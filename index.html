@@ -78,7 +78,7 @@
     .card:nth-child(3)::after { background:linear-gradient(90deg,var(--rose-d),transparent); }
     .card:nth-child(4)::after { background:linear-gradient(90deg,var(--teal-d),transparent); }
     .card:nth-child(5)::after { background:linear-gradient(90deg,var(--rose),var(--teal),transparent); }
-    .card-icon { position:absolute; top:.85rem; right:.85rem; width:56px; height:56px; object-fit:contain; opacity:.88; }
+    .card-icon { position:absolute; top:.6rem; right:.6rem; width:85px; height:85px; object-fit:contain; opacity:.75; mix-blend-mode:screen; }
     .card-tagline { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--teal); margin-bottom:.55rem; margin-top:0.3rem; }
     .card-title { font-family:'Cinzel',serif; font-size:.88rem; font-weight:600; color:var(--rose-l); margin-bottom:.55rem; letter-spacing:.06em; padding-right:3.5rem; }
     .card-desc { font-size:.82rem; color:var(--muted); line-height:1.75; margin-bottom:1.15rem; }
@@ -115,13 +115,12 @@
     <div class="tagline-hdr" data-i18n="tagline">Seelenkraft · Transformation · Harmonie</div>
   </div>
   <div class="lang-sel">
-    <select id="lang-select">
+    <select id="lang-select" onchange="aevLang(this.value)">
       <option value="de">DE</option>
       <option value="en">EN</option>
       <option value="ru">RU</option>
       <option value="pt">PT</option>
       <option value="es">ES</option>
-      <option value="ar">AR</option>
       <option value="tr">TR</option>
     </select>
   </div>
@@ -451,17 +450,14 @@ var T = {
   }
 };
 
-window.onload = function() {
-  var sel = document.getElementById('lang-select');
-  if (!sel) return;
-
-  function applyLang(l) {
+// Language function — global scope so onchange can call it directly
+function aevLang(l) {
     var t = T[l] || T['de'];
     try { localStorage.setItem('aevima-lang', l); } catch(e){}
     document.documentElement.lang = l;
     document.body.classList.toggle('rtl', l === 'ar');
-    sel.value = l;
-
+    var sel = document.getElementById('lang-select');
+    if (sel) sel.value = l;
     var els = document.querySelectorAll('[data-i18n]');
     for (var i = 0; i < els.length; i++) {
       var key = els[i].getAttribute('data-i18n');
@@ -474,11 +470,20 @@ window.onload = function() {
     }
   }
 
-  sel.addEventListener('change', function() { applyLang(this.value); });
+// Remove ar from T
+delete T.ar;
 
+// Init immediately (script is at bottom of body — DOM is ready)
+(function() {
   var saved = 'de';
   try { saved = localStorage.getItem('aevima-lang') || 'de'; } catch(e){}
-  applyLang(saved);
+  aevLang(saved);
+
+  // ALSO bind via addEventListener as backup
+  var sel = document.getElementById('lang-select');
+  if (sel) sel.addEventListener('change', function(){ aevLang(this.value); });
+
+  // (applyLang moved to global aevLang above)
 
   // Forms
   function bindForm(fId, eId, sId) {
@@ -488,8 +493,8 @@ window.onload = function() {
       ev.preventDefault();
       var email = document.getElementById(eId).value;
       if (!email || email.indexOf('@') < 0) { document.getElementById(eId).focus(); return; }
-      fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'form-name=aevima-waitlist&email='+encodeURIComponent(email) })
-        .finally(function() { f.style.display='none'; document.getElementById(sId).style.display='block'; });
+      var done = function() { f.style.display='none'; document.getElementById(sId).style.display='block'; };
+      try { fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'form-name=aevima-waitlist&email='+encodeURIComponent(email)}).then(done).catch(done); } catch(e){ done(); }
     });
   }
   bindForm('form1','e1','s1');
@@ -503,7 +508,7 @@ window.onload = function() {
     for(var i=0;i<stars.length;i++){ var s=stars[i]; s.a+=s.sp; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=s.col; ctx.globalAlpha=(Math.sin(s.a)*.5+.5)*.55+.08; ctx.fill(); }
     ctx.globalAlpha=1; requestAnimationFrame(drawS); }
   window.addEventListener('resize',initS); initS(); drawS();
-};
+})();
 </script>
 </body>
 </html>
