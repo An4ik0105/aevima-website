@@ -117,8 +117,10 @@
 </div>
 
 <script>
-var isTest = location.search.indexOf('test=1') > -1;
+var isTest = location.search.indexOf('test=1') > -1 || location.hash.indexOf('test') > -1 || localStorage.getItem('aevima-test') === '1';
 if (isTest) document.getElementById('test-info').style.display = 'block';
+// Secret: click footer 5x to activate
+var _tc=0; document.addEventListener('click',function(e){ if(e.target.tagName==='FOOTER'||e.target.closest('footer')){_tc++;if(_tc>=5){localStorage.setItem('aevima-test','1');location.reload();}} });
 
 var LZ_DATA = {
   1:{name:"Die Pionierin / Der Pionier",teaser:"Du bist hier um voranzugehen — nicht um zu folgen.<br><br>Menschen mit der Lebenszahl 1 sind Anführer. Nicht weil sie es wollen, sondern weil sie es nicht anders können. Wenn du in einem Raum bist, spüren andere deine Energie — auch wenn du nichts sagst.<br><br><strong>Deine größte Stärke</strong> ist dein unerschütterlicher Wille. Du stehst auf — immer wieder — egal wie oft du gefallen bist.<br><br><strong>Aber da ist auch ein Schatten:</strong> Du kämpfst mit Abhängigkeit. Es kostet dich enorm, jemanden wirklich brauchen zu dürfen. Manchmal bist du einsamer als du zeigst."},

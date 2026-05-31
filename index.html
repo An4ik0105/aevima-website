@@ -34,10 +34,12 @@
     .logo-text { font-family:'Cinzel',serif; font-size:1.2rem; font-weight:600; color:var(--rose); letter-spacing:.22em; }
     .tagline-hdr { font-size:.56rem; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; display:none; margin-top:.1rem; }
     @media(min-width:600px){ .tagline-hdr{display:block;} }
-    .lang-sel { position:relative; }
-    .lang-sel select { appearance:none; -webkit-appearance:none; background:rgba(255,255,255,.06); border:1px solid var(--border); color:var(--rose-l); font-family:'Raleway',sans-serif; font-size:.75rem; letter-spacing:.08em; padding:.32rem 1.8rem .32rem .7rem; border-radius:20px; cursor:pointer; outline:none; transition:border-color .3s; }
+    .lang-toggle { display:flex; align-items:center; gap:0; background:rgba(255,255,255,.06); border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+    .lt-btn { background:none; border:none; color:var(--muted); font-family:'Cinzel',serif; font-size:.72rem; letter-spacing:.12em; padding:.34rem .85rem; cursor:pointer; transition:background .25s,color .25s; }
+    .lt-btn.active { background:var(--rose); color:var(--dark); font-weight:600; }
+
     .lang-sel select:focus { border-color:var(--rose); }
-    .lang-sel::after { content:'▾'; position:absolute; right:.55rem; top:50%; transform:translateY(-50%); color:var(--rose); font-size:.6rem; pointer-events:none; }
+
 
     /* HERO */
     .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:9rem 2rem 6rem; }
@@ -114,11 +116,9 @@
     <div class="logo-text">AEVIMA</div>
     <div class="tagline-hdr" data-i18n="tagline">Seelenkraft · Transformation · Harmonie</div>
   </div>
-  <div class="lang-sel">
-    <select id="lang-select" onchange="aevLang(this.value)">
-      <option value="de">DE</option>
-      <option value="en">EN</option>
-    </select>
+  <div class="lang-toggle">
+    <button id="btn-de" onclick="aevLang('de')" class="lt-btn active">DE</button>
+    <button id="btn-en" onclick="aevLang('en')" class="lt-btn">EN</button>
   </div>
 </header>
 
@@ -299,8 +299,8 @@ function aevLang(l) {
   var t = T[l] || T['de'];
   try { localStorage.setItem('aevima-lang', l); } catch(e){}
   document.documentElement.lang = l;
-  var sel = document.getElementById('lang-select');
-  if (sel) sel.value = l;
+  var bd = document.getElementById('btn-de'), be = document.getElementById('btn-en');
+  if(bd){ bd.classList.toggle('active', l==='de'); be.classList.toggle('active', l==='en'); }
   var els = document.querySelectorAll('[data-i18n]');
   for (var i = 0; i < els.length; i++) {
     var key = els[i].getAttribute('data-i18n');

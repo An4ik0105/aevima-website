@@ -109,7 +109,7 @@
 </div>
 
 <script>
-var isTest = location.search.indexOf('test=1') > -1;
+var isTest = location.search.indexOf('test=1') > -1 || location.hash.indexOf('test') > -1 || localStorage.getItem('aevima-test') === '1';
 if (isTest) document.getElementById('test-info').style.display='block';
 
 function reduce(n, km) {
