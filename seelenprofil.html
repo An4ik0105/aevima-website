@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dein Seelenprofil – AEVIMA</title>
+  <link rel="preconnect" href="https://fonts.bunny.net"/>
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--dark:#12101A;--dark2:#1A1625;--rose:#C4956A;--rose-l:#E8C4A0;--rose-d:#9B6F4A;--teal:#2AAFA0;--teal-d:#1D7A70;--text:#F0EDE8;--muted:#9B8FA8;--border:rgba(196,149,106,.18)}
+    body{background:var(--dark);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(196,149,106,.07) 0,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(42,175,160,.05) 0,transparent 60%);pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:60px 24px 80px}
+    .back{display:inline-flex;align-items:center;gap:.4rem;color:var(--rose);text-decoration:none;font-size:.78rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8;transition:opacity .3s}
+    .back:hover{opacity:1}
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:600;color:var(--rose-l);letter-spacing:.1em;margin-bottom:8px}
+    .subtitle{color:var(--muted);font-size:.85rem;margin-bottom:40px;letter-spacing:.05em}
+    .hr{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
+    label{display:block;font-size:.72rem;letter-spacing:.14em;color:var(--rose);text-transform:uppercase;margin-bottom:6px}
+    input[type=text],input[type=email],input[type=date]{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none;transition:border-color .3s}
+    input:focus{border-color:rgba(196,149,106,.5)}
+    input::placeholder{color:var(--muted);opacity:.6}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+    .form-group{margin-bottom:20px}
+    .btn-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:all .3s;margin-top:8px}
+    .btn-submit:hover{opacity:.88;transform:translateY(-1px)}
+    .consent{font-size:.72rem;color:var(--muted);line-height:1.6;margin-top:12px;text-align:center}
+    .consent a{color:var(--rose);text-decoration:none}
+    /* RESULT */
+    #result{display:none;margin-top:48px}
+    .res-header{text-align:center;margin-bottom:36px}
+    .res-name{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--rose-l);letter-spacing:.15em}
+    .res-date{color:var(--muted);font-size:.78rem;margin-top:4px}
+    .lz-wrap{text-align:center;margin:28px 0}
+    .lz-num{font-family:'Cinzel',serif;font-size:3.5rem;font-weight:700;color:var(--rose);line-height:1}
+    .lz-label{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.25em;color:var(--teal);text-transform:uppercase;margin-top:4px}
+    .lz-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--rose-l);margin-top:6px;letter-spacing:.08em}
+    .section{background:rgba(196,149,106,.04);border:1px solid var(--border);border-radius:3px;padding:24px;margin-bottom:16px}
+    .section-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--rose);text-transform:uppercase;margin-bottom:12px}
+    .section p{color:var(--muted);font-size:.88rem;line-height:1.9}
+    .section p strong{color:var(--text)}
+    .bar-wrap{margin-top:10px}
+    .bar-label{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:4px}
+    .bar{background:rgba(255,255,255,.06);border-radius:20px;height:6px;overflow:hidden}
+    .bar-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px;transition:width 1.2s ease}
+    /* LOCKED */
+    .locked{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.15);border-radius:3px;padding:24px;margin-bottom:16px;position:relative}
+    .locked::after{content:'🔒';position:absolute;right:16px;top:16px;font-size:1rem;opacity:.4}
+    .locked-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+    .locked p{color:rgba(155,143,168,.45);font-size:.85rem;font-style:italic;filter:blur(3px);user-select:none}
+    /* PAYWALL */
+    .paywall{text-align:center;margin-top:40px;padding:40px 24px;background:linear-gradient(135deg,rgba(196,149,106,.08),rgba(42,175,160,.06));border:1px solid var(--border);border-radius:3px}
+    .paywall h2{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--text);margin-bottom:10px;letter-spacing:.08em}
+    .paywall p{color:var(--muted);font-size:.86rem;max-width:420px;margin:0 auto 24px;line-height:1.8}
+    .price{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--rose);margin:16px 0 4px}
+    .price-note{font-size:.75rem;color:var(--muted)}
+    .btn-pay{display:inline-block;padding:15px 48px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;cursor:pointer;text-decoration:none;transition:all .3s;margin-top:16px}
+    .btn-pay:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 30px rgba(196,149,106,.3)}
+    .pay-note{font-size:.7rem;color:var(--muted);margin-top:12px}
+    /* TEST BADGE */
+    .test-badge{background:rgba(42,175,160,.15);border:1px solid var(--teal);color:var(--teal);font-size:.7rem;letter-spacing:.12em;padding:.3rem .8rem;border-radius:20px;display:inline-block;margin-bottom:20px}
+    @media(max-width:500px){.form-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← AEVIMA</a>
+
+  <div id="test-info" style="display:none">
+    <span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span>
+  </div>
+
+  <div style="text-align:center">
+    <h1>DEIN SEELENPROFIL</h1>
+    <p class="subtitle">Numerologie · Seelenurge · Lebensthemen · Jahresprognose</p>
+  </div>
+  <div class="hr"></div>
+
+  <p style="color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:32px">
+    In deinen Geburtsdaten liegt eine Sprache verborgen — eine Sprache, die beschreibt, wer du wirklich bist.
+    Nicht wer du sein solltest. Nicht wer andere in dir sehen. Sondern du.
+  </p>
+
+  <form id="soulForm">
+    <div class="form-row">
+      <div>
+        <label>Vorname</label>
+        <input type="text" id="fname" placeholder="z.B. Anna" required/>
+      </div>
+      <div>
+        <label>Nachname</label>
+        <input type="text" id="lname" placeholder="z.B. Muster" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Geburtsdatum</label>
+      <input type="date" id="bdate" required/>
+    </div>
+    <div class="form-group">
+      <label>Geburtsort <span style="font-size:.7rem;color:var(--muted);text-transform:none;letter-spacing:0">(Stadt)</span></label>
+      <input type="text" id="birthplace" placeholder="z.B. Berlin" required/>
+    </div>
+    <div class="form-group">
+      <label>E-Mail <span style="font-size:.7rem;color:var(--muted);text-transform:none;letter-spacing:0">(für deine Vollanalyse)</span></label>
+      <input type="email" id="email" placeholder="deine@email.de" required/>
+    </div>
+    <button type="submit" class="btn-submit">Mein Profil enthüllen →</button>
+    <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<script>
+// ─── TEST MODE ──────────────────────────────────────────────────
+var isTest = location.search.indexOf('test=1') > -1;
+if (isTest) document.getElementById('test-info').style.display = 'block';
+
+// ─── NUMEROLOGY ENGINE ──────────────────────────────────────────
+function reduce(n, keepMaster) {
+  while (n > 9) {
+    if (keepMaster && (n === 11 || n === 22 || n === 33)) break;
+    var s = 0;
+    String(n).split('').forEach(function(d){ s += parseInt(d); });
+    n = s;
+  }
+  return n;
+}
+
+function charVal(c) {
+  var map = {a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8};
+  return map[c.toLowerCase()] || 0;
+}
+
+var VOWELS = 'aeiouäöü';
+function isVowel(c){ return VOWELS.indexOf(c.toLowerCase()) > -1; }
+
+function calcAll(fname, lname, bdate) {
+  // Life Path Number (Lebenszahl)
+  var parts = bdate.split('-');
+  var y = parts[0], m = parts[1], d = parts[2];
+  var lz = reduce(parseInt(d), false) + reduce(parseInt(m), false) + reduce(parseInt(y), false);
+  lz = reduce(lz, true);
+
+  // Expression Number (Ausdruckszahl) — all letters
+  var full = (fname + lname).toLowerCase().replace(/[^a-z]/g,'');
+  var az_sum = 0;
+  for (var i = 0; i < full.length; i++) az_sum += charVal(full[i]);
+  var az = reduce(az_sum, true);
+
+  // Soul Urge (Seelenurge) — vowels only
+  var su_sum = 0;
+  for (var j = 0; j < full.length; j++) {
+    if (isVowel(full[j])) su_sum += charVal(full[j]);
+  }
+  var su = reduce(su_sum, true);
+
+  // Birthday Number
+  var bn = reduce(parseInt(d), true);
+
+  // Personal Year
+  var thisYear = new Date().getFullYear();
+  var py = reduce(reduce(parseInt(d),false) + reduce(parseInt(m),false) + reduce(thisYear,false), true);
+
+  return { lz:lz, az:az, su:su, bn:bn, py:py, day:d, month:m, year:y };
+}
+
+// ─── CONTENT LIBRARY ────────────────────────────────────────────
+var LZ = {
+  1: {
+    name: "Der Pionier",
+    preview: "Du bist hier um anzuführen — nicht weil du Macht willst, sondern weil du weißt, wie es besser geht. Deine stärkste Qualität ist dein unerschütterlicher Glaube an das, was möglich ist.",
+    full: "Menschen mit der Lebenszahl 1 tragen eine natürliche Autorität in sich. Du siehst Lösungen, wo andere Probleme sehen. Du wirst oft als erste(r) losgeschickt — ob du willst oder nicht.<br><br><strong>Deine Stärken:</strong> Entschlossenheit, Mut, Pioniergeist, Führungsstärke, Kreativität.<br><br><strong>Deine Herausforderung:</strong> Alleingang. Du tendierst dazu, alles selbst zu machen. Das Zulassen von Hilfe ist deine wichtigste Lebensaufgabe.",
+    challenge: "Lerne, Schwäche als Mut zu sehen.",
+    lesson: "Unabhängigkeit ohne Isolation"
+  },
+  2: {
+    name: "Der Diplomat",
+    preview: "Die 2 ist die sensibelste aller Lebenszahlen. Du bist hier um zu verbinden, zu heilen, Frieden zu stiften. Das ist eine große Gabe — und manchmal eine schwere Last.",
+    full: "Du spürst was andere fühlen, bevor sie es selbst in Worte fassen. Diese Fähigkeit macht dich zum natürlichen Vermittler — und zum natürlichen Opfer von Energieräubern. Du musst lernen: Empathie ist keine Schwäche, aber ungeschützte Empathie zerstört dich.<br><br><strong>Deine Stärken:</strong> Einfühlungsvermögen, Geduld, Intuition, Teamfähigkeit, Harmoniebedürfnis.<br><br><strong>Deine Herausforderung:</strong> Selbstaufopferung. Du vergisst dich selbst.",
+    challenge: "Deine Bedürfnisse sind genauso wichtig.",
+    lesson: "Verbindung mit Grenzen"
+  },
+  3: {
+    name: "Der Ausdruck",
+    preview: "Die 3 ist die Lebenszahl der Kreativität, der Freude, des Ausdrucks. Du hast ein Talent das andere nicht haben: du kannst Dinge lebendig machen — mit Worten, mit Ideen, mit deiner Präsenz.",
+    full: "Du bist hier um auszudrücken, zu inspirieren, zu erschaffen. Wenn du schreibst, sprichst, malst oder einfach im Raum bist — andere spüren deine Energie. Das ist kein Zufall.<br><br><strong>Deine Stärken:</strong> Kreativität, Kommunikation, Humor, Optimismus, Charme.<br><br><strong>Deine Herausforderung:</strong> Fokus. Die 3 verteilt ihre Energie oft auf zu viele Projekte gleichzeitig.",
+    challenge: "Weniger anfangen, mehr vollenden.",
+    lesson: "Kreativität als spirituellen Akt verstehen"
+  },
+  4: {
+    name: "Das Fundament",
+    preview: "Die 4 ist die Lebenszahl der Struktur, der Verlässlichkeit, des Fundaments. Du baust was bleibt. Du planst was andere nur träumen.",
+    full: "Du bist das Rückgrat in jedem System das du betrittst. Menschen verlassen sich auf dich — manchmal ohne es zu merken. Deine größte Stärke ist deine Zuverlässigkeit. Deine größte Falle ist die Starre.<br><br><strong>Deine Stärken:</strong> Disziplin, Zuverlässigkeit, Gründlichkeit, Ausdauer, Verantwortungsbewusstsein.<br><br><strong>Deine Herausforderung:</strong> Rigidität. Du kannst so sehr an Regeln glauben, dass du das Unerwartete verpasst.",
+    challenge: "Manchmal ist der direkte Weg nicht der beste.",
+    lesson: "Struktur als Unterstützung, nicht als Käfig"
+  },
+  5: {
+    name: "Der Wandler",
+    preview: "Die 5 ist die Lebenszahl der Freiheit, des Wandels, des Abenteuers. Du bist hier um die Welt zu erleben — in all ihren Facetten. Stillstand ist für dich wie Sauerstoffmangel.",
+    full: "Du hast in diesem Leben mehr erlebt als die meisten Menschen in mehreren Leben. Das macht dich reich — und manchmal heimatlos. Deine Seele sucht nach Tiefe, aber dein Geist läuft immer weiter.<br><br><strong>Deine Stärken:</strong> Anpassungsfähigkeit, Neugier, Vielseitigkeit, Charisma, Risikobereitschaft.<br><br><strong>Deine Herausforderung:</strong> Commitment. Verbindlichkeit fühlt sich für dich wie ein Käfig an.",
+    challenge: "Freiheit ist kein Mangel an Wurzeln.",
+    lesson: "Tiefe ist die eigentliche Freiheit"
+  },
+  6: {
+    name: "Der Heiler",
+    preview: "Die 6 ist die Lebenszahl der Liebe, der Familie, der Verantwortung. Du bist ein natürlicher Heiler. Menschen kommen zu dir wenn sie Trost brauchen — und du gibst ihn, immer wieder.",
+    full: "Du trägst eine tiefe Fürsorge für andere in dir. Das ist wunderschön — und kann dich erschöpfen. Du neigst dazu, das Leid anderer als deine persönliche Aufgabe zu sehen. Aber du kannst nicht alle heilen.<br><br><strong>Deine Stärken:</strong> Mitgefühl, Fürsorge, Ästhetik, Verantwortung, Loyalität.<br><br><strong>Deine Herausforderung:</strong> Selbstpflege. Du gibst leichter als du nimmst.",
+    challenge: "Auch du verdienst Heilung.",
+    lesson: "Liebe beginnt bei dir selbst"
+  },
+  7: {
+    name: "Der Seeker",
+    preview: "Die 7 ist die spirituellste aller Lebenszahlen. Du denkst tiefer, fühlst feiner, siehst weiter. Oberflächlichkeit ist dir physisch unangenehm.",
+    full: "Du bist in dieser Welt — aber nicht ganz von ihr. Du siehst Muster die andere übersehen. Du stellst Fragen die andere nicht stellen wollen. Das macht dich brilliant — und oft einsam.<br><br><strong>Deine Stärken:</strong> Analytisches Denken, Spiritualität, Intuition, Tiefgang, Weisheit.<br><br><strong>Deine Herausforderung:</strong> Verbindung. Du kannst so sehr in deiner inneren Welt verschwinden, dass du die äußere verlierst.",
+    challenge: "Weisheit, die nicht geteilt wird, ist einsam.",
+    lesson: "Tiefe im Kontakt mit anderen"
+  },
+  8: {
+    name: "Die Kraft",
+    preview: "Die 8 ist die Lebenszahl der Macht, des Wohlstands, der Leistung. Du hast ein natürliches Gespür für Erfolg — und gleichzeitig eine innere Blockade die ihn immer wieder bremst.",
+    full: "Die 8 ist die Zahl des kosmischen Ausgleichs. Was du aussendest, kommt zurück — verstärkt. Das bedeutet: Großzügigkeit zieht Überfluss an. Gier zieht Verlust an. Du bist hier um das Spiel der materiellen Welt zu meistern — nicht darin gefangen zu sein.<br><br><strong>Deine Stärken:</strong> Führung, Ambition, Geschäftssinn, Ausdauer, Effizienz.<br><br><strong>Deine Herausforderung:</strong> Kontrolle. Die 8 hat Angst vor Kontrollverlust.",
+    challenge: "Vertrauen ist mächtiger als Kontrolle.",
+    lesson: "Reichtum des Geistes vor materiellem Reichtum"
+  },
+  9: {
+    name: "Der Weise",
+    preview: "Die 9 ist die höchste der einstelligen Lebenszahlen. Du bist ein alter Geist — du hast in diesem Leben Weisheit mitgebracht die andere erst erwerben müssen.",
+    full: "Du hast eine Tiefe die nicht erklärt werden kann — sie wird gespürt. Menschen öffnen sich dir. Fremde erzählen dir ihre Geheimnisse. Das ist keine Zufälligkeit — das ist deine Aufgabe.<br><br><strong>Deine Stärken:</strong> Weisheit, Mitgefühl, Kreativität, Idealismus, Weitblick.<br><br><strong>Deine Herausforderung:</strong> Loslassen. Die 9 hält an Vergangenem fest — Menschen, Träumen, Schmerzen.",
+    challenge: "Loslassen ist der Weg nach vorne.",
+    lesson: "Dienst an anderen als höchster Ausdruck des Selbst"
+  },
+  11: {
+    name: "Der Erleuchtete",
+    preview: "Die 11 ist eine Meisterzahl. Du bist hier um zu inspirieren — nicht durch Reden, sondern durch dein bloßes Sein. Du trägst ein Licht in dir, das andere spüren.",
+    full: "Die 11 lebt zwischen zwei Welten: der spirituellen und der materiellen. Du hast eine Verbindung zur höheren Intelligenz — aber du weißt nicht immer wie du das in die Welt bringen sollst.<br><br><strong>Deine Stärken:</strong> Intuition, Empathie, Inspiration, Kreativität, spirituelle Wahrnehmung.<br><br><strong>Deine Herausforderung:</strong> Nervosität und Angst. Die Energieintensität der 11 führt oft zu Überreizung.",
+    challenge: "Erdung ist deine tägliche Pflicht.",
+    lesson: "Das Licht leuchten lassen ohne es zu erzwingen"
+  },
+  22: {
+    name: "Der Baumeister",
+    preview: "Die 22 ist die mächtigste Meisterzahl. Du bist hier um Großes zu bauen — nicht für dich, sondern für die Welt. Das ist eine schwere Aufgabe und eine große Ehre.",
+    full: "22 kombiniert die Intuition der 11 mit der Disziplin der 4. Du siehst die Blaupause — aber du hast auch das Werkzeug um sie zu bauen.<br><br><strong>Deine Stärken:</strong> Vision, Pragmatismus, Führung, Ausdauer, transformative Kraft.<br><br><strong>Deine Herausforderung:</strong> Der Druck der eigenen Erwartungen.",
+    challenge: "Auch du darfst unvollkommen sein.",
+    lesson: "Große Visionen brauchen geduldige Hände"
+  },
+  33: {
+    name: "Der Meisterlehrer",
+    preview: "Die 33 ist die seltenste Meisterzahl. Sie trägt die Liebe der 6, die Kraft der 11 und die Vision der 22. Du bist hier um zu heilen und zu lehren — durch liebevolle Wahrheit.",
+    full: "Die 33 ist der kosmische Lehrer. Du trägst eine außergewöhnliche Fähigkeit in dir: Menschen zu heilen ohne ein Wort zu sagen. Deine Präsenz ist transformativ.<br><br><strong>Deine Stärken:</strong> Unbedingte Liebe, Weisheit, Healing, Inspiration, Führung durch Beispiel.<br><br><strong>Deine Herausforderung:</strong> Martyrium. Die 33 neigt dazu, alles zu geben bis zur Erschöpfung.",
+    challenge: "Mitgefühl beginnt bei dir.",
+    lesson: "Liebe ohne Selbstverlust"
+  }
+};
+
+var PY = {
+  1:"Ein Jahr des Neubeginns. Was du jetzt pflanzt, wächst die nächsten 9 Jahre. Handle mutig.",
+  2:"Ein Jahr der Geduld und Verbindung. Beziehungen stehen im Fokus. Nicht drängen — warten.",
+  3:"Ein Jahr des Ausdrucks und der Freude. Kreativität und Kommunikation fließen. Nutze es.",
+  4:"Ein Jahr des Aufbaus und der Disziplin. Fundamente legen. Keine schnellen Gewinne.",
+  5:"Ein Jahr des Wandels. Überraschungen, Veränderungen, Chancen. Bleib offen.",
+  6:"Ein Jahr der Liebe und Verantwortung. Familie, Beziehungen, Heilung stehen im Vordergrund.",
+  7:"Ein Jahr der Reflexion und Spiritualität. Innehalten, Nachdenken, Forschen.",
+  8:"Ein Jahr der Ernte und der Macht. Was du aufgebaut hast, trägt jetzt Früchte.",
+  9:"Ein Jahr des Abschlusses. Loslassen was nicht mehr dient. Vorbereitung auf Neues.",
+  11:"Ein Meisterjahr der Inspiration. Außergewöhnliche spirituelle Klarheit möglich.",
+  22:"Ein Meisterjahr der Manifestation. Träume haben jetzt besondere Kraft."
+};
+
+// ─── FORM SUBMIT ────────────────────────────────────────────────
+document.getElementById('soulForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  var bdate = document.getElementById('bdate').value;
+  var birthplace = document.getElementById('birthplace').value.trim();
+
+  var d = calcAll(fname, lname, bdate);
+  var lzData = LZ[d.lz] || LZ[1];
+  var pyText = PY[d.py] || PY[1];
+
+  var bFormatted = bdate.split('-').reverse().join('.');
+  var unlocked = isTest;
+
+  var sections = '';
+
+  // Preview section (always visible)
+  sections += '<div class="section"><div class="section-title">✦ Deine Lebenszahl ' + d.lz + ' — ' + lzData.name + '</div>';
+  sections += '<p>' + lzData.preview + '</p>';
+  sections += '<div class="bar-wrap"><div class="bar-label"><span>Spirituelle Tiefe</span><span>' + (d.lz * 10 + 5) % 100 + '%</span></div><div class="bar"><div class="bar-fill" style="width:' + (d.lz * 11 + 30) % 90 + '%"></div></div></div>';
+  sections += '</div>';
+
+  // Second preview — Seelenurge
+  sections += '<div class="section"><div class="section-title">◐ Seelenurge ' + d.su + ' — Was dein Herz wirklich will</div>';
+  sections += '<p>Deine Seelenurge-Zahl ' + d.su + ' offenbart deine tiefsten inneren Bedürfnisse — die Wünsche die du selten ausgesprochen hast. Sie zeigt was dich wirklich antreibt, jenseits aller äußeren Erwartungen.</p></div>';
+
+  if (unlocked) {
+    // Full analysis
+    sections += '<div class="section"><div class="section-title">◎ Vollanalyse — ' + lzData.name + '</div>';
+    sections += '<p>' + lzData.full + '</p>';
+    sections += '<p style="margin-top:12px"><strong>Deine zentrale Herausforderung:</strong> ' + lzData.challenge + '</p>';
+    sections += '<p><strong>Deine Lebenslektion:</strong> ' + lzData.lesson + '</p></div>';
+
+    sections += '<div class="section"><div class="section-title">✧ Ausdruckszahl ' + d.az + ' — Wie andere dich sehen</div>';
+    sections += '<p>Deine Ausdruckszahl zeigt die Talente und Fähigkeiten die du in diese Welt mitgebracht hast. Sie beschreibt wie du wirkst — unabhängig davon wie du dich fühlst. Die Zahl ' + d.az + ' verbindet sich mit deiner Lebenszahl zu einem einzigartigen Bild deiner Bestimmung.</p></div>';
+
+    sections += '<div class="section"><div class="section-title">◐ Persönliches Jahr ' + d.py + '</div>';
+    sections += '<p>' + pyText + '</p></div>';
+
+    sections += '<div class="section"><div class="section-title">⊕ Geburtsort-Energie — ' + birthplace + '</div>';
+    sections += '<p>Der Ort deiner Geburt prägt die astrologische Energie deines Lebens. ' + birthplace + ' hat eine spezifische kosmische Signatur — eine Energie die dich geformt hat und weiterhin begleitet. Deine Seele hat diesen Ort nicht zufällig gewählt.</p></div>';
+  } else {
+    // Locked sections
+    var lockedSections = [
+      ['◎ Vollanalyse — ' + lzData.name, 'Deine vollständige Charakteranalyse inkl. Herausforderungen, Lebenslektion und Beziehungsmuster.'],
+      ['✧ Ausdruckszahl ' + d.az, 'Wie andere dich sehen — und welche Talente du in diese Welt mitgebracht hast.'],
+      ['◐ Persönliches Jahr ' + d.py, 'Was das aktuelle Jahr für dich bedeutet — Chancen, Warnsignale, Empfehlungen.'],
+      ['⊕ Geburtsort-Energie', 'Die astrologische Signatur deines Geburtsortes und ihre Wirkung auf dein Leben.'],
+      ['✦ Gesundheit & Energie', 'Körperliche Muster die mit deiner Lebenszahl zusammenhängen und wie du Blockaden löst.']
+    ];
+    lockedSections.forEach(function(s) {
+      sections += '<div class="locked"><div class="locked-title">' + s[0] + '</div><p>' + s[1] + ' Vollständige Analyse in der Premium-Version.</p></div>';
+    });
+
+    sections += '<div class="paywall">';
+    sections += '<h2>Deine vollständige Seelen-Analyse</h2>';
+    sections += '<p>Erhalte deine komplette Analyse als PDF — sofort nach Bezahlung in deinem Postfach. Einmalig. Kein Abo.</p>';
+    sections += '<div class="price">37 €</div>';
+    sections += '<p class="price-note">PDF · Vollanalyse · Sofortzustellung</p>';
+    sections += '<a href="https://www.digistore24.com/product/PLACEHOLDER" class="btn-pay" target="_blank">Jetzt vollständige Analyse erhalten →</a>';
+    sections += '<p class="pay-note">Sichere Zahlung via Digistore24 · DSGVO-konform</p>';
+    sections += '</div>';
+  }
+
+  document.getElementById('result').innerHTML =
+    '<div class="res-header">' +
+    '<p class="res-name">✦ ' + fname + ' ' + lname + ' ✦</p>' +
+    '<p class="res-date">' + bFormatted + ' · ' + birthplace + '</p>' +
+    '</div>' +
+    '<div class="lz-wrap">' +
+    '<div class="lz-num">' + d.lz + '</div>' +
+    '<div class="lz-label">Deine Lebenszahl</div>' +
+    '<div class="lz-name">' + lzData.name + '</div>' +
+    '</div>' +
+    sections;
+
+  document.getElementById('soulForm').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  window.scrollTo({top: 300, behavior: 'smooth'});
+});
+</script>
+</body>
+</html>

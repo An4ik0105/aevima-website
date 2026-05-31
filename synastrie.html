@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paar-Synastrie – AEVIMA</title>
+  <link rel="preconnect" href="https://fonts.bunny.net"/>
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--dark:#12101A;--dark2:#1A1625;--rose:#C4956A;--rose-l:#E8C4A0;--rose-d:#9B6F4A;--teal:#2AAFA0;--teal-d:#1D7A70;--text:#F0EDE8;--muted:#9B8FA8;--border:rgba(196,149,106,.18)}
+    body{background:var(--dark);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(196,149,106,.07) 0,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(42,175,160,.05) 0,transparent 60%);pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:60px 24px 80px}
+    .back{display:inline-flex;align-items:center;gap:.4rem;color:var(--rose);text-decoration:none;font-size:.78rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:600;color:var(--rose-l);letter-spacing:.1em;margin-bottom:8px}
+    .subtitle{color:var(--muted);font-size:.85rem;margin-bottom:40px}
+    .hr{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
+    .duo{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+    .duo-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:3px;padding:20px}
+    .duo-card h3{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+    .duo-card:nth-child(1) h3{color:var(--rose)}
+    .duo-card:nth-child(2) h3{color:var(--teal)}
+    label{display:block;font-size:.7rem;letter-spacing:.12em;color:var(--rose);text-transform:uppercase;margin-bottom:5px}
+    .duo-card:nth-child(2) label{color:var(--teal)}
+    input[type=text],input[type=date]{width:100%;padding:11px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.88rem;outline:none;transition:border-color .3s;margin-bottom:14px}
+    input:focus{border-color:rgba(196,149,106,.5)}
+    input::placeholder{color:var(--muted);opacity:.6}
+    .fg{margin-bottom:14px}
+    .email-row{margin-bottom:20px}
+    .email-row label{color:var(--rose-l)}
+    .email-row input[type=email]{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none}
+    .btn-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:all .3s;margin-top:8px}
+    .btn-submit:hover{opacity:.88;transform:translateY(-1px)}
+    .consent{font-size:.7rem;color:var(--muted);margin-top:10px;text-align:center}
+    .consent a{color:var(--rose)}
+    /* RESULT */
+    #result{display:none;margin-top:48px}
+    .duo-heads{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;margin-bottom:36px;gap:16px}
+    .person-card{background:rgba(196,149,106,.05);border:1px solid var(--border);border-radius:3px;padding:16px}
+    .person-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--rose-l);margin-bottom:4px}
+    .person-lz{font-family:'Cinzel',serif;font-size:2rem;color:var(--rose)}
+    .person-lz-name{font-size:.72rem;color:var(--muted);letter-spacing:.1em}
+    .duo-sym{font-size:1.5rem;color:var(--teal);opacity:.7}
+    .compat-score{text-align:center;margin:32px 0}
+    .score-num{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--rose)}
+    .score-label{font-size:.72rem;letter-spacing:.2em;color:var(--teal);text-transform:uppercase}
+    .bar{background:rgba(255,255,255,.06);border-radius:20px;height:8px;overflow:hidden;margin:8px 0}
+    .bar-fill{height:100%;border-radius:20px;transition:width 1.2s ease}
+    .bar-fill-rose{background:linear-gradient(to right,var(--teal),var(--rose))}
+    .section{background:rgba(196,149,106,.04);border:1px solid var(--border);border-radius:3px;padding:22px;margin-bottom:14px}
+    .section-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--rose);text-transform:uppercase;margin-bottom:10px}
+    .section p{color:var(--muted);font-size:.87rem;line-height:1.9}
+    .locked{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.15);border-radius:3px;padding:22px;margin-bottom:14px;position:relative}
+    .locked::after{content:'🔒';position:absolute;right:14px;top:14px;font-size:.9rem;opacity:.4}
+    .locked-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+    .locked p{color:rgba(155,143,168,.4);font-size:.84rem;font-style:italic;filter:blur(3px);user-select:none}
+    .paywall{text-align:center;margin-top:40px;padding:40px 24px;background:linear-gradient(135deg,rgba(196,149,106,.08),rgba(42,175,160,.06));border:1px solid var(--border);border-radius:3px}
+    .paywall h2{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--text);margin-bottom:10px}
+    .paywall p{color:var(--muted);font-size:.85rem;max-width:420px;margin:0 auto 24px;line-height:1.8}
+    .price{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--rose);margin:16px 0 4px}
+    .btn-pay{display:inline-block;padding:15px 48px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;cursor:pointer;text-decoration:none;transition:all .3s;margin-top:16px}
+    .btn-pay:hover{opacity:.88;transform:translateY(-1px)}
+    .test-badge{background:rgba(42,175,160,.15);border:1px solid var(--teal);color:var(--teal);font-size:.7rem;letter-spacing:.12em;padding:.3rem .8rem;border-radius:20px;display:inline-block;margin-bottom:20px}
+    @media(max-width:500px){.duo{grid-template-columns:1fr}.duo-heads{grid-template-columns:1fr;gap:8px}.duo-sym{transform:rotate(90deg)}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← AEVIMA</a>
+
+  <div id="test-info" style="display:none"><span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span></div>
+
+  <div style="text-align:center">
+    <h1>PAAR-SYNASTRIE</h1>
+    <p class="subtitle">Kosmische Verbindungsanalyse · Seelenkompatibilität · Wachstumspotenzial</p>
+  </div>
+  <div class="hr"></div>
+
+  <p style="color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:32px">
+    Manche Begegnungen sind kein Zufall. Die Numerologie zeigt die kosmische Sprache eurer Verbindung —
+    was euch anzieht, was euch herausfordert, und wie ihr füreinander wachsen könnt.
+  </p>
+
+  <form id="synaForm">
+    <div class="duo">
+      <div class="duo-card">
+        <h3>◎ Person 1</h3>
+        <div class="fg"><label>Vorname</label><input type="text" id="a_fname" placeholder="z.B. Anna" required/></div>
+        <div class="fg"><label>Nachname</label><input type="text" id="a_lname" placeholder="z.B. Muster" required/></div>
+        <div class="fg"><label>Geburtsdatum</label><input type="date" id="a_bdate" required/></div>
+      </div>
+      <div class="duo-card">
+        <h3>◎ Person 2</h3>
+        <div class="fg"><label>Vorname</label><input type="text" id="b_fname" placeholder="z.B. Max" required/></div>
+        <div class="fg"><label>Nachname</label><input type="text" id="b_lname" placeholder="z.B. Muster" required/></div>
+        <div class="fg"><label>Geburtsdatum</label><input type="date" id="b_bdate" required/></div>
+      </div>
+    </div>
+    <div class="email-row fg">
+      <label>E-Mail für eure Analyse</label>
+      <input type="email" id="email" placeholder="eure@email.de" required/>
+    </div>
+    <button type="submit" class="btn-submit">Unsere Verbindung analysieren →</button>
+    <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<script>
+var isTest = location.search.indexOf('test=1') > -1;
+if (isTest) document.getElementById('test-info').style.display='block';
+
+function reduce(n, km) {
+  while(n>9){
+    if(km&&(n===11||n===22||n===33))break;
+    var s=0; String(n).split('').forEach(function(d){s+=parseInt(d);}); n=s;
+  }
+  return n;
+}
+function lz(bdate){
+  var p=bdate.split('-'); return reduce(reduce(parseInt(p[2]),false)+reduce(parseInt(p[1]),false)+reduce(parseInt(p[0]),false),true);
+}
+
+var LZ_NAMES={1:"Pionier",2:"Diplomat",3:"Ausdruck",4:"Fundament",5:"Wandler",6:"Heiler",7:"Seeker",8:"Kraft",9:"Weiser",11:"Erleuchteter",22:"Baumeister",33:"Meisterlehrer"};
+
+var COMPAT = {
+  // [a][b] = {score, text_preview, text_full, challenge, gift}
+};
+
+function getCompat(a, b) {
+  var score, gift, challenge, preview, full;
+  var same = a === b;
+  var sum = (a + b) % 9 || 9;
+
+  if (same) {
+    score = 78;
+    gift = "Tiefes gegenseitiges Verständnis";
+    challenge = "Ihr spiegelt eure Schwächen direkt zurück";
+    preview = "Ihr seid aus ähnlichem Stoff gemacht. Das schafft ein sofortiges Verständnis — aber auch eine spiegelartige Dynamik. Was euch aneinander stört, ist oft, was ihr an euch selbst nicht mögt.";
+    full = "Gleiche Lebenszahlen erzeugen eine magnetische Anziehung und ein instintktives Verstehen. Gleichzeitig verstärken sich eure Muster — positive wie negative. Diese Verbindung bietet enormes Wachstumspotenzial, wenn beide bereit sind, sich ehrlich anzuschauen.";
+  } else if ([1,3,5,7,9,11].indexOf(a) > -1 && [1,3,5,7,9,11].indexOf(b) > -1) {
+    score = 82;
+    gift = "Gegenseitige Inspiration und kreative Energie";
+    challenge = "Wer gibt nach? Keine der Seelen liebt Kompromisse.";
+    preview = "Zwischen euch fließt eine elektrische Energie. Gespräche werden tiefer als erwartet, Stille fühlt sich weniger leer an. Aber — beide von euch seid Anführer. Und zwei Anführer müssen lernen, abwechselnd zu folgen.";
+    full = "Diese Kombination schafft eine der lebhaftesten Verbindungen in der Numerologie. Ihr bringt gegenseitig das Beste hervor — und das Schwierigste. Das Geheimnis: Keiner muss recht haben. Ihr seid beide hier um zu wachsen.";
+  } else if (sum === 9 || sum === 11) {
+    score = 91;
+    gift = "Kosmische Ergänzung — ihr vervollständigt euch gegenseitig";
+    challenge = "Die Stärke des anderen kann die eigene Schwäche sichtbar machen";
+    preview = "Es gibt Verbindungen, die sich anfühlen als wären sie vorherbestimmt. Eure Lebenszahlen ergänzen sich auf eine Art, die selten ist. Was einer von euch nicht hat, bringt der andere mit.";
+    full = "Diese Verbindung trägt das Potenzial echter spiritueller Partnerschaft. Nicht weil es immer leicht ist — sondern weil es bedeutungsvoll ist. Eure Seelen haben sich diese Begegnung nicht zufällig ausgesucht.";
+  } else if (sum === 6 || sum === 7) {
+    score = 74;
+    gift = "Tiefer emotionaler Austausch";
+    challenge = "Unterschiedliche Bedürfnisse nach Nähe und Freiheit";
+    preview = "Eure Verbindung hat Tiefe — aber auch Reibung. Einer von euch zieht an, der andere hält Abstand. Dieser Rhythmus ist nicht falsch — er ist die Einladung zu echter Kommunikation.";
+    full = "Diese Kombination lehrt beide, echte Intimität zu wagen. Die Herausforderung ist real, aber die Belohnung auch: Eine Verbindung, die bleibt, weil sie ehrlich ist.";
+  } else {
+    score = 68;
+    gift = "Vielfalt als Stärke — ihr denkt und fühlt unterschiedlich";
+    challenge = "Missverständnisse entstehen leicht — nicht aus schlechtem Willen";
+    preview = "Auf den ersten Blick scheint es, als kämt ihr aus verschiedenen Welten. Das stimmt — und das ist genau eurer Potential. Was einer übersieht, sieht der andere. Was einer nicht versteht, versteht der andere sofort.";
+    full = "Unterschiedliche Lebenszahlen bedeuten unterschiedliche Lebensaufgaben. Das kann zu Missverständnissen führen — oder zu tiefer gegenseitiger Bereicherung. Der Schlüssel ist: Neugier statt Urteil.";
+  }
+
+  return {score:score, gift:gift, challenge:challenge, preview:preview, full:full};
+}
+
+document.getElementById('synaForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var af = document.getElementById('a_fname').value.trim();
+  var al = document.getElementById('a_lname').value.trim();
+  var abd = document.getElementById('a_bdate').value;
+  var bf = document.getElementById('b_fname').value.trim();
+  var bl = document.getElementById('b_lname').value.trim();
+  var bbd = document.getElementById('b_bdate').value;
+
+  var lzA = lz(abd);
+  var lzB = lz(bbd);
+  var compat = getCompat(lzA, lzB);
+  var unlocked = isTest;
+
+  var sections = '';
+
+  // Always visible
+  sections += '<div class="compat-score"><div class="score-num">' + compat.score + '%</div><div class="score-label">Seelenkompatibilität</div>';
+  sections += '<div class="bar" style="max-width:300px;margin:12px auto"><div class="bar-fill bar-fill-rose" style="width:'+compat.score+'%"></div></div></div>';
+
+  sections += '<div class="section"><div class="section-title">◎ Das Geschenk eurer Verbindung</div>';
+  sections += '<p><strong>' + compat.gift + '</strong><br><br>' + compat.preview + '</p></div>';
+
+  sections += '<div class="section"><div class="section-title">◐ Eure Herausforderung</div>';
+  sections += '<p>' + compat.challenge + '</p></div>';
+
+  if (unlocked) {
+    sections += '<div class="section"><div class="section-title">✦ Vollständige Beziehungsanalyse</div>';
+    sections += '<p>' + compat.full + '</p>';
+    sections += '<p style="margin-top:16px"><strong>Lebenszahl ' + lzA + ' (' + af + ')</strong> trifft auf <strong>Lebenszahl ' + lzB + ' (' + bf + ')</strong>. Diese Kombination aktiviert in beiden Seelen Muster die einzeln nicht sichtbar wären.</p></div>';
+
+    sections += '<div class="section"><div class="section-title">✧ Kommunikationsmuster</div>';
+    sections += '<p>Eure verbale und emotionale Kommunikation trägt eine spezifische Energie. Die ' + lzA + ' kommuniziert durch ' + ['Direkt­heit','Feingefühl','Kreativität','Klarheit','Offenheit','Wärme','Tiefe','Stärke','Weisheit','Inspiration','Vision','Liebe'][lzA-1] + '. Die ' + lzB + ' durch ' + ['Direkt­heit','Feingefühl','Kreativität','Klarheit','Offenheit','Wärme','Tiefe','Stärke','Weisheit','Inspiration','Vision','Liebe'][lzB-1] + '. Wenn diese Stile kollidieren — ist das nicht das Ende. Es ist der Anfang echter Verbindung.</p></div>';
+
+    sections += '<div class="section"><div class="section-title">⊕ Wachstumspotenzial</div>';
+    sections += '<p>Diese Verbindung hat das Potenzial, beide von euch zu verändern — in die Richtung, die eure Seelen gewählt haben. Die Frage ist nicht ob ihr kompatibel seid. Die Frage ist: seid ihr bereit für das Wachstum das diese Verbindung fordert?</p></div>';
+  } else {
+    var locked = [
+      ['✦ Vollständige Beziehungsanalyse', 'Detaillierte Analyse eurer Verbindungsdynamik, Anziehungsmuster und Entwicklungsphasen.'],
+      ['✧ Kommunikationsmuster', 'Wie ihr sprechen, hören und missvestehen — und wie ihr das transformiert.'],
+      ['⊕ Wachstumspotenzial', 'Was diese Verbindung aus beiden herausholt — und wie ihr das Beste daraus macht.'],
+      ['◐ Herausforderungen & Lösungen', 'Die häufigsten Konfliktpunkte dieser Zahlenkombination — mit konkreten Empfehlungen.']
+    ];
+    locked.forEach(function(s){
+      sections += '<div class="locked"><div class="locked-title">'+s[0]+'</div><p>'+s[1]+' Vollständige Analyse in der Premium-Version.</p></div>';
+    });
+
+    sections += '<div class="paywall"><h2>Vollständige Synastrie-Analyse</h2>';
+    sections += '<p>Erhalte den kompletten Beziehungsbericht für ' + af + ' & ' + bf + ' als PDF — mit Wachstumspotenzial, Kommunikationsempfehlungen und Jahresprognose für eure Beziehung.</p>';
+    sections += '<div class="price">57 €</div><p style="font-size:.73rem;color:var(--muted)">PDF · Vollanalyse · Sofortzustellung</p>';
+    sections += '<a href="https://www.digistore24.com/product/PLACEHOLDER_SYNASTRIE" class="btn-pay" target="_blank">Unseren vollständigen Report erhalten →</a>';
+    sections += '<p style="font-size:.68rem;color:var(--muted);margin-top:10px">Sichere Zahlung via Digistore24</p></div>';
+  }
+
+  document.getElementById('result').innerHTML =
+    '<div class="duo-heads">' +
+    '<div class="person-card"><div class="person-name">' + af + ' ' + al + '</div><div class="person-lz">' + lzA + '</div><div class="person-lz-name">' + (LZ_NAMES[lzA]||'') + '</div></div>' +
+    '<div class="duo-sym">◎</div>' +
+    '<div class="person-card"><div class="person-name">' + bf + ' ' + bl + '</div><div class="person-lz">' + lzB + '</div><div class="person-lz-name">' + (LZ_NAMES[lzB]||'') + '</div></div>' +
+    '</div>' + sections;
+
+  document.getElementById('synaForm').style.display='none';
+  document.getElementById('result').style.display='block';
+  window.scrollTo({top:300,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
