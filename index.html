@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>AEVIMA</title>
-  <meta name="description" content="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung." />
+  <meta name="description" content="Entdecke, was dich prägt, verbindet und auf deinem Weg begleitet." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --dark:#12101A; --dark2:#1A1625; --rose:#C4956A; --rose-l:#E8C4A0;
-      --rose-d:#9B6F4A; --teal:#2AAFA0; --teal-d:#1D7A70;
+      --dark:#12101A; --dark2:#1A1625;
+      --rose:#C4956A; --rose-l:#E8C4A0; --rose-d:#9B6F4A;
+      --teal:#2AAFA0; --teal-d:#1D7A70;
       --text:#F0EDE8; --muted:#9B8FA8; --border:rgba(196,149,106,0.18);
     }
     html { scroll-behavior:smooth; }
     body { background:var(--dark); color:var(--text); font-family:'Raleway',sans-serif; font-weight:300; line-height:1.8; overflow-x:hidden; }
     body.rtl { direction:rtl; }
     body::before { content:''; position:fixed; inset:0;
-      background: radial-gradient(ellipse at 25% 15%,rgba(196,149,106,0.07) 0%,transparent 55%),
-                  radial-gradient(ellipse at 75% 85%,rgba(42,175,160,0.05) 0%,transparent 55%);
+      background:radial-gradient(ellipse at 25% 15%,rgba(196,149,106,.07) 0%,transparent 55%),
+                  radial-gradient(ellipse at 75% 85%,rgba(42,175,160,.05) 0%,transparent 55%);
       pointer-events:none; z-index:0; }
     canvas.stars { position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.38; }
     section,header,footer { position:relative; z-index:1; }
@@ -32,34 +34,23 @@
     .logo-text { font-family:'Cinzel',serif; font-size:1.2rem; font-weight:600; color:var(--rose); letter-spacing:.22em; }
     .tagline-hdr { font-size:.56rem; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; display:none; margin-top:.1rem; }
     @media(min-width:600px){ .tagline-hdr{display:block;} }
-
     .lang-sel { position:relative; }
-    .lang-sel select {
-      appearance:none; -webkit-appearance:none;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border); color:var(--rose-l);
-      font-family:'Raleway',sans-serif; font-size:.75rem; letter-spacing:.08em;
-      padding:.32rem 1.8rem .32rem .7rem; border-radius:20px; cursor:pointer;
-      outline:none; transition:border-color .3s;
-    }
+    .lang-sel select { appearance:none; -webkit-appearance:none; background:rgba(255,255,255,.06); border:1px solid var(--border); color:var(--rose-l); font-family:'Raleway',sans-serif; font-size:.75rem; letter-spacing:.08em; padding:.32rem 1.8rem .32rem .7rem; border-radius:20px; cursor:pointer; outline:none; transition:border-color .3s; }
     .lang-sel select:focus { border-color:var(--rose); }
     .lang-sel::after { content:'▾'; position:absolute; right:.55rem; top:50%; transform:translateY(-50%); color:var(--rose); font-size:.6rem; pointer-events:none; }
 
     /* HERO */
     .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:9rem 2rem 6rem; }
     .logo-img { width:clamp(220px,42vw,340px); height:auto; margin-bottom:2.5rem; animation:glow 4s ease-in-out infinite; }
-    @keyframes glow {
-      0%,100%{ filter:drop-shadow(0 0 20px rgba(196,149,106,.28)) drop-shadow(0 0 50px rgba(196,149,106,.1)); }
-      50%{ filter:drop-shadow(0 0 42px rgba(196,149,106,.45)) drop-shadow(0 0 90px rgba(196,149,106,.2)); }
-    }
-    .hero-lbl { font-size:.6rem; letter-spacing:.42em; text-transform:uppercase; color:var(--teal); margin-bottom:1.75rem; }
+    @keyframes glow { 0%,100%{ filter:drop-shadow(0 0 20px rgba(196,149,106,.28)) drop-shadow(0 0 50px rgba(196,149,106,.1)); } 50%{ filter:drop-shadow(0 0 42px rgba(196,149,106,.45)) drop-shadow(0 0 90px rgba(196,149,106,.2)); } }
     h1 { font-family:'Cinzel',serif; font-size:clamp(1.7rem,4.5vw,3.2rem); font-weight:400; color:var(--rose-l); line-height:1.35; margin-bottom:1.5rem; max-width:680px; }
     h1 em { font-style:normal; color:var(--rose); }
-    .hero-sub { font-size:clamp(.85rem,2vw,1rem); color:var(--muted); max-width:540px; margin-bottom:.75rem; font-weight:400; }
+    .hero-sub { font-size:clamp(.9rem,2vw,1.05rem); color:var(--rose-l); max-width:540px; margin-bottom:.75rem; font-weight:400; }
     .dots { display:flex; align-items:center; gap:.5rem; justify-content:center; margin:1.5rem 0 1.75rem; }
     .dots span { width:3px; height:3px; border-radius:50%; background:var(--teal); opacity:.55; }
     .dots span:nth-child(2) { width:5px; height:5px; background:var(--rose); opacity:.9; }
     .hero-body { font-size:.88rem; color:var(--muted); max-width:500px; margin-bottom:2.75rem; line-height:2.1; text-align:left; }
+    .hero-highlight { color:var(--rose-l); font-style:italic; }
 
     /* FORM */
     .wl-form { display:flex; flex-direction:column; gap:.7rem; width:100%; max-width:390px; margin:0 auto; }
@@ -68,7 +59,7 @@
     .wl-form input::placeholder { color:var(--muted); opacity:.65; }
     .btn { padding:.82rem 2rem; background:linear-gradient(135deg,var(--rose),var(--rose-d)); color:var(--dark); border:none; border-radius:2px; font-family:'Cinzel',serif; font-size:.77rem; letter-spacing:.2em; cursor:pointer; font-weight:600; transition:opacity .3s,transform .2s; }
     .btn:hover { opacity:.85; transform:translateY(-1px); }
-    .form-note { font-size:.69rem; color:var(--muted); letter-spacing:.06em; opacity:.6; }
+    .form-legal { font-size:.68rem; color:var(--muted); line-height:1.6; opacity:.75; max-width:360px; margin:0 auto; text-align:center; }
     .success { display:none; padding:.9rem 1.5rem; border:1px solid var(--teal-d); color:var(--teal); border-radius:2px; font-size:.87rem; background:rgba(42,175,160,.06); }
 
     .hr { width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); }
@@ -78,8 +69,8 @@
     .sec-lbl { font-size:.58rem; letter-spacing:.44em; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; }
     h2 { font-family:'Cinzel',serif; font-size:clamp(1.3rem,3vw,1.9rem); font-weight:400; color:var(--rose-l); margin-bottom:1rem; }
     .pillars-intro { font-size:.89rem; color:var(--muted); max-width:480px; margin:0 auto 4rem; line-height:1.9; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.15rem; max-width:1000px; margin:0 auto; }
-    .card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:3px; padding:2rem 1.6rem; text-align:left; position:relative; overflow:hidden; transition:border-color .3s,background .3s,transform .3s; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.15rem; max-width:1020px; margin:0 auto; }
+    .card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:3px; padding:2rem 1.6rem 1.75rem; text-align:left; position:relative; overflow:hidden; transition:border-color .3s,background .3s,transform .3s; }
     .card:hover { border-color:rgba(196,149,106,.38); background:rgba(196,149,106,.04); transform:translateY(-3px); }
     .card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
     .card:nth-child(1)::after { background:linear-gradient(90deg,var(--rose),transparent); }
@@ -87,14 +78,14 @@
     .card:nth-child(3)::after { background:linear-gradient(90deg,var(--rose-d),transparent); }
     .card:nth-child(4)::after { background:linear-gradient(90deg,var(--teal-d),transparent); }
     .card:nth-child(5)::after { background:linear-gradient(90deg,var(--rose),var(--teal),transparent); }
-    .card-symbol { font-size:1.6rem; margin-bottom:.6rem; color:var(--rose); opacity:.6; }
-    .card-tagline { font-size:.63rem; letter-spacing:.18em; text-transform:uppercase; color:var(--teal); margin-bottom:.6rem; }
-    .card-title { font-family:'Cinzel',serif; font-size:.9rem; font-weight:600; color:var(--rose-l); margin-bottom:.55rem; letter-spacing:.06em; }
+    .card-icon { position:absolute; top:.85rem; right:.85rem; width:56px; height:56px; object-fit:contain; opacity:.88; }
+    .card-tagline { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--teal); margin-bottom:.55rem; margin-top:0.3rem; }
+    .card-title { font-family:'Cinzel',serif; font-size:.88rem; font-weight:600; color:var(--rose-l); margin-bottom:.55rem; letter-spacing:.06em; padding-right:3.5rem; }
     .card-desc { font-size:.82rem; color:var(--muted); line-height:1.75; margin-bottom:1.15rem; }
     .badge { display:inline-block; font-size:.59rem; letter-spacing:.15em; text-transform:uppercase; padding:.26rem .65rem; border-radius:20px; font-weight:500; }
     .b-avail { border:1px solid rgba(196,149,106,.4); color:var(--rose); }
     .b-soon { border:1px solid rgba(42,175,160,.3); color:var(--teal); }
-    .b-abo { border:1px solid rgba(196,149,106,.5); color:var(--rose-l); background:rgba(196,149,106,.08); }
+    .b-abo { border:1px solid rgba(42,175,160,.3); color:var(--teal); }
 
     /* PHILOSOPHY */
     .phil { padding:7rem 2rem; text-align:center; }
@@ -102,7 +93,6 @@
     .phil-txt { color:var(--muted); font-size:.87rem; max-width:460px; margin:0 auto; line-height:1.95; }
     .cta { padding:7rem 2rem; background:var(--dark2); text-align:center; }
     .cta-intro { color:var(--muted); margin:.75rem auto 3rem; font-size:.89rem; max-width:380px; line-height:1.9; }
-
     footer { padding:2.5rem 2rem; background:var(--dark); border-top:1px solid var(--border); text-align:center; font-size:.72rem; color:var(--muted); letter-spacing:.06em; }
     .ft-links { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem; }
     footer a { color:var(--rose-d); text-decoration:none; transition:color .3s; }
@@ -112,6 +102,8 @@
     body.rtl blockquote { border-left:none; border-right:2px solid var(--rose); text-align:right; }
     body.rtl .hero-body { text-align:right; }
     body.rtl .card { text-align:right; }
+    body.rtl .card-icon { left:.85rem; right:auto; }
+    body.rtl .card-title { padding-right:0; padding-left:3.5rem; }
   </style>
 </head>
 <body>
@@ -137,9 +129,8 @@
 
 <section class="hero">
   <img src="logo.png" alt="AEVIMA" class="logo-img" />
-  <p class="hero-lbl" data-i18n="tagline">Seelenkraft · Transformation · Harmonie</p>
   <h1 data-i18n="h1">Du bist nicht zufällig hier.</h1>
-  <p class="hero-sub" data-i18n="sub">Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.</p>
+  <p class="hero-sub" data-i18n="sub">Entdecke, was dich prägt, verbindet und auf deinem Weg begleitet.</p>
   <div class="dots"><span></span><span></span><span></span></div>
   <p class="hero-body" data-i18n="body">
     Vielleicht gibt es einen Teil in dir, der nach Antworten sucht.<br>
@@ -148,9 +139,9 @@
     In Symbolen. In Träumen. In wiederkehrenden Mustern.<br>
     In dem leisen Gefühl, dass etwas in deinem Leben verstanden werden möchte.<br><br>
     Hier findest du einen Raum, diese Botschaften zu erkunden und ihre tiefere Bedeutung zu entdecken.<br><br>
-    Denn deine Seele war immer da.<br>
+    <span class="hero-highlight">Denn deine Seele war immer da.<br>
     Was oft fehlt, ist die Stille, sie wahrzunehmen –<br>
-    und ein Weg, ihre Sprache zu verstehen.
+    und ein Weg, ihre Sprache zu verstehen.</span>
   </p>
   <form name="aevima-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="email" name="email" />
@@ -159,8 +150,8 @@
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
     <input type="email" id="e1" name="email" data-i18n-ph="email_ph" placeholder="Deine E-Mail-Adresse" required />
-    <button type="submit" class="btn" data-i18n="cta_btn">Frühzugang sichern →</button>
-    <p class="form-note" data-i18n="form_note">Kein Spam · Jederzeit abmeldbar · Kostenlos</p>
+    <button type="submit" class="btn" data-i18n="cta_btn">Keine Neuigkeiten verpassen →</button>
+    <p class="form-legal" data-i18n="form_legal">Mit der Anmeldung stimmst du zu, Updates von AEVIMA zu erhalten. Abmeldung jederzeit möglich.</p>
   </form>
   <div class="success" id="s1" data-i18n="success_msg">✦ Du bist dabei. Wir melden uns bei dir.</div>
 </section>
@@ -173,39 +164,39 @@
   <p class="pillars-intro" data-i18n="pillars_intro">Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.</p>
   <div class="grid">
     <div class="card">
-      <div class="card-symbol">✦</div>
+      <img src="p1.png" class="card-icon" alt="" />
       <div class="card-tagline" data-i18n="p1_tag">Erkenne dich selbst</div>
       <div class="card-title" data-i18n="p1_title">Dein Seelenprofil</div>
-      <p class="card-desc" data-i18n="p1_desc">Wer bist du wirklich — jenseits von Rollen und Erwartungen? Dein Name, Geburtsdatum und -ort öffnen den Weg zu deiner tiefsten Wahrheit.</p>
+      <p class="card-desc" data-i18n="p1_desc">Wer bist du unter all den Schichten, die das Leben dich geformt hat? In deinen Geburtsdaten liegt ein Schlüssel verborgen, der die Sprache deiner Seele sichtbar macht und zeigt, wie du wirklich bist.</p>
       <span class="badge b-avail" data-i18n="badge_avail">Verfügbar</span>
     </div>
     <div class="card">
-      <div class="card-symbol">◎</div>
+      <img src="p2.png" class="card-icon" alt="" />
       <div class="card-tagline" data-i18n="p2_tag">Verstehe deine Beziehungen</div>
       <div class="card-title" data-i18n="p2_title">Paar-Synastrie</div>
       <p class="card-desc" data-i18n="p2_desc">Manche Verbindungen fühlen sich an, als wären sie bestimmt. Entdecke, was zwei Seelen wirklich verbindet — und wo Raum für Wachstum liegt.</p>
       <span class="badge b-soon" data-i18n="badge_soon">Bald verfügbar</span>
     </div>
     <div class="card">
-      <div class="card-symbol">◐</div>
+      <img src="p3.png" class="card-icon" alt="" />
       <div class="card-tagline" data-i18n="p3_tag">Nutze den richtigen Zeitpunkt</div>
       <div class="card-title" data-i18n="p3_title">Kosmischer Kalender</div>
       <p class="card-desc" data-i18n="p3_desc">Das Leben hat Rhythmen. Phasen für Stille, für Aufbruch, für Ernte. Dein persönlicher Kalender zeigt dir, wann welche Energie fließt.</p>
       <span class="badge b-soon" data-i18n="badge_soon">Bald verfügbar</span>
     </div>
     <div class="card">
-      <div class="card-symbol">⊕</div>
+      <img src="p4.png" class="card-icon" alt="" />
       <div class="card-tagline" data-i18n="p4_tag">Finde deinen Ort</div>
       <div class="card-title" data-i18n="p4_title">Astrocartography</div>
       <p class="card-desc" data-i18n="p4_desc">Nicht jeder Ort fühlt sich wie Heimat an — manche Orte tragen dich, andere zehren dich aus. Entdecke, wo auf der Erde deine Energie aufblüht.</p>
       <span class="badge b-soon" data-i18n="badge_soon">Bald verfügbar</span>
     </div>
     <div class="card">
-      <div class="card-symbol">✧</div>
+      <img src="p5.png" class="card-icon" alt="" />
       <div class="card-tagline" data-i18n="p5_tag">Höre auf deine innere Weisheit</div>
       <div class="card-title" data-i18n="p5_title">Traumdeutung</div>
-      <p class="card-desc" data-i18n="p5_desc">Jede Nacht hinterlässt deine Seele Spuren. Was du träumst, ist keine Zufälligkeit — es ist eine Botschaft. AEVIMA hilft dir, sie zu hören.</p>
-      <span class="badge b-abo" data-i18n="badge_abo">Einzel &amp; Abo</span>
+      <p class="card-desc" data-i18n="p5_desc">Jede Nacht hinterlässt deine Seele Spuren. Was du träumst, ist keine Zufälligkeit — es ist eine Botschaft. AEVIMA hilft dir, sie zu deuten.</p>
+      <span class="badge b-abo" data-i18n="badge_soon">Bald verfügbar</span>
     </div>
   </div>
 </section>
@@ -223,15 +214,15 @@
 <div class="hr"></div>
 
 <section class="cta" id="warteliste">
-  <p class="sec-lbl" data-i18n="early_lbl">Frühzugang</p>
-  <h2 data-i18n="early_h2">Sei dabei, wenn AEVIMA startet.</h2>
-  <p class="cta-intro" data-i18n="early_intro">Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.</p>
+  <p class="sec-lbl" data-i18n="early_lbl">Updates erhalten</p>
+  <h2 data-i18n="early_h2">Verpasse keine Neuigkeiten von AEVIMA.</h2>
+  <p class="cta-intro" data-i18n="early_intro">Trage dich ein und erhalte exklusive Updates, Einblicke und als Erste die Nachricht, wenn neue Analysen verfügbar sind.</p>
   <form id="form2" class="wl-form" style="max-width:370px;">
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
     <input type="email" id="e2" name="email" data-i18n-ph="email_ph" placeholder="Deine E-Mail-Adresse" required />
-    <button type="submit" class="btn" data-i18n="cta_btn2">Jetzt eintragen →</button>
-    <p class="form-note" data-i18n="form_note2">Kein Spam · Jederzeit abmeldbar</p>
+    <button type="submit" class="btn" data-i18n="cta_btn">Keine Neuigkeiten verpassen →</button>
+    <p class="form-legal" data-i18n="form_legal">Mit der Anmeldung stimmst du zu, Updates von AEVIMA zu erhalten. Abmeldung jederzeit möglich.</p>
   </form>
   <div class="success" id="s2" data-i18n="success_msg">✦ Du bist dabei.</div>
 </section>
@@ -242,265 +233,277 @@
     <a href="datenschutz.html" data-i18n="ft_privacy">Datenschutz</a>
     <a href="agb.html" data-i18n="ft_agb">AGB</a>
   </div>
-  <p>© 2026 AEVIMA · Seelenkraft · Transformation · Harmonie</p>
+  <p>© 2026 AEVIMA</p>
   <p style="margin-top:.4rem;font-size:.6rem;opacity:.3;">DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.</p>
 </footer>
 
 <script>
-const T = {
+var T = {
   de:{
     tagline:"Seelenkraft · Transformation · Harmonie",
     h1:"Du bist nicht zufällig hier.",
-    sub:"Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.",
-    body:`Vielleicht gibt es einen Teil in dir, der nach Antworten sucht.<br>Vielleicht spürst du, dass manche Zeichen, Begegnungen oder inneren Impulse mehr bedeuten, als es auf den ersten Blick scheint.<br><br>Deine Seele spricht.<br>In Symbolen. In Träumen. In wiederkehrenden Mustern.<br>In dem leisen Gefühl, dass etwas in deinem Leben verstanden werden möchte.<br><br>Hier findest du einen Raum, diese Botschaften zu erkunden und ihre tiefere Bedeutung zu entdecken.<br><br>Denn deine Seele war immer da.<br>Was oft fehlt, ist die Stille, sie wahrzunehmen –<br>und ein Weg, ihre Sprache zu verstehen.`,
-    email_ph:"Deine E-Mail-Adresse", cta_btn:"Frühzugang sichern →", cta_btn2:"Jetzt eintragen →",
-    form_note:"Kein Spam · Jederzeit abmeldbar · Kostenlos", form_note2:"Kein Spam · Jederzeit abmeldbar",
+    sub:"Entdecke, was dich prägt, verbindet und auf deinem Weg begleitet.",
+    body:'Vielleicht gibt es einen Teil in dir, der nach Antworten sucht.<br>Vielleicht spürst du, dass manche Zeichen, Begegnungen oder inneren Impulse mehr bedeuten, als es auf den ersten Blick scheint.<br><br>Deine Seele spricht.<br>In Symbolen. In Träumen. In wiederkehrenden Mustern.<br>In dem leisen Gefühl, dass etwas in deinem Leben verstanden werden möchte.<br><br>Hier findest du einen Raum, diese Botschaften zu erkunden und ihre tiefere Bedeutung zu entdecken.<br><br><span class="hero-highlight">Denn deine Seele war immer da.<br>Was oft fehlt, ist die Stille, sie wahrzunehmen –<br>und ein Weg, ihre Sprache zu verstehen.</span>',
+    email_ph:"Deine E-Mail-Adresse",
+    cta_btn:"Keine Neuigkeiten verpassen →",
+    form_legal:"Mit der Anmeldung stimmst du zu, Updates von AEVIMA zu erhalten. Abmeldung jederzeit möglich.",
     success_msg:"✦ Du bist dabei. Wir melden uns bei dir.",
     cosmos_line:"Dein Kosmos · Deine Essenz · Dein Weg",
     pillars_h2:"Die fünf Säulen von AEVIMA",
     pillars_intro:"Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.",
-    p1_tag:"Erkenne dich selbst", p1_title:"Dein Seelenprofil", p1_desc:"Wer bist du wirklich — jenseits von Rollen und Erwartungen? Dein Name, Geburtsdatum und -ort öffnen den Weg zu deiner tiefsten Wahrheit.",
-    p2_tag:"Verstehe deine Beziehungen", p2_title:"Paar-Synastrie", p2_desc:"Manche Verbindungen fühlen sich an, als wären sie bestimmt. Entdecke, was zwei Seelen wirklich verbindet — und wo Raum für Wachstum liegt.",
-    p3_tag:"Nutze den richtigen Zeitpunkt", p3_title:"Kosmischer Kalender", p3_desc:"Das Leben hat Rhythmen. Phasen für Stille, für Aufbruch, für Ernte. Dein persönlicher Kalender zeigt dir, wann welche Energie fließt.",
-    p4_tag:"Finde deinen Ort", p4_title:"Astrocartography", p4_desc:"Nicht jeder Ort fühlt sich wie Heimat an — manche Orte tragen dich, andere zehren dich aus. Entdecke, wo auf der Erde deine Energie aufblüht.",
-    p5_tag:"Höre auf deine innere Weisheit", p5_title:"Traumdeutung", p5_desc:"Jede Nacht hinterlässt deine Seele Spuren. Was du träumst, ist keine Zufälligkeit — es ist eine Botschaft. AEVIMA hilft dir, sie zu hören.",
-    badge_avail:"Verfügbar", badge_soon:"Bald verfügbar", badge_abo:"Einzel & Abo",
+    p1_tag:"Erkenne dich selbst", p1_title:"Dein Seelenprofil",
+    p1_desc:"Wer bist du unter all den Schichten, die das Leben dich geformt hat? In deinen Geburtsdaten liegt ein Schlüssel verborgen, der die Sprache deiner Seele sichtbar macht und zeigt, wie du wirklich bist.",
+    p2_tag:"Verstehe deine Beziehungen", p2_title:"Paar-Synastrie",
+    p2_desc:"Manche Verbindungen fühlen sich an, als wären sie bestimmt. Entdecke, was zwei Seelen wirklich verbindet — und wo Raum für Wachstum liegt.",
+    p3_tag:"Nutze den richtigen Zeitpunkt", p3_title:"Kosmischer Kalender",
+    p3_desc:"Das Leben hat Rhythmen. Phasen für Stille, für Aufbruch, für Ernte. Dein persönlicher Kalender zeigt dir, wann welche Energie fließt.",
+    p4_tag:"Finde deinen Ort", p4_title:"Astrocartography",
+    p4_desc:"Nicht jeder Ort fühlt sich wie Heimat an — manche Orte tragen dich, andere zehren dich aus. Entdecke, wo auf der Erde deine Energie aufblüht.",
+    p5_tag:"Höre auf deine innere Weisheit", p5_title:"Traumdeutung",
+    p5_desc:"Jede Nacht hinterlässt deine Seele Spuren. Was du träumst, ist keine Zufälligkeit — es ist eine Botschaft. AEVIMA hilft dir, sie zu deuten.",
+    badge_avail:"Verfügbar", badge_soon:"Bald verfügbar",
     phil_lbl:"Die Haltung hinter AEVIMA", phil_h2:"Achtsamkeit. Nicht Suche.",
     quote:"„Deine Seele sucht niemanden und wartet auf nichts.<br>Sie ist bereits vollständig.<br>AEVIMA hilft dir, ihre Sprache zu verstehen."",
     phil_txt:"Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst.",
-    early_lbl:"Frühzugang", early_h2:"Sei dabei, wenn AEVIMA startet.",
-    early_intro:"Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.",
+    early_lbl:"Updates erhalten", early_h2:"Verpasse keine Neuigkeiten von AEVIMA.",
+    early_intro:"Trage dich ein und erhalte exklusive Updates, Einblicke und als Erste die Nachricht, wenn neue Analysen verfügbar sind.",
     ft_impressum:"Impressum", ft_privacy:"Datenschutz", ft_agb:"AGB"
   },
   en:{
     tagline:"Soul Power · Transformation · Harmony",
     h1:"You are not here by chance.",
-    sub:"Personalized analyses for mindfulness, self-understanding and cosmic orientation.",
-    body:`Perhaps there is a part of you searching for answers.<br>Perhaps you sense that certain signs, encounters or inner impulses carry more meaning than they first appear.<br><br>Your soul speaks.<br>In symbols. In dreams. In recurring patterns.<br>In the quiet feeling that something in your life wants to be understood.<br><br>Here you will find a space to explore these messages and discover their deeper meaning.<br><br>For your soul was always there.<br>What is often missing is the stillness to perceive it –<br>and a way to understand its language.`,
-    email_ph:"Your email address", cta_btn:"Secure Early Access →", cta_btn2:"Sign Up Now →",
-    form_note:"No spam · Unsubscribe anytime · Free", form_note2:"No spam · Unsubscribe anytime",
+    sub:"Discover what shapes you, connects you and accompanies you on your path.",
+    body:'Perhaps there is a part of you searching for answers.<br>Perhaps you sense that certain signs, encounters or inner impulses carry more meaning than they first appear.<br><br>Your soul speaks.<br>In symbols. In dreams. In recurring patterns.<br>In the quiet feeling that something in your life wants to be understood.<br><br>Here you will find a space to explore these messages and discover their deeper meaning.<br><br><span class="hero-highlight">For your soul was always there.<br>What is often missing is the stillness to perceive it –<br>and a way to understand its language.</span>',
+    email_ph:"Your email address",
+    cta_btn:"Don't miss any news →",
+    form_legal:"By signing up, you agree to receive updates from AEVIMA. Unsubscribe at any time.",
     success_msg:"✦ You're in. We'll be in touch.",
     cosmos_line:"Your Cosmos · Your Essence · Your Path",
     pillars_h2:"The Five Pillars of AEVIMA",
     pillars_intro:"Every analysis is unique — just like you.<br>Discover what awaits within.",
-    p1_tag:"Know yourself", p1_title:"Your Soul Profile", p1_desc:"Who are you really — beyond roles and expectations? Your name, date and place of birth open the path to your deepest truth.",
-    p2_tag:"Understand your relationships", p2_title:"Pair Synastry", p2_desc:"Some connections feel like they were meant to be. Discover what truly unites two souls — and where space for growth lies.",
-    p3_tag:"Use the right moment", p3_title:"Cosmic Calendar", p3_desc:"Life has rhythms. Phases for stillness, for departure, for harvest. Your personal calendar shows you when which energy flows.",
-    p4_tag:"Find your place", p4_title:"Astrocartography", p4_desc:"Not every place feels like home — some places carry you, others drain you. Discover where on earth your energy truly flourishes.",
-    p5_tag:"Listen to your inner wisdom", p5_title:"Dream Analysis", p5_desc:"Every night your soul leaves traces. What you dream is not coincidence — it is a message. AEVIMA helps you hear it.",
-    badge_avail:"Available", badge_soon:"Coming soon", badge_abo:"Single & Subscription",
+    p1_tag:"Know yourself", p1_title:"Your Soul Profile",
+    p1_desc:"Who are you beneath all the layers life has formed in you? Hidden in your birth data is a key that makes the language of your soul visible and reveals who you truly are.",
+    p2_tag:"Understand your relationships", p2_title:"Pair Synastry",
+    p2_desc:"Some connections feel like they were meant to be. Discover what truly unites two souls — and where space for growth lies.",
+    p3_tag:"Use the right moment", p3_title:"Cosmic Calendar",
+    p3_desc:"Life has rhythms. Phases for stillness, for departure, for harvest. Your personal calendar shows you when which energy flows.",
+    p4_tag:"Find your place", p4_title:"Astrocartography",
+    p4_desc:"Not every place feels like home — some places carry you, others drain you. Discover where on earth your energy truly flourishes.",
+    p5_tag:"Listen to your inner wisdom", p5_title:"Dream Analysis",
+    p5_desc:"Every night your soul leaves traces. What you dream is not coincidence — it is a message. AEVIMA helps you interpret it.",
+    badge_avail:"Available", badge_soon:"Coming soon",
     phil_lbl:"The Philosophy Behind AEVIMA", phil_h2:"Mindfulness. Not Search.",
     quote:"„Your soul seeks no one and waits for nothing.<br>It is already whole.<br>AEVIMA helps you understand its language."",
     phil_txt:"We do not work with drama, fear or the promise of fixing you. We give you a tool for greater clarity — for a life in harmony with yourself.",
-    early_lbl:"Early Access", early_h2:"Be there when AEVIMA launches.",
-    early_intro:"Sign up now. You will receive exclusive early access and a personal welcome gift.",
+    early_lbl:"Stay Updated", early_h2:"Don't miss any news from AEVIMA.",
+    early_intro:"Sign up and receive exclusive updates, insights and be the first to know when new analyses become available.",
     ft_impressum:"Legal Notice", ft_privacy:"Privacy Policy", ft_agb:"Terms"
   },
   ru:{
     tagline:"Сила Души · Трансформация · Гармония",
     h1:"Ты здесь не случайно.",
-    sub:"Персонализированные анализы для осознанности, самопознания и космической ориентации.",
-    body:`Возможно, есть часть тебя, которая ищет ответы.<br>Возможно, ты чувствуешь, что некоторые знаки, встречи или внутренние импульсы несут больше смысла, чем кажется.<br><br>Твоя душа говорит.<br>В символах. В снах. В повторяющихся образах.<br>В тихом ощущении, что что-то в твоей жизни хочет быть понятым.<br><br>Здесь ты найдёшь пространство для исследования этих посланий.<br><br>Ведь твоя душа была здесь всегда.<br>Чего часто не хватает — это тишины, чтобы её услышать,<br>и пути, чтобы понять её язык.`,
-    email_ph:"Твой адрес электронной почты", cta_btn:"Получить ранний доступ →", cta_btn2:"Записаться →",
-    form_note:"Без спама · Отписка в любое время · Бесплатно", form_note2:"Без спама · Отписка в любое время",
+    sub:"Открой, что формирует тебя, связывает и сопровождает на твоём пути.",
+    body:'Возможно, есть часть тебя, которая ищет ответы.<br>Возможно, ты чувствуешь, что некоторые знаки и встречи несут больше смысла, чем кажется.<br><br>Твоя душа говорит.<br>В символах. В снах. В повторяющихся образах.<br>В тихом ощущении, что что-то хочет быть понятым.<br><br>Здесь ты найдёшь пространство для исследования этих посланий.<br><br><span class="hero-highlight">Ведь твоя душа была здесь всегда.<br>Чего часто не хватает — это тишины, чтобы её услышать,<br>и пути, чтобы понять её язык.</span>',
+    email_ph:"Твой адрес электронной почты",
+    cta_btn:"Не пропустить новости →",
+    form_legal:"Регистрируясь, ты соглашаешься получать обновления от AEVIMA. Отписка в любое время.",
     success_msg:"✦ Ты с нами. Мы свяжемся с тобой.",
     cosmos_line:"Твой Космос · Твоя Суть · Твой Путь",
     pillars_h2:"Пять опор AEVIMA",
     pillars_intro:"Каждый анализ уникален — как и ты.<br>Открой, что ждёт внутри.",
-    p1_tag:"Познай себя", p1_title:"Профиль Души", p1_desc:"Кто ты на самом деле — за пределами ролей и ожиданий? Твоё имя, дата и место рождения открывают путь к твоей глубочайшей истине.",
-    p2_tag:"Пойми свои отношения", p2_title:"Синастрия пары", p2_desc:"Некоторые связи ощущаются как предназначенные судьбой. Узнай, что действительно объединяет две души — и где есть пространство для роста.",
-    p3_tag:"Используй нужный момент", p3_title:"Космический Календарь", p3_desc:"У жизни есть ритмы. Фазы для тишины, для движения, для сбора урожая. Твой личный календарь показывает, когда и какая энергия течёт.",
-    p4_tag:"Найди своё место", p4_title:"Астрокартография", p4_desc:"Не каждое место ощущается как дом — одни места несут тебя, другие истощают. Открой, где на Земле твоя энергия расцветает.",
-    p5_tag:"Слушай свою внутреннюю мудрость", p5_title:"Толкование Снов", p5_desc:"Каждую ночь твоя душа оставляет следы. То, что ты видишь во сне — не случайность, это послание. AEVIMA помогает тебе его услышать.",
-    badge_avail:"Доступно", badge_soon:"Скоро", badge_abo:"Разово и Подписка",
+    p1_tag:"Познай себя", p1_title:"Профиль Души",
+    p1_desc:"Кто ты под всеми слоями, которые сформировала жизнь? В твоих данных о рождении скрыт ключ, который делает видимым язык твоей души.",
+    p2_tag:"Пойми свои отношения", p2_title:"Синастрия пары",
+    p2_desc:"Некоторые связи ощущаются как предназначенные судьбой. Узнай, что действительно объединяет две души — и где есть пространство для роста.",
+    p3_tag:"Используй нужный момент", p3_title:"Космический Календарь",
+    p3_desc:"У жизни есть ритмы. Фазы для тишины, для движения, для урожая. Твой календарь показывает, когда и какая энергия течёт.",
+    p4_tag:"Найди своё место", p4_title:"Астрокартография",
+    p4_desc:"Не каждое место ощущается как дом — одни несут тебя, другие истощают. Открой, где на Земле твоя энергия расцветает.",
+    p5_tag:"Слушай свою мудрость", p5_title:"Толкование Снов",
+    p5_desc:"Каждую ночь твоя душа оставляет следы. То, что ты видишь во сне — не случайность, это послание. AEVIMA помогает тебе его истолковать.",
+    badge_avail:"Доступно", badge_soon:"Скоро",
     phil_lbl:"Философия AEVIMA", phil_h2:"Осознанность. Не поиск.",
     quote:"„Твоя душа никого не ищет и ничего не ждёт.<br>Она уже целостна.<br>AEVIMA помогает тебе понять её язык."",
-    phil_txt:"Мы не работаем с драмой, страхом или обещанием тебя исправить. Мы даём тебе инструмент для большей ясности — для жизни в гармонии с собой.",
-    early_lbl:"Ранний доступ", early_h2:"Будь здесь, когда AEVIMA запустится.",
-    early_intro:"Запишись сейчас. Получи эксклюзивный ранний доступ и личный приветственный подарок.",
+    phil_txt:"Мы не работаем с драмой, страхом или обещанием тебя исправить. Мы даём инструмент для ясности — для жизни в гармонии с собой.",
+    early_lbl:"Получай обновления", early_h2:"Не пропусти новости AEVIMA.",
+    early_intro:"Запишись и получай эксклюзивные обновления и первой узнавай о новых анализах.",
     ft_impressum:"Выходные данные", ft_privacy:"Конфиденциальность", ft_agb:"Условия"
   },
   pt:{
     tagline:"Força da Alma · Transformação · Harmonia",
     h1:"Você não está aqui por acaso.",
-    sub:"Análises personalizadas para mindfulness, autocompreensão e orientação cósmica.",
-    body:`Talvez haja uma parte em você buscando respostas.<br>Talvez você perceba que certos sinais carregam mais significado do que parecem.<br><br>Sua alma fala.<br>Em símbolos. Em sonhos. Em padrões recorrentes.<br>No sentimento silencioso de que algo em sua vida quer ser compreendido.<br><br>Aqui você encontrará um espaço para explorar essas mensagens.<br><br>Pois sua alma sempre esteve presente.<br>O que muitas vezes falta é o silêncio para percebê-la –<br>e um caminho para entender a sua linguagem.`,
-    email_ph:"Seu endereço de e-mail", cta_btn:"Garantir Acesso Antecipado →", cta_btn2:"Inscrever-se →",
-    form_note:"Sem spam · Cancele a qualquer hora · Gratuito", form_note2:"Sem spam · Cancele a qualquer hora",
+    sub:"Descubra o que te forma, conecta e acompanha no seu caminho.",
+    body:'Talvez haja uma parte em você buscando respostas.<br>Talvez perceba que certos sinais carregam mais significado do que parecem.<br><br>Sua alma fala.<br>Em símbolos. Em sonhos. Em padrões recorrentes.<br>No sentimento de que algo quer ser compreendido.<br><br>Aqui você encontrará um espaço para explorar essas mensagens.<br><br><span class="hero-highlight">Pois sua alma sempre esteve presente.<br>O que muitas vezes falta é o silêncio para percebê-la –<br>e um caminho para entender a sua linguagem.</span>',
+    email_ph:"Seu endereço de e-mail",
+    cta_btn:"Não perca nenhuma novidade →",
+    form_legal:"Ao se inscrever, você concorda em receber atualizações da AEVIMA. Cancele quando quiser.",
     success_msg:"✦ Você está dentro. Entraremos em contato.",
     cosmos_line:"Seu Cosmos · Sua Essência · Seu Caminho",
     pillars_h2:"Os Cinco Pilares do AEVIMA",
     pillars_intro:"Cada análise é única — assim como você.<br>Descubra o que aguarda dentro.",
-    p1_tag:"Conheça a si mesmo", p1_title:"Perfil da Alma", p1_desc:"Quem você realmente é — além dos papéis e expectativas? Seu nome, data e local de nascimento abrem o caminho para sua verdade mais profunda.",
-    p2_tag:"Entenda seus relacionamentos", p2_title:"Sinastria do Casal", p2_desc:"Algumas conexões parecem predestinadas. Descubra o que realmente une duas almas — e onde há espaço para crescimento.",
-    p3_tag:"Use o momento certo", p3_title:"Calendário Cósmico", p3_desc:"A vida tem ritmos. Fases para o silêncio, para o movimento, para a colheita. Seu calendário pessoal mostra quando qual energia flui.",
-    p4_tag:"Encontre seu lugar", p4_title:"Astrocartografia", p4_desc:"Nem todo lugar parece um lar — alguns lugares te sustentam, outros te esgotam. Descubra onde na Terra sua energia verdadeiramente floresce.",
-    p5_tag:"Ouça sua sabedoria interior", p5_title:"Interpretação de Sonhos", p5_desc:"Toda noite sua alma deixa rastros. O que você sonha não é coincidência — é uma mensagem. O AEVIMA te ajuda a ouvi-la.",
-    badge_avail:"Disponível", badge_soon:"Em breve", badge_abo:"Individual e Assinatura",
+    p1_tag:"Conheça a si mesmo", p1_title:"Perfil da Alma",
+    p1_desc:"Quem é você sob todas as camadas que a vida formou em você? Em seus dados de nascimento há uma chave oculta que torna visível a linguagem da sua alma.",
+    p2_tag:"Entenda seus relacionamentos", p2_title:"Sinastria do Casal",
+    p2_desc:"Algumas conexões parecem predestinadas. Descubra o que realmente une duas almas — e onde há espaço para crescimento.",
+    p3_tag:"Use o momento certo", p3_title:"Calendário Cósmico",
+    p3_desc:"A vida tem ritmos. Fases para o silêncio, para o movimento, para a colheita. Seu calendário mostra quando qual energia flui.",
+    p4_tag:"Encontre seu lugar", p4_title:"Astrocartografia",
+    p4_desc:"Nem todo lugar parece um lar — alguns te sustentam, outros te esgotam. Descubra onde sua energia floresce.",
+    p5_tag:"Ouça sua sabedoria", p5_title:"Interpretação de Sonhos",
+    p5_desc:"Toda noite sua alma deixa rastros. O que você sonha não é coincidência — é uma mensagem. O AEVIMA te ajuda a interpretá-la.",
+    badge_avail:"Disponível", badge_soon:"Em breve",
     phil_lbl:"A Filosofia do AEVIMA", phil_h2:"Atenção Plena. Não Busca.",
     quote:"„Sua alma não busca ninguém e não espera nada.<br>Ela já é completa.<br>O AEVIMA te ajuda a entender a sua linguagem."",
-    phil_txt:"Não trabalhamos com drama, medo ou a promessa de te consertar. Oferecemos uma ferramenta para maior clareza — para uma vida em harmonia consigo mesmo.",
-    early_lbl:"Acesso Antecipado", early_h2:"Esteja lá quando o AEVIMA lançar.",
-    early_intro:"Inscreva-se agora. Você receberá acesso antecipado exclusivo e um presente pessoal de boas-vindas.",
+    phil_txt:"Não trabalhamos com drama, medo ou a promessa de te consertar. Oferecemos uma ferramenta para maior clareza.",
+    early_lbl:"Receba Updates", early_h2:"Não perca novidades do AEVIMA.",
+    early_intro:"Inscreva-se e receba atualizações exclusivas e seja a primeira a saber de novas análises.",
     ft_impressum:"Aviso Legal", ft_privacy:"Privacidade", ft_agb:"Termos"
   },
   es:{
     tagline:"Fuerza del Alma · Transformación · Armonía",
     h1:"No estás aquí por casualidad.",
-    sub:"Análisis personalizados para la atención plena, el autoconocimiento y la orientación cósmica.",
-    body:`Quizás hay una parte de ti que busca respuestas.<br>Quizás sientes que ciertas señales llevan más significado de lo que parece a primera vista.<br><br>Tu alma habla.<br>En símbolos. En sueños. En patrones que se repiten.<br>En esa silenciosa sensación de que algo en tu vida quiere ser comprendido.<br><br>Aquí encontrarás un espacio para explorar estos mensajes.<br><br>Pues tu alma siempre ha estado ahí.<br>Lo que a menudo falta es el silencio para percibirla –<br>y un camino para entender su lenguaje.`,
-    email_ph:"Tu dirección de correo electrónico", cta_btn:"Asegurar Acceso Anticipado →", cta_btn2:"Inscribirse →",
-    form_note:"Sin spam · Cancela en cualquier momento · Gratis", form_note2:"Sin spam · Cancela en cualquier momento",
+    sub:"Descubre lo que te forma, conecta y acompaña en tu camino.",
+    body:'Quizás hay una parte de ti que busca respuestas.<br>Quizás sientes que ciertas señales llevan más significado de lo que parece.<br><br>Tu alma habla.<br>En símbolos. En sueños. En patrones repetidos.<br>En esa sensación de que algo quiere ser comprendido.<br><br>Aquí encontrarás un espacio para explorar estos mensajes.<br><br><span class="hero-highlight">Pues tu alma siempre ha estado ahí.<br>Lo que a menudo falta es el silencio para percibirla –<br>y un camino para entender su lenguaje.</span>',
+    email_ph:"Tu dirección de correo",
+    cta_btn:"No perderte ninguna novedad →",
+    form_legal:"Al registrarte aceptas recibir actualizaciones de AEVIMA. Cancela cuando quieras.",
     success_msg:"✦ Ya estás dentro. Te contactaremos.",
     cosmos_line:"Tu Cosmos · Tu Esencia · Tu Camino",
     pillars_h2:"Los Cinco Pilares de AEVIMA",
     pillars_intro:"Cada análisis es único — igual que tú.<br>Descubre lo que te espera dentro.",
-    p1_tag:"Conócete a ti mismo", p1_title:"Tu Perfil del Alma", p1_desc:"¿Quién eres realmente — más allá de roles y expectativas? Tu nombre, fecha y lugar de nacimiento abren el camino hacia tu verdad más profunda.",
-    p2_tag:"Comprende tus relaciones", p2_title:"Sinastría de Pareja", p2_desc:"Algunas conexiones se sienten como predestinadas. Descubre qué une realmente a dos almas — y dónde hay espacio para el crecimiento.",
-    p3_tag:"Aprovecha el momento adecuado", p3_title:"Calendario Cósmico", p3_desc:"La vida tiene ritmos. Fases para el silencio, para el movimiento, para la cosecha. Tu calendario personal te muestra cuándo fluye qué energía.",
-    p4_tag:"Encuentra tu lugar", p4_title:"Astrocartografía", p4_desc:"No todo lugar se siente como hogar — algunos te sostienen, otros te agotan. Descubre dónde en la Tierra tu energía florece de verdad.",
-    p5_tag:"Escucha tu sabiduría interior", p5_title:"Interpretación de Sueños", p5_desc:"Cada noche tu alma deja huellas. Lo que sueñas no es coincidencia — es un mensaje. AEVIMA te ayuda a escucharlo.",
-    badge_avail:"Disponible", badge_soon:"Próximamente", badge_abo:"Individual y Suscripción",
+    p1_tag:"Conócete a ti mismo", p1_title:"Tu Perfil del Alma",
+    p1_desc:"¿Quién eres bajo todas las capas que la vida ha formado en ti? En tus datos de nacimiento hay una clave oculta que hace visible el lenguaje de tu alma.",
+    p2_tag:"Comprende tus relaciones", p2_title:"Sinastría de Pareja",
+    p2_desc:"Algunas conexiones se sienten como predestinadas. Descubre qué une realmente a dos almas — y dónde hay espacio para el crecimiento.",
+    p3_tag:"Aprovecha el momento", p3_title:"Calendario Cósmico",
+    p3_desc:"La vida tiene ritmos. Fases para el silencio, para el movimiento, para la cosecha. Tu calendario muestra cuándo fluye qué energía.",
+    p4_tag:"Encuentra tu lugar", p4_title:"Astrocartografía",
+    p4_desc:"No todo lugar se siente como hogar — algunos te sostienen, otros te agotan. Descubre dónde florece tu energía.",
+    p5_tag:"Escucha tu sabiduría", p5_title:"Interpretación de Sueños",
+    p5_desc:"Cada noche tu alma deja huellas. Lo que sueñas no es coincidencia — es un mensaje. AEVIMA te ayuda a interpretarlo.",
+    badge_avail:"Disponible", badge_soon:"Próximamente",
     phil_lbl:"La Filosofía de AEVIMA", phil_h2:"Atención Plena. No Búsqueda.",
     quote:"„Tu alma no busca a nadie y no espera nada.<br>Ya es completa.<br>AEVIMA te ayuda a entender su lenguaje."",
-    phil_txt:"No trabajamos con drama, miedo ni la promesa de arreglarte. Te ofrecemos una herramienta para mayor claridad — para una vida en armonía contigo mismo.",
-    early_lbl:"Acceso Anticipado", early_h2:"Sé parte del lanzamiento de AEVIMA.",
-    early_intro:"Inscríbete ahora. Recibirás acceso anticipado exclusivo y un regalo personal de bienvenida.",
+    phil_txt:"No trabajamos con drama, miedo ni promesas. Te ofrecemos una herramienta para mayor claridad — para una vida en armonía contigo mismo.",
+    early_lbl:"Recibe Updates", early_h2:"No te pierdas novedades de AEVIMA.",
+    early_intro:"Regístrate y recibe actualizaciones exclusivas y sé la primera en saber de nuevos análisis.",
     ft_impressum:"Aviso Legal", ft_privacy:"Privacidad", ft_agb:"Términos"
   },
   ar:{
     tagline:"قوة الروح · التحول · الانسجام",
     h1:"لستَ هنا بالصدفة.",
-    sub:"تحليلات مخصصة للوعي والفهم الذاتي والتوجيه الكوني.",
-    body:`ربما ثمة جزء منك يبحث عن إجابات.<br>ربما تشعر أن بعض الإشارات واللقاءات تحمل معنى أعمق مما يبدو في البداية.<br><br>روحك تتكلم.<br>في الرموز. في الأحلام. في الأنماط المتكررة.<br>في ذلك الإحساس الهادئ بأن شيئاً ما يريد أن يُفهم.<br><br>هنا ستجد مساحة لاستكشاف هذه الرسائل.<br><br>فروحك كانت دائماً هنا.<br>ما ينقص في أغلب الأحيان هو الصمت لإدراكها –<br>وطريقة لفهم لغتها.`,
-    email_ph:"عنوان بريدك الإلكتروني", cta_btn:"احجز وصولك المبكر ←", cta_btn2:"سجّل الآن ←",
-    form_note:"بلا رسائل مزعجة · إلغاء في أي وقت · مجاناً", form_note2:"بلا رسائل مزعجة · إلغاء في أي وقت",
+    sub:"اكتشف ما يشكّلك، يربطك ويرافقك في طريقك.",
+    body:'ربما ثمة جزء منك يبحث عن إجابات.<br>ربما تشعر أن بعض الإشارات تحمل معنى أعمق مما يبدو.<br><br>روحك تتكلم.<br>في الرموز. في الأحلام. في الأنماط المتكررة.<br>في ذلك الإحساس بأن شيئاً ما يريد أن يُفهم.<br><br>هنا ستجد مساحة لاستكشاف هذه الرسائل.<br><br><span class="hero-highlight">فروحك كانت دائماً هنا.<br>ما ينقص في أغلب الأحيان هو الصمت لإدراكها –<br>وطريقة لفهم لغتها.</span>',
+    email_ph:"عنوان بريدك الإلكتروني",
+    cta_btn:"لا تفوّت أي أخبار ←",
+    form_legal:"بالتسجيل توافق على تلقي تحديثات من AEVIMA. إلغاء الاشتراك في أي وقت.",
     success_msg:"✦ أنت معنا. سنتواصل معك قريباً.",
     cosmos_line:"كونك · جوهرك · طريقك",
     pillars_h2:"الأعمدة الخمسة لـ AEVIMA",
     pillars_intro:"كل تحليل فريد من نوعه — تماماً كما أنت.<br>اكتشف ما ينتظرك في الداخل.",
-    p1_tag:"اعرف نفسك", p1_title:"ملفك الروحاني", p1_desc:"من أنت حقاً — بعيداً عن الأدوار والتوقعات؟ اسمك وتاريخ ومكان ميلادك يفتحون الطريق إلى حقيقتك الأعمق.",
-    p2_tag:"افهم علاقاتك", p2_title:"التوافق الروحاني", p2_desc:"بعض الروابط تبدو كأنها مقدّرة. اكتشف ما يجمع روحين حقاً — وأين يوجد مجال للنمو.",
-    p3_tag:"استغل الوقت المناسب", p3_title:"التقويم الكوني", p3_desc:"للحياة إيقاعات. مراحل للصمت والانطلاق والحصاد. تقويمك الشخصي يريك متى تتدفق أي طاقة.",
-    p4_tag:"اعثر على مكانك", p4_title:"الخرائط الفلكية", p4_desc:"ليس كل مكان يشعرك بأنه وطن — بعضها يحملك وبعضها يستنزفك. اكتشف أين تزهر طاقتك على وجه الأرض.",
-    p5_tag:"استمع لحكمتك الداخلية", p5_title:"تفسير الأحلام", p5_desc:"كل ليلة تترك روحك أثراً. ما تحلم به ليس صدفة — بل رسالة. AEVIMA يساعدك على سماعها.",
-    badge_avail:"متاح", badge_soon:"قريباً", badge_abo:"فردي واشتراك",
+    p1_tag:"اعرف نفسك", p1_title:"ملفك الروحاني",
+    p1_desc:"من أنت تحت كل الطبقات التي شكّلتها الحياة فيك؟ في بيانات ميلادك مفتاح مخفي يجعل لغة روحك مرئية.",
+    p2_tag:"افهم علاقاتك", p2_title:"التوافق الروحاني",
+    p2_desc:"بعض الروابط تبدو كأنها مقدّرة. اكتشف ما يجمع روحين حقاً — وأين يوجد مجال للنمو.",
+    p3_tag:"استغل الوقت المناسب", p3_title:"التقويم الكوني",
+    p3_desc:"للحياة إيقاعات. مراحل للصمت والانطلاق والحصاد. تقويمك الشخصي يريك متى تتدفق أي طاقة.",
+    p4_tag:"اعثر على مكانك", p4_title:"الخرائط الفلكية",
+    p4_desc:"ليس كل مكان يشعرك بأنه وطن. اكتشف أين تزهر طاقتك على وجه الأرض.",
+    p5_tag:"استمع لحكمتك", p5_title:"تفسير الأحلام",
+    p5_desc:"كل ليلة تترك روحك أثراً. ما تحلم به ليس صدفة — بل رسالة. AEVIMA يساعدك على تأويلها.",
+    badge_avail:"متاح", badge_soon:"قريباً",
     phil_lbl:"فلسفة AEVIMA", phil_h2:"الوعي. لا البحث.",
     quote:"„روحك لا تبحث عن أحد ولا تنتظر شيئاً.<br>هي كاملة بالفعل.<br>AEVIMA يساعدك على فهم لغتها."",
-    phil_txt:"لا نعمل بالدراما أو الخوف أو وعد إصلاحك. نقدم لك أداة لمزيد من الوضوح — لحياة في انسجام مع نفسك.",
-    early_lbl:"الوصول المبكر", early_h2:"كن هنا حين ينطلق AEVIMA.",
-    early_intro:"سجّل الآن. ستحصل على وصول مبكر حصري وهدية ترحيبية شخصية.",
+    phil_txt:"لا نعمل بالدراما أو الخوف. نقدم لك أداة لمزيد من الوضوح — لحياة في انسجام مع نفسك.",
+    early_lbl:"احصل على تحديثات", early_h2:"لا تفوّت أخبار AEVIMA.",
+    early_intro:"سجّل واحصل على تحديثات حصرية وكن أول من يعلم بالتحليلات الجديدة.",
     ft_impressum:"بيانات النشر", ft_privacy:"الخصوصية", ft_agb:"الشروط"
   },
   tr:{
     tagline:"Ruh Gücü · Dönüşüm · Uyum",
     h1:"Burada tesadüfen değilsin.",
-    sub:"Farkındalık, öz-anlayış ve kozmik yönelim için kişiselleştirilmiş analizler.",
-    body:`Belki içinde cevap arayan bir parça var.<br>Belki bazı işaretlerin ilk bakışta göründüğünden daha derin anlamlar taşıdığını hissediyorsun.<br><br>Ruhun konuşuyor.<br>Sembollerde. Rüyalarda. Tekrar eden örüntülerde.<br>Hayatındaki bir şeyin anlaşılmak istediğine dair o sessiz histe.<br><br>Burada bu mesajları keşfetmek için bir alan bulacaksın.<br><br>Çünkü ruhun her zaman oradaydı.<br>Çoğu zaman eksik olan, onu fark etmek için sessizlik –<br>ve onun dilini anlamak için bir yol.`,
-    email_ph:"E-posta adresin", cta_btn:"Erken Erişimi Güvence Altına Al →", cta_btn2:"Şimdi Kaydol →",
-    form_note:"Spam yok · İstediğin zaman çık · Ücretsiz", form_note2:"Spam yok · İstediğin zaman çık",
+    sub:"Seni şekillendiren, bağlayan ve yolunda eşlik edeni keşfet.",
+    body:'Belki içinde cevap arayan bir parça var.<br>Belki bazı işaretlerin daha derin anlamlar taşıdığını hissediyorsun.<br><br>Ruhun konuşuyor.<br>Sembollerde. Rüyalarda. Tekrar eden örüntülerde.<br>Hayatındaki bir şeyin anlaşılmak istediğine dair o sessiz histe.<br><br>Burada bu mesajları keşfetmek için bir alan bulacaksın.<br><br><span class="hero-highlight">Çünkü ruhun her zaman oradaydı.<br>Çoğu zaman eksik olan, onu fark etmek için sessizlik –<br>ve onun dilini anlamak için bir yol.</span>',
+    email_ph:"E-posta adresin",
+    cta_btn:"Haberleri kaçırma →",
+    form_legal:"Kaydolarak AEVIMA'dan güncellemeler almayı kabul edersin. İstediğin zaman çıkabilirsin.",
     success_msg:"✦ Aramızdasın. Seninle iletişime geçeceğiz.",
     cosmos_line:"Kozmosun · Özün · Yolun",
     pillars_h2:"AEVIMA'nın Beş Sütunu",
     pillars_intro:"Her analiz benzersizdir — tıpkı senin gibi.<br>İçinde neyin seni beklediğini keşfet.",
-    p1_tag:"Kendini tanı", p1_title:"Ruh Profilin", p1_desc:"Gerçekten kim sin — rollerin ve beklentilerin ötesinde? Adın, doğum tarihin ve yerin en derin gerçeğine giden yolu açıyor.",
-    p2_tag:"İlişkilerini anla", p2_title:"Çift Sinastri", p2_desc:"Bazı bağlar kader gibi hissettiriyor. İki ruhu gerçekten neyin birleştirdiğini ve büyüme için nerede alan olduğunu keşfet.",
-    p3_tag:"Doğru anı kullan", p3_title:"Kozmik Takvim", p3_desc:"Hayatın ritimleri var. Sessizlik, hareket ve hasat için fazlar. Kişisel takvimin hangi enerjinin ne zaman aktığını gösteriyor.",
-    p4_tag:"Yerini bul", p4_title:"Astrokartografi", p4_desc:"Her yer ev gibi hissettirmez — bazı yerler seni taşır, bazıları seni tüketir. Enerjinin gerçekten nerede yeşerdiğini keşfet.",
-    p5_tag:"İç bilgeliğini dinle", p5_title:"Rüya Yorumu", p5_desc:"Her gece ruhun izler bırakır. Rüya gördüklerin tesadüf değil — bir mesajdır. AEVIMA onu duymanıza yardımcı olur.",
-    badge_avail:"Mevcut", badge_soon:"Yakında", badge_abo:"Tekil ve Abonelik",
+    p1_tag:"Kendini tanı", p1_title:"Ruh Profilin",
+    p1_desc:"Hayatın sende oluşturduğu tüm katmanların altında sen kimsin? Doğum verilerinde ruhunun dilini görünür kılan ve gerçek benliğini ortaya koyan gizli bir anahtar yatıyor.",
+    p2_tag:"İlişkilerini anla", p2_title:"Çift Sinastri",
+    p2_desc:"Bazı bağlar kader gibi hissettiriyor. İki ruhu gerçekten neyin birleştirdiğini ve büyüme için nerede alan olduğunu keşfet.",
+    p3_tag:"Doğru anı kullan", p3_title:"Kozmik Takvim",
+    p3_desc:"Hayatın ritimleri var. Sessizlik, hareket ve hasat için fazlar. Kişisel takvimin hangi enerjinin ne zaman aktığını gösteriyor.",
+    p4_tag:"Yerini bul", p4_title:"Astrokartografi",
+    p4_desc:"Her yer ev gibi hissettirmez — bazı yerler seni taşır, bazıları seni tüketir. Enerjinin nerede yeşerdiğini keşfet.",
+    p5_tag:"İç bilgeliğini dinle", p5_title:"Rüya Yorumu",
+    p5_desc:"Her gece ruhun izler bırakır. Rüya gördüklerin tesadüf değil — bir mesajdır. AEVIMA onu yorumlamanıza yardımcı olur.",
+    badge_avail:"Mevcut", badge_soon:"Yakında",
     phil_lbl:"AEVIMA'nın Felsefesi", phil_h2:"Farkındalık. Arayış Değil.",
     quote:"„Ruhun kimseyi aramaz ve hiçbir şey beklemez.<br>O zaten bütündür.<br>AEVIMA onun dilini anlamana yardım eder."",
-    phil_txt:"Drama, korku ya da seni düzeltme vaadiyle çalışmıyoruz. Daha fazla netlik için bir araç sunuyoruz — kendinle uyum içinde bir yaşam için.",
-    early_lbl:"Erken Erişim", early_h2:"AEVIMA lansmanında orada ol.",
-    early_intro:"Şimdi kaydol. Özel erken erişim ve kişisel bir karşılama hediyesi alacaksın.",
+    phil_txt:"Drama, korku ya da seni düzeltme vaadiyle çalışmıyoruz. Daha fazla netlik için bir araç sunuyoruz.",
+    early_lbl:"Güncel Kal", early_h2:"AEVIMA haberlerini kaçırma.",
+    early_intro:"Kaydol ve özel güncellemeler al, yeni analizlerden ilk sen haber ol.",
     ft_impressum:"Künye", ft_privacy:"Gizlilik", ft_agb:"Şartlar"
   }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+window.onload = function() {
+  var sel = document.getElementById('lang-select');
+  if (!sel) return;
 
-  // Language engine
-  function setLang(l) {
+  function applyLang(l) {
     var t = T[l] || T['de'];
-    localStorage.setItem('aevima-lang', l);
+    try { localStorage.setItem('aevima-lang', l); } catch(e){}
     document.documentElement.lang = l;
     document.body.classList.toggle('rtl', l === 'ar');
+    sel.value = l;
 
-    document.querySelectorAll('[data-i18n]').forEach(function(el) {
-      var key = el.getAttribute('data-i18n');
-      if (t[key] !== undefined) el.innerHTML = t[key];
-    });
-    document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
-      var key = el.getAttribute('data-i18n-ph');
-      if (t[key] !== undefined) el.placeholder = t[key];
-    });
-
-    var sel = document.getElementById('lang-select');
-    if (sel) sel.value = l;
+    var els = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < els.length; i++) {
+      var key = els[i].getAttribute('data-i18n');
+      if (t[key] !== undefined) els[i].innerHTML = t[key];
+    }
+    var phs = document.querySelectorAll('[data-i18n-ph]');
+    for (var j = 0; j < phs.length; j++) {
+      var k = phs[j].getAttribute('data-i18n-ph');
+      if (t[k] !== undefined) phs[j].placeholder = t[k];
+    }
   }
 
-  // Bind language selector
-  var langSel = document.getElementById('lang-select');
-  if (langSel) {
-    langSel.addEventListener('change', function() {
-      setLang(this.value);
-    });
-  }
+  sel.addEventListener('change', function() { applyLang(this.value); });
 
-  // Init language
-  var saved = localStorage.getItem('aevima-lang') || 'de';
-  setLang(saved);
+  var saved = 'de';
+  try { saved = localStorage.getItem('aevima-lang') || 'de'; } catch(e){}
+  applyLang(saved);
 
   // Forms
-  function handle(fId, eId, sId) {
+  function bindForm(fId, eId, sId) {
     var f = document.getElementById(fId);
     if (!f) return;
-    f.addEventListener('submit', function(e) {
-      e.preventDefault();
+    f.addEventListener('submit', function(ev) {
+      ev.preventDefault();
       var email = document.getElementById(eId).value;
       if (!email || email.indexOf('@') < 0) { document.getElementById(eId).focus(); return; }
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'form-name=aevima-waitlist&email=' + encodeURIComponent(email)
-      }).finally(function() {
-        f.style.display = 'none';
-        document.getElementById(sId).style.display = 'block';
-      });
+      fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'form-name=aevima-waitlist&email='+encodeURIComponent(email) })
+        .finally(function() { f.style.display='none'; document.getElementById(sId).style.display='block'; });
     });
   }
-  handle('form1', 'e1', 's1');
-  handle('form2', 'e2', 's2');
+  bindForm('form1','e1','s1');
+  bindForm('form2','e2','s2');
 
   // Stars
-  var c = document.getElementById('stars');
-  var ctx = c.getContext('2d');
-  var stars = [];
-  function initStars() {
-    c.width = innerWidth; c.height = innerHeight; stars = [];
-    for (var i = 0; i < 120; i++) stars.push({
-      x: Math.random() * c.width, y: Math.random() * c.height,
-      r: Math.random() * 1.1 + 0.2, a: Math.random(),
-      sp: Math.random() * 0.003 + 0.001,
-      col: Math.random() > 0.82 ? '#2AAFA0' : '#C4956A'
-    });
-  }
-  function drawStars() {
-    ctx.clearRect(0, 0, c.width, c.height);
-    stars.forEach(function(s) {
-      s.a += s.sp;
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = s.col;
-      ctx.globalAlpha = (Math.sin(s.a) * 0.5 + 0.5) * 0.55 + 0.08;
-      ctx.fill();
-    });
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(drawStars);
-  }
-  window.addEventListener('resize', initStars);
-  initStars(); drawStars();
-});
+  var c = document.getElementById('stars'), ctx = c.getContext('2d'), stars = [];
+  function initS() { c.width=innerWidth; c.height=innerHeight; stars=[];
+    for(var i=0;i<120;i++) stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,a:Math.random(),sp:Math.random()*.003+.001,col:Math.random()>.82?'#2AAFA0':'#C4956A'}); }
+  function drawS() { ctx.clearRect(0,0,c.width,c.height);
+    for(var i=0;i<stars.length;i++){ var s=stars[i]; s.a+=s.sp; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=s.col; ctx.globalAlpha=(Math.sin(s.a)*.5+.5)*.55+.08; ctx.fill(); }
+    ctx.globalAlpha=1; requestAnimationFrame(drawS); }
+  window.addEventListener('resize',initS); initS(); drawS();
+};
 </script>
 </body>
 </html>
