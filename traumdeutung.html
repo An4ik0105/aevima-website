@@ -12,86 +12,97 @@
     body{background:var(--dark);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;min-height:100vh}
     body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(196,149,106,.07) 0,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(42,175,160,.05) 0,transparent 60%);pointer-events:none;z-index:0}
     .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:60px 24px 80px}
-    .back{display:inline-flex;align-items:center;gap:.4rem;color:var(--rose);text-decoration:none;font-size:.78rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
-    h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:600;color:var(--rose-l);letter-spacing:.1em;margin-bottom:8px}
-    .subtitle{color:var(--muted);font-size:.85rem;margin-bottom:40px}
-    .hr{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
-    label{display:block;font-size:.72rem;letter-spacing:.14em;color:var(--rose);text-transform:uppercase;margin-bottom:6px}
-    textarea{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;resize:vertical;min-height:120px;transition:border-color .3s}
+    .back{display:inline-block;color:var(--rose);text-decoration:none;font-size:.8rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;color:var(--rose-l);letter-spacing:.1em;margin-bottom:10px}
+    .subtitle{color:var(--muted);font-size:.9rem;margin-bottom:40px}
+    .divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
+    .intro-text{color:var(--muted);font-size:.95rem;line-height:2;margin-bottom:32px}
+    .intro-text strong{color:var(--rose-l)}
+    label{display:block;font-size:.8rem;letter-spacing:.12em;color:var(--rose);text-transform:uppercase;margin-bottom:8px}
+    textarea{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none;resize:vertical;min-height:130px;transition:border-color .3s;line-height:1.8}
     textarea:focus{border-color:rgba(196,149,106,.5)}
     textarea::placeholder{color:var(--muted);opacity:.6}
-    input[type=email],input[type=text]{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s}
+    input[type=email]{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none;transition:border-color .3s}
     input:focus{border-color:rgba(196,149,106,.5)}
-    input::placeholder{color:var(--muted);opacity:.6}
-    .fg{margin-bottom:20px}
-    .btn-submit{width:100%;padding:15px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:all .3s;margin-top:8px}
-    .btn-submit:hover{opacity:.88;transform:translateY(-1px)}
-    .consent{font-size:.7rem;color:var(--muted);margin-top:10px;text-align:center}
+    input::placeholder{color:var(--muted);opacity:.7}
+    .form-group{margin-bottom:24px}
+    .kw-label{font-size:.75rem;color:var(--muted);margin-top:8px;margin-bottom:8px}
+    .kw-row{display:flex;flex-wrap:wrap;gap:8px}
+    .kw-chip{background:rgba(196,149,106,.08);border:1px solid rgba(196,149,106,.22);color:var(--muted);font-size:.72rem;padding:.28rem .7rem;border-radius:20px;cursor:pointer;transition:all .2s;user-select:none}
+    .kw-chip.active{background:rgba(196,149,106,.22);border-color:var(--rose);color:var(--rose-l)}
+    .btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:all .3s;margin-top:8px}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(196,149,106,.3)}
+    .consent{font-size:.72rem;color:var(--muted);margin-top:10px;text-align:center}
     .consent a{color:var(--rose)}
-    .keywords-box{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;min-height:32px}
-    .kw-chip{background:rgba(196,149,106,.12);border:1px solid rgba(196,149,106,.25);color:var(--rose-l);font-size:.72rem;padding:.3rem .7rem;border-radius:20px;cursor:pointer;transition:background .2s}
-    .kw-chip.active{background:rgba(196,149,106,.3);border-color:var(--rose)}
     /* RESULT */
     #result{display:none;margin-top:48px}
-    .dream-header{text-align:center;margin-bottom:32px}
-    .dream-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--rose-l);margin-bottom:8px}
-    .symbol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
-    .symbol-card{background:rgba(196,149,106,.04);border:1px solid var(--border);border-radius:3px;padding:16px}
-    .sym-name{font-family:'Cinzel',serif;font-size:.8rem;color:var(--rose);letter-spacing:.1em;margin-bottom:6px}
-    .sym-short{font-size:.82rem;color:var(--muted);line-height:1.7}
-    .section{background:rgba(196,149,106,.04);border:1px solid var(--border);border-radius:3px;padding:22px;margin-bottom:14px}
-    .section-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--rose);text-transform:uppercase;margin-bottom:10px}
-    .section p{color:var(--muted);font-size:.87rem;line-height:1.9}
-    .locked{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.15);border-radius:3px;padding:22px;margin-bottom:14px;position:relative}
-    .locked::after{content:'🔒';position:absolute;right:14px;top:14px;font-size:.9rem;opacity:.4}
-    .locked-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
-    .locked p{color:rgba(155,143,168,.4);font-size:.84rem;font-style:italic;filter:blur(3px);user-select:none}
-    .paywall{text-align:center;margin-top:40px;padding:36px 24px;background:linear-gradient(135deg,rgba(196,149,106,.08),rgba(42,175,160,.06));border:1px solid var(--border);border-radius:3px}
-    .paywall h2{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--text);margin-bottom:10px}
-    .paywall p{color:var(--muted);font-size:.84rem;max-width:400px;margin:0 auto 20px}
-    .price-row{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;margin:16px 0}
-    .price-box{background:rgba(196,149,106,.08);border:1px solid var(--border);border-radius:3px;padding:16px 24px;text-align:center}
-    .price-box.featured{border-color:var(--rose);background:rgba(196,149,106,.12)}
-    .price-amount{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--rose)}
-    .price-label{font-size:.68rem;color:var(--muted);letter-spacing:.08em}
-    .price-desc{font-size:.72rem;color:var(--teal);margin-top:4px}
-    .btn-pay{display:inline-block;padding:13px 36px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;cursor:pointer;text-decoration:none;transition:all .3s;margin:6px}
+    .result-intro{font-family:'Cinzel',serif;font-size:1rem;color:var(--rose-l);margin-bottom:28px;text-align:center;line-height:1.7;letter-spacing:.04em}
+    .sym-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;margin-bottom:28px}
+    .sym-card{background:rgba(196,149,106,.05);border:1px solid var(--border);border-radius:3px;padding:18px}
+    .sym-name{font-family:'Cinzel',serif;font-size:.82rem;color:var(--rose);letter-spacing:.1em;margin-bottom:5px}
+    .sym-short{font-size:.82rem;color:var(--muted);line-height:1.6}
+    .section{background:rgba(196,149,106,.05);border:1px solid var(--border);border-radius:3px;padding:28px;margin-bottom:18px}
+    .section-title{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;color:var(--rose);text-transform:uppercase;margin-bottom:14px}
+    .section p{color:var(--muted);font-size:.9rem;line-height:1.95}
+    .section p strong{color:var(--text)}
+    .section p em{color:var(--rose-l);font-style:italic}
+    .locked{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.15);border-radius:3px;padding:28px;margin-bottom:18px;position:relative;overflow:hidden}
+    .locked::before{content:'🔒';position:absolute;right:20px;top:20px;font-size:1.1rem;opacity:.45}
+    .locked-title{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+    .locked p{color:rgba(155,143,168,.5);font-size:.88rem;font-style:italic}
+    .paywall{text-align:center;margin-top:40px;padding:44px 24px;background:linear-gradient(135deg,rgba(196,149,106,.08),rgba(42,175,160,.06));border:1px solid var(--border);border-radius:3px}
+    .paywall h2{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--text);margin-bottom:12px;letter-spacing:.08em}
+    .paywall .hook{color:var(--rose-l);font-size:.92rem;max-width:440px;margin:0 auto 28px;line-height:1.9;font-style:italic}
+    .price-cards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0 28px}
+    .price-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:20px 28px;text-align:center;min-width:150px}
+    .price-card.highlight{border-color:var(--rose);background:rgba(196,149,106,.08)}
+    .price-amount{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--rose)}
+    .price-period{font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin-top:2px}
+    .price-desc{font-size:.75rem;color:var(--teal);margin-top:6px}
+    .btn-pay{display:inline-block;padding:15px 40px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.18em;cursor:pointer;text-decoration:none;transition:all .3s;margin:6px}
     .btn-pay:hover{opacity:.88;transform:translateY(-1px)}
-    .btn-pay.secondary{background:transparent;border:1px solid var(--teal);color:var(--teal)}
+    .btn-pay.outline{background:transparent;border:1px solid rgba(42,175,160,.5);color:var(--teal)}
+    .pay-small{font-size:.7rem;color:var(--muted);margin-top:10px}
     .test-badge{background:rgba(42,175,160,.15);border:1px solid var(--teal);color:var(--teal);font-size:.7rem;letter-spacing:.12em;padding:.3rem .8rem;border-radius:20px;display:inline-block;margin-bottom:20px}
+    .tag{display:inline-block;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.18rem .5rem;border-radius:12px;margin-left:6px;vertical-align:middle}
+    .tag-jung{background:rgba(42,175,160,.12);color:var(--teal);border:1px solid rgba(42,175,160,.25)}
   </style>
 </head>
 <body>
 <div class="wrap">
   <a href="index.html" class="back">← AEVIMA</a>
 
-  <div id="test-info" style="display:none"><span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span></div>
+  <div id="test-info" style="display:none;text-align:center;margin-bottom:20px">
+    <span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span>
+  </div>
 
   <div style="text-align:center">
     <h1>TRAUMDEUTUNG</h1>
-    <p class="subtitle">Symbole · Unbewusstes · Seelenbotschaften</p>
+    <p class="subtitle">Symbole · Botschaften des Unbewussten · Was deine Seele dir nachts sagt</p>
   </div>
-  <div class="hr"></div>
+  <div class="divider"></div>
 
-  <p style="color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:32px">
-    Jede Nacht hinterlässt deine Seele Spuren. Träume sind keine Zufälligkeiten — sie sind Botschaften aus dem Unbewussten, die dein waches Ich noch nicht gehört hat.
-    Gib deinen Traum ein und entdecke, was er dir sagen möchte.
-  </p>
+  <div class="intro-text">
+    <p>Dein Traum heute Nacht war kein Zufall.</p><br>
+    <p>Manchmal schickt uns die Seele Botschaften in einer Sprache, die unser Verstand noch nicht sprechen kann.
+    In Bildern. In Symbolen. In Gefühlen die nach dem Aufwachen noch stundenlang bleiben.</p><br>
+    <p><strong>Diese Bilder bedeuten etwas.</strong> Und wenn du weißt, was — verändert sich etwas in dir.</p>
+  </div>
 
   <form id="dreamForm">
-    <div class="fg">
-      <label>Beschreibe deinen Traum <span style="font-size:.7rem;color:var(--muted);text-transform:none;letter-spacing:0">(oder nenne Schlüsselworte)</span></label>
-      <textarea id="dream_text" placeholder="z.B. Ich flog über Wasser, dann erschien ein weißes Tier, ich fühlte mich verloren aber nicht ängstlich..." required></textarea>
+    <div class="form-group">
+      <label>Beschreibe deinen Traum</label>
+      <textarea id="dream_text" placeholder="Schreib einfach drauf los... was du geträumt hast, wie es sich angefühlt hat, welche Bilder geblieben sind. Es muss nicht vollständig sein." required></textarea>
     </div>
-    <div class="fg">
-      <label>Schlüsselwörter <span style="font-size:.7rem;color:var(--muted);text-transform:none;letter-spacing:0">(optional, klicken um hinzuzufügen)</span></label>
-      <div class="keywords-box" id="kw-suggestions"></div>
+    <div class="form-group">
+      <p class="kw-label">Oder wähle Symbole die vorgekommen sind:</p>
+      <div class="kw-row" id="kw-row"></div>
     </div>
-    <div class="fg">
-      <label>E-Mail <span style="font-size:.7rem;color:var(--muted);text-transform:none;letter-spacing:0">(für deine Tiefenanalyse)</span></label>
+    <div class="form-group">
+      <label>E-Mail <span style="font-size:.75rem;color:var(--muted);text-transform:none;letter-spacing:0">(für deine vollständige Deutung)</span></label>
       <input type="email" id="email" placeholder="deine@email.de" required/>
     </div>
-    <button type="submit" class="btn-submit">Mein Traum enthüllen →</button>
+    <button type="submit" class="btn">✦ Meinen Traum deuten</button>
     <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
   </form>
 
@@ -100,158 +111,174 @@
 
 <script>
 var isTest = location.search.indexOf('test=1') > -1;
-if (isTest) document.getElementById('test-info').style.display='block';
+if (isTest) document.getElementById('test-info').style.display = 'block';
 
-// ─── DREAM SYMBOL DATABASE ──────────────────────────────────────
-// Sources: Carl Jung (Archetypes & Collective Unconscious),
-//          Pamela Ball (20,000 Dreams Encyclopedia),
-//          Theresa Cheung (Dream Dictionary A-Z),
-//          Klaus Vollmar (Traumsymbole Lexikon)
-var SYMBOLS = {
-  // NATUR & ELEMENTE
-  "wasser":   {cat:"Element",short:"Emotionen, Unbewusstes, Reinigung",full:"Wasser ist das universellste Symbol des Unbewussten. Ruhiges Wasser spiegelt inneren Frieden wider. Stürmisches Wasser deutet auf unterdrückte Emotionen hin. Jung sah Wasser als den 'Mutterarchetypus' — das Urprinzip des Lebens und der Transformation.",jungian:true},
-  "fliegen":  {cat:"Bewegung",short:"Freiheit, spirituelles Erwachen, Perspektivwechsel",full:"Fliegen ist eines der häufigsten und positivsten Traumsymbole. Es deutet auf den Wunsch nach Freiheit, den Aufstieg über Probleme oder spirituelles Wachstum hin. Die Höhe, in der du fliegst, gibt Hinweise auf dein aktuelles Entwicklungsniveau.",jungian:true},
-  "fallen":   {cat:"Bewegung",short:"Kontrollverlust, Angst, Loslassen",full:"Fallen im Traum signalisiert einen Bereich deines Lebens, in dem du das Gefühl hast, den Boden zu verlieren. Es kann aber auch die Einladung sein, loszulassen — bewusst zu fallen, statt sich zu klammern. Das Aufwachen vor dem Aufprall ist bedeutungsvoll.",jungian:true},
-  "feuer":    {cat:"Element",short:"Transformation, Leidenschaft, Reinigung oder Zerstörung",full:"Feuer ist das Symbol der Transformation. Wenn es wärmt und leuchtet, steht es für Leidenschaft, Kreativität und spirituelle Energie. Wenn es unkontrolliert brennt, symbolisiert es unkontrollierte Emotionen oder den Wunsch nach Neuanfang durch radikale Veränderung."},
-  "erde":     {cat:"Element",short:"Stabilität, Verankerung, Fruchtbarkeit",full:"Erde im Traum steht für Sicherheit, Beständigkeit und das Verlangen nach festen Wurzeln. Fruchtbare Erde deutet auf Wachstumspotenzial hin. Trockene, karge Erde zeigt Erschöpfung oder das Bedürfnis nach Nährung."},
-  "wind":     {cat:"Element",short:"Veränderung, geistige Impulse, das Unsichtbare",full:"Wind steht für die geistige Ebene und das Unsichtbare. Ein sanfter Wind deutet auf positive Veränderungen hin. Ein Sturm signalisiert innere Unruhe oder äußere Herausforderungen, die kommen oder gehen."},
-
-  // TIERE
-  "schlange": {cat:"Tier",short:"Transformation, Heilung, verborgenes Wissen",full:"Die Schlange ist eines der ältesten und vielschichtigsten Traumsymbole. In der Jungschen Psychologie steht sie für die Kraft der Transformation und das Unbewusste. Sie häutet sich — ein Symbol der Erneuerung. Sie kann auch verborgene Weisheit oder unterdrückte Energie symbolisieren.",jungian:true},
-  "wolf":     {cat:"Tier",short:"Instinkte, Wildheit, Gemeinschaft oder Isolation",full:"Der Wolf verkörpert deine ursprünglichsten Instinkte. Er steht für innere Wildheit, die vielleicht zu sehr gezähmt wurde. Ein einzelner Wolf kann Einsamkeit oder Unabhängigkeit bedeuten. Eine Wolfsherde steht für Gemeinschaft und soziale Bindungen.",jungian:true},
-  "hund":     {cat:"Tier",short:"Loyalität, bedingungslose Zuneigung, Führung",full:"Hunde stehen für Treue, bedingungslose Loyalität und das Bedürfnis nach Zugehörigkeit. Ein freundlicher Hund zeigt gesunde Beziehungen. Ein bedrohlicher Hund kann unterdrückte Loyalitätskonflikte oder Verrat symbolisieren."},
-  "vogel":    {cat:"Tier",short:"Freiheit, Botschaft, spirituelle Verbindung",full:"Vögel verbinden Himmel und Erde — sie sind klassische Botschafter zwischen den Welten. Ein fliegender Vogel steht für Freiheit und spirituellen Aufstieg. Ein käfiggehaltener Vogel deutet auf eingeschränkte Entfaltungsmöglichkeiten hin."},
-  "pferd":    {cat:"Tier",short:"Energie, Leidenschaft, unkontrollierte Kraft",full:"Das Pferd steht für ungezähmte Energie und Leidenschaft. Ein wildes Pferd symbolisiert Impulskräfte, die noch nicht integriert sind. Ein gezähmtes Pferd steht für bewusste Kraft und kontrollierte Energie. Jung sah das Pferd als Symbol für die Mutter-Natur-Energie."},
-  "katze":    {cat:"Tier",short:"Intuition, Unabhängigkeit, das Feminine",full:"Die Katze ist das Symbol der weiblichen Mysterien und der Intuition. Sie steht für Eleganz, Unabhängigkeit und die Fähigkeit, in der Dunkelheit zu sehen. Eine schwarze Katze kann verdrängte Ängste symbolisieren, aber auch tiefe intuitive Kraft."},
-
-  // MENSCHEN & BEZIEHUNGEN
-  "kind":     {cat:"Mensch",short:"Inneres Kind, Neubeginn, Verletzlichkeit",full:"Ein Kind im Traum repräsentiert fast immer dein inneres Kind — den Teil von dir, der noch unberührt ist, spielen möchte, Heilung braucht oder neue Anfänge verkörpert. Jung nannte es den 'Puer aeternus' — das ewige Kind als Archetyp des Möglichen.",jungian:true},
-  "mutter":   {cat:"Mensch",short:"Fürsorge, Schutz, Ursprung oder Kontrolle",full:"Die Muttergestalt im Traum ist einer der mächtigsten Archetypen. Sie kann sowohl nährende Liebe als auch kontrollierende Vereinnahmung symbolisieren — je nach Kontext. Jung unterschied zwischen der 'guten Mutter' und der 'verschlingenden Mutter'.",jungian:true},
-  "vater":    {cat:"Mensch",short:"Autorität, Struktur, Schutz oder Unterdrückung",full:"Der Vater verkörpert die gesellschaftliche Ordnung, Regeln und Autorität. Ein unterstützender Vater zeigt gesunde Beziehung zur Strukturen. Ein bedrohlicher Vater kann auf ungelöste Autoritätskonflikte oder Selbstdisziplin-Fragen hinweisen."},
-  "unbekannt":{cat:"Mensch",short:"Schattenaspekte oder unbekannte Potenziale",full:"Eine unbekannte Figur im Traum repräsentiert oft einen Teil deiner eigenen Psyche. Jung nannte den Schatten: alle Aspekte, die du nicht in dir anerkennst. Aber unbekannte Figuren können auch zukünftige Versionen von dir oder ungelebte Potenziale sein.",jungian:true},
-
-  // ORTE & RÄUME
-  "haus":     {cat:"Ort",short:"Dein Selbst, verschiedene Aspekte deiner Persönlichkeit",full:"Das Haus ist eines der wichtigsten Traumsymbole und steht für die Seele des Träumenden. Verschiedene Räume repräsentieren verschiedene Aspekte der Psyche. Der Keller steht für das Unbewusste, der Dachboden für Erinnerungen und vergangene Erfahrungen.",jungian:true},
-  "wasser":   {cat:"Element",short:"Emotionen, Unbewusstes, Reinigung",full:"Wasser ist das universellste Symbol des Unbewussten."},
-  "meer":     {cat:"Ort",short:"Das große Unbewusste, emotionale Tiefe, Weite",full:"Das Meer steht für das kollektive Unbewusste und die emotionale Tiefe. Ruhiges Meer zeigt inneren Frieden. Stürmisches Meer deutet auf überwältigende Gefühle hin. Am Strand stehen bedeutet Schwelle zwischen Bewusstem und Unbewusstem."},
-  "wald":     {cat:"Ort",short:"Das Unbewusste, Urinstinkte, Transformation",full:"Der Wald ist ein klassischer Jungscher Archetyp für das Unbewusste. Sich im Wald zu verlieren bedeutet Orientierungslosigkeit in den eigenen inneren Prozessen. Einen Weg durch den Wald zu finden steht für die Fähigkeit, das Unbewusste zu navigieren."},
-  "berg":     {cat:"Ort",short:"Herausforderung, Ziel, spirituelle Höhe",full:"Ein Berg im Traum steht für Ziele, Herausforderungen und spirituelle Höhe. Den Gipfel zu erreichen bedeutet Erfüllung und Überblick. Vom Berg zu fallen zeigt Angst vor dem Scheitern. Am Fuß des Berges zu stehen deutet auf einen Beginn hin."},
-
-  // AKTIONEN & ZUSTÄNDE
-  "suchen":   {cat:"Aktion",short:"Sehnsucht, spirituelle Suche, unerfüllte Bedürfnisse",full:"Etwas oder jemanden zu suchen im Traum spiegelt eine innere Sehnsucht wider. Je nach dem was gesucht wird, kann es sich um verlorene Aspekte des Selbst, spirituelle Erfüllung oder unerfüllte emotionale Bedürfnisse handeln."},
-  "laufen":   {cat:"Aktion",short:"Flucht, Vorwärtsbewegung oder Streben",full:"Laufen im Traum hat zwei Hauptbedeutungen: Vor etwas flüchten (Angst, ungelöste Probleme) oder auf etwas zurennen (Motivation, Sehnsucht nach Veränderung). Die Richtung und das Gefühl geben den Kontext."},
-  "sterben":  {cat:"Aktion",short:"Transformation, Ende eines Lebenszyklus, Erneuerung",full:"Sterben im Traum bedeutet fast nie physischen Tod. Es ist ein mächtiges Symbol der Transformation. Eine Seite von dir stirbt, damit eine neue entstehen kann. Jung sah den Tod als Übergangsritus zu einem neuen Stadium der Entwicklung.",jungian:true},
-  "vergessen":{cat:"Zustand",short:"Unterdrücktes, nicht Integriertes",full:"Vergessen oder sich nicht erinnern können im Traum zeigt Inhalte, die das Unbewusste (noch) nicht ans Licht lassen möchte. Es kann auch auf Überforderung im Wachleben hinweisen."},
-
-  // GEGENSTÄNDE & SYMBOLE
-  "schlüssel":{cat:"Objekt",short:"Lösungen, Zugang zu verborgenen Teilen",full:"Ein Schlüssel steht für die Lösung eines Problems oder den Zugang zu bisher verborgenen Bereichen deiner Psyche. Einen Schlüssel zu finden bedeutet, dass eine Lösung in Reichweite ist. Einen Schlüssel zu verlieren deutet auf verpasste Gelegenheiten hin."},
-  "spiegel":  {cat:"Objekt",short:"Selbsterkenntnis, Selbstbild, Reflexion",full:"Der Spiegel ist das Symbol der Selbstreflexion. Was du im Spiegel siehst, muss nicht dein äußeres Aussehen sein — es kann ein Aspekt deiner Psyche sein, den du zu sehen lernst. Ein gebrochener Spiegel deutet auf Selbstwahrnehmungsprobleme hin.",jungian:true},
-  "licht":    {cat:"Energie",short:"Klarheit, göttliche Führung, Bewusstsein",full:"Licht im Traum steht universell für Bewusstsein, Wahrheit und spirituelle Führung. Ein Licht in der Dunkelheit zu sehen zeigt, dass Orientierung möglich ist. Blendendes Licht kann eine spirituelle Erfahrung oder Erkenntnis symbolisieren."},
-  "dunkelheit":{cat:"Energie",short:"Das Unbewusste, Unbekanntes, Angst oder Potenzial",full:"Dunkelheit im Traum ist nicht negativ — sie repräsentiert das Unbekannte und Unexplored. Jung sah die Dunkelheit als den Schatten: alles das wir nicht wissen wollen, aber kennen müssen. In der Dunkelheit liegt enormes Potenzial."},
-  "gold":     {cat:"Objekt",short:"Wert, das Höchste, transformiertes Selbst",full:"Gold ist das alchemistische Symbol der Vollendung und Transformation. Jung sah Gold im Traum als das 'Selbst' — den integrierten Menschen, der seine Polaritäten vereint hat. Gold zu finden deutet auf innere Schätze hin, die entdeckt werden wollen.",jungian:true},
-  "zug":      {cat:"Objekt",short:"Lebensreise, Richtung, verpasste Chancen",full:"Ein Zug steht für die Lebensreise und deine Richtung. Den Zug zu verpassen deutet auf verpasste Chancen oder Angst, das Tempo des Lebens nicht mitzuhalten. Im Zug zu sitzen steht für die Mitgestaltung deines Lebenswegs."},
-  "auto":     {cat:"Objekt",short:"Kontrolle über den eigenen Weg, Antrieb",full:"Das Auto steht für deine Fähigkeit, dein Leben zu lenken. Wenn du fährst, hast du Kontrolle. Wenn jemand anderes fährt, überlässt du anderen das Steuer. Bremsenversagen deutet auf Kontrollverlust in einem wichtigen Lebensbereich hin."},
-  "mond":     {cat:"Himmel",short:"Weibliche Energie, Zyklen, Intuition",full:"Der Mond ist das Symbol des Weiblichen, der Zyklen und der Intuition. Ein Vollmond deutet auf emotionale Fülle und Klarheit hin. Ein Neumond steht für Neubeginn und Potenzial. Der Mond verbindet sich mit dem Unbewussten und dem Traumreich."},
-  "sonne":    {cat:"Himmel",short:"Bewusstsein, Vitalität, das Maskuline, Führung",full:"Die Sonne steht für Bewusstsein, Energie und Vitalität. Sie ist das Symbol des Lebens und der Vernunft. Eine strahlende Sonne deutet auf Lebenskraft und Klarheit hin. Eine verhüllte Sonne kann auf temporäre Erschöpfung oder Unsicherheit hinweisen."},
-};
-
-// Keyword suggestions
-var KW_CATS = ['Wasser','Feuer','Wald','Haus','Schlange','Kind','Fliegen','Fallen','Licht','Dunkelheit','Mond','Spiegel'];
+// Keyword chips
+var KW_LIST = ['Wasser','Feuer','Haus','Wald','Schlange','Fallen','Fliegen','Kind','Mutter','Vater','Tod','Licht','Dunkelheit','Mond','Hund','Vogel','Pferd','Spiegel','Schlüssel','Meer'];
 var selectedKW = [];
-var kwBox = document.getElementById('kw-suggestions');
-KW_CATS.forEach(function(kw){
+var kwRow = document.getElementById('kw-row');
+KW_LIST.forEach(function(kw){
   var chip = document.createElement('span');
-  chip.className = 'kw-chip'; chip.textContent = kw;
-  chip.addEventListener('click', function(){
-    var k = kw.toLowerCase();
-    var idx = selectedKW.indexOf(k);
-    if (idx > -1) { selectedKW.splice(idx, 1); chip.classList.remove('active'); }
-    else { selectedKW.push(k); chip.classList.add('active'); }
-  });
-  kwBox.appendChild(chip);
+  chip.className='kw-chip'; chip.textContent=kw;
+  chip.onclick = function(){
+    var k=kw.toLowerCase(), idx=selectedKW.indexOf(k);
+    if(idx>-1){selectedKW.splice(idx,1);chip.classList.remove('active');}
+    else{selectedKW.push(k);chip.classList.add('active');}
+  };
+  kwRow.appendChild(chip);
 });
 
-// Extract keywords from text
-function extractKeywords(text) {
-  var found = [];
-  var lower = text.toLowerCase();
-  Object.keys(SYMBOLS).forEach(function(k){
-    if (lower.indexOf(k) > -1 && found.indexOf(k) < 0) found.push(k);
+// Symbol database — qualitative sources: Jung, Cheung, Vollmar, DreamMoods
+var DB = {
+  "wasser":{s:"Wasser",k:"Das Unbewusste · Emotionen · Reinigung",
+    kurz:"Wasser ist der Spiegel deiner inneren Welt. Ruhig oder stürmisch — es zeigt dir, was in dir gerade wirklich los ist.",
+    tief:"Wasser ist das älteste Symbol des Unbewussten. Carl Jung sah es als den 'Ursprung aller psychischen Energie'. Ruhiges Wasser spiegelt inneren Frieden — Stürme zeigen unterdrückte Gefühle, die nach oben drängen. Wasser das fließt bedeutet Bewegung und Veränderung. Wenn du im Traum ins Wasser fällst: deine Seele lädt dich ein, loszulassen. Du kannst nicht ertrinken in dem was du bist."},
+  "feuer":{s:"Feuer",k:"Transformation · Leidenschaft · Erneuerung",
+    kurz:"Feuer im Traum ist selten eine Warnung — meistens ist es eine Einladung. Irgendetwas in dir will verwandelt werden.",
+    tief:"Feuer ist das alchemistische Symbol der Transformation. Was brennt, wird nicht zerstört — es wird neu. In deinem Traum steht Feuer für Leidenschaft, die du vielleicht noch nicht vollständig gelebt hast. Oder für eine Lebensphase, die enden muss damit eine neue beginnen kann. Lass es brennen — kontrolliertes Feuer wärmt, es vernichtet nicht."},
+  "schlange":{s:"Schlange",k:"Transformation · Weisheit · verborgene Kraft",
+    kurz:"Die Schlange häutet sich. Wenn sie in deinem Traum erscheint, will etwas Altes abgestreift werden — um Platz für das zu machen, was du wirklich bist.",
+    tief:"Die Schlange ist eines der komplexesten und kraftvollsten Traumsymbole überhaupt. In Jungs Archetypenlehre steht sie für die Energie der Transformation und des Unbewussten — die Kraft, die gleichzeitig heilt und erschreckt. Wenn eine Schlange dich im Traum beißt: Dein Unbewusstes versucht mit Gewalt, gehört zu werden. Was hast du in dir verdrängt, das jetzt nach oben will?"},
+  "fliegen":{s:"Fliegen",k:"Freiheit · spirituelles Erwachen · Überblick",
+    kurz:"Wenn du im Traum fliegst, darf ein Teil von dir sein, was er wirklich ist — ohne Boden, ohne Grenzen, ohne Erwartungen.",
+    tief:"Fliegen ist eines der häufigsten und tiefst bedeutsamen Träume überhaupt. Es steht nicht nur für Freiheitswunsch — es zeigt, dass du fähig bist, über deine Probleme hinaussehen. Die Höhe, in der du fliegst, gibt Hinweise: Nahe an der Erde zu fliegen bedeutet, du hast noch Ängste die dich festhalten. Hoch oben — du hast etwas Altes losgelassen."},
+  "fallen":{s:"Fallen",k:"Kontrollverlust · Übergang · Einladung zum Loslassen",
+    kurz:"Fallen im Traum fühlt sich beängstigend an — aber es bedeutet selten Gefahr. Es bedeutet: Lass los. Du musst nicht immer festhalten.",
+    tief:"Fallen gehört zu den universellsten Träumen der Menschheit. Es zeigt einen Bereich deines Lebens, wo du das Gefühl hast, den Halt zu verlieren. Oft ist das gar nicht schlimm — manchmal muss man fallen, um zu entdecken, dass man fliegen kann. Jung interpretierte Fallträume als unbewusste Sehnsucht nach Erdung: Du läufst so schnell, dass dein Inneres 'Stop' sagt."},
+  "haus":{s:"Haus",k:"Deine Seele · verschiedene Ebenen deiner Psyche",
+    kurz:"Das Haus in deinem Traum bist du selbst. Jedes Zimmer, jeder Keller, jedes Dach erzählt von einem anderen Teil von dir.",
+    tief:"Das Haus ist Jungs bevorzugtes Symbol für die menschliche Psyche. Der Keller steht für das Unbewusste — dort liegt das was du verdrängt hast. Der Dachboden für alte Erinnerungen und vergangene Versionen von dir. Fremde Zimmer die du noch nie betreten hast: unentdeckte Anteile deiner Persönlichkeit, die darauf warten, gelebt zu werden."},
+  "kind":{s:"Kind",k:"Inneres Kind · Neubeginn · das Unberührte in dir",
+    kurz:"Das Kind in deinem Traum bist du — der Teil von dir der noch unverletzt ist, der noch spielen kann, der noch glaubt.",
+    tief:"Jung nannte es den 'Puer aeternus' — das ewige Kind. Wenn ein Kind in deinem Traum erscheint, sendet deine Seele ein Signal: Da ist noch etwas Zartes in dir, das Schutz braucht. Oder etwas das heilen möchte. Oder ein Neubeginn, dem du den Raum geben sollst, den es verdient."},
+  "mutter":{s:"Mutter",k:"Urprinzip · Fürsorge · oder Kontrolle",
+    kurz:"Die Mutter im Traum ist nicht immer deine Mutter. Sie ist das Prinzip — Ursprung, Schutz, Wärme. Oder das Gegenteil davon.",
+    tief:"Die Mutterfigur ist einer der mächtigsten Archetypen. Jung unterschied zwischen der 'nährenden Mutter' und der 'verschlingenden Mutter'. Wenn die Mutterfigur in deinem Traum liebevoll ist: Du sehnst dich nach Geborgenheit. Wenn sie bedrohlich ist: Es gibt etwas in deinem Leben das dich kontrolliert oder das du nicht loslassen kannst."},
+  "tod":{s:"Tod",k:"Transformation · Ende eines Zyklus · Erneuerung",
+    kurz:"Der Tod im Traum ist fast nie der echte Tod. Er ist das Ende von etwas das enden muss — damit etwas Neues entstehen kann.",
+    tief:"Sterben oder Sterben sehen im Traum ist eines der häufigsten und zugleich am meisten missverstandenen Symbole. Es bedeutet fast nie physischen Tod. Es steht für die Beendigung einer Lebensphase, eines Musters, einer Version von dir. Jung sah den Traumtod als den wichtigsten Übergangsritus der Psyche: Ohne Ende kein Anfang."},
+  "licht":{s:"Licht",k:"Klarheit · göttliche Führung · Bewusstsein",
+    kurz:"Wenn Licht in deinem Traum erscheint, weiß deine Seele mehr als dein Verstand. Es gibt eine Richtung. Du musst ihr nur vertrauen.",
+    tief:"Licht ist das universellste Symbol für Bewusstsein, Wahrheit und spirituelle Führung. Ein Licht in der Dunkelheit zu sehen bedeutet: Die Antwort ist schon da — du musst sie nur noch sehen. Blendendes Licht deutet auf eine Erkenntnis hin, die kurz davor ist, in dein Bewusstsein zu dringen. Lass sie."},
+  "dunkelheit":{s:"Dunkelheit",k:"Das Unbewusste · unbekannte Potenziale · Stille",
+    kurz:"Dunkelheit im Traum ist nicht das Böse. Es ist das Unbekannte. Und im Unbekannten liegen deine größten Schätze.",
+    tief:"Jung sah den Schatten — alles das wir über uns selbst nicht wissen wollen — als eine der größten Quellen innerer Kraft. Wenn Dunkelheit in deinem Traum erscheint, ist das eine Einladung: Schau hin. Was sich in der Dunkelheit befindet, ist kein Monster. Es ist ein Teil von dir, der Licht braucht."},
+  "mond":{s:"Mond",k:"Weibliche Energie · Zyklen · Intuition",
+    kurz:"Der Mond erinnert dich: Du bist nicht gemacht für konstante Energie. Du bist gemacht für Zyklen — für Vollheit und Leere, für Wachstum und Stille.",
+    tief:"Der Mond ist das Symbol der weiblichen Energie und der intuitiven Wahrnehmung — unabhängig von Geschlecht. Ein Vollmond im Traum steht für emotionale Fülle und scharfe Wahrnehmung. Ein abnehmender Mond lädt zum Loslassen ein. Der Neumond ist der Ort der Stille — wo neue Absichten gesetzt werden können."},
+  "hund":{s:"Hund",k:"Loyalität · Treue · der beste Teil von dir",
+    kurz:"Der Hund in deinem Traum steht für Treue — nicht nur die von anderen zu dir. Sondern auch die von dir zu dir selbst.",
+    tief:"Hunde sind in der Traumsymbolik Wächter und treue Begleiter. Ein freundlicher Hund zeigt, dass in deinem Leben echte, verlässliche Verbindungen existieren oder sich anbahnen. Ein bedrohlicher Hund deutet auf Vertrauen hin, das gebrochen wurde — oder auf einen Teil von dir, den du nicht mehr magst."},
+  "vogel":{s:"Vogel",k:"Freiheit · Botschaft · spirituelle Verbindung",
+    kurz:"Vögel verbinden Erde und Himmel. Wenn einer in deinem Traum erscheint, trägst du eine Botschaft — oder du wartest auf eine.",
+    tief:"In fast allen Kulturen gelten Vögel als Boten zwischen den Welten. Ein fliegender Vogel steht für befreite Energie und spirituellen Aufstieg. Ein käfiggehaltener Vogel zeigt einen Aspekt deiner selbst, der nicht entfaltet werden darf. Was hindert dich daran, zu sein was du wirklich bist?"},
+  "pferd":{s:"Pferd",k:"Ungezähmte Energie · Leidenschaft · innere Kraft",
+    kurz:"Das Pferd in deinem Traum ist deine rohe, ungezähmte Lebensenergie. Sie will nicht gezähmt werden — sie will gelenkt werden.",
+    tief:"Das Pferd verkörpert in Jungs Archetypensystem die Naturkraft — die Energie, die aus dem Unbewussten aufsteigt und nicht immer bequem ist. Ein wildes Pferd: Du hast Impulse, Leidenschaften, eine Kraft in dir, die noch keinen Ausdruck gefunden hat. Ein gezähmtes Pferd: Du hast gelernt, deine Energie zu lenken. Nutze sie."},
+  "meer":{s:"Meer",k:"Das große Unbewusste · emotionale Weite · Ursprung",
+    kurz:"Das Meer ist grenzenlos. Wenn es in deinem Traum erscheint, lädt es dich ein: In die Tiefe. In das was größer ist als du.",
+    tief:"Das Meer steht für das kollektive Unbewusste — den Ozean aller menschlichen Erfahrung, zu dem wir alle Zugang haben. Am Strand stehen bedeutet: Du stehst an einer Schwelle. Du schaust in etwas Großes — wagst du es, hineinzutauchen? Wenn du unter Wasser bist: Du bist mitten in einem emotionalen Prozess, der größer ist als du dachtest."},
+  "spiegel":{s:"Spiegel",k:"Selbsterkenntnis · das wahre Gesicht · Reflexion",
+    kurz:"Was du im Traumspiegel siehst, ist die Version von dir, die deine Seele kennt — nicht die die du anderen zeigst.",
+    tief:"Der Spiegel ist das Symbol der radikalen Selbstbegegnung. Was du in ihm siehst, kann dein wahres Gesicht sein, ein Aspekt den du leugnest, oder eine zukünftige Version von dir. Wenn das Spiegelbild sich anders bewegt als du: Ein Teil von dir handelt unabhängig vom bewussten Willen — dein Schatten will gesehen werden."},
+  "schlüssel":{s:"Schlüssel",k:"Lösung · Zugang · die Antwort liegt in dir",
+    kurz:"Einen Schlüssel zu finden bedeutet: Du hast die Antwort auf etwas das dich beschäftigt. Du weißt es nur noch nicht.",
+    tief:"Der Schlüssel steht für Zugang zu Dingen die bisher verschlossen waren — in dir oder außen. Einen Schlüssel zu finden ist ein hochpositives Symbol: Eine Lösung ist in Reichweite. Einen Schlüssel zu verlieren: Die Gelegenheit war da — aber du hast sie noch nicht erkannt. Die Frage ist: Für welche Tür suchst du gerade?"},
+  "wolf":{s:"Wolf",k:"Instinkte · Wildheit · das was du zähmen musstest",
+    kurz:"Der Wolf in deinem Traum erinnert dich an das was du in dir domestiziert hast — um dazuzugehören. Es will nicht länger gezähmt sein.",
+    tief:"Der Wolf ist das Symbol der ursprünglichen Instinkte und der sozialen Intelligenz. Ein einsamer Wolf steht für Isolation oder Unabhängigkeit. Eine Wolfsherde für Gemeinschaft und kollektive Kraft. Wenn der Wolf dich angreift: Etwas Unterdrücktes in dir kämpft um Aufmerksamkeit. Wenn er friedlich ist: Deine Instinkte wollen dir etwas zeigen — hör hin."}
+};
+
+function findSymbols(text) {
+  var found = [], lower = text.toLowerCase();
+  Object.keys(DB).forEach(function(k){
+    if(lower.indexOf(k) > -1 && found.indexOf(k) < 0) found.push(k);
   });
   selectedKW.forEach(function(k){
-    if (found.indexOf(k) < 0) found.push(k);
+    if(found.indexOf(k)<0) found.push(k);
   });
-  return found.slice(0, 6);
+  return found.slice(0, 5);
 }
 
 document.getElementById('dreamForm').addEventListener('submit', function(e){
   e.preventDefault();
   var text = document.getElementById('dream_text').value.trim();
-  var keywords = extractKeywords(text);
-  var unlocked = isTest;
+  var syms = findSymbols(text);
+  if (syms.length === 0) syms = ['licht', 'haus'];
 
-  if (keywords.length === 0) {
-    keywords = ['licht', 'haus', 'wasser']; // defaults
+  var unlocked = isTest;
+  var html = '';
+
+  // Header
+  html += '<p class="result-intro">✦ Wir haben ' + syms.length + ' Symbol' + (syms.length>1?'e':'') + ' in deinem Traum gefunden. ✦</p>';
+
+  // Symbol cards (always visible)
+  html += '<div class="sym-grid">';
+  syms.slice(0, unlocked ? 5 : 2).forEach(function(k){
+    var s = DB[k]; if(!s) return;
+    html += '<div class="sym-card"><div class="sym-name">' + s.s + '</div><div class="sym-short">' + s.k + '</div></div>';
+  });
+  html += '</div>';
+
+  // First symbol full free
+  if (syms[0] && DB[syms[0]]) {
+    var s0 = DB[syms[0]];
+    html += '<div class="section"><div class="section-title">✦ ' + s0.s + ' — Was es dir sagt</div>';
+    html += '<p>' + s0.kurz + '</p></div>';
   }
 
-  var symbolCards = '';
-  keywords.slice(0, 3).forEach(function(k){
-    var s = SYMBOLS[k];
-    if (!s) return;
-    symbolCards += '<div class="symbol-card">';
-    symbolCards += '<div class="sym-name">' + k.charAt(0).toUpperCase() + k.slice(1) + '</div>';
-    symbolCards += '<div class="sym-short">' + s.short + '</div>';
-    symbolCards += '</div>';
-  });
-
-  var sections = '<div class="dream-header"><div class="dream-title">✧ Traumsymbole erkannt</div></div>';
-  sections += '<div class="symbol-grid">' + symbolCards + '</div>';
-
-  // Preview section
-  if (keywords[0] && SYMBOLS[keywords[0]]) {
-    sections += '<div class="section"><div class="section-title">◐ Botschaft des Hauptsymbols</div>';
-    sections += '<p>' + SYMBOLS[keywords[0]].short + ' — ' + SYMBOLS[keywords[0]].full.split('.')[0] + '.</p></div>';
+  // Second symbol — teaser
+  if (syms[1] && DB[syms[1]]) {
+    html += '<div class="section"><div class="section-title">◎ ' + DB[syms[1]].s + ' — Die zweite Botschaft</div>';
+    html += '<p>' + DB[syms[1]].kurz + '<br><br><em>Die tiefere Bedeutung und der Zusammenhang mit deiner aktuellen Lebenssituation stehen in der Vollanalyse.</em></p></div>';
   }
 
   if (unlocked) {
     // Full analysis
-    keywords.forEach(function(k){
-      var s = SYMBOLS[k];
-      if (!s) return;
-      sections += '<div class="section"><div class="section-title">✦ ' + k.charAt(0).toUpperCase() + k.slice(1);
-      if(s.jungian) sections += ' <span style="font-size:.62rem;color:var(--teal)">Jungsches Symbol</span>';
-      sections += '</div><p>' + s.full + '</p></div>';
+    syms.slice(2).forEach(function(k){
+      var s = DB[k]; if(!s) return;
+      html += '<div class="section"><div class="section-title">✧ ' + s.s + '</div>';
+      html += '<p>' + s.tief + '</p></div>';
     });
 
-    sections += '<div class="section"><div class="section-title">◎ Gesamtbotschaft deines Traums</div>';
-    sections += '<p>Dein Traum trägt eine Botschaft über ' + (keywords.length > 1 ? 'das Zusammenspiel von ' + keywords.slice(0,-1).join(', ') + ' und ' + keywords[keywords.length-1] : keywords[0] || 'innere Prozesse') + '. Diese Symbole sind kein Zufall — sie sind die Sprache deines Unbewussten. Höre auf das was wiederkehrt, was sich seltsam anfühlt, was Emotion erzeugt.</p></div>';
+    html += '<div class="section"><div class="section-title">◐ Die Gesamtbotschaft deines Traums</div>';
+    html += '<p>Dein Traum ist kein Zufallsprodukt. Die Symbole die deine Seele gewählt hat — ' + syms.map(function(k){return DB[k]?DB[k].s:k;}).join(', ') + ' — erzählen gemeinsam eine Geschichte.<br><br>';
+    html += 'Diese Geschichte handelt von etwas in dir, das nach oben drängt. Etwas das gesehen werden will. Etwas das bereit ist, sich zu verändern.<br><br>';
+    html += '<strong>Die wichtigste Frage nach diesem Traum:</strong> Was in deinem Leben fühlt sich gerade so an wie das Hauptgefühl in deinem Traum?</p></div>';
+
+    html += '<div class="section"><div class="section-title">⊕ Empfehlung für heute</div>';
+    html += '<p>Schreib diesen Traum auf. Nicht nur die Bilder — vor allem das Gefühl. Träume verblassen schnell, aber das Gefühl das sie hinterlassen ist die eigentliche Botschaft.<br><br>';
+    html += 'Und wenn du heute Nacht schläfst: Nimm eine Absicht mit. Frag deine Seele bewusst: <em>Was willst du mir zeigen?</em></p></div>';
   } else {
-    var locked = [
-      ['✦ Tiefenanalyse aller Symbole', 'Jedes Symbol einzeln gedeutet — mit Quellenangabe aus Jung, Cheung und Vollmar.'],
-      ['◎ Gesamtbotschaft deines Traums', 'Was dein Unbewusstes dir heute Nacht sagen wollte — im Zusammenhang betrachtet.'],
-      ['✧ Verbindung zu deiner Lebenssituation', 'Wie dein Traum mit aktuellen Herausforderungen oder Entscheidungen zusammenhängt.'],
-      ['⊕ Handlungsempfehlung', 'Konkrete Impulse für den Alltag basierend auf deiner Trauböbotschaft.']
-    ];
-    locked.forEach(function(s){
-      sections += '<div class="locked"><div class="locked-title">'+s[0]+'</div><p>'+s[1]+'</p></div>';
-    });
+    html += '<div class="locked"><div class="locked-title">🔒 Tiefendeutung aller Symbole</div>';
+    html += '<p>Jedes Symbol aus deinem Traum vollständig gedeutet — mit den Quellen Jung, Cheung und Vollmar. Was sie einzeln bedeuten. Und was sie zusammen erzählen.</p></div>';
 
-    sections += '<div class="paywall"><h2>Vollständige Traumdeutung</h2>';
-    sections += '<p>Wähle dein Modell — einmalig oder als monatliches Abo für unbegrenzte Traumdeutungen.</p>';
-    sections += '<div class="price-row">';
-    sections += '<div class="price-box"><div class="price-amount">3,99 €</div><div class="price-label">Einmalig</div><div class="price-desc">Diese Analyse</div></div>';
-    sections += '<div class="price-box featured"><div class="price-amount">9,99 €</div><div class="price-label">Pro Monat</div><div class="price-desc">Unbegrenzt · täglich deutbar</div></div>';
-    sections += '</div>';
-    sections += '<a href="https://www.digistore24.com/product/PLACEHOLDER_TRAUM" class="btn-pay" target="_blank">Einmalige Analyse (3,99 €) →</a>';
-    sections += '<a href="https://www.digistore24.com/product/PLACEHOLDER_TRAUM_ABO" class="btn-pay secondary" target="_blank">Monatsabo (9,99 €/Monat) →</a>';
-    sections += '<p style="font-size:.68rem;color:var(--muted);margin-top:10px">Sichere Zahlung via Digistore24 · Abo jederzeit kündbar</p>';
-    sections += '</div>';
+    html += '<div class="locked"><div class="locked-title">🔒 Die Gesamtbotschaft</div>';
+    html += '<p>Was dein Traum als Ganzes sagen will — warum gerade diese Symbole, warum jetzt, was deine Seele dir mitteilen möchte.</p></div>';
+
+    html += '<div class="locked"><div class="locked-title">🔒 Verbindung zu deiner Lebenssituation</div>';
+    html += '<p>Wie dein Traum mit dem zusammenhängt, was du gerade durchlebst. Was er dir zeigen will, bevor dein Verstand es begreift.</p></div>';
+
+    html += '<div class="locked"><div class="locked-title">🔒 Empfehlung & Handlungsimpuls</div>';
+    html += '<p>Was du heute konkret tun kannst, um die Botschaft deines Traums in dein Leben zu integrieren.</p></div>';
+
+    html += '<div class="paywall">';
+    html += '<h2>Deine vollständige Traumdeutung</h2>';
+    html += '<p class="hook">Dein Traum hat dir etwas Wichtiges zu sagen.<br>Nicht morgen. Jetzt. Bevor die Bilder verblassen.</p>';
+    html += '<div class="price-cards">';
+    html += '<div class="price-card"><div class="price-amount">3,99 €</div><div class="price-period">EINMALIG</div><div class="price-desc">Diese Traumanalyse</div></div>';
+    html += '<div class="price-card highlight"><div class="price-amount">9,99 €</div><div class="price-period">PRO MONAT</div><div class="price-desc">Unbegrenzt · täglich deutbar<br>Abo jederzeit kündbar</div></div>';
+    html += '</div>';
+    html += '<a href="https://www.digistore24.com/product/PLACEHOLDER_TRAUM" class="btn-pay" target="_blank">✦ Deutung erhalten (3,99 €)</a>';
+    html += '<a href="https://www.digistore24.com/product/PLACEHOLDER_TRAUM_ABO" class="btn-pay outline" target="_blank">Monatsabo (9,99 €)</a>';
+    html += '<p class="pay-small">Sichere Zahlung via Digistore24 · Sofortzustellung · Abo jederzeit kündbar</p>';
+    html += '</div>';
   }
 
-  document.getElementById('result').innerHTML = sections;
-  document.getElementById('dreamForm').style.display='none';
-  document.getElementById('result').style.display='block';
-  window.scrollTo({top:200,behavior:'smooth'});
+  document.getElementById('result').innerHTML = html;
+  document.getElementById('dreamForm').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
 });
 </script>
 </body>
