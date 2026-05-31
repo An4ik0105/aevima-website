@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEVIMA – Deine Seele spricht. Lernst du zuzuhören?</title>
+  <meta name="description" content="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung. Seelenprofil · Synastrie · Kosmischer Kalender · Astrocartography." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:       #FAF8F5;
+      --cream-dark:  #F0EDE8;
+      --rose-gold:   #C4956A;
+      --rose-light:  #E8C4A0;
+      --rose-dark:   #9B6F4A;
+      --teal:        #2AAFA0;
+      --teal-light:  #56C9BC;
+      --emerald:     #2D7D5A;
+      --text:        #2C2C2C;
+      --text-muted:  #7A7065;
+      --border:      rgba(196,149,106,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER / NAV ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250,248,245,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-text {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--rose-gold);
+      letter-spacing: 0.15em;
+    }
+
+    .tagline-header {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: none;
+    }
+
+    @media(min-width:600px){ .tagline-header { display: block; } }
+
+    nav a {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--rose-gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(196,149,106,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(42,175,160,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .logo-symbol {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 4px 24px rgba(196,149,106,0.3));
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+    }
+
+    h1 span { color: var(--rose-gold); }
+
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .hero-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin-bottom: 3rem;
+      line-height: 1.9;
+    }
+
+    .divider-dots {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      justify-content: center;
+      margin: 0.75rem 0 2.5rem;
+    }
+    .divider-dots span {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--rose-gold);
+      opacity: 0.5;
+    }
+
+    /* ── FORM ── */
+    .waitlist-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto 1rem;
+    }
+
+    .waitlist-form input {
+      padding: 0.9rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: white;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .waitlist-form input:focus { border-color: var(--rose-gold); }
+    .waitlist-form input::placeholder { color: #B8AFA6; }
+
+    .btn-primary {
+      padding: 0.9rem 2rem;
+      background: var(--rose-gold);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--rose-dark); transform: translateY(-1px); }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── TRENNLINIE ── */
+    .section-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose-gold), transparent);
+      margin: 0 auto 3rem;
+    }
+
+    /* ── PILLARS ── */
+    .pillars {
+      padding: 6rem 2rem;
+      background: var(--cream-dark);
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .pillars-intro {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 4rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pillar-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(196,149,106,0.12);
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .pillar-card:nth-child(1)::before { background: var(--rose-gold); }
+    .pillar-card:nth-child(2)::before { background: var(--teal); }
+    .pillar-card:nth-child(3)::before { background: var(--emerald); }
+    .pillar-card:nth-child(4)::before { background: linear-gradient(90deg, var(--rose-gold), var(--teal)); }
+
+    .pillar-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--rose-light);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .pillar-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .pillar-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .badge-available { background: rgba(196,149,106,0.12); color: var(--rose-dark); }
+    .badge-soon { background: rgba(42,175,160,0.1); color: var(--teal); }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy {
+      padding: 6rem 2rem;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    blockquote {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.6;
+      font-style: italic;
+      margin: 2rem 0;
+      padding: 2rem;
+      border-left: 3px solid var(--rose-gold);
+      text-align: left;
+      background: white;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, var(--cream-dark) 0%, #EDE8E0 100%);
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 2rem;
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    footer a { color: var(--rose-light); text-decoration: none; }
+    footer a:hover { color: white; }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    /* ── SUCCESS MESSAGE ── */
+    .success-msg {
+      display: none;
+      padding: 1rem 2rem;
+      background: rgba(45,125,90,0.1);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      border-radius: 2px;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── ORNAMENT ── */
+    .ornament {
+      font-size: 1.2rem;
+      color: var(--rose-gold);
+      opacity: 0.6;
+      letter-spacing: 0.5em;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="logo-text">AEVIMA</div>
+    <div class="tagline-header">Seelenkraft · Transformation · Harmonie</div>
+  </div>
+  <nav>
+    <a href="#saeulen">Analysen</a>
+    <a href="#warteliste">Frühzugang</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Logo Symbol (Doppel-Lemniskat Platzhalter — wird durch echtes Logo ersetzt) -->
+  <svg class="logo-symbol" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="rg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#E8C4A0"/>
+        <stop offset="50%" stop-color="#C4956A"/>
+        <stop offset="100%" stop-color="#9B6F4A"/>
+      </linearGradient>
+    </defs>
+    <!-- Horizontale Lemniskat -->
+    <path d="M20 60 C20 45 35 35 50 40 C62 44 62 56 75 60 C88 64 88 76 75 80 C62 84 62 76 50 80 C35 85 20 75 20 60Z" stroke="url(#rg)" stroke-width="2" fill="none" opacity="0.9"/>
+    <!-- Vertikale Lemniskat -->
+    <path d="M60 20 C75 20 85 35 80 50 C76 62 64 62 60 75 C56 88 44 88 40 75 C36 62 44 62 40 50 C35 35 45 20 60 20Z" stroke="url(#rg)" stroke-width="2" fill="none" opacity="0.9"/>
+    <!-- Center dot -->
+    <circle cx="60" cy="60" r="3" fill="url(#rg)" opacity="0.8"/>
+    <!-- Sparkles -->
+    <circle cx="22" cy="38" r="1.5" fill="#C4956A" opacity="0.5"/>
+    <circle cx="98" cy="82" r="1.5" fill="#C4956A" opacity="0.5"/>
+    <circle cx="88" cy="26" r="1" fill="#2AAFA0" opacity="0.6"/>
+    <circle cx="32" cy="94" r="1" fill="#2AAFA0" opacity="0.6"/>
+    <circle cx="110" cy="52" r="1" fill="#C4956A" opacity="0.4"/>
+    <circle cx="10" cy="68" r="1" fill="#C4956A" opacity="0.4"/>
+  </svg>
+
+  <p class="hero-label">Seelenkraft · Transformation · Harmonie</p>
+
+  <h1>Deine Seele spricht.<br><span>Lernst du zuzuhören?</span></h1>
+
+  <p class="hero-sub">Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.</p>
+
+  <div class="divider-dots"><span></span><span></span><span></span></div>
+
+  <p class="hero-body">
+    Deine Seele war immer da.<br>
+    Was fehlt, ist die Stille — und das Werkzeug,<br>
+    um zu verstehen, was sie dir zeigt.<br><br>
+    AEVIMA verbindet numerologisches und astrologisches Wissen<br>
+    zu einer tiefen, personalisierten Analyse.
+  </p>
+
+  <!-- Netlify Form (hidden, for bot detection) -->
+  <form name="aevima-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="email" name="email" />
+  </form>
+
+  <form id="form-hero" class="waitlist-form" id="warteliste">
+    <input type="hidden" name="form-name" value="aevima-waitlist" />
+    <input name="bot-field" style="display:none" />
+    <input type="email" id="email-input" name="email" placeholder="Deine E-Mail-Adresse" required />
+    <button type="submit" class="btn-primary">Frühzugang sichern →</button>
+    <p class="form-note">Kein Spam. Jederzeit abmeldbar. Dein Frühzugang ist kostenlos.</p>
+  </form>
+  <div class="success-msg" id="success-msg" style="display:none;">
+    ✓ Du bist dabei. Wir melden uns bei dir.
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div style="padding: 0 2rem;">
+  <div class="section-divider"></div>
+</div>
+
+<!-- DIE 4 SÄULEN -->
+<section class="pillars" id="saeulen">
+  <p class="section-label">Dein Kosmos · Deine Essenz · Dein Weg</p>
+  <h2>Die vier Säulen von AEVIMA</h2>
+  <p class="pillars-intro">Jede Analyse ist einzigartig — so wie du. Entdecke, was in dir wartet.</p>
+
+  <div class="pillars-grid">
+
+    <div class="pillar-card">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Dein Seelenprofil</div>
+      <p class="pillar-desc">
+        Name, Geburtsdatum und -ort verbinden sich zu einer tiefen Analyse deiner Eigenschaften, Stärken, Schwächen und Lebensthemen.
+        Verstehe, wer du wirklich bist.
+      </p>
+      <span class="pillar-badge badge-available">Verfügbar</span>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Paar-Synastrie</div>
+      <p class="pillar-desc">
+        Zwei Seelen, eine Analyse. Verstehe die kosmische Verbindung zwischen euch —
+        Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.
+      </p>
+      <span class="pillar-badge badge-soon">Bald verfügbar</span>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Kosmischer Kalender</div>
+      <p class="pillar-desc">
+        Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe.
+        Navigiere dein Jahr mit kosmischer Klarheit.
+      </p>
+      <span class="pillar-badge badge-soon">Bald verfügbar</span>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-num">04</div>
+      <div class="pillar-title">Astrocartography</div>
+      <p class="pillar-desc">
+        Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in den Bereichen Liebe, Karriere, Spiritualität und Wohlbefinden bist.
+      </p>
+      <span class="pillar-badge badge-soon">Bald verfügbar</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHIE -->
+<section class="philosophy">
+  <p class="ornament">· · ·</p>
+  <p class="section-label">Die Haltung hinter AEVIMA</p>
+  <h2>Achtsamkeit. Nicht Suche.</h2>
+  <blockquote>
+    „Deine Seele sucht niemanden und wartet auf nichts.<br>
+    Sie ist bereits vollständig.<br>
+    AEVIMA hilft dir, ihre Sprache zu verstehen."
+  </blockquote>
+  <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 480px; margin: 0 auto;">
+    Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen,
+    dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit —
+    nicht mehr, nicht weniger.
+  </p>
+</section>
+
+<!-- CTA SEKTION -->
+<section class="cta-section">
+  <p class="section-label">Frühzugang</p>
+  <h2>Sei dabei, wenn AEVIMA startet.</h2>
+  <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: 0.95rem; max-width: 440px; margin-left: auto; margin-right: auto;">
+    Trage dich jetzt ein. Du erhältst exklusiven Frühzugang<br>und ein persönliches Willkommensgeschenk.
+  </p>
+  <form id="form-cta" class="waitlist-form" style="max-width: 380px;">
+    <input type="hidden" name="form-name" value="aevima-waitlist" />
+    <input name="bot-field" style="display:none" />
+    <input type="email" id="email-input-2" name="email" placeholder="Deine E-Mail-Adresse" required />
+    <button type="submit" class="btn-primary">Jetzt eintragen →</button>
+    <p class="form-note">Kein Spam. Jederzeit abmeldbar.</p>
+  </form>
+  <div class="success-msg" id="success-msg-2" style="display:none;">✓ Du bist dabei.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+  </div>
+  <p>© 2026 AEVIMA · Seelenkraft · Transformation · Harmonie</p>
+  <p style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.5;">
+    DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.
+  </p>
+</footer>
+
+<script>
+  // Form handling is done server-side via Netlify Forms
+  // JavaScript only handles UI feedback
+  document.addEventListener('DOMContentLoaded', function() {
+    // Hero form
+    const form1 = document.getElementById('form-hero');
+    if (form1) {
+      form1.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email-input').value;
+        if (!email || !email.includes('@')) return;
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ 'form-name': 'aevima-waitlist', email: email }).toString()
+        }).then(() => {
+          document.getElementById('form-hero').style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+        }).catch(() => {
+          document.getElementById('form-hero').style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+        });
+      });
+    }
+    // CTA form
+    const form2 = document.getElementById('form-cta');
+    if (form2) {
+      form2.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email-input-2').value;
+        if (!email || !email.includes('@')) return;
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ 'form-name': 'aevima-waitlist', email: email }).toString()
+        }).then(() => {
+          document.getElementById('form-cta').style.display = 'none';
+          document.getElementById('success-msg-2').style.display = 'block';
+        }).catch(() => {
+          document.getElementById('form-cta').style.display = 'none';
+          document.getElementById('success-msg-2').style.display = 'block';
+        });
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
