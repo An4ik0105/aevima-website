@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kosmischer Kalender – AEVIMA</title>
+  <link rel="preconnect" href="https://fonts.bunny.net"/>
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--dark:#12101A;--rose:#C4956A;--rose-l:#E8C4A0;--rose-d:#9B6F4A;--teal:#2AAFA0;--teal-d:#1D7A70;--text:#F0EDE8;--muted:#9B8FA8;--border:rgba(196,149,106,.18)}
+    body{background:var(--dark);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(196,149,106,.07) 0,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(42,175,160,.05) 0,transparent 60%);pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:60px 24px 80px}
+    .back{display:inline-block;color:var(--rose);text-decoration:none;font-size:.8rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;color:var(--rose-l);letter-spacing:.1em;margin-bottom:10px}
+    .subtitle{color:var(--muted);font-size:.9rem;margin-bottom:40px}
+    .divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
+    .form-group{margin-bottom:22px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    label{display:block;font-size:.78rem;letter-spacing:.12em;color:var(--rose);text-transform:uppercase;margin-bottom:7px}
+    input{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none;transition:border-color .3s}
+    input:focus{border-color:rgba(196,149,106,.5)}
+    input::placeholder{color:var(--muted);opacity:.65}
+    .btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:all .3s;margin-top:8px}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(196,149,106,.3)}
+    .consent{font-size:.72rem;color:var(--muted);margin-top:10px;text-align:center}
+    .consent a{color:var(--rose)}
+    /* RESULT */
+    #result{display:none;margin-top:48px}
+    .res-header{text-align:center;margin-bottom:36px}
+    .res-name{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--rose-l);letter-spacing:.15em}
+    .year-badge{font-family:'Cinzel',serif;font-size:3.5rem;color:var(--rose);line-height:1;margin:16px 0 4px}
+    .year-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--rose-l);letter-spacing:.1em}
+    .section{background:rgba(196,149,106,.05);border:1px solid var(--border);border-radius:3px;padding:26px;margin-bottom:18px}
+    .section-title{font-family:'Cinzel',serif;font-size:.73rem;letter-spacing:.2em;color:var(--rose);text-transform:uppercase;margin-bottom:12px}
+    .section p{color:var(--muted);font-size:.9rem;line-height:1.9}
+    .section p strong{color:var(--text)}
+    .section p em{color:var(--rose-l);font-style:italic}
+    .months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+    .month-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;padding:12px;text-align:center}
+    .month-name{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;color:var(--rose);margin-bottom:4px}
+    .month-energy{font-size:.78rem;color:var(--muted)}
+    .month-card.high{border-color:rgba(196,149,106,.4);background:rgba(196,149,106,.06)}
+    .month-card.high .month-name{color:var(--rose-l)}
+    .month-card.caution{border-color:rgba(42,175,160,.3)}
+    .month-card.caution .month-name{color:var(--teal)}
+    .phase-bar{display:flex;gap:3px;margin-top:14px}
+    .phase-seg{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.08)}
+    .phase-seg.active{background:var(--rose)}
+    .phase-seg.teal{background:var(--teal)}
+    .zyklus-bar{background:rgba(255,255,255,.06);border-radius:20px;height:8px;margin:10px 0;overflow:hidden}
+    .zyklus-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px;transition:width 1s ease}
+    .locked{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.15);border-radius:3px;padding:26px;margin-bottom:18px;position:relative}
+    .locked::before{content:'🔒';position:absolute;right:18px;top:18px;font-size:1rem;opacity:.45}
+    .locked-title{font-family:'Cinzel',serif;font-size:.73rem;letter-spacing:.2em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+    .locked p{color:rgba(155,143,168,.5);font-size:.87rem;font-style:italic}
+    .paywall{text-align:center;margin-top:40px;padding:42px 24px;background:linear-gradient(135deg,rgba(196,149,106,.08),rgba(42,175,160,.06));border:1px solid var(--border);border-radius:3px}
+    .paywall h2{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--text);margin-bottom:10px}
+    .paywall .hook{color:var(--rose-l);font-size:.92rem;max-width:440px;margin:0 auto 24px;font-style:italic;line-height:1.9}
+    .price-cards{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:18px 0 24px}
+    .price-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:18px 24px;text-align:center}
+    .price-card.hl{border-color:var(--rose);background:rgba(196,149,106,.08)}
+    .price-amount{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--rose)}
+    .price-period{font-size:.68rem;color:var(--muted);letter-spacing:.1em}
+    .price-desc{font-size:.72rem;color:var(--teal);margin-top:5px}
+    .btn-pay{display:inline-block;padding:14px 38px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;letter-spacing:.18em;cursor:pointer;text-decoration:none;transition:all .3s;margin:5px}
+    .btn-pay:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-pay.outline{background:transparent;border:1px solid rgba(42,175,160,.4);color:var(--teal)}
+    .pay-small{font-size:.68rem;color:var(--muted);margin-top:8px}
+    .test-badge{background:rgba(42,175,160,.15);border:1px solid var(--teal);color:var(--teal);font-size:.7rem;letter-spacing:.12em;padding:.3rem .8rem;border-radius:20px;display:inline-block;margin-bottom:20px}
+    @media(max-width:480px){.form-row{grid-template-columns:1fr}.months-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← AEVIMA</a>
+  <div id="test-info" style="display:none;text-align:center;margin-bottom:20px">
+    <span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span>
+  </div>
+  <div style="text-align:center">
+    <h1>KOSMISCHER KALENDER</h1>
+    <p class="subtitle">Dein persönliches Energiejahr · Monatsqualitäten · Hochphasen & Vorsicht</p>
+  </div>
+  <div class="divider"></div>
+  <p style="color:var(--muted);font-size:.95rem;line-height:2;margin-bottom:32px">
+    Das Leben hat Rhythmen.<br>
+    Nicht jeder Monat trägt dieselbe Energie. Nicht jede Phase ist für dasselbe gemacht.<br>
+    <strong style="color:var(--rose-l)">Dein persönlicher Kosmischer Kalender zeigt dir, wann du vorankommen sollst — und wann du dich schützen musst.</strong>
+  </p>
+  <form id="kalForm">
+    <div class="form-row">
+      <div class="form-group"><label>Vorname</label><input type="text" id="fname" placeholder="z.B. Anna" required/></div>
+      <div class="form-group"><label>Nachname</label><input type="text" id="lname" placeholder="z.B. Muster" required/></div>
+    </div>
+    <div class="form-group"><label>Geburtsdatum</label><input type="date" id="bdate" required/></div>
+    <div class="form-group"><label>Geburtsort</label><input type="text" id="birthplace" placeholder="z.B. Berlin, Deutschland" required/></div>
+    <div class="form-group"><label>E-Mail</label><input type="email" id="email" placeholder="deine@email.de" required/></div>
+    <button type="submit" class="btn">✦ Meinen Kosmischen Kalender öffnen</button>
+    <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
+  </form>
+  <div id="result"></div>
+</div>
+<script>
+var isTest = location.search.indexOf('test=1')>-1 || location.hash.indexOf('test')>-1 || localStorage.getItem('aevima-test')==='1';
+if(isTest) document.getElementById('test-info').style.display='block';
+var _tc=0; document.addEventListener('click',function(e){if(e.target.closest('footer')){_tc++;if(_tc>=5){localStorage.setItem('aevima-test','1');location.reload();}}});
+
+function reduce(n,km){var ms=[11,22,33,44];while(n>9){if(km&&ms.indexOf(n)>-1)break;var s=0;String(n).split('').forEach(function(d){s+=parseInt(d);});n=s;}return n;}
+
+var PJ_DATA = {
+  1:{name:"Persönliches Jahr 1 — Der Neubeginn",
+    energy:"Das ist das Jahr des Neuanfangs. Was du jetzt pflanzt, wächst die nächsten 9 Jahre. Keine Angst vor dem ersten Schritt — dies ist exakt der richtige Moment.",
+    high:["März","April","Oktober"],caution:["Juli","Dezember"],
+    full:"Das Persönliche Jahr 1 ist der Startschuss eines neuen 9-Jahres-Zyklus. Die Energie ist aufgeladen, frisch, unverbraucht. Alles was du in diesem Jahr anfängst, trägt eine besondere Kraft — weil du im Strömungsfluss bist.<br><br>Was du in diesem Jahr loslässt, solltest du wirklich loslassen. Was du anfängst, solltest du wirklich wollen. Denn die Saat bestimmt die Ernte der nächsten 9 Jahre."},
+  2:{name:"Persönliches Jahr 2 — Die Stille und die Verbindung",
+    energy:"Kein Jahr für große Sprünge — ein Jahr für tiefe Verbindungen. Warte. Beobachte. Füge zusammen, was du letztes Jahr begonnen hast.",
+    high:["Februar","Juni","September"],caution:["Januar","Mai"],
+    full:"Das Persönliche Jahr 2 fordert Geduld. Die Energie ist subtil, feminin, verbindend. Es ist das Jahr der Kooperationen, der tiefen Gespräche, der emotionalen Klarheit. Dränge nicht. Was wachsen soll, braucht Wurzeln bevor es Blüten trägt.<br><br>Besonders wertvoll: neue und alte Beziehungen pflegen. In diesem Jahr entstehen die Verbindungen, die tragen."},
+  3:{name:"Persönliches Jahr 3 — Der Ausdruck",
+    energy:"Deine Kreativität ist auf dem Höhepunkt. Sprich. Schreib. Erschaffe. Das Universum hört dir gerade besonders zu.",
+    high:["März","Juli","Oktober"],caution:["August","November"],
+    full:"Die 3 ist die Zahl der Kommunikation und des kreativen Ausdrucks. In einem Persönlichen Jahr 3 fließen Ideen wie Wasser. Nutze das. Dies ist nicht das Jahr um im Verborgenen zu arbeiten — es ist das Jahr, gesehen zu werden.<br><br>Vorsicht: Zerstreuung ist die Schattenseite der 3. Zu viele Projekte gleichzeitig rauben die Kraft. Wähle ein bis zwei Dinge — und mach sie wirklich."},
+  4:{name:"Persönliches Jahr 4 — Das Fundament",
+    energy:"Zeit um zu bauen. Nicht zu träumen — zu bauen. Jede Stunde die du jetzt investierst, trägt langfristige Früchte.",
+    high:["Januar","Mai","September"],caution:["März","Oktober"],
+    full:"Das Persönliche Jahr 4 ist das härteste — und eines der wertvollsten. Die Energie ist geerdet, solide, fordernd. Hier entsteht nichts ohne Arbeit. Dafür bleibt hier alles, was entsteht.<br><br>Nutze dieses Jahr um Strukturen aufzubauen, Systeme zu etablieren und das Fundament zu legen für das was du in den nächsten Jahren ernten möchtest."},
+  5:{name:"Persönliches Jahr 5 — Der Wandel",
+    energy:"Veränderungen kommen — willkommen sie. Alles was nicht mehr passt, fällt jetzt weg. Das ist kein Verlust. Das ist Platz.",
+    high:["Mai","August","November"],caution:["Februar","September"],
+    full:"Das Persönliche Jahr 5 bringt Bewegung, Überraschungen, Wendepunkte. Was sich verändert, war bereit für Veränderung — auch wenn es sich nicht so anfühlt. Die größte Falle: sich gegen den Strom zu stemmen.<br><br>Lass los was geht. Umarme was kommt. Deine Seele hat diese Veränderungen schon lange gewollt."},
+  6:{name:"Persönliches Jahr 6 — Die Liebe und Verantwortung",
+    energy:"Familie, Beziehungen, Heilung. Das Jahr lädt dich ein, tiefer zu lieben — dich selbst eingeschlossen.",
+    high:["Februar","Juni","Oktober"],caution:["April","Dezember"],
+    full:"Das Persönliche Jahr 6 dreht sich um Verbindungen und Verantwortung. Beziehungen werden tiefer oder enden. Heilung ist möglich — in der Familie, in der Partnerschaft, in dir selbst.<br><br>Gleichzeitig: Vorsicht vor Übernahme fremder Verantwortung. In einem Jahr der 6 neigst du dazu, für alle zu sorgen — bis du selbst leer bist."},
+  7:{name:"Persönliches Jahr 7 — Die Stille und die Tiefe",
+    energy:"Ein Jahr für dich allein. Für Reflexion, Spiritualität, tiefes Verstehen. Nach außen wenig — nach innen alles.",
+    high:["März","Juli","November"],caution:["Januar","Juni"],
+    full:"Das Persönliche Jahr 7 ist das Jahr der inneren Reise. Die Energie zieht sich nach innen. Soziale Aktivitäten erschöpfen dich mehr als sonst. Das ist kein Problem — das ist ein Auftrag.<br><br>Nutze Stille. Meditiere. Lerne. Forsche. Was du in diesem Jahr in dir findest, trägt dich die nächsten Jahre."},
+  8:{name:"Persönliches Jahr 8 — Die Ernte",
+    energy:"Du erntets jetzt was du in den letzten 7 Jahren gesät hast. Erfolg, Anerkennung, materielle Stabilität — das Jahr der Kraft.",
+    high:["Januar","April","August"],caution:["Oktober","Dezember"],
+    full:"Das Persönliche Jahr 8 ist das Jahr der sichtbaren Ergebnisse. Was du in den Jahren 1-7 aufgebaut hast, zeigt jetzt seinen Wert. Dies ist das beste Jahr für Karriereschritte, finanzielle Entscheidungen und das Einfordern von Anerkennung.<br><br>Die Falle: Gier und Kontrollsucht. Die 8 neigt in schwachen Momenten dazu, alles festhalten zu wollen — Lockerheit ist die Antwort."},
+  9:{name:"Persönliches Jahr 9 — Der Abschluss",
+    energy:"Ein Zyklus geht zu Ende. Was noch aufzulösen ist, wird aufgelöst. Loslassen ist das Thema dieses Jahres — und ein Geschenk.",
+    high:["März","September","Dezember"],caution:["Juni","November"],
+    full:"Das Persönliche Jahr 9 beendet einen 9-Jahres-Zyklus. Es ist das Jahr des großen Loslassens — von Menschen, Situationen, Überzeugungen die nicht mehr passen. Das kann sich schmerzhaft anfühlen. Aber ohne das Leere des 9. Jahres kann das 1. Jahr nicht beginnen.<br><br>Vermeide neue große Projekte. Vollende was begonnen wurde. Und schau ehrlich auf das was geht — und was bleibt."}
+};
+var MONTHS = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+var MONTHS_FULL = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+var ZYKLEN={1:"Erwachen & Wurzeln",2:"Identität & Aufbruch",3:"Aufbau & Kraft",4:"Transformation & Tiefe",5:"Weisheit & Ernte",6:"Vollendung & Weitergabe"};
+var NEXT_ZYKLEN={1:"Identität & Aufbruch",2:"Aufbau & Kraft",3:"Transformation & Tiefe",4:"Weisheit & Ernte",5:"Vollendung & Weitergabe",6:"Meisterschaft"};
+
+function reduce2(n){while(n>9){var s=0;String(n).split('').forEach(function(d){s+=parseInt(d);});n=s;}return n;}
+
+document.getElementById('kalForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var fname=document.getElementById('fname').value.trim();
+  var bdate=document.getElementById('bdate').value;
+  var parts=bdate.split('-'); var year=parseInt(parts[0]),month=parseInt(parts[1]),day=parseInt(parts[2]);
+  var curYear=new Date().getFullYear(), curMonth=new Date().getMonth();
+  var pj=reduce2(reduce2(day)+reduce2(month)+reduce2(curYear));
+  var pjData=PJ_DATA[pj]||PJ_DATA[1];
+  var age=curYear-year, cycleNum=Math.floor(age/13)+1;
+  var cycleStart=year+((cycleNum-1)*13), cycleEnd=cycleStart+12;
+  var yearInCycle=age-((cycleNum-1)*13)+1, yearsLeft=cycleEnd-curYear+1;
+  var pct=Math.round((yearInCycle/13)*100);
+  var unlocked=isTest;
+
+  // Month energies (simplified: personal month = reduce(pj + monthNum))
+  var monthCards='';
+  for(var m=1;m<=12;m++){
+    var pm=reduce2(pj+m);
+    var isHigh=pjData.high.indexOf(MONTHS_FULL[m-1])>-1;
+    var isCaution=pjData.caution.indexOf(MONTHS_FULL[m-1])>-1;
+    var cls='month-card'+(isHigh?' high':isCaution?' caution':'');
+    var icon=isHigh?'✦':isCaution?'◐':'·';
+    var label=isHigh?'Hochphase':isCaution?'Achtsamkeit':'Normal';
+    monthCards+='<div class="'+cls+'"><div class="month-name">'+icon+' '+MONTHS[m-1]+'</div><div class="month-energy">'+label+'</div></div>';
+  }
+
+  var html='<div class="res-header">'+'<p class="res-name">✦ '+fname+' ✦</p>'+'<div class="year-badge">'+pj+'</div>'+'<p class="year-name">'+pjData.name+'</p></div>';
+
+  html+='<div class="section"><div class="section-title">◐ Deine Energie '+curYear+'</div><p>'+pjData.energy+'</p></div>';
+
+  html+='<div class="section"><div class="section-title">✦ Deine Monatsenergien '+curYear+'</div>';
+  html+='<p style="margin-bottom:12px">Hochphasen sind die Monate, in denen deine Energie am stärksten fließt. Achtsamkeitsmonate brauchen mehr Ruhe als Aktivität.</p>';
+  html+='<div class="months-grid">'+monthCards+'</div></div>';
+
+  html+='<div class="section"><div class="section-title">◎ Dein Lebenszyklus ('+cycleNum+'. Phase)</div>';
+  html+='<p>Seit <strong>'+cycleStart+'</strong> bist du in der Phase: <strong>'+( ZYKLEN[cycleNum]||'Meisterschaft')+'</strong>.<br><br>';
+  html+='Jahr <strong>'+yearInCycle+' von 13</strong> in diesem Abschnitt.';
+  html+='<div class="zyklus-bar"><div class="zyklus-fill" style="width:'+pct+'%"></div></div>';
+  html+='Noch <strong>'+yearsLeft+' Jahr'+(yearsLeft===1?'':'e')+'</strong> bis zum nächsten Zyklus.<br><br>';
+  html+=(yearsLeft<=3?'<strong>Diese Phase geht zu Ende.</strong> Was noch unvollendet ist, will jetzt abgeschlossen werden.':'Was du jetzt aufbaust, trägt dich in die nächste Phase.');
+  html+='<br><br>Ab <strong>'+(cycleEnd+1)+'</strong> beginnt: <strong>'+(NEXT_ZYKLEN[cycleNum]||'Vollendung')+'</strong>.</p></div>';
+
+  if(unlocked){
+    html+='<div class="section"><div class="section-title">✧ Vollständige Jahresanalyse '+curYear+'</div><p>'+pjData.full+'</p></div>';
+    html+='<div class="section"><div class="section-title">✦ Hochphasen im Detail</div>';
+    html+='<p>Deine stärksten Monate '+curYear+': <strong>'+pjData.high.join(', ')+'</strong>.<br><br>';
+    html+='In diesen Monaten fließt deine Energie am kraftvollsten. Wichtige Entscheidungen, Launches, Gespräche, Neuanfänge — diese Monate sind dafür gemacht.</p></div>';
+    html+='<div class="section"><div class="section-title">◐ Vorsichtsphasen</div>';
+    html+='<p>In <strong>'+pjData.caution.join(' und ')+'</strong> zieht sich deine Energie zurück.<br><br>';
+    html+='Das sind keine schlechten Monate — es sind Ruhemonate. Plane weniger. Schütze dich mehr. Lass andere ans Steuer wenn möglich.</p></div>';
+    html+='<div class="section"><div class="section-title">⊕ Dein Ausblick auf '+(curYear+1)+'</div>';
+    var nextPj=reduce2(pj===9?1:pj+1);
+    html+='<p>Ab '+curYear+' wirst du in ein Persönliches Jahr <strong>'+nextPj+'</strong> eintreten — '+(PJ_DATA[nextPj]||PJ_DATA[1]).name+'.<br><br>';
+    html+='Was du noch in diesem Jahr abschließt, bestimmt wie frei du in das nächste Jahr gehst.</p></div>';
+  } else {
+    html+='<div class="locked"><div class="locked-title">🔒 Vollständige Jahresanalyse</div><p>Was das Persönliche Jahr '+pj+' konkret für dich bedeutet — in allen Lebensbereichen.</p></div>';
+    html+='<div class="locked"><div class="locked-title">🔒 Hochphasen & Vorsichtsmonate im Detail</div><p>Wann genau deine Energie am stärksten ist — und wann du dich schützen sollst. Konkret auf den Monat.</p></div>';
+    html+='<div class="locked"><div class="locked-title">🔒 Ausblick auf '+(curYear+1)+'</div><p>Was das nächste Persönliche Jahr für dich bringt — und wie du dich jetzt vorbereiten kannst.</p></div>';
+    html+='<div class="locked"><div class="locked-title">🔒 Dein persönliches Manifestationsfenster</div><p>In welchen Wochen dieses Jahres deine Wünsche die größte kosmische Unterstützung haben.</p></div>';
+    html+='<div class="paywall"><h2>Dein vollständiger Kosmischer Kalender</h2>';
+    html+='<p class="hook">Es gibt Momente in diesem Jahr, in denen alles leichter wird.<br>Und Momente in denen du dich schützen musst.<br>Kennst du deinen?</p>';
+    html+='<div class="price-cards">';
+    html+='<div class="price-card hl"><div class="price-amount">97 €</div><div class="price-period">EINMALIG</div><div class="price-desc">Jahreskalender '+curYear+' + Ausblick</div></div>';
+    html+='<div class="price-card"><div class="price-amount">9,99 €</div><div class="price-period">PRO MONAT</div><div class="price-desc">Monatlich · jederzeit kündbar</div></div>';
+    html+='</div>';
+    html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_KALENDER" class="btn-pay" target="_blank">✦ Kalender erhalten (97 €)</a>';
+    html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_KALENDER_ABO" class="btn-pay outline" target="_blank">Monatsabo (9,99 €)</a>';
+    html+='<p class="pay-small">Sichere Zahlung via Digistore24 · Sofortzustellung</p></div>';
+  }
+
+  document.getElementById('result').innerHTML=html;
+  document.getElementById('kalForm').style.display='none';
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>

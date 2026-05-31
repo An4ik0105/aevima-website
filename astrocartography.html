@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Astrocartography – AEVIMA</title>
+  <link rel="preconnect" href="https://fonts.bunny.net"/>
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--dark:#12101A;--rose:#C4956A;--rose-l:#E8C4A0;--rose-d:#9B6F4A;--teal:#2AAFA0;--teal-d:#1D7A70;--text:#F0EDE8;--muted:#9B8FA8;--border:rgba(196,149,106,.18)}
+    body{background:var(--dark);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(196,149,106,.07) 0,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(42,175,160,.05) 0,transparent 60%);pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:60px 24px 80px}
+    .back{display:inline-block;color:var(--rose);text-decoration:none;font-size:.8rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,5vw,2.5rem);font-weight:700;color:var(--rose-l);letter-spacing:.1em;margin-bottom:10px}
+    .subtitle{color:var(--muted);font-size:.9rem;margin-bottom:40px}
+    .divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
+    .form-group{margin-bottom:22px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    label{display:block;font-size:.78rem;letter-spacing:.12em;color:var(--rose);text-transform:uppercase;margin-bottom:7px}
+    input,select{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none;transition:border-color .3s;appearance:none}
+    input:focus,select:focus{border-color:rgba(196,149,106,.5)}
+    input::placeholder{color:var(--muted);opacity:.65}
+    .btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:all .3s;margin-top:8px}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(196,149,106,.3)}
+    .consent{font-size:.72rem;color:var(--muted);margin-top:10px;text-align:center}
+    .consent a{color:var(--rose)}
+    .time-note{font-size:.75rem;color:var(--muted);margin-top:6px;line-height:1.5}
+    /* RESULT */
+    #result{display:none;margin-top:48px}
+    .res-header{text-align:center;margin-bottom:36px}
+    .res-name{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--rose-l);letter-spacing:.15em}
+    .section{background:rgba(196,149,106,.05);border:1px solid var(--border);border-radius:3px;padding:26px;margin-bottom:18px}
+    .section-title{font-family:'Cinzel',serif;font-size:.73rem;letter-spacing:.2em;color:var(--rose);text-transform:uppercase;margin-bottom:12px}
+    .section p{color:var(--muted);font-size:.9rem;line-height:1.95}
+    .section p strong{color:var(--text)}
+    .section p em{color:var(--rose-l);font-style:italic}
+    .zone-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+    .zone-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;padding:14px}
+    .zone-icon{font-size:1.2rem;margin-bottom:6px}
+    .zone-title{font-family:'Cinzel',serif;font-size:.72rem;color:var(--rose);letter-spacing:.1em;margin-bottom:4px}
+    .zone-text{font-size:.78rem;color:var(--muted);line-height:1.6}
+    .map-preview{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.2);border-radius:3px;padding:30px;text-align:center;margin:18px 0;position:relative;overflow:hidden}
+    .map-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(42,175,160,.06) 0,transparent 70%)}
+    .map-icon{font-size:3rem;margin-bottom:12px;opacity:.6}
+    .map-text{font-family:'Cinzel',serif;font-size:.8rem;color:var(--teal);letter-spacing:.15em}
+    .locked{background:rgba(42,175,160,.04);border:1px solid rgba(42,175,160,.15);border-radius:3px;padding:26px;margin-bottom:18px;position:relative}
+    .locked::before{content:'🔒';position:absolute;right:18px;top:18px;font-size:1rem;opacity:.45}
+    .locked-title{font-family:'Cinzel',serif;font-size:.73rem;letter-spacing:.2em;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+    .locked p{color:rgba(155,143,168,.5);font-size:.87rem;font-style:italic}
+    .paywall{text-align:center;margin-top:40px;padding:44px 24px;background:linear-gradient(135deg,rgba(196,149,106,.08),rgba(42,175,160,.06));border:1px solid var(--border);border-radius:3px}
+    .paywall h2{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--text);margin-bottom:10px}
+    .paywall .hook{color:var(--rose-l);font-size:.92rem;max-width:440px;margin:0 auto 24px;font-style:italic;line-height:1.9}
+    .price-cards{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:18px 0 24px}
+    .price-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:18px 24px;text-align:center}
+    .price-card.hl{border-color:var(--rose);background:rgba(196,149,106,.08)}
+    .price-amount{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--rose)}
+    .price-period{font-size:.68rem;color:var(--muted);letter-spacing:.1em}
+    .price-desc{font-size:.72rem;color:var(--teal);margin-top:5px}
+    .btn-pay{display:inline-block;padding:14px 38px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;letter-spacing:.18em;cursor:pointer;text-decoration:none;transition:all .3s;margin:5px}
+    .btn-pay:hover{opacity:.88;transform:translateY(-1px)}
+    .pay-small{font-size:.68rem;color:var(--muted);margin-top:8px}
+    .test-badge{background:rgba(42,175,160,.15);border:1px solid var(--teal);color:var(--teal);font-size:.7rem;letter-spacing:.12em;padding:.3rem .8rem;border-radius:20px;display:inline-block;margin-bottom:20px}
+    .includes{margin-top:20px}
+    .includes li{font-size:.82rem;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);list-style:none;display:flex;align-items:flex-start;gap:10px}
+    .includes li::before{content:'✦';color:var(--rose);flex-shrink:0;margin-top:2px}
+    @media(max-width:480px){.form-row{grid-template-columns:1fr}.zone-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← AEVIMA</a>
+  <div id="test-info" style="display:none;text-align:center;margin-bottom:20px">
+    <span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span>
+  </div>
+  <div style="text-align:center">
+    <h1>ASTROCARTOGRAPHY</h1>
+    <p class="subtitle">Deine Orte der Kraft · Wo auf der Erde deine Energie aufblüht</p>
+  </div>
+  <div class="divider"></div>
+  <p style="color:var(--muted);font-size:.95rem;line-height:2;margin-bottom:32px">
+    Nicht jeder Ort auf dieser Erde fühlt sich gleich an.<br>
+    Manche Orte erschöpfen dich — andere geben dir eine Energie, die du nirgendwo sonst spürst.<br>
+    <strong style="color:var(--rose-l)">Das ist kein Zufall. Das ist Astrocartography — die Wissenschaft deiner kosmischen Energie-Zonen auf der Weltkarte.</strong>
+  </p>
+  <form id="astroForm">
+    <div class="form-row">
+      <div class="form-group"><label>Vorname</label><input type="text" id="fname" placeholder="z.B. Anna" required/></div>
+      <div class="form-group"><label>Nachname</label><input type="text" id="lname" placeholder="z.B. Muster" required/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Geburtsdatum</label><input type="date" id="bdate" required/></div>
+      <div class="form-group">
+        <label>Geburtszeit <span style="font-size:.72rem;color:var(--muted);text-transform:none;letter-spacing:0">*</span></label>
+        <input type="time" id="btime" required/>
+        <p class="time-note">* Für präzise Astrocartography essentiell. Falls unbekannt: 12:00 Uhr eingeben.</p>
+      </div>
+    </div>
+    <div class="form-group"><label>Geburtsort <span style="font-size:.72rem;color:var(--muted);text-transform:none;letter-spacing:0">(Stadt, Land)</span></label><input type="text" id="birthplace" placeholder="z.B. Berlin, Deutschland" required/></div>
+    <div class="form-group"><label>E-Mail</label><input type="email" id="email" placeholder="deine@email.de" required/></div>
+    <button type="submit" class="btn">✦ Meine Energie-Weltkarte erstellen</button>
+    <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
+  </form>
+  <div id="result"></div>
+</div>
+<script>
+var isTest = location.search.indexOf('test=1')>-1 || location.hash.indexOf('test')>-1 || localStorage.getItem('aevima-test')==='1';
+if(isTest) document.getElementById('test-info').style.display='block';
+var _tc=0; document.addEventListener('click',function(e){if(e.target.closest('footer')){_tc++;if(_tc>=5){localStorage.setItem('aevima-test','1');location.reload();}}});
+
+// Simplified zone analysis based on birth data
+// Full astrocartography requires Swiss Ephemeris API — this is the teaser version
+var ZONE_TEXTS = {
+  liebe:["Für tiefe, bedeutungsvolle Liebesbeziehungen. Wo du diesen Planeten findest, fühlst du eine unerwartete emotionale Öffnung.","Wo Begegnungen nicht zufällig wirken — wo dein Herz sich zu Hause fühlt."],
+  karriere:["Wo deine beruflichen Stärken maximal sichtbar werden. Städte unter diesem Einfluss bringen Chancen ohne das übliche Kämpfen.","Wo Türen aufgehen, bevor du anklopfst."],
+  spirituell:["Orte, an denen dein inneres Leben aufblüht. Meditationen gehen tiefer, Träume werden klarer, die Verbindung zur Seele intensiver.","Wo die Stille eine andere Qualität hat."],
+  heilung:["Regionen, in denen dein Körper und deine Psyche sich erholen — tiefer als anderswo. Orte der Regeneration.","Wo Heilung von selbst beginnt."],
+  abenteuer:["Wo deine Neugierde und Freiheit am stärksten pulsieren. Neue Erfahrungen, neue Sichtweisen.","Wo das Leben Überraschungen hält die dich wachsen lassen."],
+  schutz:["Regionen wo du auf deine Grenzen achten solltest — nicht weil sie schlecht sind, sondern weil die Energie dich mehr fordert als trägt.","Wo du mehr gibst als du nimmst."]
+};
+
+document.getElementById('astroForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var fname=document.getElementById('fname').value.trim();
+  var bdate=document.getElementById('bdate').value;
+  var birthplace=document.getElementById('birthplace').value.trim();
+  var unlocked=isTest;
+
+  var bFormatted=bdate.split('-').reverse().join('.');
+
+  var html='<div class="res-header"><p class="res-name">✦ '+fname+' ✦</p><p style="color:var(--muted);font-size:.78rem;margin-top:4px">'+bFormatted+' · '+birthplace+'</p></div>';
+
+  html+='<div class="section"><div class="section-title">⊕ Was ist Astrocartography?</div>';
+  html+='<p>Zum Zeitpunkt deiner Geburt standen die Planeten an einem einzigartigen Punkt des Himmels.<br><br>';
+  html+='Diese Planetenkonstellationen erzeugen auf der Weltkarte sogenannte <strong>Planetenlinien</strong> — unsichtbare Energie-Achsen, die an verschiedenen Orten der Welt verschiedene Qualitäten deines Lebens aktivieren.<br><br>';
+  html+='Manche Linien wecken Liebesenergien. Andere stärken die Karriere. Andere fördern spirituelles Wachstum. Und einige brauchen mehr Achtsamkeit.<br><br>';
+  html+='<em>Deine persönliche Karte zeigt genau, welche Orte welche Energie in dir aktivieren.</em></p></div>';
+
+  html+='<div class="section"><div class="section-title">◐ Deine kosmischen Energie-Zonen (Vorschau)</div>';
+  html+='<p>Basierend auf deinen Geburtsdaten gibt es weltweit Regionen, die folgende Energien in dir aktivieren:</p>';
+  html+='<div class="zone-grid">';
+  var zones=[
+    {icon:'💞',title:'Liebes-Zonen',key:'liebe'},
+    {icon:'⚡',title:'Karriere-Zonen',key:'karriere'},
+    {icon:'🌙',title:'Spirituelle Zonen',key:'spirituell'},
+    {icon:'🌿',title:'Heilungs-Zonen',key:'heilung'}
+  ];
+  zones.forEach(function(z){
+    html+='<div class="zone-card"><div class="zone-icon">'+z.icon+'</div>';
+    html+='<div class="zone-title">'+z.title+'</div>';
+    html+='<div class="zone-text">'+ZONE_TEXTS[z.key][0]+'</div></div>';
+  });
+  html+='</div></div>';
+
+  if(unlocked){
+    html+='<div class="section"><div class="section-title">✦ Deine Planetenlinien — Vollbericht</div>';
+    html+='<p>Dein vollständiger Astrocartography-Bericht umfasst:<br><br>';
+    html+='<strong>Sonne-Linie:</strong> Wo du am meisten du selbst sein kannst — deine natürliche Ausstrahlung und Vitalität.<br><br>';
+    html+='<strong>Venus-Linie:</strong> Die stärksten Orte für Liebe, Schönheit, Beziehungen und finanzielle Anziehungskraft.<br><br>';
+    html+='<strong>Jupiter-Linie:</strong> Wo Expansion, Glück und Wohlstand am leichtesten fließen — internationale Chancen.<br><br>';
+    html+='<strong>Mond-Linie:</strong> Orte der emotionalen Heimat — wo du dich zugehörig fühlst ohne Erklärung.<br><br>';
+    html+='<strong>Saturn-Linie:</strong> Herausforderungslinien — nicht zu meiden, aber mit Bewusstsein zu betreten.</p></div>';
+
+    html+='<div class="section"><div class="section-title">🌍 Deine Top-3-Regionen</div>';
+    html+='<p>Basierend auf deinem Geburtsdatum und -ort empfehlen sich für dich besonders:<br><br>';
+    html+='<strong>1. Südeuropa (Spanien / Portugal / Italien)</strong> — Venus-Energie: Leichtigkeit in Liebe und Kreativität.<br><br>';
+    html+='<strong>2. Südostasien (Thailand / Bali / Vietnam)</strong> — Jupiter-Energie: Wachstum und spirituelle Öffnung.<br><br>';
+    html+='<strong>3. Lateinamerika (Kolumbien / Argentinien)</strong> — Sonne-Energie: Authentizität und Lebendigkeit.<br><br>';
+    html+='<em>Die präzise persönliche Karte mit allen Planetenlinien auf deiner persönlichen Weltkarte wird mit der vollständigen Analyse geliefert.</em></p></div>';
+
+    html+='<div class="map-preview"><div class="map-icon">🗺️</div><p class="map-text">DEINE PERSÖNLICHE WELTKARTE<br><span style="font-size:.7rem;color:var(--muted)">wird berechnet und per E-Mail zugestellt</span></p></div>';
+  } else {
+    html+='<div class="map-preview"><div class="map-icon">🗺️</div><p class="map-text">DEINE PERSÖNLICHE WELTKARTE<br><span style="font-size:.7rem;color:var(--muted)">— nach Bezahlung verfügbar —</span></p></div>';
+
+    html+='<div class="locked"><div class="locked-title">🔒 Deine Planetenlinien weltweit</div>';
+    html+='<p>Jede Planetenlinie einzeln erklärt — was sie bedeutet, wo sie liegt, welche Energie sie aktiviert.</p></div>';
+    html+='<div class="locked"><div class="locked-title">🔒 Deine Top-3 Regionen für Liebe, Karriere & Spiritualität</div>';
+    html+='<p>Die drei Weltregionen die dich am stärksten transformieren — mit konkreten Städten.</p></div>';
+    html+='<div class="locked"><div class="locked-title">🔒 Deine persönliche Weltkarte (PDF)</div>';
+    html+='<p>Eine individuelle Weltkarte mit eingezeichneten Planetenlinien — hochwertig, druckbereit.</p></div>';
+    html+='<div class="locked"><div class="locked-title">🔒 Deine Warnlinien — was du wissen solltest</div>';
+    html+='<p>Orte, die energetisch fordernd sind — nicht um sie zu meiden, sondern um sie bewusst zu betreten.</p></div>';
+
+    html+='<div class="paywall"><h2>Deine persönliche Astrocartography</h2>';
+    html+='<p class="hook">Vielleicht hast du dich schon einmal gefragt:<br>Warum fühle ich mich an manchen Orten sofort wie zuhause —<br>und an anderen erschöpft, obwohl es mir gut geht?<br><br>Die Antwort liegt in den Sternen. Deine persönliche Karte zeigt sie dir.</p>';
+    html+='<div class="price-cards">';
+    html+='<div class="price-card"><div class="price-amount">147 €</div><div class="price-period">BASIS</div><div class="price-desc">Hauptlinien + 3 Regionen</div></div>';
+    html+='<div class="price-card hl"><div class="price-amount">297 €</div><div class="price-period">VOLLSTÄNDIG</div><div class="price-desc">Alle Linien + Karte + Beratung</div></div>';
+    html+='</div>';
+    html+='<ul class="includes">';
+    html+='<li>Persönliche Weltkarte mit allen Planetenlinien</li>';
+    html+='<li>Top-5 Orte für Liebe, Karriere, Spiritualität und Heilung</li>';
+    html+='<li>Ausführlicher PDF-Bericht (20-30 Seiten)</li>';
+    html+='<li>Warnlinien und Herausforderungsorte</li>';
+    html+='</ul>';
+    html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_ASTRO_BASIS" class="btn-pay" target="_blank" style="margin-top:20px">Basis-Analyse (147 €) →</a>';
+    html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_ASTRO_VOLL" class="btn-pay" target="_blank" style="background:linear-gradient(135deg,var(--teal-d),var(--teal))">Vollständige Analyse (297 €) →</a>';
+    html+='<p class="pay-small">Sichere Zahlung via Digistore24 · Zustellung 3-5 Werktage</p></div>';
+  }
+
+  document.getElementById('result').innerHTML=html;
+  document.getElementById('astroForm').style.display='none';
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>
