@@ -11,23 +11,24 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:       #FAF8F5;
-      --cream-dark:  #F0EDE8;
+      --dark:        #12101A;
+      --dark2:       #1A1625;
+      --dark3:       #221E30;
       --rose-gold:   #C4956A;
       --rose-light:  #E8C4A0;
-      --rose-dark:   #9B6F4A;
+      --rose-dim:    #9B6F4A;
       --teal:        #2AAFA0;
-      --teal-light:  #56C9BC;
-      --emerald:     #2D7D5A;
-      --text:        #2C2C2C;
-      --text-muted:  #7A7065;
-      --border:      rgba(196,149,106,0.25);
+      --teal-dim:    #1D7A70;
+      --text:        #F0EDE8;
+      --text-muted:  #9B8FA8;
+      --border:      rgba(196,149,106,0.18);
+      --border-teal: rgba(42,175,160,0.2);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--cream);
+      background-color: var(--dark);
       color: var(--text);
       font-family: 'Raleway', sans-serif;
       font-weight: 300;
@@ -35,15 +36,38 @@
       overflow-x: hidden;
     }
 
-    /* ── HEADER / NAV ── */
+    /* ── STARS ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 15%, rgba(196,149,106,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 85%, rgba(42,175,160,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(196,149,106,0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stars-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    section, header, footer { position: relative; z-index: 1; }
+
+    /* ── HEADER ── */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(250,248,245,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(18,16,26,0.88);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
+      padding: 1rem 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -51,29 +75,29 @@
 
     .logo-text {
       font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--rose-gold);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
     }
 
     .tagline-header {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
       color: var(--text-muted);
       text-transform: uppercase;
       display: none;
+      margin-top: 0.15rem;
     }
-
     @media(min-width:600px){ .tagline-header { display: block; } }
 
     nav a {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-muted);
       text-decoration: none;
-      margin-left: 1.5rem;
+      margin-left: 2rem;
       transition: color 0.3s;
     }
     nav a:hover { color: var(--rose-gold); }
@@ -86,75 +110,76 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 5rem;
-      position: relative;
+      padding: 9rem 2rem 6rem;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 20%, rgba(196,149,106,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 80%, rgba(42,175,160,0.06) 0%, transparent 60%);
-      pointer-events: none;
+    .logo-img {
+      width: clamp(180px, 40vw, 280px);
+      height: auto;
+      margin-bottom: 2.5rem;
+      filter: drop-shadow(0 0 30px rgba(196,149,106,0.25)) drop-shadow(0 0 60px rgba(196,149,106,0.1));
+      animation: glow-pulse 4s ease-in-out infinite;
     }
 
-    .logo-symbol {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 2rem;
-      filter: drop-shadow(0 4px 24px rgba(196,149,106,0.3));
+    @keyframes glow-pulse {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(196,149,106,0.2)) drop-shadow(0 0 50px rgba(196,149,106,0.08)); }
+      50% { filter: drop-shadow(0 0 35px rgba(196,149,106,0.35)) drop-shadow(0 0 80px rgba(196,149,106,0.15)); }
     }
 
     .hero-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.35em;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--rose-gold);
-      margin-bottom: 1.5rem;
+      color: var(--teal);
+      margin-bottom: 1.75rem;
     }
 
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-size: clamp(1.9rem, 5vw, 3.5rem);
       font-weight: 400;
-      color: var(--text);
-      line-height: 1.25;
+      color: var(--rose-light);
+      line-height: 1.3;
       margin-bottom: 1.5rem;
-      max-width: 700px;
+      max-width: 680px;
     }
 
-    h1 span { color: var(--rose-gold); }
+    h1 em {
+      font-style: normal;
+      color: var(--rose-gold);
+    }
 
     .hero-sub {
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
       color: var(--text-muted);
-      max-width: 560px;
-      margin-bottom: 1.5rem;
+      max-width: 540px;
+      margin-bottom: 1rem;
       font-weight: 400;
     }
 
-    .hero-body {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 500px;
-      margin-bottom: 3rem;
-      line-height: 1.9;
-    }
-
+    /* teal divider dots */
     .divider-dots {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       justify-content: center;
-      margin: 0.75rem 0 2.5rem;
+      margin: 1.5rem 0 2rem;
     }
     .divider-dots span {
-      width: 4px; height: 4px;
-      border-radius: 50%;
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--teal); opacity: 0.6;
+    }
+    .divider-dots span:nth-child(2) {
+      width: 5px; height: 5px; opacity: 0.9;
       background: var(--rose-gold);
-      opacity: 0.5;
+    }
+
+    .hero-body {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 3rem;
+      line-height: 2;
     }
 
     /* ── FORM ── */
@@ -163,62 +188,77 @@
       flex-direction: column;
       gap: 0.75rem;
       width: 100%;
-      max-width: 420px;
-      margin: 0 auto 1rem;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
-    .waitlist-form input {
-      padding: 0.9rem 1.25rem;
+    .waitlist-form input[type="email"] {
+      padding: 0.85rem 1.25rem;
+      background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
       border-radius: 2px;
-      background: white;
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.95rem;
       color: var(--text);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.92rem;
       outline: none;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, background 0.3s;
     }
-    .waitlist-form input:focus { border-color: var(--rose-gold); }
-    .waitlist-form input::placeholder { color: #B8AFA6; }
+    .waitlist-form input[type="email"]:focus {
+      border-color: var(--rose-gold);
+      background: rgba(196,149,106,0.06);
+    }
+    .waitlist-form input::placeholder { color: var(--text-muted); opacity: 0.7; }
 
     .btn-primary {
-      padding: 0.9rem 2rem;
-      background: var(--rose-gold);
-      color: white;
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-dim));
+      color: var(--dark);
       border: none;
       border-radius: 2px;
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      font-weight: 600;
+      transition: opacity 0.3s, transform 0.2s;
     }
-    .btn-primary:hover { background: var(--rose-dark); transform: translateY(-1px); }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
 
     .form-note {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      opacity: 0.7;
     }
 
-    /* ── TRENNLINIE ── */
-    .section-divider {
-      width: 60px;
+    .success-msg {
+      display: none;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--teal-dim);
+      color: var(--teal);
+      border-radius: 2px;
+      font-size: 0.88rem;
+      background: rgba(42,175,160,0.07);
+    }
+
+    /* ── THIN DIVIDER ── */
+    .line-divider {
+      width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--rose-gold), transparent);
-      margin: 0 auto 3rem;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0;
     }
 
     /* ── PILLARS ── */
     .pillars {
-      padding: 6rem 2rem;
-      background: var(--cream-dark);
+      padding: 7rem 2rem;
+      background: var(--dark2);
       text-align: center;
     }
 
     .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--teal);
       margin-bottom: 1rem;
@@ -226,161 +266,164 @@
 
     h2 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-size: clamp(1.4rem, 3vw, 2rem);
       font-weight: 400;
-      color: var(--text);
+      color: var(--rose-light);
       margin-bottom: 1rem;
     }
 
     .pillars-intro {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
-      max-width: 520px;
+      max-width: 500px;
       margin: 0 auto 4rem;
+      line-height: 1.9;
     }
 
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      max-width: 1000px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+      max-width: 960px;
       margin: 0 auto;
     }
 
     .pillar-card {
-      background: white;
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2.5rem 2rem;
+      border-radius: 3px;
+      padding: 2.25rem 1.75rem;
       text-align: left;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
     }
     .pillar-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(196,149,106,0.12);
+      border-color: rgba(196,149,106,0.4);
+      background: rgba(196,149,106,0.04);
+      transform: translateY(-3px);
     }
 
-    .pillar-card::before {
+    .pillar-card::after {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
+      height: 2px;
     }
-    .pillar-card:nth-child(1)::before { background: var(--rose-gold); }
-    .pillar-card:nth-child(2)::before { background: var(--teal); }
-    .pillar-card:nth-child(3)::before { background: var(--emerald); }
-    .pillar-card:nth-child(4)::before { background: linear-gradient(90deg, var(--rose-gold), var(--teal)); }
+    .pillar-card:nth-child(1)::after { background: linear-gradient(90deg, var(--rose-gold), transparent); }
+    .pillar-card:nth-child(2)::after { background: linear-gradient(90deg, var(--teal), transparent); }
+    .pillar-card:nth-child(3)::after { background: linear-gradient(90deg, var(--rose-dim), transparent); }
+    .pillar-card:nth-child(4)::after { background: linear-gradient(90deg, var(--teal-dim), var(--rose-gold), transparent); }
 
     .pillar-num {
       font-family: 'Cinzel', serif;
-      font-size: 2.5rem;
-      color: var(--rose-light);
+      font-size: 2.2rem;
+      color: rgba(196,149,106,0.2);
       line-height: 1;
       margin-bottom: 1rem;
     }
 
     .pillar-title {
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
+      color: var(--rose-light);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.06em;
     }
 
     .pillar-desc {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 1.25rem;
     }
 
     .pillar-badge {
       display: inline-block;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      padding: 0.3rem 0.75rem;
+      padding: 0.28rem 0.7rem;
       border-radius: 20px;
       font-weight: 500;
     }
-    .badge-available { background: rgba(196,149,106,0.12); color: var(--rose-dark); }
-    .badge-soon { background: rgba(42,175,160,0.1); color: var(--teal); }
+    .badge-available { border: 1px solid rgba(196,149,106,0.4); color: var(--rose-gold); }
+    .badge-soon { border: 1px solid rgba(42,175,160,0.3); color: var(--teal); }
 
     /* ── PHILOSOPHY ── */
     .philosophy {
-      padding: 6rem 2rem;
+      padding: 7rem 2rem;
       text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
     }
 
     blockquote {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
       font-weight: 400;
-      color: var(--text);
-      line-height: 1.6;
+      color: var(--rose-light);
+      line-height: 1.7;
       font-style: italic;
-      margin: 2rem 0;
-      padding: 2rem;
-      border-left: 3px solid var(--rose-gold);
+      margin: 2.5rem auto;
+      padding: 2rem 2.5rem;
+      border-left: 2px solid var(--rose-gold);
+      max-width: 600px;
       text-align: left;
-      background: white;
+      background: rgba(196,149,106,0.04);
+      border-right: 1px solid var(--border);
     }
 
-    /* ── CTA SECTION ── */
+    .philosophy-text {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.95;
+    }
+
+    /* ── CTA ── */
     .cta-section {
-      padding: 6rem 2rem;
-      background: linear-gradient(135deg, var(--cream-dark) 0%, #EDE8E0 100%);
+      padding: 7rem 2rem;
+      background: var(--dark2);
       text-align: center;
+    }
+
+    .cta-section p.intro {
+      color: var(--text-muted);
+      margin: 0.75rem auto 3rem;
+      font-size: 0.92rem;
+      max-width: 400px;
+      line-height: 1.9;
     }
 
     /* ── FOOTER ── */
     footer {
       padding: 2.5rem 2rem;
-      background: var(--text);
-      color: rgba(255,255,255,0.5);
+      background: var(--dark);
+      border-top: 1px solid var(--border);
       text-align: center;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
     }
-    footer a { color: var(--rose-light); text-decoration: none; }
-    footer a:hover { color: white; }
-
     .footer-links {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
+      display: flex; gap: 2rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 1rem;
     }
-
-    /* ── SUCCESS MESSAGE ── */
-    .success-msg {
-      display: none;
-      padding: 1rem 2rem;
-      background: rgba(45,125,90,0.1);
-      border: 1px solid var(--emerald);
-      color: var(--emerald);
-      border-radius: 2px;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-    }
+    footer a { color: var(--rose-dim); text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--rose-gold); }
 
     /* ── ORNAMENT ── */
     .ornament {
-      font-size: 1.2rem;
-      color: var(--rose-gold);
-      opacity: 0.6;
-      letter-spacing: 0.5em;
-      margin-bottom: 1.5rem;
+      font-size: 1rem; color: var(--teal);
+      opacity: 0.5; letter-spacing: 0.6em; margin-bottom: 1.5rem;
     }
   </style>
 </head>
 <body>
+
+<!-- Stars canvas -->
+<canvas class="stars-canvas" id="stars"></canvas>
 
 <!-- HEADER -->
 <header>
@@ -396,33 +439,11 @@
 
 <!-- HERO -->
 <section class="hero">
-  <!-- Logo Symbol (Doppel-Lemniskat Platzhalter — wird durch echtes Logo ersetzt) -->
-  <svg class="logo-symbol" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="rg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stop-color="#E8C4A0"/>
-        <stop offset="50%" stop-color="#C4956A"/>
-        <stop offset="100%" stop-color="#9B6F4A"/>
-      </linearGradient>
-    </defs>
-    <!-- Horizontale Lemniskat -->
-    <path d="M20 60 C20 45 35 35 50 40 C62 44 62 56 75 60 C88 64 88 76 75 80 C62 84 62 76 50 80 C35 85 20 75 20 60Z" stroke="url(#rg)" stroke-width="2" fill="none" opacity="0.9"/>
-    <!-- Vertikale Lemniskat -->
-    <path d="M60 20 C75 20 85 35 80 50 C76 62 64 62 60 75 C56 88 44 88 40 75 C36 62 44 62 40 50 C35 35 45 20 60 20Z" stroke="url(#rg)" stroke-width="2" fill="none" opacity="0.9"/>
-    <!-- Center dot -->
-    <circle cx="60" cy="60" r="3" fill="url(#rg)" opacity="0.8"/>
-    <!-- Sparkles -->
-    <circle cx="22" cy="38" r="1.5" fill="#C4956A" opacity="0.5"/>
-    <circle cx="98" cy="82" r="1.5" fill="#C4956A" opacity="0.5"/>
-    <circle cx="88" cy="26" r="1" fill="#2AAFA0" opacity="0.6"/>
-    <circle cx="32" cy="94" r="1" fill="#2AAFA0" opacity="0.6"/>
-    <circle cx="110" cy="52" r="1" fill="#C4956A" opacity="0.4"/>
-    <circle cx="10" cy="68" r="1" fill="#C4956A" opacity="0.4"/>
-  </svg>
+  <img src="logo.jpg" alt="AEVIMA Logo" class="logo-img" />
 
   <p class="hero-label">Seelenkraft · Transformation · Harmonie</p>
 
-  <h1>Deine Seele spricht.<br><span>Lernst du zuzuhören?</span></h1>
+  <h1>Deine Seele spricht.<br><em>Lernst du zuzuhören?</em></h1>
 
   <p class="hero-sub">Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.</p>
 
@@ -431,12 +452,10 @@
   <p class="hero-body">
     Deine Seele war immer da.<br>
     Was fehlt, ist die Stille — und das Werkzeug,<br>
-    um zu verstehen, was sie dir zeigt.<br><br>
-    AEVIMA verbindet numerologisches und astrologisches Wissen<br>
-    zu einer tiefen, personalisierten Analyse.
+    um zu verstehen, was sie dir zeigt.
   </p>
 
-  <!-- Netlify Form (hidden, for bot detection) -->
+  <!-- Netlify form detection -->
   <form name="aevima-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="email" name="email" />
   </form>
@@ -446,67 +465,51 @@
     <input name="bot-field" style="display:none" />
     <input type="email" id="email-input" name="email" placeholder="Deine E-Mail-Adresse" required />
     <button type="submit" class="btn-primary">Frühzugang sichern →</button>
-    <p class="form-note">Kein Spam. Jederzeit abmeldbar. Dein Frühzugang ist kostenlos.</p>
+    <p class="form-note">Kein Spam · Jederzeit abmeldbar · Kostenlos</p>
   </form>
-  <div class="success-msg" id="success-msg" style="display:none;">
-    ✓ Du bist dabei. Wir melden uns bei dir.
-  </div>
+  <div class="success-msg" id="success-msg">✦ Du bist dabei. Wir melden uns bei dir.</div>
 </section>
 
-<!-- DIVIDER -->
-<div style="padding: 0 2rem;">
-  <div class="section-divider"></div>
-</div>
+<div class="line-divider"></div>
 
-<!-- DIE 4 SÄULEN -->
+<!-- 4 SÄULEN -->
 <section class="pillars" id="saeulen">
   <p class="section-label">Dein Kosmos · Deine Essenz · Dein Weg</p>
   <h2>Die vier Säulen von AEVIMA</h2>
-  <p class="pillars-intro">Jede Analyse ist einzigartig — so wie du. Entdecke, was in dir wartet.</p>
+  <p class="pillars-intro">Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.</p>
 
   <div class="pillars-grid">
-
     <div class="pillar-card">
       <div class="pillar-num">01</div>
       <div class="pillar-title">Dein Seelenprofil</div>
-      <p class="pillar-desc">
-        Name, Geburtsdatum und -ort verbinden sich zu einer tiefen Analyse deiner Eigenschaften, Stärken, Schwächen und Lebensthemen.
-        Verstehe, wer du wirklich bist.
-      </p>
+      <p class="pillar-desc">Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein. Verstehe, wer du wirklich bist.</p>
       <span class="pillar-badge badge-available">Verfügbar</span>
     </div>
 
     <div class="pillar-card">
       <div class="pillar-num">02</div>
       <div class="pillar-title">Paar-Synastrie</div>
-      <p class="pillar-desc">
-        Zwei Seelen, eine Analyse. Verstehe die kosmische Verbindung zwischen euch —
-        Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.
-      </p>
+      <p class="pillar-desc">Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.</p>
       <span class="pillar-badge badge-soon">Bald verfügbar</span>
     </div>
 
     <div class="pillar-card">
       <div class="pillar-num">03</div>
       <div class="pillar-title">Kosmischer Kalender</div>
-      <p class="pillar-desc">
-        Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe.
-        Navigiere dein Jahr mit kosmischer Klarheit.
-      </p>
+      <p class="pillar-desc">Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit.</p>
       <span class="pillar-badge badge-soon">Bald verfügbar</span>
     </div>
 
     <div class="pillar-card">
       <div class="pillar-num">04</div>
       <div class="pillar-title">Astrocartography</div>
-      <p class="pillar-desc">
-        Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in den Bereichen Liebe, Karriere, Spiritualität und Wohlbefinden bist.
-      </p>
+      <p class="pillar-desc">Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist.</p>
       <span class="pillar-badge badge-soon">Bald verfügbar</span>
     </div>
-
   </div>
 </section>
+
+<div class="line-divider"></div>
 
 <!-- PHILOSOPHIE -->
 <section class="philosophy">
@@ -514,32 +517,33 @@
   <p class="section-label">Die Haltung hinter AEVIMA</p>
   <h2>Achtsamkeit. Nicht Suche.</h2>
   <blockquote>
-    „Deine Seele sucht niemanden und wartet auf nichts.<br>
+    „Deine Seele sucht niemanden<br>und wartet auf nichts.<br>
     Sie ist bereits vollständig.<br>
     AEVIMA hilft dir, ihre Sprache zu verstehen."
   </blockquote>
-  <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 480px; margin: 0 auto;">
-    Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen,
-    dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit —
-    nicht mehr, nicht weniger.
+  <p class="philosophy-text">
+    Wir arbeiten nicht mit Drama, nicht mit Angst
+    und nicht mit dem Versprechen, dich zu „reparieren".<br><br>
+    Wir geben dir ein Werkzeug für mehr Klarheit —
+    für ein Leben in Einklang mit dir selbst.
   </p>
 </section>
 
-<!-- CTA SEKTION -->
-<section class="cta-section">
+<div class="line-divider"></div>
+
+<!-- CTA -->
+<section class="cta-section" id="warteliste">
   <p class="section-label">Frühzugang</p>
   <h2>Sei dabei, wenn AEVIMA startet.</h2>
-  <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: 0.95rem; max-width: 440px; margin-left: auto; margin-right: auto;">
-    Trage dich jetzt ein. Du erhältst exklusiven Frühzugang<br>und ein persönliches Willkommensgeschenk.
-  </p>
-  <form id="form-cta" class="waitlist-form" style="max-width: 380px;">
+  <p class="intro">Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.</p>
+  <form id="form-cta" class="waitlist-form" style="max-width:380px;">
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
     <input type="email" id="email-input-2" name="email" placeholder="Deine E-Mail-Adresse" required />
     <button type="submit" class="btn-primary">Jetzt eintragen →</button>
-    <p class="form-note">Kein Spam. Jederzeit abmeldbar.</p>
+    <p class="form-note">Kein Spam · Jederzeit abmeldbar</p>
   </form>
-  <div class="success-msg" id="success-msg-2" style="display:none;">✓ Du bist dabei.</div>
+  <div class="success-msg" id="success-msg-2">✦ Du bist dabei.</div>
 </section>
 
 <!-- FOOTER -->
@@ -550,55 +554,69 @@
     <a href="agb.html">AGB</a>
   </div>
   <p>© 2026 AEVIMA · Seelenkraft · Transformation · Harmonie</p>
-  <p style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.5;">
-    DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.
-  </p>
+  <p style="margin-top:0.4rem; font-size:0.65rem; opacity:0.4;">DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.</p>
 </footer>
 
 <script>
-  // Form handling is done server-side via Netlify Forms
-  // JavaScript only handles UI feedback
-  document.addEventListener('DOMContentLoaded', function() {
-    // Hero form
-    const form1 = document.getElementById('form-hero');
-    if (form1) {
-      form1.addEventListener('submit', function(e) {
+  // Stars animation
+  (function(){
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function init(){
+      resize();
+      stars = [];
+      for(let i=0; i<120; i++){
+        stars.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          r: Math.random()*1.2+0.2,
+          a: Math.random(),
+          speed: Math.random()*0.003+0.001,
+          color: Math.random() > 0.85 ? '#2AAFA0' : '#C4956A'
+        });
+      }
+    }
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      stars.forEach(s => {
+        s.a += s.speed;
+        const alpha = (Math.sin(s.a)*0.5+0.5)*0.6+0.1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', init);
+    init(); draw();
+  })();
+
+  // Form handling
+  document.addEventListener('DOMContentLoaded', function(){
+    function handleForm(formId, inputId, successId){
+      const form = document.getElementById(formId);
+      if(!form) return;
+      form.addEventListener('submit', function(e){
         e.preventDefault();
-        const email = document.getElementById('email-input').value;
-        if (!email || !email.includes('@')) return;
+        const email = document.getElementById(inputId).value;
+        if(!email || !email.includes('@')){ document.getElementById(inputId).focus(); return; }
         fetch('/', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ 'form-name': 'aevima-waitlist', email: email }).toString()
-        }).then(() => {
-          document.getElementById('form-hero').style.display = 'none';
-          document.getElementById('success-msg').style.display = 'block';
-        }).catch(() => {
-          document.getElementById('form-hero').style.display = 'none';
-          document.getElementById('success-msg').style.display = 'block';
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: new URLSearchParams({'form-name':'aevima-waitlist', email}).toString()
+        }).finally(() => {
+          form.style.display = 'none';
+          document.getElementById(successId).style.display = 'block';
         });
       });
     }
-    // CTA form
-    const form2 = document.getElementById('form-cta');
-    if (form2) {
-      form2.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email-input-2').value;
-        if (!email || !email.includes('@')) return;
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ 'form-name': 'aevima-waitlist', email: email }).toString()
-        }).then(() => {
-          document.getElementById('form-cta').style.display = 'none';
-          document.getElementById('success-msg-2').style.display = 'block';
-        }).catch(() => {
-          document.getElementById('form-cta').style.display = 'none';
-          document.getElementById('success-msg-2').style.display = 'block';
-        });
-      });
-    }
+    handleForm('form-hero','email-input','success-msg');
+    handleForm('form-cta','email-input-2','success-msg-2');
   });
 </script>
 
