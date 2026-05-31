@@ -3,540 +3,504 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AEVIMA – Deine Seele spricht. Lernst du zuzuhören?</title>
+  <title>AEVIMA</title>
   <meta name="description" content="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --dark:        #12101A;
-      --dark2:       #1A1625;
-      --dark3:       #221E30;
-      --rose-gold:   #C4956A;
-      --rose-light:  #E8C4A0;
-      --rose-dim:    #9B6F4A;
-      --teal:        #2AAFA0;
-      --teal-dim:    #1D7A70;
-      --text:        #F0EDE8;
-      --text-muted:  #9B8FA8;
-      --border:      rgba(196,149,106,0.18);
+      --dark:#12101A; --dark2:#1A1625; --rose:#C4956A; --rose-l:#E8C4A0;
+      --rose-d:#9B6F4A; --teal:#2AAFA0; --teal-d:#1D7A70;
+      --text:#F0EDE8; --muted:#9B8FA8; --border:rgba(196,149,106,0.18);
     }
+    html { scroll-behavior:smooth; }
+    body { background:var(--dark); color:var(--text); font-family:'Raleway',sans-serif; font-weight:300; line-height:1.8; overflow-x:hidden; }
+    body.rtl { direction:rtl; }
+    body::before { content:''; position:fixed; inset:0;
+      background: radial-gradient(ellipse at 25% 15%,rgba(196,149,106,0.07) 0%,transparent 55%),
+                  radial-gradient(ellipse at 75% 85%,rgba(42,175,160,0.05) 0%,transparent 55%);
+      pointer-events:none; z-index:0; }
+    canvas.stars { position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.38; }
+    section,header,footer { position:relative; z-index:1; }
 
-    html { scroll-behavior: smooth; }
-    body {
-      background-color: var(--dark);
-      color: var(--text);
-      font-family: 'Raleway', sans-serif;
-      font-weight: 300;
-      line-height: 1.8;
-      overflow-x: hidden;
-    }
+    /* HEADER */
+    header { position:fixed; top:0; left:0; right:0; z-index:100;
+      background:rgba(18,16,26,.92); backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+      padding:.85rem 2rem; display:flex; align-items:center; justify-content:space-between; }
+    .logo-text { font-family:'Cinzel',serif; font-size:1.2rem; font-weight:600; color:var(--rose); letter-spacing:.22em; }
+    .tagline-hdr { font-size:.56rem; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; display:none; margin-top:.1rem; }
+    @media(min-width:600px){ .tagline-hdr{display:block;} }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background:
-        radial-gradient(ellipse at 25% 15%, rgba(196,149,106,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse at 75% 85%, rgba(42,175,160,0.05) 0%, transparent 55%);
-      pointer-events: none; z-index: 0;
+    /* Language selector */
+    .lang-sel { position:relative; }
+    .lang-sel select {
+      appearance:none; background:rgba(255,255,255,.06);
+      border:1px solid var(--border); color:var(--rose);
+      font-family:'Cinzel',serif; font-size:.72rem; letter-spacing:.12em;
+      padding:.35rem .9rem .35rem .65rem; border-radius:20px; cursor:pointer;
+      outline:none; transition:border-color .3s;
     }
+    .lang-sel select:focus { border-color:var(--rose); }
+    .lang-sel::after { content:'▾'; position:absolute; right:.5rem; top:50%; transform:translateY(-50%); color:var(--rose); font-size:.65rem; pointer-events:none; }
 
-    .stars-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.4; }
-    section, header, footer { position: relative; z-index: 1; }
+    /* HERO */
+    .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:9rem 2rem 6rem; }
+    .logo-img { width:clamp(160px,35vw,240px); height:auto; margin-bottom:2.5rem;
+      mix-blend-mode:screen;
+      animation:glow 4s ease-in-out infinite; }
+    @keyframes glow {
+      0%,100%{ filter:drop-shadow(0 0 18px rgba(196,149,106,.22)) drop-shadow(0 0 45px rgba(196,149,106,.09)); }
+      50%{ filter:drop-shadow(0 0 38px rgba(196,149,106,.42)) drop-shadow(0 0 85px rgba(196,149,106,.18)); }
+    }
+    .hero-lbl { font-size:.6rem; letter-spacing:.42em; text-transform:uppercase; color:var(--teal); margin-bottom:1.75rem; }
+    h1 { font-family:'Cinzel',serif; font-size:clamp(1.7rem,4.5vw,3.2rem); font-weight:400; color:var(--rose-l); line-height:1.35; margin-bottom:1.5rem; max-width:680px; }
+    h1 em { font-style:normal; color:var(--rose); }
+    .hero-sub { font-size:clamp(.85rem,2vw,1rem); color:var(--muted); max-width:540px; margin-bottom:.75rem; font-weight:400; }
 
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(18,16,26,0.9);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0.9rem 2.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .dots { display:flex; align-items:center; gap:.5rem; justify-content:center; margin:1.5rem 0 1.75rem; }
+    .dots span { width:3px; height:3px; border-radius:50%; background:var(--teal); opacity:.55; }
+    .dots span:nth-child(2) { width:5px; height:5px; background:var(--rose); opacity:.9; }
 
-    .logo-text {
-      font-family: 'Cinzel', serif;
-      font-size: 1.25rem; font-weight: 600;
-      color: var(--rose-gold); letter-spacing: 0.22em;
-    }
-    .tagline-header {
-      font-size: 0.58rem; letter-spacing: 0.22em;
-      color: var(--text-muted); text-transform: uppercase;
-      display: none; margin-top: 0.1rem;
-    }
-    @media(min-width:620px){ .tagline-header { display: block; } }
+    .hero-body { font-size:.88rem; color:var(--muted); max-width:500px; margin-bottom:2.75rem; line-height:2.1; text-align:left; }
 
-    .header-right { display: flex; align-items: center; gap: 1.5rem; }
+    /* FORM */
+    .wl-form { display:flex; flex-direction:column; gap:.7rem; width:100%; max-width:390px; margin:0 auto; }
+    .wl-form input[type=email] {
+      padding:.82rem 1.2rem; background:rgba(255,255,255,.05);
+      border:1px solid var(--border); border-radius:2px; color:var(--text);
+      font-family:'Raleway',sans-serif; font-size:.9rem; outline:none;
+      transition:border-color .3s,background .3s; }
+    .wl-form input[type=email]:focus { border-color:var(--rose); background:rgba(196,149,106,.06); }
+    .wl-form input::placeholder { color:var(--muted); opacity:.65; }
+    .btn { padding:.82rem 2rem; background:linear-gradient(135deg,var(--rose),var(--rose-d));
+      color:var(--dark); border:none; border-radius:2px;
+      font-family:'Cinzel',serif; font-size:.77rem; letter-spacing:.2em;
+      cursor:pointer; font-weight:600; transition:opacity .3s,transform .2s; }
+    .btn:hover { opacity:.85; transform:translateY(-1px); }
+    .form-note { font-size:.69rem; color:var(--muted); letter-spacing:.06em; opacity:.6; }
+    .success { display:none; padding:.9rem 1.5rem; border:1px solid var(--teal-d); color:var(--teal); border-radius:2px; font-size:.87rem; background:rgba(42,175,160,.06); }
 
-    nav a {
-      font-size: 0.72rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--text-muted);
-      text-decoration: none; transition: color 0.3s;
-    }
-    nav a:hover { color: var(--rose-gold); }
+    /* DIVIDER */
+    .hr { width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); }
 
-    /* Language switcher */
-    .lang-switch {
-      display: flex; align-items: center;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
-    }
-    .lang-btn {
-      padding: 0.3rem 0.65rem;
-      font-size: 0.65rem; letter-spacing: 0.12em;
-      font-family: 'Cinzel', serif;
-      color: var(--text-muted); background: none;
-      border: none; cursor: pointer;
-      transition: background 0.25s, color 0.25s;
-    }
-    .lang-btn.active {
-      background: var(--rose-gold);
-      color: var(--dark); font-weight: 600;
-    }
+    /* PILLARS */
+    .pillars { padding:7rem 2rem; background:var(--dark2); text-align:center; }
+    .sec-lbl { font-size:.58rem; letter-spacing:.44em; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; }
+    h2 { font-family:'Cinzel',serif; font-size:clamp(1.3rem,3vw,1.9rem); font-weight:400; color:var(--rose-l); margin-bottom:1rem; }
+    .pillars-intro { font-size:.89rem; color:var(--muted); max-width:480px; margin:0 auto 4rem; line-height:1.9; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1.15rem; max-width:980px; margin:0 auto; }
+    .card { background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:3px;
+      padding:2.1rem 1.6rem; text-align:left; position:relative; overflow:hidden;
+      transition:border-color .3s,background .3s,transform .3s; }
+    .card:hover { border-color:rgba(196,149,106,.38); background:rgba(196,149,106,.04); transform:translateY(-3px); }
+    .card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+    .card:nth-child(1)::after { background:linear-gradient(90deg,var(--rose),transparent); }
+    .card:nth-child(2)::after { background:linear-gradient(90deg,var(--teal),transparent); }
+    .card:nth-child(3)::after { background:linear-gradient(90deg,var(--rose-d),transparent); }
+    .card:nth-child(4)::after { background:linear-gradient(90deg,var(--teal-d),transparent); }
+    .card:nth-child(5)::after { background:linear-gradient(90deg,var(--rose),var(--teal),transparent); }
+    .card-num { font-family:'Cinzel',serif; font-size:1.9rem; color:rgba(196,149,106,.17); line-height:1; margin-bottom:.9rem; }
+    .card-title { font-family:'Cinzel',serif; font-size:.88rem; font-weight:600; color:var(--rose-l); margin-bottom:.55rem; letter-spacing:.06em; }
+    .card-desc { font-size:.82rem; color:var(--muted); line-height:1.75; margin-bottom:1.15rem; }
+    .badge { display:inline-block; font-size:.59rem; letter-spacing:.15em; text-transform:uppercase; padding:.26rem .65rem; border-radius:20px; font-weight:500; }
+    .b-avail { border:1px solid rgba(196,149,106,.4); color:var(--rose); }
+    .b-soon { border:1px solid rgba(42,175,160,.3); color:var(--teal); }
+    .b-abo { border:1px solid rgba(196,149,106,.5); color:var(--rose-l); background:rgba(196,149,106,.08); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 9rem 2rem 6rem;
-    }
+    /* PHILOSOPHY */
+    .phil { padding:7rem 2rem; text-align:center; }
+    blockquote { font-family:'Cinzel',serif; font-size:clamp(.9rem,2.1vw,1.25rem); font-weight:400; color:var(--rose-l); line-height:1.7; font-style:italic; margin:2.5rem auto; padding:2rem 2.5rem; border-left:2px solid var(--rose); max-width:600px; text-align:left; background:rgba(196,149,106,.04); border-right:1px solid var(--border); }
+    .phil-txt { color:var(--muted); font-size:.87rem; max-width:460px; margin:0 auto; line-height:1.95; }
 
-    .logo-img {
-      width: clamp(160px, 35vw, 240px);
-      height: auto; margin-bottom: 2.5rem;
-      animation: glow-pulse 4s ease-in-out infinite;
-    }
-    @keyframes glow-pulse {
-      0%,100% { filter: drop-shadow(0 0 20px rgba(196,149,106,0.25)) drop-shadow(0 0 50px rgba(196,149,106,0.1)); }
-      50% { filter: drop-shadow(0 0 40px rgba(196,149,106,0.4)) drop-shadow(0 0 90px rgba(196,149,106,0.18)); }
-    }
+    /* CTA */
+    .cta { padding:7rem 2rem; background:var(--dark2); text-align:center; }
+    .cta-intro { color:var(--muted); margin:.75rem auto 3rem; font-size:.89rem; max-width:380px; line-height:1.9; }
 
-    .hero-label {
-      font-size: 0.62rem; letter-spacing: 0.4em;
-      text-transform: uppercase; color: var(--teal); margin-bottom: 1.75rem;
-    }
+    /* FOOTER */
+    footer { padding:2.5rem 2rem; background:var(--dark); border-top:1px solid var(--border); text-align:center; font-size:.72rem; color:var(--muted); letter-spacing:.06em; }
+    .ft-links { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem; }
+    footer a { color:var(--rose-d); text-decoration:none; transition:color .3s; }
+    footer a:hover { color:var(--rose); }
+    .orn { font-size:.95rem; color:var(--teal); opacity:.42; letter-spacing:.6em; margin-bottom:1.5rem; }
 
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 5vw, 3.4rem);
-      font-weight: 400; color: var(--rose-light);
-      line-height: 1.3; margin-bottom: 1.5rem; max-width: 680px;
-    }
-    h1 em { font-style: normal; color: var(--rose-gold); }
-
-    .hero-sub {
-      font-size: clamp(0.88rem, 2vw, 1.02rem);
-      color: var(--text-muted); max-width: 540px;
-      margin-bottom: 1rem; font-weight: 400;
-    }
-
-    .divider-dots {
-      display: flex; align-items: center; gap: 0.5rem;
-      justify-content: center; margin: 1.5rem 0 2rem;
-    }
-    .divider-dots span { width: 3px; height: 3px; border-radius: 50%; background: var(--teal); opacity: 0.6; }
-    .divider-dots span:nth-child(2) { width: 5px; height: 5px; opacity: 0.9; background: var(--rose-gold); }
-
-    .hero-body {
-      font-size: 0.9rem; color: var(--text-muted);
-      max-width: 460px; margin-bottom: 3rem; line-height: 2;
-    }
-
-    /* ── FORM ── */
-    .waitlist-form {
-      display: flex; flex-direction: column; gap: 0.7rem;
-      width: 100%; max-width: 390px; margin: 0 auto;
-    }
-    .waitlist-form input[type="email"] {
-      padding: 0.82rem 1.2rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 2px; color: var(--text);
-      font-family: 'Raleway', sans-serif; font-size: 0.9rem;
-      outline: none; transition: border-color 0.3s, background 0.3s;
-    }
-    .waitlist-form input[type="email"]:focus {
-      border-color: var(--rose-gold);
-      background: rgba(196,149,106,0.06);
-    }
-    .waitlist-form input::placeholder { color: var(--text-muted); opacity: 0.65; }
-
-    .btn-primary {
-      padding: 0.82rem 2rem;
-      background: linear-gradient(135deg, var(--rose-gold), var(--rose-dim));
-      color: var(--dark); border: none; border-radius: 2px;
-      font-family: 'Cinzel', serif; font-size: 0.78rem;
-      letter-spacing: 0.2em; cursor: pointer; font-weight: 600;
-      transition: opacity 0.3s, transform 0.2s;
-    }
-    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-
-    .form-note {
-      font-size: 0.7rem; color: var(--text-muted);
-      letter-spacing: 0.06em; opacity: 0.6;
-    }
-
-    .success-msg {
-      display: none; padding: 0.9rem 1.5rem;
-      border: 1px solid var(--teal-dim); color: var(--teal);
-      border-radius: 2px; font-size: 0.88rem;
-      background: rgba(42,175,160,0.06);
-    }
-
-    /* ── DIVIDER ── */
-    .line-divider {
-      width: 100%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-    }
-
-    /* ── PILLARS ── */
-    .pillars { padding: 7rem 2rem; background: var(--dark2); text-align: center; }
-
-    .section-label {
-      font-size: 0.6rem; letter-spacing: 0.42em;
-      text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
-    }
-
-    h2 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.35rem, 3vw, 1.95rem);
-      font-weight: 400; color: var(--rose-light); margin-bottom: 1rem;
-    }
-
-    .pillars-intro {
-      font-size: 0.9rem; color: var(--text-muted);
-      max-width: 480px; margin: 0 auto 4rem; line-height: 1.9;
-    }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem; max-width: 940px; margin: 0 auto;
-    }
-
-    .pillar-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 3px; padding: 2.1rem 1.65rem;
-      text-align: left; position: relative; overflow: hidden;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
-    }
-    .pillar-card:hover {
-      border-color: rgba(196,149,106,0.38);
-      background: rgba(196,149,106,0.04);
-      transform: translateY(-3px);
-    }
-    .pillar-card::after {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-    }
-    .pillar-card:nth-child(1)::after { background: linear-gradient(90deg, var(--rose-gold), transparent); }
-    .pillar-card:nth-child(2)::after { background: linear-gradient(90deg, var(--teal), transparent); }
-    .pillar-card:nth-child(3)::after { background: linear-gradient(90deg, var(--rose-dim), transparent); }
-    .pillar-card:nth-child(4)::after { background: linear-gradient(90deg, var(--teal-dim), var(--rose-gold), transparent); }
-
-    .pillar-num {
-      font-family: 'Cinzel', serif; font-size: 2rem;
-      color: rgba(196,149,106,0.18); line-height: 1; margin-bottom: 1rem;
-    }
-    .pillar-title {
-      font-family: 'Cinzel', serif; font-size: 0.9rem;
-      font-weight: 600; color: var(--rose-light);
-      margin-bottom: 0.6rem; letter-spacing: 0.06em;
-    }
-    .pillar-desc {
-      font-size: 0.83rem; color: var(--text-muted);
-      line-height: 1.75; margin-bottom: 1.2rem;
-    }
-    .pillar-badge {
-      display: inline-block; font-size: 0.6rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 0.26rem 0.65rem; border-radius: 20px; font-weight: 500;
-    }
-    .badge-available { border: 1px solid rgba(196,149,106,0.4); color: var(--rose-gold); }
-    .badge-soon { border: 1px solid rgba(42,175,160,0.3); color: var(--teal); }
-
-    /* ── PHILOSOPHY ── */
-    .philosophy { padding: 7rem 2rem; text-align: center; }
-
-    blockquote {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.95rem, 2.2vw, 1.28rem);
-      font-weight: 400; color: var(--rose-light);
-      line-height: 1.7; font-style: italic;
-      margin: 2.5rem auto; padding: 2rem 2.5rem;
-      border-left: 2px solid var(--rose-gold);
-      max-width: 600px; text-align: left;
-      background: rgba(196,149,106,0.04);
-      border-right: 1px solid var(--border);
-    }
-
-    .philosophy-text {
-      color: var(--text-muted); font-size: 0.88rem;
-      max-width: 460px; margin: 0 auto; line-height: 1.95;
-    }
-
-    /* ── CTA ── */
-    .cta-section { padding: 7rem 2rem; background: var(--dark2); text-align: center; }
-    .cta-section .cta-intro {
-      color: var(--text-muted); margin: 0.75rem auto 3rem;
-      font-size: 0.9rem; max-width: 380px; line-height: 1.9;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2.5rem 2rem; background: var(--dark);
-      border-top: 1px solid var(--border);
-      text-align: center; font-size: 0.73rem;
-      color: var(--text-muted); letter-spacing: 0.06em;
-    }
-    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
-    footer a { color: var(--rose-dim); text-decoration: none; transition: color 0.3s; }
-    footer a:hover { color: var(--rose-gold); }
-
-    .ornament { font-size: 1rem; color: var(--teal); opacity: 0.45; letter-spacing: 0.6em; margin-bottom: 1.5rem; }
+    /* RTL adjustments */
+    body.rtl blockquote { border-left:none; border-right:2px solid var(--rose); text-align:right; }
+    body.rtl .hero-body { text-align:right; }
+    body.rtl .card { text-align:right; }
   </style>
 </head>
 <body>
-
-<canvas class="stars-canvas" id="stars"></canvas>
+<canvas class="stars" id="stars"></canvas>
 
 <!-- HEADER -->
 <header>
   <div>
     <div class="logo-text">AEVIMA</div>
-    <div class="tagline-header" data-de="Seelenkraft · Transformation · Harmonie" data-en="Soul Power · Transformation · Harmony">Seelenkraft · Transformation · Harmonie</div>
+    <div class="tagline-hdr" data-i18n="tagline">Seelenkraft · Transformation · Harmonie</div>
   </div>
-  <div class="header-right">
-    <nav>
-      <a href="#saeulen" data-de="Analysen" data-en="Analyses">Analysen</a>
-      <a href="#warteliste" data-de="Frühzugang" data-en="Early Access">Frühzugang</a>
-    </nav>
-    <div class="lang-switch">
-      <button class="lang-btn active" data-lang="de">DE</button>
-      <button class="lang-btn" data-lang="en">EN</button>
-    </div>
+  <div class="lang-sel">
+    <select id="lang-select" onchange="setLang(this.value)">
+      <option value="de">🇩🇪 DE</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="ru">🇷🇺 RU</option>
+      <option value="pt">🇧🇷 PT</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="ar">🇸🇦 AR</option>
+      <option value="tr">🇹🇷 TR</option>
+    </select>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <img src="logo.png" alt="AEVIMA" class="logo-img" />
-
-  <p class="hero-label" data-de="Seelenkraft · Transformation · Harmonie" data-en="Soul Power · Transformation · Harmony">Seelenkraft · Transformation · Harmonie</p>
-
-  <h1>
-    <span data-de="Deine Seele spricht." data-en="Your soul speaks.">Deine Seele spricht.</span><br>
-    <em data-de="Lernst du zuzuhören?" data-en="Are you learning to listen?">Lernst du zuzuhören?</em>
-  </h1>
-
-  <p class="hero-sub" data-de="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung." data-en="Personalized analyses for mindfulness, self-understanding and cosmic orientation.">
-    Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.
-  </p>
-
-  <div class="divider-dots"><span></span><span></span><span></span></div>
-
-  <p class="hero-body" data-de="Deine Seele war immer da.<br>Was fehlt, ist die Stille — und das Werkzeug,<br>um zu verstehen, was sie dir zeigt." data-en="Your soul was always there.<br>What is missing is the stillness — and the tool<br>to understand what it is showing you.">
-    Deine Seele war immer da.<br>
-    Was fehlt, ist die Stille — und das Werkzeug,<br>
-    um zu verstehen, was sie dir zeigt.
+  <img src="logo.jpg" alt="AEVIMA" class="logo-img" />
+  <p class="hero-lbl" data-i18n="tagline">Seelenkraft · Transformation · Harmonie</p>
+  <h1 data-i18n="h1">Du bist nicht zufällig hier.</h1>
+  <p class="hero-sub" data-i18n="sub">Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.</p>
+  <div class="dots"><span></span><span></span><span></span></div>
+  <p class="hero-body" data-i18n="body">
+    Vielleicht gibt es einen Teil in dir, der nach Antworten sucht.<br>
+    Vielleicht spürst du, dass manche Zeichen, Begegnungen oder inneren Impulse mehr bedeuten, als es auf den ersten Blick scheint.<br><br>
+    Deine Seele spricht.<br>
+    In Symbolen. In Träumen. In wiederkehrenden Mustern.<br>
+    In dem leisen Gefühl, dass etwas in deinem Leben verstanden werden möchte.<br><br>
+    Hier findest du einen Raum, diese Botschaften zu erkunden und ihre tiefere Bedeutung zu entdecken.<br><br>
+    Denn deine Seele war immer da.<br>
+    Was oft fehlt, ist die Stille, sie wahrzunehmen –<br>
+    und ein Weg, ihre Sprache zu verstehen.
   </p>
 
   <form name="aevima-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="email" name="email" />
   </form>
-
-  <form id="form-hero" class="waitlist-form">
+  <form id="form1" class="wl-form">
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
-    <input type="email" id="email-input" name="email"
-      data-placeholder-de="Deine E-Mail-Adresse"
-      data-placeholder-en="Your email address"
-      placeholder="Deine E-Mail-Adresse" required />
-    <button type="submit" class="btn-primary"
-      data-de="Frühzugang sichern →" data-en="Secure Early Access →">Frühzugang sichern →</button>
-    <p class="form-note" data-de="Kein Spam · Jederzeit abmeldbar · Kostenlos" data-en="No spam · Unsubscribe anytime · Free">Kein Spam · Jederzeit abmeldbar · Kostenlos</p>
+    <input type="email" id="e1" name="email" data-i18n-placeholder="email_ph" placeholder="Deine E-Mail-Adresse" required />
+    <button type="submit" class="btn" data-i18n="cta_btn">Frühzugang sichern →</button>
+    <p class="form-note" data-i18n="form_note">Kein Spam · Jederzeit abmeldbar · Kostenlos</p>
   </form>
-  <div class="success-msg" id="success-msg" data-de="✦ Du bist dabei. Wir melden uns bei dir." data-en="✦ You're in. We'll be in touch.">✦ Du bist dabei. Wir melden uns bei dir.</div>
+  <div class="success" id="s1" data-i18n="success_msg">✦ Du bist dabei. Wir melden uns bei dir.</div>
 </section>
 
-<div class="line-divider"></div>
+<div class="hr"></div>
 
-<!-- 4 SÄULEN -->
+<!-- 5 PILLARS -->
 <section class="pillars" id="saeulen">
-  <p class="section-label" data-de="Dein Kosmos · Deine Essenz · Dein Weg" data-en="Your Cosmos · Your Essence · Your Path">Dein Kosmos · Deine Essenz · Dein Weg</p>
-  <h2 data-de="Die vier Säulen von AEVIMA" data-en="The Four Pillars of AEVIMA">Die vier Säulen von AEVIMA</h2>
-  <p class="pillars-intro" data-de="Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet." data-en="Every analysis is unique — just like you.<br>Discover what awaits within.">
-    Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.
-  </p>
+  <p class="sec-lbl" data-i18n="cosmos_line">Dein Kosmos · Deine Essenz · Dein Weg</p>
+  <h2 data-i18n="pillars_h2">Die fünf Säulen von AEVIMA</h2>
+  <p class="pillars-intro" data-i18n="pillars_intro">Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.</p>
 
-  <div class="pillars-grid">
-    <div class="pillar-card">
-      <div class="pillar-num">01</div>
-      <div class="pillar-title" data-de="Dein Seelenprofil" data-en="Your Soul Profile">Dein Seelenprofil</div>
-      <p class="pillar-desc" data-de="Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein." data-en="Your name, date and place of birth come together in a deep analysis of your strengths, shadows and life themes.">Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein.</p>
-      <span class="pillar-badge badge-available" data-de="Verfügbar" data-en="Available">Verfügbar</span>
+  <div class="grid">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-title" data-i18n="p1_title">Dein Seelenprofil</div>
+      <p class="card-desc" data-i18n="p1_desc">Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein.</p>
+      <span class="badge b-avail" data-i18n="badge_avail">Verfügbar</span>
     </div>
-    <div class="pillar-card">
-      <div class="pillar-num">02</div>
-      <div class="pillar-title" data-de="Paar-Synastrie" data-en="Pair Synastry">Paar-Synastrie</div>
-      <p class="pillar-desc" data-de="Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt." data-en="Understand the cosmic connection between two souls — what binds you, what challenges you and how you can grow together.">Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.</p>
-      <span class="pillar-badge badge-soon" data-de="Bald verfügbar" data-en="Coming soon">Bald verfügbar</span>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-title" data-i18n="p2_title">Paar-Synastrie</div>
+      <p class="card-desc" data-i18n="p2_desc">Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.</p>
+      <span class="badge b-soon" data-i18n="badge_soon">Bald verfügbar</span>
     </div>
-    <div class="pillar-card">
-      <div class="pillar-num">03</div>
-      <div class="pillar-title" data-de="Kosmischer Kalender" data-en="Cosmic Calendar">Kosmischer Kalender</div>
-      <p class="pillar-desc" data-de="Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit." data-en="Your personal annual forecast — with phases for mindfulness, manifestation and rest. Navigate your year with clarity.">Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit.</p>
-      <span class="pillar-badge badge-soon" data-de="Bald verfügbar" data-en="Coming soon">Bald verfügbar</span>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-title" data-i18n="p3_title">Kosmischer Kalender</div>
+      <p class="card-desc" data-i18n="p3_desc">Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit.</p>
+      <span class="badge b-soon" data-i18n="badge_soon">Bald verfügbar</span>
     </div>
-    <div class="pillar-card">
-      <div class="pillar-num">04</div>
-      <div class="pillar-title" data-de="Astrocartography" data-en="Astrocartography">Astrocartography</div>
-      <p class="pillar-desc" data-de="Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist." data-en="A world map of your energy zones. Find out where on earth you resonate most strongly for love, career and spirituality.">Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist.</p>
-      <span class="pillar-badge badge-soon" data-de="Bald verfügbar" data-en="Coming soon">Bald verfügbar</span>
+    <div class="card">
+      <div class="card-num">04</div>
+      <div class="card-title" data-i18n="p4_title">Astrocartography</div>
+      <p class="card-desc" data-i18n="p4_desc">Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist.</p>
+      <span class="badge b-soon" data-i18n="badge_soon">Bald verfügbar</span>
+    </div>
+    <div class="card">
+      <div class="card-num">05</div>
+      <div class="card-title" data-i18n="p5_title">Traumdeutung</div>
+      <p class="card-desc" data-i18n="p5_desc">Entschlüssele die Botschaften deiner Nacht. Traumsymbole aus über 25.000 internationalen Bedeutungen — personalisiert auf dich.</p>
+      <span class="badge b-abo" data-i18n="badge_abo">Einzel &amp; Abo</span>
     </div>
   </div>
 </section>
 
-<div class="line-divider"></div>
+<div class="hr"></div>
 
-<!-- PHILOSOPHIE -->
-<section class="philosophy">
-  <p class="ornament">· · ·</p>
-  <p class="section-label" data-de="Die Haltung hinter AEVIMA" data-en="The Philosophy Behind AEVIMA">Die Haltung hinter AEVIMA</p>
-  <h2 data-de="Achtsamkeit. Nicht Suche." data-en="Mindfulness. Not Search.">Achtsamkeit. Nicht Suche.</h2>
-  <blockquote data-de="„Deine Seele sucht niemanden<br>und wartet auf nichts.<br>Sie ist bereits vollständig.<br>AEVIMA hilft dir, ihre Sprache zu verstehen."" data-en="„Your soul seeks no one<br>and waits for nothing.<br>It is already whole.<br>AEVIMA helps you understand its language."">
-    „Deine Seele sucht niemanden<br>
-    und wartet auf nichts.<br>
-    Sie ist bereits vollständig.<br>
-    AEVIMA hilft dir, ihre Sprache zu verstehen."
-  </blockquote>
-  <p class="philosophy-text" data-de="Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst." data-en="We do not work with drama, fear or the promise of fixing you. We give you a tool for greater clarity — for a life in harmony with yourself.">
-    Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst.
-  </p>
+<!-- PHILOSOPHY -->
+<section class="phil">
+  <p class="orn">· · ·</p>
+  <p class="sec-lbl" data-i18n="phil_lbl">Die Haltung hinter AEVIMA</p>
+  <h2 data-i18n="phil_h2">Achtsamkeit. Nicht Suche.</h2>
+  <blockquote data-i18n="quote">„Deine Seele sucht niemanden und wartet auf nichts.<br>Sie ist bereits vollständig.<br>AEVIMA hilft dir, ihre Sprache zu verstehen."</blockquote>
+  <p class="phil-txt" data-i18n="phil_txt">Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst.</p>
 </section>
 
-<div class="line-divider"></div>
+<div class="hr"></div>
 
 <!-- CTA -->
-<section class="cta-section" id="warteliste">
-  <p class="section-label" data-de="Frühzugang" data-en="Early Access">Frühzugang</p>
-  <h2 data-de="Sei dabei, wenn AEVIMA startet." data-en="Be there when AEVIMA launches.">Sei dabei, wenn AEVIMA startet.</h2>
-  <p class="cta-intro" data-de="Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk." data-en="Sign up now. You will receive exclusive early access and a personal welcome gift.">
-    Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.
-  </p>
-  <form id="form-cta" class="waitlist-form" style="max-width:370px;">
+<section class="cta" id="warteliste">
+  <p class="sec-lbl" data-i18n="early_lbl">Frühzugang</p>
+  <h2 data-i18n="early_h2">Sei dabei, wenn AEVIMA startet.</h2>
+  <p class="cta-intro" data-i18n="early_intro">Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.</p>
+  <form id="form2" class="wl-form" style="max-width:370px;">
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
-    <input type="email" id="email-input-2" name="email"
-      data-placeholder-de="Deine E-Mail-Adresse"
-      data-placeholder-en="Your email address"
-      placeholder="Deine E-Mail-Adresse" required />
-    <button type="submit" class="btn-primary" data-de="Jetzt eintragen →" data-en="Sign Up Now →">Jetzt eintragen →</button>
-    <p class="form-note" data-de="Kein Spam · Jederzeit abmeldbar" data-en="No spam · Unsubscribe anytime">Kein Spam · Jederzeit abmeldbar</p>
+    <input type="email" id="e2" name="email" data-i18n-placeholder="email_ph" placeholder="Deine E-Mail-Adresse" required />
+    <button type="submit" class="btn" data-i18n="cta_btn2">Jetzt eintragen →</button>
+    <p class="form-note" data-i18n="form_note2">Kein Spam · Jederzeit abmeldbar</p>
   </form>
-  <div class="success-msg" id="success-msg-2" data-de="✦ Du bist dabei." data-en="✦ You're in.">✦ Du bist dabei.</div>
+  <div class="success" id="s2" data-i18n="success_msg">✦ Du bist dabei.</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-links">
-    <a href="impressum.html" data-de="Impressum" data-en="Legal Notice">Impressum</a>
-    <a href="datenschutz.html" data-de="Datenschutz" data-en="Privacy Policy">Datenschutz</a>
-    <a href="agb.html" data-de="AGB" data-en="Terms">AGB</a>
+  <div class="ft-links">
+    <a href="impressum.html" data-i18n="ft_impressum">Impressum</a>
+    <a href="datenschutz.html" data-i18n="ft_privacy">Datenschutz</a>
+    <a href="agb.html" data-i18n="ft_agb">AGB</a>
   </div>
   <p>© 2026 AEVIMA · Seelenkraft · Transformation · Harmonie</p>
-  <p style="margin-top:0.4rem;font-size:0.62rem;opacity:0.35;">DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.</p>
+  <p style="margin-top:.4rem;font-size:.6rem;opacity:.3;">DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.</p>
 </footer>
 
 <script>
-// Stars
+// ─── TRANSLATIONS ───────────────────────────────────────────────
+const T = {
+  de: {
+    tagline: "Seelenkraft · Transformation · Harmonie",
+    h1: "Du bist nicht zufällig hier.",
+    sub: "Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.",
+    body: `Vielleicht gibt es einen Teil in dir, der nach Antworten sucht.<br>Vielleicht spürst du, dass manche Zeichen, Begegnungen oder inneren Impulse mehr bedeuten, als es auf den ersten Blick scheint.<br><br>Deine Seele spricht.<br>In Symbolen. In Träumen. In wiederkehrenden Mustern.<br>In dem leisen Gefühl, dass etwas in deinem Leben verstanden werden möchte.<br><br>Hier findest du einen Raum, diese Botschaften zu erkunden und ihre tiefere Bedeutung zu entdecken.<br><br>Denn deine Seele war immer da.<br>Was oft fehlt, ist die Stille, sie wahrzunehmen –<br>und ein Weg, ihre Sprache zu verstehen.`,
+    email_ph: "Deine E-Mail-Adresse",
+    cta_btn: "Frühzugang sichern →",
+    cta_btn2: "Jetzt eintragen →",
+    form_note: "Kein Spam · Jederzeit abmeldbar · Kostenlos",
+    form_note2: "Kein Spam · Jederzeit abmeldbar",
+    success_msg: "✦ Du bist dabei. Wir melden uns bei dir.",
+    cosmos_line: "Dein Kosmos · Deine Essenz · Dein Weg",
+    pillars_h2: "Die fünf Säulen von AEVIMA",
+    pillars_intro: "Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.",
+    p1_title:"Dein Seelenprofil", p1_desc:"Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein.",
+    p2_title:"Paar-Synastrie", p2_desc:"Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.",
+    p3_title:"Kosmischer Kalender", p3_desc:"Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe.",
+    p4_title:"Astrocartography", p4_desc:"Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist.",
+    p5_title:"Traumdeutung", p5_desc:"Entschlüssele die Botschaften deiner Nacht. Traumsymbole aus über 25.000 internationalen Bedeutungen — personalisiert auf dich.",
+    badge_avail:"Verfügbar", badge_soon:"Bald verfügbar", badge_abo:"Einzel & Abo",
+    phil_lbl:"Die Haltung hinter AEVIMA", phil_h2:"Achtsamkeit. Nicht Suche.",
+    quote:"„Deine Seele sucht niemanden und wartet auf nichts.<br>Sie ist bereits vollständig.<br>AEVIMA hilft dir, ihre Sprache zu verstehen."",
+    phil_txt:"Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst.",
+    early_lbl:"Frühzugang", early_h2:"Sei dabei, wenn AEVIMA startet.",
+    early_intro:"Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.",
+    ft_impressum:"Impressum", ft_privacy:"Datenschutz", ft_agb:"AGB"
+  },
+  en: {
+    tagline:"Soul Power · Transformation · Harmony",
+    h1:"You are not here by chance.",
+    sub:"Personalized analyses for mindfulness, self-understanding and cosmic orientation.",
+    body:`Perhaps there is a part of you searching for answers.<br>Perhaps you sense that certain signs, encounters or inner impulses carry more meaning than they first appear.<br><br>Your soul speaks.<br>In symbols. In dreams. In recurring patterns.<br>In the quiet feeling that something in your life wants to be understood.<br><br>Here you will find a space to explore these messages and discover their deeper meaning.<br><br>For your soul was always there.<br>What is often missing is the stillness to perceive it –<br>and a way to understand its language.`,
+    email_ph:"Your email address",
+    cta_btn:"Secure Early Access →", cta_btn2:"Sign Up Now →",
+    form_note:"No spam · Unsubscribe anytime · Free", form_note2:"No spam · Unsubscribe anytime",
+    success_msg:"✦ You're in. We'll be in touch.",
+    cosmos_line:"Your Cosmos · Your Essence · Your Path",
+    pillars_h2:"The Five Pillars of AEVIMA",
+    pillars_intro:"Every analysis is unique — just like you.<br>Discover what awaits within.",
+    p1_title:"Your Soul Profile", p1_desc:"Your name, date and place of birth come together in a deep analysis of your strengths, shadows and life themes.",
+    p2_title:"Pair Synastry", p2_desc:"Understand the cosmic connection between two souls — what binds you, what challenges you and how you grow together.",
+    p3_title:"Cosmic Calendar", p3_desc:"Your personal annual forecast — with phases for mindfulness, manifestation and rest.",
+    p4_title:"Astrocartography", p4_desc:"A world map of your energy zones. Find out where on earth you resonate most strongly for love, career and spirituality.",
+    p5_title:"Dream Analysis", p5_desc:"Decode the messages of your night. Dream symbols from over 25,000 international meanings — personalized for you.",
+    badge_avail:"Available", badge_soon:"Coming soon", badge_abo:"Single & Subscription",
+    phil_lbl:"The Philosophy Behind AEVIMA", phil_h2:"Mindfulness. Not Search.",
+    quote:"„Your soul seeks no one and waits for nothing.<br>It is already whole.<br>AEVIMA helps you understand its language."",
+    phil_txt:"We do not work with drama, fear or the promise of fixing you. We give you a tool for greater clarity — for a life in harmony with yourself.",
+    early_lbl:"Early Access", early_h2:"Be there when AEVIMA launches.",
+    early_intro:"Sign up now. You will receive exclusive early access and a personal welcome gift.",
+    ft_impressum:"Legal Notice", ft_privacy:"Privacy Policy", ft_agb:"Terms"
+  },
+  ru: {
+    tagline:"Сила Души · Трансформация · Гармония",
+    h1:"Ты здесь не случайно.",
+    sub:"Персонализированные анализы для осознанности, самопознания и космической ориентации.",
+    body:`Возможно, есть часть тебя, которая ищет ответы.<br>Возможно, ты чувствуешь, что некоторые знаки, встречи или внутренние импульсы несут больше смысла, чем кажется на первый взгляд.<br><br>Твоя душа говорит.<br>В символах. В снах. В повторяющихся образах.<br>В тихом ощущении, что что-то в твоей жизни хочет быть понятым.<br><br>Здесь ты найдёшь пространство для исследования этих посланий и открытия их глубокого смысла.<br><br>Ведь твоя душа была здесь всегда.<br>Чего часто не хватает — это тишины, чтобы её услышать,<br>и пути, чтобы понять её язык.`,
+    email_ph:"Твой адрес электронной почты",
+    cta_btn:"Получить ранний доступ →", cta_btn2:"Записаться сейчас →",
+    form_note:"Без спама · Отписка в любое время · Бесплатно", form_note2:"Без спама · Отписка в любое время",
+    success_msg:"✦ Ты с нами. Мы свяжемся с тобой.",
+    cosmos_line:"Твой Космос · Твоя Суть · Твой Путь",
+    pillars_h2:"Пять опор AEVIMA",
+    pillars_intro:"Каждый анализ уникален — как и ты.<br>Открой, что ждёт внутри.",
+    p1_title:"Твой Профиль Души", p1_desc:"Имя, дата и место рождения объединяются в глубокий анализ твоих сильных сторон, теней и жизненных тем.",
+    p2_title:"Синастрия пары", p2_desc:"Пойми космическую связь двух душ — что объединяет вас, что создаёт напряжение и как вы растёте друг для друга.",
+    p3_title:"Космический Календарь", p3_desc:"Личный годовой прогноз — с фазами для осознанности, манифестации и отдыха.",
+    p4_title:"Астрокартография", p4_desc:"Карта мира твоих энергетических зон. Узнай, где на Земле твоя энергия наиболее сильна в любви, карьере и духовности.",
+    p5_title:"Толкование Снов", p5_desc:"Расшифруй послания ночи. Символы снов из более чем 25.000 значений — персонализированные для тебя.",
+    badge_avail:"Доступно", badge_soon:"Скоро", badge_abo:"Разово и Подписка",
+    phil_lbl:"Философия AEVIMA", phil_h2:"Осознанность. Не поиск.",
+    quote:"„Твоя душа никого не ищет и ничего не ждёт.<br>Она уже целостна.<br>AEVIMA помогает тебе понять её язык."",
+    phil_txt:"Мы не работаем с драмой, страхом или обещанием тебя «исправить». Мы даём тебе инструмент для большей ясности — для жизни в гармонии с собой.",
+    early_lbl:"Ранний доступ", early_h2:"Будь рядом, когда AEVIMA запустится.",
+    early_intro:"Запишись сейчас. Ты получишь эксклюзивный ранний доступ и личный приветственный подарок.",
+    ft_impressum:"Выходные данные", ft_privacy:"Конфиденциальность", ft_agb:"Условия"
+  },
+  pt: {
+    tagline:"Força da Alma · Transformação · Harmonia",
+    h1:"Você não está aqui por acaso.",
+    sub:"Análises personalizadas para mindfulness, autocompreensão e orientação cósmica.",
+    body:`Talvez haja uma parte em você buscando respostas.<br>Talvez você perceba que certos sinais, encontros ou impulsos internos carregam mais significado do que parecem à primeira vista.<br><br>Sua alma fala.<br>Em símbolos. Em sonhos. Em padrões recorrentes.<br>No silencioso sentimento de que algo em sua vida quer ser compreendido.<br><br>Aqui você encontrará um espaço para explorar essas mensagens e descobrir seu significado mais profundo.<br><br>Pois sua alma sempre esteve presente.<br>O que muitas vezes falta é o silêncio para percebê-la –<br>e um caminho para entender a sua linguagem.`,
+    email_ph:"Seu endereço de e-mail",
+    cta_btn:"Garantir Acesso Antecipado →", cta_btn2:"Inscrever-se Agora →",
+    form_note:"Sem spam · Cancele a qualquer hora · Gratuito", form_note2:"Sem spam · Cancele a qualquer hora",
+    success_msg:"✦ Você está dentro. Entraremos em contato.",
+    cosmos_line:"Seu Cosmos · Sua Essência · Seu Caminho",
+    pillars_h2:"Os Cinco Pilares do AEVIMA",
+    pillars_intro:"Cada análise é única — assim como você.<br>Descubra o que aguarda dentro.",
+    p1_title:"Seu Perfil da Alma", p1_desc:"Nome, data e local de nascimento se unem em uma análise profunda de seus pontos fortes, sombras e temas de vida.",
+    p2_title:"Sinastria do Casal", p2_desc:"Entenda a conexão cósmica entre duas almas — o que as une, o que cria tensão e como crescem uma para a outra.",
+    p3_title:"Calendário Cósmico", p3_desc:"Sua previsão anual pessoal — com fases para mindfulness, manifestação e descanso.",
+    p4_title:"Astrocartografia", p4_desc:"Mapa mundial de suas zonas de energia. Descubra onde na Terra sua energia é mais forte em amor, carreira e espiritualidade.",
+    p5_title:"Interpretação de Sonhos", p5_desc:"Decodifique as mensagens da sua noite. Símbolos de sonhos de mais de 25.000 significados internacionais — personalizados para você.",
+    badge_avail:"Disponível", badge_soon:"Em breve", badge_abo:"Individual e Assinatura",
+    phil_lbl:"A Filosofia por trás do AEVIMA", phil_h2:"Atenção Plena. Não Busca.",
+    quote:"„Sua alma não busca ninguém e não espera nada.<br>Ela já é completa.<br>O AEVIMA te ajuda a entender a sua linguagem."",
+    phil_txt:"Não trabalhamos com drama, medo ou a promessa de te 'consertar'. Oferecemos uma ferramenta para maior clareza — para uma vida em harmonia consigo mesmo.",
+    early_lbl:"Acesso Antecipado", early_h2:"Esteja lá quando o AEVIMA lançar.",
+    early_intro:"Inscreva-se agora. Você receberá acesso antecipado exclusivo e um presente pessoal de boas-vindas.",
+    ft_impressum:"Aviso Legal", ft_privacy:"Privacidade", ft_agb:"Termos"
+  },
+  es: {
+    tagline:"Fuerza del Alma · Transformación · Armonía",
+    h1:"No estás aquí por casualidad.",
+    sub:"Análisis personalizados para la atención plena, el autoconocimiento y la orientación cósmica.",
+    body:`Quizás hay una parte de ti que busca respuestas.<br>Quizás sientes que ciertas señales, encuentros o impulsos internos significan más de lo que parece a primera vista.<br><br>Tu alma habla.<br>En símbolos. En sueños. En patrones que se repiten.<br>En esa silenciosa sensación de que algo en tu vida quiere ser comprendido.<br><br>Aquí encontrarás un espacio para explorar estos mensajes y descubrir su significado más profundo.<br><br>Pues tu alma siempre ha estado ahí.<br>Lo que a menudo falta es el silencio para percibirla –<br>y un camino para entender su lenguaje.`,
+    email_ph:"Tu dirección de correo electrónico",
+    cta_btn:"Asegurar Acceso Anticipado →", cta_btn2:"Inscribirse Ahora →",
+    form_note:"Sin spam · Cancela en cualquier momento · Gratis", form_note2:"Sin spam · Cancela en cualquier momento",
+    success_msg:"✦ Ya estás dentro. Te contactaremos.",
+    cosmos_line:"Tu Cosmos · Tu Esencia · Tu Camino",
+    pillars_h2:"Los Cinco Pilares de AEVIMA",
+    pillars_intro:"Cada análisis es único — igual que tú.<br>Descubre lo que te espera dentro.",
+    p1_title:"Tu Perfil del Alma", p1_desc:"Tu nombre, fecha y lugar de nacimiento se combinan en un análisis profundo de tus fortalezas, sombras y temas de vida.",
+    p2_title:"Sinastría de Pareja", p2_desc:"Comprende la conexión cósmica entre dos almas — lo que las une, lo que crea tensión y cómo crecen la una para la otra.",
+    p3_title:"Calendario Cósmico", p3_desc:"Tu pronóstico anual personal — con fases para la atención plena, la manifestación y el descanso.",
+    p4_title:"Astrocartografía", p4_desc:"Mapa mundial de tus zonas de energía. Descubre dónde en la Tierra tu energía es más fuerte en amor, carrera y espiritualidad.",
+    p5_title:"Interpretación de Sueños", p5_desc:"Descifra los mensajes de tu noche. Símbolos oníricos de más de 25.000 significados internacionales — personalizados para ti.",
+    badge_avail:"Disponible", badge_soon:"Próximamente", badge_abo:"Individual y Suscripción",
+    phil_lbl:"La Filosofía detrás de AEVIMA", phil_h2:"Atención Plena. No Búsqueda.",
+    quote:"„Tu alma no busca a nadie y no espera nada.<br>Ya es completa.<br>AEVIMA te ayuda a entender su lenguaje."",
+    phil_txt:"No trabajamos con drama, miedo ni la promesa de 'arreglarte'. Te ofrecemos una herramienta para mayor claridad — para una vida en armonía contigo mismo.",
+    early_lbl:"Acceso Anticipado", early_h2:"Sé parte del lanzamiento de AEVIMA.",
+    early_intro:"Inscríbete ahora. Recibirás acceso anticipado exclusivo y un regalo personal de bienvenida.",
+    ft_impressum:"Aviso Legal", ft_privacy:"Privacidad", ft_agb:"Términos"
+  },
+  ar: {
+    tagline:"قوة الروح · التحول · الانسجام",
+    h1:"لستَ هنا بالصدفة.",
+    sub:"تحليلات مخصصة للوعي والفهم الذاتي والتوجيه الكوني.",
+    body:`ربما ثمة جزء منك يبحث عن إجابات.<br>ربما تشعر أن بعض الإشارات، اللقاءات أو الدوافع الداخلية تحمل معنى أعمق مما يبدو للوهلة الأولى.<br><br>روحك تتكلم.<br>في الرموز. في الأحلام. في الأنماط المتكررة.<br>في ذلك الإحساس الهادئ بأن شيئاً ما في حياتك يريد أن يُفهم.<br><br>هنا ستجد مساحة لاستكشاف هذه الرسائل واكتشاف معناها العميق.<br><br>فروحك كانت دائماً هنا.<br>ما ينقص في أغلب الأحيان هو الصمت لإدراكها –<br>وطريقة لفهم لغتها.`,
+    email_ph:"عنوان بريدك الإلكتروني",
+    cta_btn:"احجز وصولك المبكر ←", cta_btn2:"سجّل الآن ←",
+    form_note:"بلا رسائل مزعجة · إلغاء في أي وقت · مجاناً", form_note2:"بلا رسائل مزعجة · إلغاء في أي وقت",
+    success_msg:"✦ أنت معنا. سنتواصل معك قريباً.",
+    cosmos_line:"كونك · جوهرك · طريقك",
+    pillars_h2:"الأعمدة الخمسة لـ AEVIMA",
+    pillars_intro:"كل تحليل فريد من نوعه — تماماً كما أنت.<br>اكتشف ما ينتظرك في الداخل.",
+    p1_title:"ملفك الروحاني", p1_desc:"اسمك وتاريخ ومكان ميلادك تتحد في تحليل عميق لنقاط قوتك وظلالك ومواضيع حياتك.",
+    p2_title:"التوافق الروحاني للزوجين", p2_desc:"افهم الرابط الكوني بين روحَين — ما يجمعهما وما يخلق التوتر وكيف ينموان معاً.",
+    p3_title:"التقويم الكوني", p3_desc:"توقعاتك الشخصية للعام — مع مراحل للوعي والتجلي والراحة.",
+    p4_title:"الخرائط الفلكية", p4_desc:"خريطة عالمية لمناطق طاقتك. اكتشف أين على الأرض تكون طاقتك أقوى في الحب والمهنة والروحانية.",
+    p5_title:"تفسير الأحلام", p5_desc:"فكّ رموز رسائل الليل. رموز الأحلام من أكثر من 25.000 معنى دولي — مخصصة لك.",
+    badge_avail:"متاح", badge_soon:"قريباً", badge_abo:"فردي واشتراك",
+    phil_lbl:"الفلسفة وراء AEVIMA", phil_h2:"الوعي. لا البحث.",
+    quote:"„روحك لا تبحث عن أحد ولا تنتظر شيئاً.<br>هي كاملة بالفعل.<br>AEVIMA يساعدك على فهم لغتها."",
+    phil_txt:"لا نعمل بالدراما أو الخوف أو وعد إصلاحك. نقدم لك أداة لمزيد من الوضوح — لحياة في انسجام مع نفسك.",
+    early_lbl:"الوصول المبكر", early_h2:"كن هنا حين ينطلق AEVIMA.",
+    early_intro:"سجّل الآن. ستحصل على وصول مبكر حصري وهدية ترحيبية شخصية.",
+    ft_impressum:"بيانات النشر", ft_privacy:"الخصوصية", ft_agb:"الشروط"
+  },
+  tr: {
+    tagline:"Ruh Gücü · Dönüşüm · Uyum",
+    h1:"Burada tesadüfen değilsin.",
+    sub:"Farkındalık, öz-anlayış ve kozmik yönelim için kişiselleştirilmiş analizler.",
+    body:`Belki içinde cevap arayan bir parça var.<br>Belki bazı işaretlerin, karşılaşmaların ya da içsel dürtülerin ilk bakışta göründüğünden daha derin anlamlar taşıdığını hissediyorsun.<br><br>Ruhun konuşuyor.<br>Sembollerde. Rüyalarda. Tekrar eden örüntülerde.<br>Hayatındaki bir şeyin anlaşılmak istediğine dair o sessiz histe.<br><br>Burada bu mesajları keşfetmek ve derin anlamlarını bulmak için bir alan bulacaksın.<br><br>Çünkü ruhun her zaman oradaydı.<br>Çoğu zaman eksik olan, onu fark etmek için sessizlik –<br>ve onun dilini anlamak için bir yol.`,
+    email_ph:"E-posta adresin",
+    cta_btn:"Erken Erişimi Güvence Altına Al →", cta_btn2:"Şimdi Kaydol →",
+    form_note:"Spam yok · İstediğin zaman çık · Ücretsiz", form_note2:"Spam yok · İstediğin zaman çık",
+    success_msg:"✦ Aramızdasın. Seninle iletişime geçeceğiz.",
+    cosmos_line:"Kozmosun · Özün · Yolun",
+    pillars_h2:"AEVIMA'nın Beş Sütunu",
+    pillars_intro:"Her analiz benzersizdir — tıpkı senin gibi.<br>İçinde neyin seni beklediğini keşfet.",
+    p1_title:"Ruh Profilin", p1_desc:"Adın, doğum tarihin ve yerin, güçlü yanların, gölgeler ve yaşam temalarının derin analizinde bir araya geliyor.",
+    p2_title:"Çift Sinastri", p2_desc:"İki ruh arasındaki kozmik bağı anla — sizi birbirine bağlayan, gerilim yaratanlar ve birbiriniz için nasıl büyüyeceğiniz.",
+    p3_title:"Kozmik Takvim", p3_desc:"Kişisel yıllık tahminlerin — farkındalık, tezahür ve dinlenme aşamalarıyla.",
+    p4_title:"Astrokartografi", p4_desc:"Enerji bölgelerinin dünya haritası. Yeryüzünde aşk, kariyer ve maneviyat açısından enerjinin en güçlü olduğu yerleri keşfet.",
+    p5_title:"Rüya Yorumu", p5_desc:"Gecenin mesajlarını çöz. 25.000'den fazla uluslararası anlamdan rüya sembolleri — sana özel.",
+    badge_avail:"Mevcut", badge_soon:"Yakında", badge_abo:"Tekil ve Abonelik",
+    phil_lbl:"AEVIMA'nın Felsefesi", phil_h2:"Farkındalık. Arayış Değil.",
+    quote:"„Ruhun kimseyi aramaz ve hiçbir şey beklemez.<br>O zaten bütündür.<br>AEVIMA onun dilini anlamana yardım eder."",
+    phil_txt:"Drama, korku ya da seni 'düzeltme' vaadiyle çalışmıyoruz. Sana daha fazla netlik için bir araç sunuyoruz — kendinle uyum içinde bir yaşam için.",
+    early_lbl:"Erken Erişim", early_h2:"AEVIMA lansmanında orada ol.",
+    early_intro:"Şimdi kaydol. Özel erken erişim ve kişisel bir karşılama hediyesi alacaksın.",
+    ft_impressum:"Künye", ft_privacy:"Gizlilik", ft_agb:"Şartlar"
+  }
+};
+
+// ─── LANGUAGE ENGINE ────────────────────────────────────────────
+function setLang(l) {
+  const t = T[l] || T.de;
+  localStorage.setItem('aevima-lang', l);
+  document.documentElement.lang = l;
+  document.body.classList.toggle('rtl', l === 'ar');
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  const sel = document.getElementById('lang-select');
+  if (sel) sel.value = l;
+}
+
+(function(){
+  const saved = localStorage.getItem('aevima-lang') || 'de';
+  setLang(saved);
+})();
+
+// ─── STARS ──────────────────────────────────────────────────────
 (function(){
   const c = document.getElementById('stars'), ctx = c.getContext('2d');
-  let stars = [];
-  function resize(){ c.width = innerWidth; c.height = innerHeight; }
-  function init(){
-    resize(); stars = [];
-    for(let i=0;i<120;i++) stars.push({
-      x:Math.random()*c.width, y:Math.random()*c.height,
-      r:Math.random()*1.1+0.2, a:Math.random(),
-      speed:Math.random()*0.003+0.001,
-      col:Math.random()>0.82?'#2AAFA0':'#C4956A'
-    });
-  }
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      s.a+=s.speed;
-      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle=s.col; ctx.globalAlpha=(Math.sin(s.a)*0.5+0.5)*0.55+0.08;
-      ctx.fill();
-    });
-    ctx.globalAlpha=1; requestAnimationFrame(draw);
-  }
+  let s = [];
+  function init(){ c.width=innerWidth; c.height=innerHeight; s=[];
+    for(let i=0;i<120;i++) s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,a:Math.random(),sp:Math.random()*.003+.001,col:Math.random()>.82?'#2AAFA0':'#C4956A'}); }
+  function draw(){ ctx.clearRect(0,0,c.width,c.height);
+    s.forEach(p=>{ p.a+=p.sp; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=p.col; ctx.globalAlpha=(Math.sin(p.a)*.5+.5)*.55+.08; ctx.fill(); });
+    ctx.globalAlpha=1; requestAnimationFrame(draw); }
   window.addEventListener('resize',init); init(); draw();
 })();
 
-// Language switcher
+// ─── FORMS ──────────────────────────────────────────────────────
 (function(){
-  let lang = localStorage.getItem('aevima-lang') || 'de';
-
-  function applyLang(l){
-    lang = l;
-    localStorage.setItem('aevima-lang', l);
-    document.documentElement.lang = l;
-
-    // Update all text elements
-    document.querySelectorAll('[data-de]').forEach(el=>{
-      const txt = el.getAttribute('data-'+l);
-      if(txt) el.innerHTML = txt;
-    });
-
-    // Update placeholders
-    document.querySelectorAll('[data-placeholder-de]').forEach(el=>{
-      el.placeholder = el.getAttribute('data-placeholder-'+l) || el.placeholder;
-    });
-
-    // Update lang buttons
-    document.querySelectorAll('.lang-btn').forEach(btn=>{
-      btn.classList.toggle('active', btn.getAttribute('data-lang')===l);
-    });
-  }
-
-  document.querySelectorAll('.lang-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=> applyLang(btn.getAttribute('data-lang')));
-  });
-
-  applyLang(lang);
-})();
-
-// Forms
-(function(){
-  function handle(formId, inputId, successId){
-    const form = document.getElementById(formId);
-    if(!form) return;
-    form.addEventListener('submit', e=>{
+  function handle(fId, eId, sId){
+    const f = document.getElementById(fId); if(!f) return;
+    f.addEventListener('submit', e => {
       e.preventDefault();
-      const email = document.getElementById(inputId).value;
-      if(!email||!email.includes('@')){ document.getElementById(inputId).focus(); return; }
-      fetch('/',{
-        method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body: new URLSearchParams({'form-name':'aevima-waitlist', email}).toString()
-      }).finally(()=>{
-        form.style.display='none';
-        document.getElementById(successId).style.display='block';
-      });
+      const email = document.getElementById(eId).value;
+      if(!email||!email.includes('@')){ document.getElementById(eId).focus(); return; }
+      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:new URLSearchParams({'form-name':'aevima-waitlist',email}).toString()
+      }).finally(()=>{ f.style.display='none'; document.getElementById(sId).style.display='block'; });
     });
   }
-  handle('form-hero','email-input','success-msg');
-  handle('form-cta','email-input-2','success-msg-2');
+  handle('form1','e1','s1');
+  handle('form2','e2','s2');
 })();
 </script>
-
 </body>
 </html>
