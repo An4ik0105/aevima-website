@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AEVIMA – Deine Seele spricht. Lernst du zuzuhören?</title>
-  <meta name="description" content="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung. Seelenprofil · Synastrie · Kosmischer Kalender · Astrocartography." />
+  <meta name="description" content="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung." />
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet" />
   <style>
@@ -22,11 +22,9 @@
       --text:        #F0EDE8;
       --text-muted:  #9B8FA8;
       --border:      rgba(196,149,106,0.18);
-      --border-teal: rgba(42,175,160,0.2);
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       background-color: var(--dark);
       color: var(--text);
@@ -36,279 +34,205 @@
       overflow-x: hidden;
     }
 
-    /* ── STARS ── */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background:
         radial-gradient(ellipse at 25% 15%, rgba(196,149,106,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse at 75% 85%, rgba(42,175,160,0.05) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 50%, rgba(196,149,106,0.03) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+        radial-gradient(ellipse at 75% 85%, rgba(42,175,160,0.05) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
     }
 
-    .stars-canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
+    .stars-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.4; }
     section, header, footer { position: relative; z-index: 1; }
 
     /* ── HEADER ── */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(18,16,26,0.88);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(18,16,26,0.9);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 1rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 0.9rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
     }
 
     .logo-text {
       font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--rose-gold);
-      letter-spacing: 0.2em;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--rose-gold); letter-spacing: 0.22em;
     }
-
     .tagline-header {
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      display: none;
-      margin-top: 0.15rem;
+      font-size: 0.58rem; letter-spacing: 0.22em;
+      color: var(--text-muted); text-transform: uppercase;
+      display: none; margin-top: 0.1rem;
     }
-    @media(min-width:600px){ .tagline-header { display: block; } }
+    @media(min-width:620px){ .tagline-header { display: block; } }
+
+    .header-right { display: flex; align-items: center; gap: 1.5rem; }
 
     nav a {
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-left: 2rem;
-      transition: color 0.3s;
+      font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+      text-decoration: none; transition: color 0.3s;
     }
     nav a:hover { color: var(--rose-gold); }
+
+    /* Language switcher */
+    .lang-switch {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .lang-btn {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.65rem; letter-spacing: 0.12em;
+      font-family: 'Cinzel', serif;
+      color: var(--text-muted); background: none;
+      border: none; cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+    }
+    .lang-btn.active {
+      background: var(--rose-gold);
+      color: var(--dark); font-weight: 600;
+    }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 9rem 2rem 6rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 9rem 2rem 6rem;
     }
 
     .logo-img {
-      width: clamp(180px, 40vw, 280px);
-      height: auto;
-      margin-bottom: 2.5rem;
-      filter: drop-shadow(0 0 30px rgba(196,149,106,0.25)) drop-shadow(0 0 60px rgba(196,149,106,0.1));
+      width: clamp(160px, 35vw, 240px);
+      height: auto; margin-bottom: 2.5rem;
       animation: glow-pulse 4s ease-in-out infinite;
     }
-
     @keyframes glow-pulse {
-      0%, 100% { filter: drop-shadow(0 0 20px rgba(196,149,106,0.2)) drop-shadow(0 0 50px rgba(196,149,106,0.08)); }
-      50% { filter: drop-shadow(0 0 35px rgba(196,149,106,0.35)) drop-shadow(0 0 80px rgba(196,149,106,0.15)); }
+      0%,100% { filter: drop-shadow(0 0 20px rgba(196,149,106,0.25)) drop-shadow(0 0 50px rgba(196,149,106,0.1)); }
+      50% { filter: drop-shadow(0 0 40px rgba(196,149,106,0.4)) drop-shadow(0 0 90px rgba(196,149,106,0.18)); }
     }
 
     .hero-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1.75rem;
+      font-size: 0.62rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 1.75rem;
     }
 
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.9rem, 5vw, 3.5rem);
-      font-weight: 400;
-      color: var(--rose-light);
-      line-height: 1.3;
-      margin-bottom: 1.5rem;
-      max-width: 680px;
+      font-size: clamp(1.8rem, 5vw, 3.4rem);
+      font-weight: 400; color: var(--rose-light);
+      line-height: 1.3; margin-bottom: 1.5rem; max-width: 680px;
     }
-
-    h1 em {
-      font-style: normal;
-      color: var(--rose-gold);
-    }
+    h1 em { font-style: normal; color: var(--rose-gold); }
 
     .hero-sub {
-      font-size: clamp(0.9rem, 2vw, 1.05rem);
-      color: var(--text-muted);
-      max-width: 540px;
-      margin-bottom: 1rem;
-      font-weight: 400;
+      font-size: clamp(0.88rem, 2vw, 1.02rem);
+      color: var(--text-muted); max-width: 540px;
+      margin-bottom: 1rem; font-weight: 400;
     }
 
-    /* teal divider dots */
     .divider-dots {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      justify-content: center;
-      margin: 1.5rem 0 2rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      justify-content: center; margin: 1.5rem 0 2rem;
     }
-    .divider-dots span {
-      width: 3px; height: 3px; border-radius: 50%;
-      background: var(--teal); opacity: 0.6;
-    }
-    .divider-dots span:nth-child(2) {
-      width: 5px; height: 5px; opacity: 0.9;
-      background: var(--rose-gold);
-    }
+    .divider-dots span { width: 3px; height: 3px; border-radius: 50%; background: var(--teal); opacity: 0.6; }
+    .divider-dots span:nth-child(2) { width: 5px; height: 5px; opacity: 0.9; background: var(--rose-gold); }
 
     .hero-body {
-      font-size: 0.93rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin-bottom: 3rem;
-      line-height: 2;
+      font-size: 0.9rem; color: var(--text-muted);
+      max-width: 460px; margin-bottom: 3rem; line-height: 2;
     }
 
     /* ── FORM ── */
     .waitlist-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0.7rem;
+      width: 100%; max-width: 390px; margin: 0 auto;
     }
-
     .waitlist-form input[type="email"] {
-      padding: 0.85rem 1.25rem;
+      padding: 0.82rem 1.2rem;
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
-      border-radius: 2px;
-      color: var(--text);
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.92rem;
-      outline: none;
-      transition: border-color 0.3s, background 0.3s;
+      border-radius: 2px; color: var(--text);
+      font-family: 'Raleway', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.3s, background 0.3s;
     }
     .waitlist-form input[type="email"]:focus {
       border-color: var(--rose-gold);
       background: rgba(196,149,106,0.06);
     }
-    .waitlist-form input::placeholder { color: var(--text-muted); opacity: 0.7; }
+    .waitlist-form input::placeholder { color: var(--text-muted); opacity: 0.65; }
 
     .btn-primary {
-      padding: 0.85rem 2rem;
+      padding: 0.82rem 2rem;
       background: linear-gradient(135deg, var(--rose-gold), var(--rose-dim));
-      color: var(--dark);
-      border: none;
-      border-radius: 2px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      cursor: pointer;
-      font-weight: 600;
+      color: var(--dark); border: none; border-radius: 2px;
+      font-family: 'Cinzel', serif; font-size: 0.78rem;
+      letter-spacing: 0.2em; cursor: pointer; font-weight: 600;
       transition: opacity 0.3s, transform 0.2s;
     }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
 
     .form-note {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-      opacity: 0.7;
+      font-size: 0.7rem; color: var(--text-muted);
+      letter-spacing: 0.06em; opacity: 0.6;
     }
 
     .success-msg {
-      display: none;
-      padding: 1rem 1.5rem;
-      border: 1px solid var(--teal-dim);
-      color: var(--teal);
-      border-radius: 2px;
-      font-size: 0.88rem;
-      background: rgba(42,175,160,0.07);
+      display: none; padding: 0.9rem 1.5rem;
+      border: 1px solid var(--teal-dim); color: var(--teal);
+      border-radius: 2px; font-size: 0.88rem;
+      background: rgba(42,175,160,0.06);
     }
 
-    /* ── THIN DIVIDER ── */
+    /* ── DIVIDER ── */
     .line-divider {
-      width: 100%;
-      height: 1px;
+      width: 100%; height: 1px;
       background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0;
     }
 
     /* ── PILLARS ── */
-    .pillars {
-      padding: 7rem 2rem;
-      background: var(--dark2);
-      text-align: center;
-    }
+    .pillars { padding: 7rem 2rem; background: var(--dark2); text-align: center; }
 
     .section-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1rem;
+      font-size: 0.6rem; letter-spacing: 0.42em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
     }
 
     h2 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 400;
-      color: var(--rose-light);
-      margin-bottom: 1rem;
+      font-size: clamp(1.35rem, 3vw, 1.95rem);
+      font-weight: 400; color: var(--rose-light); margin-bottom: 1rem;
     }
 
     .pillars-intro {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto 4rem;
-      line-height: 1.9;
+      font-size: 0.9rem; color: var(--text-muted);
+      max-width: 480px; margin: 0 auto 4rem; line-height: 1.9;
     }
 
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.25rem;
-      max-width: 960px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem; max-width: 940px; margin: 0 auto;
     }
 
     .pillar-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 2.25rem 1.75rem;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
+      border-radius: 3px; padding: 2.1rem 1.65rem;
+      text-align: left; position: relative; overflow: hidden;
       transition: border-color 0.3s, background 0.3s, transform 0.3s;
     }
     .pillar-card:hover {
-      border-color: rgba(196,149,106,0.4);
+      border-color: rgba(196,149,106,0.38);
       background: rgba(196,149,106,0.04);
       transform: translateY(-3px);
     }
-
     .pillar-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
     }
     .pillar-card:nth-child(1)::after { background: linear-gradient(90deg, var(--rose-gold), transparent); }
     .pillar-card:nth-child(2)::after { background: linear-gradient(90deg, var(--teal), transparent); }
@@ -316,195 +240,164 @@
     .pillar-card:nth-child(4)::after { background: linear-gradient(90deg, var(--teal-dim), var(--rose-gold), transparent); }
 
     .pillar-num {
-      font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
-      color: rgba(196,149,106,0.2);
-      line-height: 1;
-      margin-bottom: 1rem;
+      font-family: 'Cinzel', serif; font-size: 2rem;
+      color: rgba(196,149,106,0.18); line-height: 1; margin-bottom: 1rem;
     }
-
     .pillar-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--rose-light);
-      margin-bottom: 0.6rem;
-      letter-spacing: 0.06em;
+      font-family: 'Cinzel', serif; font-size: 0.9rem;
+      font-weight: 600; color: var(--rose-light);
+      margin-bottom: 0.6rem; letter-spacing: 0.06em;
     }
-
     .pillar-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      margin-bottom: 1.25rem;
+      font-size: 0.83rem; color: var(--text-muted);
+      line-height: 1.75; margin-bottom: 1.2rem;
     }
-
     .pillar-badge {
-      display: inline-block;
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.28rem 0.7rem;
-      border-radius: 20px;
-      font-weight: 500;
+      display: inline-block; font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.26rem 0.65rem; border-radius: 20px; font-weight: 500;
     }
     .badge-available { border: 1px solid rgba(196,149,106,0.4); color: var(--rose-gold); }
     .badge-soon { border: 1px solid rgba(42,175,160,0.3); color: var(--teal); }
 
     /* ── PHILOSOPHY ── */
-    .philosophy {
-      padding: 7rem 2rem;
-      text-align: center;
-    }
+    .philosophy { padding: 7rem 2rem; text-align: center; }
 
     blockquote {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1rem, 2.2vw, 1.35rem);
-      font-weight: 400;
-      color: var(--rose-light);
-      line-height: 1.7;
-      font-style: italic;
-      margin: 2.5rem auto;
-      padding: 2rem 2.5rem;
+      font-size: clamp(0.95rem, 2.2vw, 1.28rem);
+      font-weight: 400; color: var(--rose-light);
+      line-height: 1.7; font-style: italic;
+      margin: 2.5rem auto; padding: 2rem 2.5rem;
       border-left: 2px solid var(--rose-gold);
-      max-width: 600px;
-      text-align: left;
+      max-width: 600px; text-align: left;
       background: rgba(196,149,106,0.04);
       border-right: 1px solid var(--border);
     }
 
     .philosophy-text {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.95;
+      color: var(--text-muted); font-size: 0.88rem;
+      max-width: 460px; margin: 0 auto; line-height: 1.95;
     }
 
     /* ── CTA ── */
-    .cta-section {
-      padding: 7rem 2rem;
-      background: var(--dark2);
-      text-align: center;
-    }
-
-    .cta-section p.intro {
-      color: var(--text-muted);
-      margin: 0.75rem auto 3rem;
-      font-size: 0.92rem;
-      max-width: 400px;
-      line-height: 1.9;
+    .cta-section { padding: 7rem 2rem; background: var(--dark2); text-align: center; }
+    .cta-section .cta-intro {
+      color: var(--text-muted); margin: 0.75rem auto 3rem;
+      font-size: 0.9rem; max-width: 380px; line-height: 1.9;
     }
 
     /* ── FOOTER ── */
     footer {
-      padding: 2.5rem 2rem;
-      background: var(--dark);
+      padding: 2.5rem 2rem; background: var(--dark);
       border-top: 1px solid var(--border);
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
+      text-align: center; font-size: 0.73rem;
+      color: var(--text-muted); letter-spacing: 0.06em;
     }
-    .footer-links {
-      display: flex; gap: 2rem; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 1rem;
-    }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
     footer a { color: var(--rose-dim); text-decoration: none; transition: color 0.3s; }
     footer a:hover { color: var(--rose-gold); }
 
-    /* ── ORNAMENT ── */
-    .ornament {
-      font-size: 1rem; color: var(--teal);
-      opacity: 0.5; letter-spacing: 0.6em; margin-bottom: 1.5rem;
-    }
+    .ornament { font-size: 1rem; color: var(--teal); opacity: 0.45; letter-spacing: 0.6em; margin-bottom: 1.5rem; }
   </style>
 </head>
 <body>
 
-<!-- Stars canvas -->
 <canvas class="stars-canvas" id="stars"></canvas>
 
 <!-- HEADER -->
 <header>
   <div>
     <div class="logo-text">AEVIMA</div>
-    <div class="tagline-header">Seelenkraft · Transformation · Harmonie</div>
+    <div class="tagline-header" data-de="Seelenkraft · Transformation · Harmonie" data-en="Soul Power · Transformation · Harmony">Seelenkraft · Transformation · Harmonie</div>
   </div>
-  <nav>
-    <a href="#saeulen">Analysen</a>
-    <a href="#warteliste">Frühzugang</a>
-  </nav>
+  <div class="header-right">
+    <nav>
+      <a href="#saeulen" data-de="Analysen" data-en="Analyses">Analysen</a>
+      <a href="#warteliste" data-de="Frühzugang" data-en="Early Access">Frühzugang</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <img src="logo.jpg" alt="AEVIMA Logo" class="logo-img" />
+  <img src="logo.png" alt="AEVIMA" class="logo-img" />
 
-  <p class="hero-label">Seelenkraft · Transformation · Harmonie</p>
+  <p class="hero-label" data-de="Seelenkraft · Transformation · Harmonie" data-en="Soul Power · Transformation · Harmony">Seelenkraft · Transformation · Harmonie</p>
 
-  <h1>Deine Seele spricht.<br><em>Lernst du zuzuhören?</em></h1>
+  <h1>
+    <span data-de="Deine Seele spricht." data-en="Your soul speaks.">Deine Seele spricht.</span><br>
+    <em data-de="Lernst du zuzuhören?" data-en="Are you learning to listen?">Lernst du zuzuhören?</em>
+  </h1>
 
-  <p class="hero-sub">Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.</p>
+  <p class="hero-sub" data-de="Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung." data-en="Personalized analyses for mindfulness, self-understanding and cosmic orientation.">
+    Personalisierte Analysen für Achtsamkeit, Selbstverständnis und kosmische Orientierung.
+  </p>
 
   <div class="divider-dots"><span></span><span></span><span></span></div>
 
-  <p class="hero-body">
+  <p class="hero-body" data-de="Deine Seele war immer da.<br>Was fehlt, ist die Stille — und das Werkzeug,<br>um zu verstehen, was sie dir zeigt." data-en="Your soul was always there.<br>What is missing is the stillness — and the tool<br>to understand what it is showing you.">
     Deine Seele war immer da.<br>
     Was fehlt, ist die Stille — und das Werkzeug,<br>
     um zu verstehen, was sie dir zeigt.
   </p>
 
-  <!-- Netlify form detection -->
   <form name="aevima-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="email" name="email" />
   </form>
 
-  <form id="form-hero" class="waitlist-form" id="warteliste">
+  <form id="form-hero" class="waitlist-form">
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
-    <input type="email" id="email-input" name="email" placeholder="Deine E-Mail-Adresse" required />
-    <button type="submit" class="btn-primary">Frühzugang sichern →</button>
-    <p class="form-note">Kein Spam · Jederzeit abmeldbar · Kostenlos</p>
+    <input type="email" id="email-input" name="email"
+      data-placeholder-de="Deine E-Mail-Adresse"
+      data-placeholder-en="Your email address"
+      placeholder="Deine E-Mail-Adresse" required />
+    <button type="submit" class="btn-primary"
+      data-de="Frühzugang sichern →" data-en="Secure Early Access →">Frühzugang sichern →</button>
+    <p class="form-note" data-de="Kein Spam · Jederzeit abmeldbar · Kostenlos" data-en="No spam · Unsubscribe anytime · Free">Kein Spam · Jederzeit abmeldbar · Kostenlos</p>
   </form>
-  <div class="success-msg" id="success-msg">✦ Du bist dabei. Wir melden uns bei dir.</div>
+  <div class="success-msg" id="success-msg" data-de="✦ Du bist dabei. Wir melden uns bei dir." data-en="✦ You're in. We'll be in touch.">✦ Du bist dabei. Wir melden uns bei dir.</div>
 </section>
 
 <div class="line-divider"></div>
 
 <!-- 4 SÄULEN -->
 <section class="pillars" id="saeulen">
-  <p class="section-label">Dein Kosmos · Deine Essenz · Dein Weg</p>
-  <h2>Die vier Säulen von AEVIMA</h2>
-  <p class="pillars-intro">Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.</p>
+  <p class="section-label" data-de="Dein Kosmos · Deine Essenz · Dein Weg" data-en="Your Cosmos · Your Essence · Your Path">Dein Kosmos · Deine Essenz · Dein Weg</p>
+  <h2 data-de="Die vier Säulen von AEVIMA" data-en="The Four Pillars of AEVIMA">Die vier Säulen von AEVIMA</h2>
+  <p class="pillars-intro" data-de="Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet." data-en="Every analysis is unique — just like you.<br>Discover what awaits within.">
+    Jede Analyse ist einzigartig — so wie du.<br>Entdecke, was in dir wartet.
+  </p>
 
   <div class="pillars-grid">
     <div class="pillar-card">
       <div class="pillar-num">01</div>
-      <div class="pillar-title">Dein Seelenprofil</div>
-      <p class="pillar-desc">Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein. Verstehe, wer du wirklich bist.</p>
-      <span class="pillar-badge badge-available">Verfügbar</span>
+      <div class="pillar-title" data-de="Dein Seelenprofil" data-en="Your Soul Profile">Dein Seelenprofil</div>
+      <p class="pillar-desc" data-de="Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein." data-en="Your name, date and place of birth come together in a deep analysis of your strengths, shadows and life themes.">Name, Geburtsdatum und -ort fließen in eine tiefe Analyse deiner Stärken, Schwächen und Lebensthemen ein.</p>
+      <span class="pillar-badge badge-available" data-de="Verfügbar" data-en="Available">Verfügbar</span>
     </div>
-
     <div class="pillar-card">
       <div class="pillar-num">02</div>
-      <div class="pillar-title">Paar-Synastrie</div>
-      <p class="pillar-desc">Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.</p>
-      <span class="pillar-badge badge-soon">Bald verfügbar</span>
+      <div class="pillar-title" data-de="Paar-Synastrie" data-en="Pair Synastry">Paar-Synastrie</div>
+      <p class="pillar-desc" data-de="Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt." data-en="Understand the cosmic connection between two souls — what binds you, what challenges you and how you can grow together.">Verstehe die kosmische Verbindung zwischen zwei Seelen — Gemeinsamkeiten, Spannungsfelder und wie ihr füreinander wachsen könnt.</p>
+      <span class="pillar-badge badge-soon" data-de="Bald verfügbar" data-en="Coming soon">Bald verfügbar</span>
     </div>
-
     <div class="pillar-card">
       <div class="pillar-num">03</div>
-      <div class="pillar-title">Kosmischer Kalender</div>
-      <p class="pillar-desc">Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit.</p>
-      <span class="pillar-badge badge-soon">Bald verfügbar</span>
+      <div class="pillar-title" data-de="Kosmischer Kalender" data-en="Cosmic Calendar">Kosmischer Kalender</div>
+      <p class="pillar-desc" data-de="Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit." data-en="Your personal annual forecast — with phases for mindfulness, manifestation and rest. Navigate your year with clarity.">Deine persönliche Jahresprognose — mit Phasen für Achtsamkeit, Manifestation und Ruhe. Navigiere dein Jahr mit Klarheit.</p>
+      <span class="pillar-badge badge-soon" data-de="Bald verfügbar" data-en="Coming soon">Bald verfügbar</span>
     </div>
-
     <div class="pillar-card">
       <div class="pillar-num">04</div>
-      <div class="pillar-title">Astrocartography</div>
-      <p class="pillar-desc">Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist.</p>
-      <span class="pillar-badge badge-soon">Bald verfügbar</span>
+      <div class="pillar-title" data-de="Astrocartography" data-en="Astrocartography">Astrocartography</div>
+      <p class="pillar-desc" data-de="Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist." data-en="A world map of your energy zones. Find out where on earth you resonate most strongly for love, career and spirituality.">Weltkarte deiner Energie-Zonen. Finde heraus, wo auf der Erde du am stärksten in Liebe, Karriere und Spiritualität bist.</p>
+      <span class="pillar-badge badge-soon" data-de="Bald verfügbar" data-en="Coming soon">Bald verfügbar</span>
     </div>
   </div>
 </section>
@@ -514,18 +407,16 @@
 <!-- PHILOSOPHIE -->
 <section class="philosophy">
   <p class="ornament">· · ·</p>
-  <p class="section-label">Die Haltung hinter AEVIMA</p>
-  <h2>Achtsamkeit. Nicht Suche.</h2>
-  <blockquote>
-    „Deine Seele sucht niemanden<br>und wartet auf nichts.<br>
+  <p class="section-label" data-de="Die Haltung hinter AEVIMA" data-en="The Philosophy Behind AEVIMA">Die Haltung hinter AEVIMA</p>
+  <h2 data-de="Achtsamkeit. Nicht Suche." data-en="Mindfulness. Not Search.">Achtsamkeit. Nicht Suche.</h2>
+  <blockquote data-de="„Deine Seele sucht niemanden<br>und wartet auf nichts.<br>Sie ist bereits vollständig.<br>AEVIMA hilft dir, ihre Sprache zu verstehen."" data-en="„Your soul seeks no one<br>and waits for nothing.<br>It is already whole.<br>AEVIMA helps you understand its language."">
+    „Deine Seele sucht niemanden<br>
+    und wartet auf nichts.<br>
     Sie ist bereits vollständig.<br>
     AEVIMA hilft dir, ihre Sprache zu verstehen."
   </blockquote>
-  <p class="philosophy-text">
-    Wir arbeiten nicht mit Drama, nicht mit Angst
-    und nicht mit dem Versprechen, dich zu „reparieren".<br><br>
-    Wir geben dir ein Werkzeug für mehr Klarheit —
-    für ein Leben in Einklang mit dir selbst.
+  <p class="philosophy-text" data-de="Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst." data-en="We do not work with drama, fear or the promise of fixing you. We give you a tool for greater clarity — for a life in harmony with yourself.">
+    Wir arbeiten nicht mit Drama, nicht mit Angst und nicht mit dem Versprechen, dich zu „reparieren". Wir geben dir ein Werkzeug für mehr Klarheit — für ein Leben in Einklang mit dir selbst.
   </p>
 </section>
 
@@ -533,91 +424,118 @@
 
 <!-- CTA -->
 <section class="cta-section" id="warteliste">
-  <p class="section-label">Frühzugang</p>
-  <h2>Sei dabei, wenn AEVIMA startet.</h2>
-  <p class="intro">Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.</p>
-  <form id="form-cta" class="waitlist-form" style="max-width:380px;">
+  <p class="section-label" data-de="Frühzugang" data-en="Early Access">Frühzugang</p>
+  <h2 data-de="Sei dabei, wenn AEVIMA startet." data-en="Be there when AEVIMA launches.">Sei dabei, wenn AEVIMA startet.</h2>
+  <p class="cta-intro" data-de="Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk." data-en="Sign up now. You will receive exclusive early access and a personal welcome gift.">
+    Trage dich jetzt ein. Du erhältst exklusiven Frühzugang und ein persönliches Willkommensgeschenk.
+  </p>
+  <form id="form-cta" class="waitlist-form" style="max-width:370px;">
     <input type="hidden" name="form-name" value="aevima-waitlist" />
     <input name="bot-field" style="display:none" />
-    <input type="email" id="email-input-2" name="email" placeholder="Deine E-Mail-Adresse" required />
-    <button type="submit" class="btn-primary">Jetzt eintragen →</button>
-    <p class="form-note">Kein Spam · Jederzeit abmeldbar</p>
+    <input type="email" id="email-input-2" name="email"
+      data-placeholder-de="Deine E-Mail-Adresse"
+      data-placeholder-en="Your email address"
+      placeholder="Deine E-Mail-Adresse" required />
+    <button type="submit" class="btn-primary" data-de="Jetzt eintragen →" data-en="Sign Up Now →">Jetzt eintragen →</button>
+    <p class="form-note" data-de="Kein Spam · Jederzeit abmeldbar" data-en="No spam · Unsubscribe anytime">Kein Spam · Jederzeit abmeldbar</p>
   </form>
-  <div class="success-msg" id="success-msg-2">✦ Du bist dabei.</div>
+  <div class="success-msg" id="success-msg-2" data-de="✦ Du bist dabei." data-en="✦ You're in.">✦ Du bist dabei.</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-links">
-    <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutz</a>
-    <a href="agb.html">AGB</a>
+    <a href="impressum.html" data-de="Impressum" data-en="Legal Notice">Impressum</a>
+    <a href="datenschutz.html" data-de="Datenschutz" data-en="Privacy Policy">Datenschutz</a>
+    <a href="agb.html" data-de="AGB" data-en="Terms">AGB</a>
   </div>
   <p>© 2026 AEVIMA · Seelenkraft · Transformation · Harmonie</p>
-  <p style="margin-top:0.4rem; font-size:0.65rem; opacity:0.4;">DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.</p>
+  <p style="margin-top:0.4rem;font-size:0.62rem;opacity:0.35;">DEIN KOSMOS. DEINE ESSENZ. DEIN WEG.</p>
 </footer>
 
 <script>
-  // Stars animation
-  (function(){
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    function init(){
-      resize();
-      stars = [];
-      for(let i=0; i<120; i++){
-        stars.push({
-          x: Math.random()*canvas.width,
-          y: Math.random()*canvas.height,
-          r: Math.random()*1.2+0.2,
-          a: Math.random(),
-          speed: Math.random()*0.003+0.001,
-          color: Math.random() > 0.85 ? '#2AAFA0' : '#C4956A'
-        });
-      }
-    }
-    function draw(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      stars.forEach(s => {
-        s.a += s.speed;
-        const alpha = (Math.sin(s.a)*0.5+0.5)*0.6+0.1;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        ctx.fillStyle = s.color;
-        ctx.globalAlpha = alpha;
-        ctx.fill();
-      });
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', init);
-    init(); draw();
-  })();
+// Stars
+(function(){
+  const c = document.getElementById('stars'), ctx = c.getContext('2d');
+  let stars = [];
+  function resize(){ c.width = innerWidth; c.height = innerHeight; }
+  function init(){
+    resize(); stars = [];
+    for(let i=0;i<120;i++) stars.push({
+      x:Math.random()*c.width, y:Math.random()*c.height,
+      r:Math.random()*1.1+0.2, a:Math.random(),
+      speed:Math.random()*0.003+0.001,
+      col:Math.random()>0.82?'#2AAFA0':'#C4956A'
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.a+=s.speed;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.col; ctx.globalAlpha=(Math.sin(s.a)*0.5+0.5)*0.55+0.08;
+      ctx.fill();
+    });
+    ctx.globalAlpha=1; requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',init); init(); draw();
+})();
 
-  // Form handling
-  document.addEventListener('DOMContentLoaded', function(){
-    function handleForm(formId, inputId, successId){
-      const form = document.getElementById(formId);
-      if(!form) return;
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        const email = document.getElementById(inputId).value;
-        if(!email || !email.includes('@')){ document.getElementById(inputId).focus(); return; }
-        fetch('/', {
-          method: 'POST',
-          headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body: new URLSearchParams({'form-name':'aevima-waitlist', email}).toString()
-        }).finally(() => {
-          form.style.display = 'none';
-          document.getElementById(successId).style.display = 'block';
-        });
-      });
-    }
-    handleForm('form-hero','email-input','success-msg');
-    handleForm('form-cta','email-input-2','success-msg-2');
+// Language switcher
+(function(){
+  let lang = localStorage.getItem('aevima-lang') || 'de';
+
+  function applyLang(l){
+    lang = l;
+    localStorage.setItem('aevima-lang', l);
+    document.documentElement.lang = l;
+
+    // Update all text elements
+    document.querySelectorAll('[data-de]').forEach(el=>{
+      const txt = el.getAttribute('data-'+l);
+      if(txt) el.innerHTML = txt;
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-placeholder-de]').forEach(el=>{
+      el.placeholder = el.getAttribute('data-placeholder-'+l) || el.placeholder;
+    });
+
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.classList.toggle('active', btn.getAttribute('data-lang')===l);
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> applyLang(btn.getAttribute('data-lang')));
   });
+
+  applyLang(lang);
+})();
+
+// Forms
+(function(){
+  function handle(formId, inputId, successId){
+    const form = document.getElementById(formId);
+    if(!form) return;
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      const email = document.getElementById(inputId).value;
+      if(!email||!email.includes('@')){ document.getElementById(inputId).focus(); return; }
+      fetch('/',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({'form-name':'aevima-waitlist', email}).toString()
+      }).finally(()=>{
+        form.style.display='none';
+        document.getElementById(successId).style.display='block';
+      });
+    });
+  }
+  handle('form-hero','email-input','success-msg');
+  handle('form-cta','email-input-2','success-msg-2');
+})();
 </script>
 
 </body>
