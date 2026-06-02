@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paar-Synastrie – AEVIMA</title>
+  <title>Beziehungsanalyse – AEVIMA</title>
   <link rel="preconnect" href="https://fonts.bunny.net"/>
   <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
   <style>
@@ -72,14 +72,14 @@
   <div id="test-info" style="display:none"><span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span></div>
 
   <div style="text-align:center">
-    <h1>PAAR-SYNASTRIE</h1>
-    <p class="subtitle">Kosmische Verbindungsanalyse · Seelenkompatibilität · Wachstumspotenzial</p>
+    <h1>BEZIEHUNGSANALYSE</h1>
+    <p class="subtitle">Verbindungsdynamik · Beziehungsmuster · Gemeinsames Wachstumspotenzial</p>
   </div>
   <div class="hr"></div>
 
   <p style="color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:32px">
-    Manche Begegnungen sind kein Zufall. Die Numerologie zeigt die kosmische Sprache eurer Verbindung —
-    was euch anzieht, was euch herausfordert, und wie ihr füreinander wachsen könnt.
+    Manche Verbindungen haben eine Tiefe, die sich schwer erklären lässt. Diese Analyse zeigt die Dynamik eurer Verbindung —
+    was euch anzieht, was euch herausfordert, und wie ihr gemeinsam wachsen könnt.
   </p>
 
   <form id="synaForm">
@@ -101,7 +101,7 @@
       <label>E-Mail für eure Analyse</label>
       <input type="email" id="email" placeholder="eure@email.de" required/>
     </div>
-    <button type="submit" class="btn-submit">Unsere Verbindung analysieren →</button>
+    <button type="submit" class="btn-submit">Unsere Verbindungsdynamik verstehen →</button>
     <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
   </form>
 
@@ -150,7 +150,7 @@ function getCompat(a, b) {
     score = 91;
     gift = "Kosmische Ergänzung — ihr vervollständigt euch gegenseitig";
     challenge = "Die Stärke des anderen kann die eigene Schwäche sichtbar machen";
-    preview = "Es gibt Verbindungen, die sich anfühlen als wären sie vorherbestimmt. Eure Lebenszahlen ergänzen sich auf eine Art, die selten ist. Was einer von euch nicht hat, bringt der andere mit.";
+    preview = "Manche Verbindungen haben eine Qualität, die sich nur schwer in Worte fassen lässt. Eure Muster ergänzen sich auf eine Art, die selten ist — und die beide wachsen lässt.";
     full = "Diese Verbindung trägt das Potenzial echter spiritueller Partnerschaft. Nicht weil es immer leicht ist — sondern weil es bedeutungsvoll ist. Eure Seelen haben sich diese Begegnung nicht zufällig ausgesucht.";
   } else if (sum === 6 || sum === 7) {
     score = 74;
@@ -167,6 +167,14 @@ function getCompat(a, b) {
   }
 
   return {score:score, gift:gift, challenge:challenge, preview:preview, full:full};
+}
+
+
+function getCompatLabel(score) {
+  if (score >= 88) return 'Tiefe gegenseitige Ergänzung';
+  if (score >= 80) return 'Starke Verbindungsenergie';
+  if (score >= 72) return 'Bedeutungsvolle Verbindung';
+  return 'Wachstumsreiche Verbindung';
 }
 
 document.getElementById('synaForm').addEventListener('submit', function(e){
@@ -186,7 +194,7 @@ document.getElementById('synaForm').addEventListener('submit', function(e){
   var sections = '';
 
   // Always visible
-  sections += '<div class="compat-score"><div class="score-num">' + compat.score + '%</div><div class="score-label">Seelenkompatibilität</div>';
+  sections += '<div class="compat-score"><div class="score-label" style="font-size:.85rem;color:var(--rose-l);letter-spacing:.08em">' + getCompatLabel(compat.score) + '</div>';
   sections += '<div class="bar" style="max-width:300px;margin:12px auto"><div class="bar-fill bar-fill-rose" style="width:'+compat.score+'%"></div></div></div>';
 
   sections += '<div class="section"><div class="section-title">◎ Das Geschenk eurer Verbindung</div>';
@@ -216,10 +224,10 @@ document.getElementById('synaForm').addEventListener('submit', function(e){
       sections += '<div class="locked"><div class="locked-title">'+s[0]+'</div><p>'+s[1]+' Vollständige Analyse in der Premium-Version.</p></div>';
     });
 
-    sections += '<div class="paywall"><h2>Vollständige Synastrie-Analyse</h2>';
+    sections += '<div class="paywall"><h2>Eure vollständige Beziehungsanalyse</h2>';
     sections += '<p>Erhalte den kompletten Beziehungsbericht für ' + af + ' & ' + bf + ' als PDF — mit Wachstumspotenzial, Kommunikationsempfehlungen und Jahresprognose für eure Beziehung.</p>';
     sections += '<div class="price">57 €</div><p style="font-size:.73rem;color:var(--muted)">PDF · Vollanalyse · Sofortzustellung</p>';
-    sections += '<a href="https://www.digistore24.com/product/PLACEHOLDER_SYNASTRIE" class="btn-pay" target="_blank">Unseren vollständigen Report erhalten →</a>';
+    sections += '<a href="https://www.digistore24.com/product/PLACEHOLDER_SYNASTRIE" class="btn-pay" target="_blank">Unsere vollständige Beziehungsanalyse erhalten →</a>';
     sections += '<p style="font-size:.68rem;color:var(--muted);margin-top:10px">Sichere Zahlung via Digistore24</p></div>';
   }
 
@@ -230,7 +238,15 @@ document.getElementById('synaForm').addEventListener('submit', function(e){
     '<div class="person-card"><div class="person-name">' + bf + ' ' + bl + '</div><div class="person-lz">' + lzB + '</div><div class="person-lz-name">' + (LZ_NAMES[lzB]||'') + '</div></div>' +
     '</div>' + sections;
 
-  document.getElementById('synaForm').style.display='none';
+  
+function getCompatLabel(score) {
+  if (score >= 88) return 'Tiefe gegenseitige Ergänzung';
+  if (score >= 80) return 'Starke Verbindungsenergie';
+  if (score >= 72) return 'Bedeutungsvolle Verbindung';
+  return 'Wachstumsreiche Verbindung';
+}
+
+document.getElementById('synaForm').style.display='none';
   document.getElementById('result').style.display='block';
   window.scrollTo({top:300,behavior:'smooth'});
 });

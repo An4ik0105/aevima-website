@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kosmischer Kalender – AEVIMA</title>
+  <title>Deine Jahresenergie – AEVIMA</title>
   <link rel="preconnect" href="https://fonts.bunny.net"/>
   <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
   <style>
@@ -79,14 +79,14 @@
     <span class="test-badge">✦ TESTMODUS — Vollversion freigeschaltet</span>
   </div>
   <div style="text-align:center">
-    <h1>KOSMISCHER KALENDER</h1>
-    <p class="subtitle">Dein persönliches Energiejahr · Monatsqualitäten · Hochphasen & Vorsicht</p>
+    <h1>DEINE JAHRESENERGIE</h1>
+    <p class="subtitle">Persönliche Lebensphasen · Zeiten der Kraft · Zeiten der Ruhe</p>
   </div>
   <div class="divider"></div>
   <p style="color:var(--muted);font-size:.95rem;line-height:2;margin-bottom:32px">
     Das Leben hat Rhythmen.<br>
     Nicht jeder Monat trägt dieselbe Energie. Nicht jede Phase ist für dasselbe gemacht.<br>
-    <strong style="color:var(--rose-l)">Dein persönlicher Kosmischer Kalender zeigt dir, wann du vorankommen sollst — und wann du dich schützen musst.</strong>
+    <strong style="color:var(--rose-l)">Diese Analyse zeigt dir, welche Qualität das aktuelle Jahr trägt — und was es dir anbietet.</strong>
   </p>
   <form id="kalForm">
     <div class="form-row">
@@ -96,7 +96,7 @@
     <div class="form-group"><label>Geburtsdatum</label><input type="date" id="bdate" required/></div>
     <div class="form-group"><label>Geburtsort</label><input type="text" id="birthplace" placeholder="z.B. Berlin, Deutschland" required/></div>
     <div class="form-group"><label>E-Mail</label><input type="email" id="email" placeholder="deine@email.de" required/></div>
-    <button type="submit" class="btn">✦ Meinen Kosmischen Kalender öffnen</button>
+    <button type="submit" class="btn">✦ Meine Jahresenergie analysieren</button>
     <p class="consent">Mit dem Absenden stimmst du zu, dein Ergebnis per E-Mail zu erhalten. <a href="datenschutz.html">Datenschutz</a></p>
   </form>
   <div id="result"></div>
@@ -211,14 +211,14 @@ document.getElementById('kalForm').addEventListener('submit',function(e){
     html+='<div class="locked"><div class="locked-title">🔒 Vollständige Jahresanalyse</div><p>Was das Persönliche Jahr '+pj+' konkret für dich bedeutet — in allen Lebensbereichen.</p></div>';
     html+='<div class="locked"><div class="locked-title">🔒 Hochphasen & Vorsichtsmonate im Detail</div><p>Wann genau deine Energie am stärksten ist — und wann du dich schützen sollst. Konkret auf den Monat.</p></div>';
     html+='<div class="locked"><div class="locked-title">🔒 Ausblick auf '+(curYear+1)+'</div><p>Was das nächste Persönliche Jahr für dich bringt — und wie du dich jetzt vorbereiten kannst.</p></div>';
-    html+='<div class="locked"><div class="locked-title">🔒 Dein persönliches Manifestationsfenster</div><p>In welchen Wochen dieses Jahres deine Wünsche die größte kosmische Unterstützung haben.</p></div>';
-    html+='<div class="paywall"><h2>Dein vollständiger Kosmischer Kalender</h2>';
-    html+='<p class="hook">Es gibt Momente in diesem Jahr, in denen alles leichter wird.<br>Und Momente in denen du dich schützen musst.<br>Kennst du deinen?</p>';
+    html+='<div class="locked"><div class="locked-title">🔒 Deine persönlichen Reflexionsfragen</div><p>Konkrete Fragen für jede Lebensphase dieses Jahres — für mehr Klarheit im richtigen Moment.</p></div>';
+    html+='<div class="paywall"><h2>Deine vollständige Jahresenergie-Analyse</h2>';
+    html+='<p class="hook">Jede Lebensphase trägt eine andere Qualität.<br>Diese Analyse zeigt dir, wo du gerade stehst — und was diese Phase dir anbietet.</p>';
     html+='<div class="price-cards">';
     html+='<div class="price-card hl"><div class="price-amount">97 €</div><div class="price-period">EINMALIG</div><div class="price-desc">Jahreskalender '+curYear+' + Ausblick</div></div>';
     html+='<div class="price-card"><div class="price-amount">9,99 €</div><div class="price-period">PRO MONAT</div><div class="price-desc">Monatlich · jederzeit kündbar</div></div>';
     html+='</div>';
-    html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_KALENDER" class="btn-pay" target="_blank">✦ Kalender erhalten (97 €)</a>';
+    html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_KALENDER" class="btn-pay" target="_blank">✦ Jahresenergie-Analyse erhalten (97 €)</a>';
     html+='<a href="https://www.digistore24.com/product/PLACEHOLDER_KALENDER_ABO" class="btn-pay outline" target="_blank">Monatsabo (9,99 €)</a>';
     html+='<p class="pay-small">Sichere Zahlung via Digistore24 · Sofortzustellung</p></div>';
   }

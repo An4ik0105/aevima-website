@@ -69,7 +69,7 @@
 
   <div style="text-align:center">
     <h1>DEIN SEELENPROFIL</h1>
-    <p class="subtitle">Astronumerologie · Lebenszyklen · Seelenanalyse</p>
+    <p class="subtitle">Persönlichkeitsanalyse · Lebensmuster · Wachstumspotenziale</p>
   </div>
   <div class="divider"></div>
 
@@ -110,7 +110,7 @@
         <span>Ich möchte meinen Einblick + AEVIMA-Updates per E-Mail erhalten. (Jederzeit abbestellbar.)</span>
       </div>
     </div>
-    <button type="submit" class="btn" id="submitBtn">✦ Mein Seelenprofil enthüllen</button>
+    <button type="submit" class="btn" id="submitBtn">✦ Meine Analyse starten</button>
   </form>
 
   <div id="result"></div>
@@ -212,16 +212,16 @@ document.getElementById('soulForm').addEventListener('submit', function(e) {
 
   if (!isTest) {
     lockedSections =
-      '<div class="locked"><div class="locked-title">🔒 Seelenplan & Lebensaufgabe</div><p>Warum du wirklich hier bist — deine tiefste Aufgabe in diesem Leben.</p></div>' +
-      '<div class="locked"><div class="locked-title">🔒 Vorsichtsphasen & Hochphasen</div><p>Wann genau in den nächsten Jahren deine Energie kippt — und wann deine stärksten Momente kommen.</p></div>' +
-      '<div class="locked"><div class="locked-title">🔒 Deine persönliche kosmische Botschaft</div><p>Eine direkte Botschaft an dich — basierend auf allen deinen Zahlen kombiniert.</p></div>';
+      '<div class="locked"><div class="locked-title">🔒 Deine Entwicklungsaufgabe</div><p>Was diese Lebensphase von dir möchte — und welches Wachstum sich zeigen will.</p></div>' +
+      '<div class="locked"><div class="locked-title">🔒 Deine Lebensphasen & Energiequalitäten</div><p>In welchen Phasen deine Energie fließt — und in welchen sie sich zurückzieht.</p></div>' +
+      '<div class="locked"><div class="locked-title">🔒 Zusammenfassung deiner Kernmuster</div><p>Was alle deine Zahlen gemeinsam zeigen — dein persönlicher roter Faden.</p></div>';
 
     paywallSection =
       '<div class="paywall">' +
       '<h2>Dein vollständiges Seelenprofil</h2>' +
-      '<p>Alle 12 Dimensionen · Vorsichtsphasen · Seelenplan · Persönliche Botschaft · Als PDF per E-Mail</p>' +
+      '<p>7 Dimensionen · Beziehungsmuster · Entwicklungsaufgabe · Berufung · Schattenseite · Als PDF per E-Mail</p>' +
       '<div class="price">37 €</div>' +
-      '<a href="https://www.digistore24.com/product/PLACEHOLDER" class="btn-pay" target="_blank">✦ Vollständiges Profil erhalten</a>' +
+      '<a href="https://www.digistore24.com/product/PLACEHOLDER" class="btn-pay" target="_blank">✦ Vollständige Analyse erhalten</a>' +
       '<p style="font-size:.7rem;color:var(--muted);margin-top:12px">Sichere Zahlung via Digistore24 · DSGVO-konform · Sofortzustellung</p>' +
       '</div>';
   }
@@ -253,11 +253,10 @@ document.getElementById('soulForm').addEventListener('submit', function(e) {
     'Dieser Spalt ist größer als du denkst. Und er kostet dich täglich Energie — Energie die du für das benutzen könntest, was du wirklich willst.<br><br>' +
     '<em>Wie du diesen Spalt schließt — steht im vollständigen Profil.</em></p></div>' +
 
-    '<div class="section"><div class="section-title">✧ Gesundheit & Körper</div>' +
-    '<p>Dein Körper lügt nicht — er zeigt was die Seele noch nicht aussprechen konnte.<br><br>' +
-    'Menschen mit deiner Lebenszahl tragen eine spezifische körperliche Schwachstelle — und sie ist kein Zufall.<br><br>' +
-    'Dein Körper lügt nicht. Er zeigt dir seit Jahren was die Seele noch nicht aussprechen konnte.<br><br>' +
-    '<em>Was genau dein Körper dir sagen will — und wie du ihn endlich hörst — steht im vollständigen Profil.</em></p></div>' +
+    '<div class="section"><div class="section-title">✧ Körper & inneres Erleben</div>' +
+    '<p>Der Körper trägt oft das, was noch keinen sprachlichen Ausdruck gefunden hat.<br><br>' +
+    'Menschen mit deiner Lebenszahl zeigen häufig bestimmte Muster darin, wie sie körperliche Signale wahrnehmen und deuten.<br><br>' +
+    '<em>Wie sich dieses Muster bei deiner Lebenszahl zeigt — steht im vollständigen Profil.</em></p></div>' +
 
     '<div class="section"><div class="section-title">◎ Liebe & Beziehungen</div>' +
     '<p>In der Liebe wiederholt sich ein Muster.<br>' +
@@ -286,7 +285,7 @@ document.getElementById('soulForm').addEventListener('submit', function(e) {
   document.getElementById('soulForm').style.display = 'none';
   document.getElementById('result').style.display = 'block';
   document.getElementById('result').scrollIntoView({behavior:'smooth'});
-  btn.disabled = false; btn.textContent = '✦ Mein Seelenprofil enthüllen';
+  btn.disabled = false; btn.textContent = '✦ Meine Analyse starten';
 });
 </script>
 </body>
