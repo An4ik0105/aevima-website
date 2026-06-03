@@ -85,11 +85,11 @@
     </svg>
   </div>
 
-  <div class="label">Zugang bestätigt</div>
+  <div id="danke" style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--rose-l);letter-spacing:.1em;margin-bottom:20px">Danke.</div>
 
   <div class="quote">Deine vollständige Analyse<br>ist jetzt sichtbar.</div>
 
-  <div class="msg" style="margin-top:8px;font-size:.82rem">Kein Zufall. Dein Weg.</div>
+  <div class="msg" style="margin-top:8px;font-size:.82rem;color:var(--muted)">Kein Zufall. Dein Weg.</div>
 
   <a href="seelenprofil-v2.html?test=1" class="btn">✦ Mein Profil lesen</a>
 
@@ -98,6 +98,12 @@
 
 </div>
 <script>
+// Personalisierung
+(function(){
+  var name = localStorage.getItem('aevima_first_name');
+  var el = document.getElementById('danke');
+  if(el && name) el.textContent = 'Danke, ' + name + '.';
+})();
 var n=5;
 var t=setInterval(function(){
   n--;

@@ -157,7 +157,8 @@
 
   <div class="intro">
     <div class="brand">Aevima</div>
-    <h1 class="headline">Kein Zufall.<br><span style="color:var(--teal)">Dein Weg.</span></h1>
+    <h1 class="headline">Manche Dinge<br>wiederholen sich.<br><span style="color:var(--teal)">Nicht zufällig.</span></h1>
+    <p style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;color:var(--muted);margin-top:12px">Kein Zufall. Dein Weg.</p>
     <div class="divider"></div>
     <p class="subline">Name · Geburtsdatum · Geburtsort<br>Das ist alles was du brauchst.</p>
   </div>
@@ -260,6 +261,7 @@ document.getElementById('soulForm').addEventListener('submit',function(e){
   var btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.textContent='✦ Analysiere...';
 
+  localStorage.setItem('aevima_first_name', document.getElementById('fname').value.trim());
   setTimeout(function(){
     var fn=document.getElementById('fname').value.trim();
     var ln=document.getElementById('lname').value.trim();
@@ -275,7 +277,7 @@ document.getElementById('soulForm').addEventListener('submit',function(e){
     var pw='<div class="pw-wrap"><div class="pw-box">'
       +'<div class="pw-sym"><div style="width:64px;height:64px;border-radius:50%;border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;margin:0 auto 4px;background:rgba(196,149,106,.08)"><span style="font-size:1.5rem">◈</span></div></div>'
       +'<div class="pw-label">Vollständige Analyse</div>'
-      +'<div class="pw-price">49 €</div>'
+      +'<div style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;color:var(--teal);margin-bottom:2px">PILOTPREIS</div><div class="pw-price">49 €</div>'
       +'<div class="pw-note">Einmalig · Kein Abo · Sofortzugang</div>'
       +'<div class="pw-items">'
       +'<div class="pw-item">Herzwunsch</div>'
