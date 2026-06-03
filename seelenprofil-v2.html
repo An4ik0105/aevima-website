@@ -9,135 +9,101 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --black:#0F0E14;
-      --night:#18161F;
-      --card:#1C1A27;
-      --off-white:#EDE9E2;
-      --text:#D8D4CC;
-      --muted:#9B8FA8;
-      --emerald:#1E7A52;
-      --emerald-h:#2AA06D;
-      --teal:#2AAFA0;
-      --rose:#C4956A;
-      --rose-l:#E8C4A0;
-      --rose-d:#9B6F4A;
-      --b-rose:rgba(196,149,106,.2);
-      --b-teal:rgba(42,175,160,.25);
-      --b-emerald:rgba(30,122,82,.3);
+      --black:#0F0E14;--night:#18161F;--off-white:#EDE9E2;--text:#D8D4CC;--muted:#9B8FA8;
+      --emerald:#1E7A52;--emerald-h:#2AA06D;--teal:#2AAFA0;
+      --rose:#C4956A;--rose-l:#E8C4A0;--rose-d:#9B6F4A;
+      --br:rgba(196,149,106,.2);--bt:rgba(42,175,160,.25);--be:rgba(30,122,82,.3);
     }
     html{scroll-behavior:smooth}
     body{background:var(--black);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.85;min-height:100vh}
-    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 10%,rgba(30,122,82,.06) 0,transparent 55%),radial-gradient(ellipse at 70% 90%,rgba(42,175,160,.05) 0,transparent 55%);pointer-events:none;z-index:0}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 10%,rgba(30,122,82,.05) 0,transparent 55%),radial-gradient(ellipse at 70% 90%,rgba(42,175,160,.04) 0,transparent 55%);pointer-events:none;z-index:0}
     .page{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 20px 100px}
 
-    /* ── HERO SYMBOL ── */
-    .sym-hero{display:flex;justify-content:center;padding:52px 0 0}
-    .sym-hero svg{filter:drop-shadow(0 0 24px rgba(196,149,106,.4))}
-    .sym-ring{display:flex;justify-content:center;padding:32px 0 0}
-    .sym-ring svg{filter:drop-shadow(0 0 16px rgba(196,149,106,.3))}
+    /* LOGO */
+    .logo-wrap{display:flex;justify-content:center;padding:48px 0 32px}
+    .logo-wrap img{max-width:180px;height:auto}
 
-    /* ── INTRO ── */
-    .intro{text-align:center;padding:28px 0 44px}
-    .brand{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.35em;color:var(--muted);text-transform:uppercase;margin-bottom:20px}
-    .headline{font-family:'Cinzel',serif;font-size:clamp(1.5rem,5vw,2rem);font-weight:600;color:var(--rose-l);letter-spacing:.06em;line-height:1.3;margin-bottom:12px}
-    .subline{color:var(--muted);font-size:.88rem;letter-spacing:.04em;line-height:1.7}
-    .divider{width:56px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:28px auto}
+    /* INTRO */
+    .intro{text-align:center;padding:0 0 40px}
+    .headline{font-family:'Cinzel',serif;font-size:clamp(1.4rem,5vw,1.9rem);font-weight:600;color:var(--rose-l);letter-spacing:.06em;line-height:1.35;margin-bottom:10px}
+    .subline{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:28px}
+    .divider{width:56px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 28px}
+    .intro-body{color:var(--muted);font-size:.88rem;line-height:1.7}
 
-    /* ── FORM ── */
+    /* FORM */
     .form-group{margin-bottom:18px}
     label{display:block;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;color:var(--rose);text-transform:uppercase;margin-bottom:7px}
-    input[type=text],input[type=email],input[type=date],input[type=time]{
-      width:100%;padding:14px 16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--b-rose);
-      border-radius:2px;
-      color:var(--off-white);
-      font-family:'Raleway',sans-serif;font-size:.92rem;
-      outline:none;transition:border-color .25s,background .25s
-    }
-    input:focus{border-color:rgba(42,175,160,.6);background:rgba(42,175,160,.04)}
-    input::placeholder{color:var(--muted);opacity:.55}
+    .field{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid var(--br);border-radius:2px;color:var(--off-white);font-family:'Raleway',sans-serif;font-size:.92rem;outline:none;transition:border-color .25s,background .25s}
+    .field:focus{border-color:rgba(42,175,160,.6);background:rgba(42,175,160,.03)}
+    .field::placeholder{color:var(--muted);opacity:.55}
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .check-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
     .check-row input{width:17px;height:17px;min-width:17px;margin-top:4px;accent-color:var(--teal)}
     .check-row span{font-size:.8rem;color:var(--muted);line-height:1.6}
     .check-row a{color:var(--rose);text-decoration:none}
-    .btn-primary{
-      width:100%;padding:17px 24px;
-      background:linear-gradient(135deg,var(--emerald),#16704A);
-      color:var(--off-white);border:none;border-radius:2px;
-      font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;
-      cursor:pointer;transition:all .25s;margin-top:10px;min-height:54px
-    }
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(30,122,82,.4)}
-    .btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-    .btn-sub{color:var(--muted);font-size:.76rem;text-align:center;margin-top:9px;letter-spacing:.04em}
+    .btn-start{width:100%;padding:17px 24px;background:linear-gradient(135deg,var(--emerald),#16704A);color:var(--off-white);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .25s;margin-top:10px;min-height:54px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .btn-start:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(30,122,82,.4)}
+    .btn-start:disabled{opacity:.45;cursor:not-allowed}
+    .btn-note{color:var(--muted);font-size:.76rem;text-align:center;margin-top:8px}
 
-    /* ── RESULT ── */
-    #result{display:none}
-    .r-hero{text-align:center;padding:44px 0 36px}
+    /* RESULT */
+    #result{display:none;margin-top:8px}
+    .r-logo{display:flex;justify-content:center;padding:40px 0 28px}
+    .r-logo img{max-width:140px;height:auto}
+    .r-hero{text-align:center;margin-bottom:36px}
     .r-name{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--rose-l);letter-spacing:.15em;margin-bottom:4px}
     .r-date{color:var(--muted);font-size:.76rem;letter-spacing:.05em;margin-bottom:20px}
     .lz-num{font-family:'Cinzel',serif;font-size:4rem;font-weight:700;color:var(--rose);line-height:1;display:block}
     .lz-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--rose-l);letter-spacing:.12em;margin-top:6px;display:block}
     .master-tag{display:inline-block;font-size:.6rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.2rem .6rem;border-radius:20px;margin-left:8px;vertical-align:middle}
 
-    /* ── PILLARS ── */
-    .pillar{border-radius:3px;padding:26px;margin-bottom:16px;border:1px solid var(--b-rose)}
-    .pillar.p-teal{border-color:var(--b-teal);background:rgba(42,175,160,.03)}
-    .pillar.p-em{border-color:var(--b-emerald);background:rgba(30,122,82,.02)}
-    .pillar.p-dim{border-color:rgba(196,149,106,.1);opacity:.85}
+    /* PILLARS */
+    .pillar{border-radius:3px;padding:26px;margin-bottom:16px;border:1px solid var(--br)}
     .pt{font-family:'Cinzel',serif;font-size:.67rem;letter-spacing:.22em;color:var(--rose);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-    .pillar.p-teal .pt{color:var(--teal)}
-    .pillar.p-em .pt{color:#3DB87A}
+    .p-teal{border-color:var(--bt);background:rgba(42,175,160,.025)}
+    .p-teal .pt{color:var(--teal)}
+    .p-em{border-color:var(--be);background:rgba(30,122,82,.02)}
+    .p-em .pt{color:#3DB87A}
+    .p-dim{opacity:.8;border-color:rgba(196,149,106,.1)}
     .pillar p{font-size:.9rem;color:var(--text);line-height:1.9}
     .pillar p strong{color:var(--off-white)}
     .pillar p em{color:var(--rose-l);font-style:italic}
-    .pillar .fade{color:var(--muted);font-size:.84rem;margin-top:10px;font-style:italic}
+    .fade-p{color:var(--muted) !important;font-style:italic;font-size:.84rem !important;margin-top:10px}
 
-    /* ── BADGE PRIORITY ── */
-    .badge-hot{display:inline-block;font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.15em;padding:.2rem .6rem;border-radius:20px;margin-left:8px;vertical-align:middle}
-    .badge-hot.teal{background:rgba(42,175,160,.15);color:var(--teal);border:1px solid rgba(42,175,160,.3)}
+    /* BADGE */
+    .hot-badge{display:inline-flex;align-items:center;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;padding:.2rem .55rem;border-radius:20px;margin-left:8px;background:rgba(42,175,160,.12);color:var(--teal);border:1px solid rgba(42,175,160,.25)}
 
-    /* ── PAYWALL ── */
-    .pw-wrap{margin:4px 0 16px}
-    .pw-box{background:var(--night);border:1px solid var(--b-teal);border-radius:3px;padding:32px 24px;text-align:center}
-    .pw-sym{margin-bottom:16px}
-    .pw-label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
-    .pw-price{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--rose);margin:6px 0 3px;line-height:1}
-    .pw-note{color:var(--muted);font-size:.78rem;margin-bottom:22px}
-    .pw-items{margin-bottom:20px}
-    .pw-item{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.82rem;padding:3px 0;justify-content:center}
-    .pw-item::before{content:"✦";color:var(--teal);font-size:.65rem}
-    .btn-pw{
-      display:flex;align-items:center;justify-content:center;gap:8px;
-      width:100%;padding:17px;
-      background:linear-gradient(135deg,var(--emerald),#16704A);
-      color:var(--off-white);border:none;border-radius:2px;
-      font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;
-      cursor:pointer;transition:all .25s;min-height:54px;text-decoration:none
-    }
+    /* PAYWALL */
+    .pw-box{background:var(--night);border:1px solid var(--bt);border-radius:3px;padding:32px 24px;text-align:center;margin-bottom:20px}
+    .pw-lock{width:64px;height:64px;border-radius:50%;border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;background:rgba(196,149,106,.07);font-size:1.4rem;color:var(--rose)}
+    .pw-pilot{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;color:var(--teal);text-transform:uppercase;margin-bottom:4px}
+    .pw-price{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--rose);line-height:1;margin-bottom:4px}
+    .pw-note{color:var(--muted);font-size:.78rem;margin-bottom:18px}
+    .pw-items{margin-bottom:18px}
+    .pw-item{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.83rem;padding:3px 0;justify-content:center}
+    .pw-item::before{content:"✦";color:var(--teal);font-size:.62rem}
+    .btn-pw{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:17px;background:linear-gradient(135deg,var(--emerald),#16704A);color:var(--off-white);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .25s;min-height:54px;text-decoration:none}
     .btn-pw:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(30,122,82,.4)}
-    .pw-trust{color:var(--muted);font-size:.74rem;margin-top:10px;letter-spacing:.03em}
+    .pw-trust{color:var(--muted);font-size:.73rem;margin-top:10px}
 
-    /* ── LOCKED BLUR ── */
+    /* LOCKED */
     .locked-wrap{position:relative;overflow:hidden;border-radius:3px;margin-bottom:16px}
-    .locked-content{border:1px solid rgba(196,149,106,.1);border-radius:3px;padding:26px;filter:blur(5px);pointer-events:none;user-select:none}
-    .locked-overlay{position:absolute;inset:0;background:rgba(15,14,20,.7);display:flex;align-items:center;justify-content:center;border-radius:3px}
-    .lock-icon{font-size:1.4rem;opacity:.5}
+    .locked-inner{border:1px solid rgba(196,149,106,.1);border-radius:3px;padding:26px;filter:blur(4px);pointer-events:none;user-select:none}
+    .locked-over{position:absolute;inset:0;background:rgba(15,14,20,.65);display:flex;align-items:center;justify-content:center;border-radius:3px;font-size:1.4rem;color:var(--muted)}
 
-    /* ── CYCLE ── */
-    .cycle-bar{background:rgba(255,255,255,.07);border-radius:20px;height:7px;margin:10px 0;overflow:hidden}
-    .cycle-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px}
+    /* CYCLE */
+    .cyc-bar{background:rgba(255,255,255,.07);border-radius:20px;height:7px;margin:10px 0;overflow:hidden}
+    .cyc-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px}
 
-    /* ── ORNAMENT ── */
+    /* ORNAMENTS */
     .orn{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:40px auto}
-    .orn-teal{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);margin:40px auto}
+    .orn-t{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);margin:40px auto}
 
-    /* ── CLOSING ── */
+    /* CLOSING */
     .closing{text-align:center;padding:48px 0 60px}
-    .cl-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin:16px 0 20px}
-    .cl-quote{font-size:1rem;color:var(--off-white);line-height:1.9;font-style:italic}
+    .closing img{max-width:80px;margin-bottom:16px;opacity:.9}
+    .cl-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
+    .cl-quote{font-size:.98rem;color:var(--off-white);line-height:1.9;font-style:italic}
 
     @media(max-width:500px){.row2{grid-template-columns:1fr}}
   </style>
@@ -145,47 +111,42 @@
 <body>
 <div class="page">
 
-  <!-- HERO -->
-  <div class="sym-hero">
-    <svg width="88" height="88" viewBox="0 0 80 80" fill="none">
-      <path d="M40 40C40 40 24 24 16 24C8 24 8 32 8 40C8 48 8 56 16 56C24 56 40 40 40 40Z" stroke="#C4956A" stroke-width="1.8" fill="none"/>
-      <path d="M40 40C40 40 56 56 64 56C72 56 72 48 72 40C72 32 72 24 64 24C56 24 40 40 40 40Z" stroke="#C4956A" stroke-width="1.8" fill="none"/>
-      <path d="M40 40C40 40 24 56 24 64C24 72 32 72 40 72C48 72 56 72 56 64C56 56 40 40 40 40Z" stroke="#E8C4A0" stroke-width="1.2" fill="none" opacity=".7"/>
-      <path d="M40 40C40 40 56 24 56 16C56 8 48 8 40 8C32 8 24 8 24 16C24 24 40 40 40 40Z" stroke="#E8C4A0" stroke-width="1.2" fill="none" opacity=".7"/>
-    </svg>
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <img src="logo.png" alt="AEVIMA" loading="eager"/>
   </div>
 
+  <!-- INTRO -->
   <div class="intro">
-    <div class="brand">Aevima</div>
     <h1 class="headline">Manche Dinge<br>wiederholen sich.<br><span style="color:var(--teal)">Nicht zufällig.</span></h1>
-    <p style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;color:var(--muted);margin-top:12px">Kein Zufall. Dein Weg.</p>
     <div class="divider"></div>
-    <p class="subline">Name · Geburtsdatum · Geburtsort<br>Das ist alles was du brauchst.</p>
+    <p class="subline">Kein Zufall. Dein Weg.</p>
+    <p class="intro-body">Name · Geburtsdatum · Geburtsort — das ist alles was du brauchst.</p>
   </div>
 
   <!-- FORM -->
-  <form id="soulForm">
+  <form id="soulForm" novalidate>
     <div class="row2">
       <div class="form-group">
-        <label>Vorname</label>
-        <input type="text" id="fname" placeholder="Anna" required/>
+        <label for="fname">Vorname</label>
+        <input type="text" id="fname" class="field" placeholder="Anna" required/>
       </div>
       <div class="form-group">
-        <label>Nachname</label>
-        <input type="text" id="lname" placeholder="Muster" required/>
+        <label for="lname">Nachname</label>
+        <input type="text" id="lname" class="field" placeholder="Muster" required/>
       </div>
     </div>
     <div class="form-group">
-      <label>Geburtsdatum</label>
-      <input type="date" id="bdate" required/>
+      <label for="bdate">Geburtsdatum</label>
+      <input type="date" id="bdate" class="field" required/>
     </div>
     <div class="form-group">
-      <label>Geburtsort</label>
-      <input type="text" id="birthplace" placeholder="Stadt, Land" required/>
+      <label for="birthplace">Geburtsort</label>
+      <input type="text" id="birthplace" class="field" placeholder="Stadt, Land" required/>
     </div>
     <div class="form-group">
-      <label>E-Mail</label>
-      <input type="email" id="email" placeholder="deine@email.de" required/>
+      <label for="email">E-Mail</label>
+      <input type="email" id="email" class="field" placeholder="deine@email.de" required/>
     </div>
     <div style="margin:20px 0 4px">
       <div class="check-row">
@@ -197,170 +158,202 @@
         <span>Ich möchte Einblicke per E-Mail erhalten.</span>
       </div>
     </div>
-    <button type="submit" class="btn-primary" id="submitBtn">✦ Meine Analyse starten</button>
-    <p class="btn-sub">Kostenlose Vorschau · Kein Konto nötig</p>
+    <button type="submit" class="btn-start" id="submitBtn">✦ Analyse starten</button>
+    <p class="btn-note">Kostenlose Vorschau · Kein Konto nötig</p>
   </form>
 
   <!-- RESULT -->
   <div id="result"></div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-var isTest = location.search.indexOf('test=1')>-1||localStorage.getItem('aevima-test')==='1';
+// ── CONFIG ───────────────────────────────────────────────────────
+var isTest = location.search.indexOf('test=1') > -1 || localStorage.getItem('aevima-test') === '1';
 
-var LZ_DATA={
-  1:{name:"Die Pionierin",teaser:"Du bist hier um voranzugehen — nicht um zu folgen. Wenn du in einem Raum bist, spüren andere deine Energie — auch wenn du nichts sagst.<br><br><strong>Deine Stärke:</strong> ein unerschütterlicher Wille. Du stehst auf — immer wieder.<br><em>Dein Schatten:</em> Du kämpfst damit, jemanden wirklich brauchen zu dürfen."},
-  2:{name:"Die Brückenbauerin",teaser:"Du spürst was andere fühlen — noch bevor sie es selbst wissen. Du bist hier um zu verbinden, zu heilen, Frieden zu stiften.<br><br><strong>Dein Geschenk:</strong> Du siehst das Gute in jedem Menschen.<br><em>Dein Kampf:</em> Du weißt nicht immer, wo du aufhörst und andere anfangen."},
-  3:{name:"Die Schöpferin",teaser:"Wenn du redest, hören Menschen zu. Die 3 ist die Lebenszahl der Kreativität und des Ausdrucks.<br><br><strong>Deine Stärke:</strong> Ideen fließen dir zu wie Wasser.<br><em>Dein Schatten:</em> Du verlierst dich leicht. Fängst viel an — beendest wenig."},
-  4:{name:"Die Baumeisterin",teaser:"Du bist diejenige auf die sich alle verlassen. Die 4 steht für Struktur, Verlässlichkeit, Fundament.<br><br><strong>Deine Stärke:</strong> Was du dir vornimmst, ziehst du durch.<br><em>Dein Kampf:</em> Du fragst dich selten, ob das Fundament selbst getragen wird."},
-  5:{name:"Der freie Geist",teaser:"Du wirst in keine Schublade passen — und das ist gut so. Die 5 ist die Lebenszahl der Freiheit und des Wandels.<br><br><strong>Deine Gabe:</strong> Du siehst Möglichkeiten die andere übersehen.<br><em>Dein Muster:</em> Nähe fühlt sich manchmal wie ein Käfig an."},
-  6:{name:"Die Liebende",teaser:"Du liebst tiefer als die meisten. Die 6 ist die Lebenszahl der Liebe und der Verantwortung.<br><br><strong>Deine Stärke:</strong> Du erschaffst Geborgenheit überall wo du bist.<br><em>Dein Schatten:</em> Du gibst so viel — und fragst dich manchmal ob irgendjemand das sieht."},
-  7:{name:"Die Suchende",teaser:"Du bist hier um Wahrheiten zu finden die andere nicht einmal suchen. Du denkst tiefer, fühlst feiner, siehst weiter.<br><br><strong>Deine Gabe:</strong> Du erkennst Muster die anderen verborgen bleiben.<br><em>Dein Kampf:</em> Du vertraust schwer."},
-  8:{name:"Die Mächtige",teaser:"Du bist für mehr gemacht als du dir erlaubst zu zeigen. Die 8 ist die Lebenszahl der Macht und der Leistung.<br><br><strong>Deine Gabe:</strong> Du kannst Großes aufbauen.<br><em>Dein Muster:</em> Du schwankst zwischen Vollgas und tiefem Zweifel."},
-  9:{name:"Die Vollenderin",teaser:"Du trägst ein Wissen in dir das du dir selbst noch nicht vollständig erklären kannst. Die 9 ist die höchste der einstelligen Lebenszahlen.<br><br><strong>Deine Gabe:</strong> Mitgefühl, Weitsicht, tiefes Verständnis.<br><em>Dein Kampf:</em> Du gibst für andere — und lässt dich selbst oft zurück."},
-  11:{name:"Die Erleuchtete",teaser:"Du bist mit einer Antenne auf die Welt gekommen die andere nicht haben. Die 11 ist eine Meisterzahl der Intuition.<br><br><strong>Deine Gabe:</strong> Du spürst Dinge bevor sie passieren.<br><em>Dein Kampf:</em> Deine Empfindsamkeit ist gleichzeitig Stärke und Schmerz.",master:true},
-  22:{name:"Der Meisterbaumeister",teaser:"Du bist hier um etwas zu erschaffen das Generationen überdauert. Die 22 ist die mächtigste Meisterzahl.<br><br><strong>Deine Gabe:</strong> Du siehst das große Bild und kannst es aufbauen.<br><em>Dein Muster:</em> Das Gewicht deiner Vision erschreckt dich manchmal.",master:true},
-  33:{name:"Der Meisterlehrer",teaser:"Du bist nicht hier um ein normales Leben zu führen. Die 33 ist die seltenste Meisterzahl.<br><br><strong>Deine Gabe:</strong> Du kannst Menschen tief und nachhaltig berühren.<br><em>Dein Schatten:</em> Du gibst bis zur Erschöpfung.",master:true}
+// ── DATA ─────────────────────────────────────────────────────────
+var LZ = {
+  1:{n:"Die Pionierin",t:"Du bist hier um voranzugehen — nicht um zu folgen. Wenn du in einem Raum bist, spüren andere deine Energie.<br><br><strong>Deine Stärke:</strong> ein unerschütterlicher Wille. Du stehst auf — immer wieder.<br><em>Dein Schatten:</em> Du kämpfst damit, jemanden wirklich brauchen zu dürfen."},
+  2:{n:"Die Brückenbauerin",t:"Du spürst was andere fühlen — noch bevor sie es selbst wissen. Du bist hier um zu verbinden, zu heilen.<br><br><strong>Dein Geschenk:</strong> Du siehst das Gute in jedem Menschen.<br><em>Dein Kampf:</em> Du weißt nicht immer, wo du aufhörst und andere anfangen."},
+  3:{n:"Die Schöpferin",t:"Wenn du redest, hören Menschen zu. Die 3 ist die Lebenszahl der Kreativität und des Ausdrucks.<br><br><strong>Deine Stärke:</strong> Ideen fließen dir zu wie Wasser.<br><em>Dein Schatten:</em> Du verlierst dich leicht. Fängst viel an — beendest wenig."},
+  4:{n:"Die Baumeisterin",t:"Du bist diejenige auf die sich alle verlassen. Struktur, Verlässlichkeit, Fundament.<br><br><strong>Deine Stärke:</strong> Was du dir vornimmst, ziehst du durch.<br><em>Dein Kampf:</em> Du fragst dich selten, ob das Fundament selbst getragen wird."},
+  5:{n:"Der freie Geist",t:"Du wirst in keine Schublade passen. Die 5 ist die Lebenszahl der Freiheit und des Wandels.<br><br><strong>Deine Gabe:</strong> Du siehst Möglichkeiten die andere übersehen.<br><em>Dein Muster:</em> Nähe fühlt sich manchmal wie ein Käfig an."},
+  6:{n:"Die Liebende",t:"Du liebst tiefer als die meisten. Die 6 steht für Liebe, Familie, Verantwortung.<br><br><strong>Deine Stärke:</strong> Du erschaffst Geborgenheit überall wo du bist.<br><em>Dein Schatten:</em> Du gibst so viel — und fragst dich manchmal ob irgendjemand das sieht."},
+  7:{n:"Die Suchende",t:"Du bist hier um Wahrheiten zu finden die andere nicht einmal suchen. Tiefer. Feiner. Weiter.<br><br><strong>Deine Gabe:</strong> Du erkennst Muster die anderen verborgen bleiben.<br><em>Dein Kampf:</em> Du vertraust schwer."},
+  8:{n:"Die Mächtige",t:"Du bist für mehr gemacht als du dir erlaubst zu zeigen. Macht, Wohlstand, Leistung.<br><br><strong>Deine Gabe:</strong> Du kannst Großes aufbauen.<br><em>Dein Muster:</em> Du schwankst zwischen Vollgas und tiefem Zweifel."},
+  9:{n:"Die Vollenderin",t:"Du trägst ein Wissen in dir das du dir noch nicht vollständig erklärst. Die höchste einstellige Zahl.<br><br><strong>Deine Gabe:</strong> Mitgefühl, Weitsicht, tiefes Verständnis.<br><em>Dein Kampf:</em> Du gibst für andere — und lässt dich selbst oft zurück."},
+  11:{n:"Die Erleuchtete",t:"Du bist mit einer Antenne auf die Welt gekommen die andere nicht haben. Meisterzahl der Intuition.<br><br><strong>Deine Gabe:</strong> Du spürst Dinge bevor sie passieren.<br><em>Dein Kampf:</em> Empfindsamkeit ist gleichzeitig Stärke und Schmerz.",m:true},
+  22:{n:"Der Meisterbaumeister",t:"Du bist hier um etwas zu erschaffen das Generationen überdauert. Die mächtigste Meisterzahl.<br><br><strong>Deine Gabe:</strong> Du siehst das große Bild und kannst es aufbauen.<br><em>Dein Muster:</em> Das Gewicht deiner Vision erschreckt dich manchmal.",m:true},
+  33:{n:"Der Meisterlehrer",t:"Du bist nicht hier um ein normales Leben zu führen. Die seltenste Meisterzahl.<br><br><strong>Deine Gabe:</strong> Du kannst Menschen tief und nachhaltig berühren.<br><em>Dein Schatten:</em> Du gibst bis zur Erschöpfung.",m:true}
 };
 
-var HW={1:"Du willst nicht gebraucht werden. Du willst gebraucht werden dürfen — ohne dafür stark sein zu müssen.",2:"Du willst jemanden, der ohne Aufforderung fragt wie es dir wirklich geht — und dann wartet, bis du antwortest.",3:"Du willst ernst genommen werden — nicht bewundert. Nicht für das was du produzierst.",4:"Du willst einmal sagen dürfen: Ich weiß nicht ob ich das schaffe — ohne sofort die Lösung parat haben zu müssen.",5:"Du willst tief gekannt sein — und trotzdem frei. Du weißt, dass das wie ein Widerspruch klingt.",6:"Du willst geliebt werden ohne etwas dafür tun zu müssen. Sondern weil du da bist.",7:"Du willst verstanden werden ohne erklären zu müssen.",8:"Du willst Erlaubnis. Die Erlaubnis vollständig zu sein — ohne deine Größe sofort kleiner zu reden.",9:"Du willst versorgt werden. So wie du es für andere tust: bevor sie fragen.",11:"Du willst auf einem Niveau kommunizieren, auf dem du nicht ständig übersetzen musst.",22:"Etwas bauen, das nach dir bleibt. Als Beweis, dass die Vision real war.",33:"Einmal nicht die Starke sein müssen."};
-
-var BM={1:"Du übernimmst. Nicht weil niemand anderes es tut — sondern weil es sich falsch anfühlt zu warten. Du planst, du trägst, du hältst die Dinge in Gang.",2:"Du passt dich an. Du weißt was dein Partner braucht, noch bevor er es ausspricht. Du bist einfach. Unkompliziert.",3:"Du machst alles leicht. Konflikte werden gelöst mit Humor. Schwere Gespräche aufgehellt bevor sie wirklich schwer werden.",4:"Du bist der verlässlichste Mensch in jeder Beziehung die du führst. Du vergisst nichts. Du hältst Wort.",5:"Du fällst schnell. Du gehst schneller. Nicht weil du nicht fühlst — sondern weil Nähe sich wie eine Tür anfühlen kann, die sich schließt.",6:"Du gibst — bevor jemand fragt. Du spürst was dein Partner braucht und stellst es bereit.",7:"Du bietest Tiefe — und schützt sie mit Abstand. In anhaltender Nähe wirst du stiller.",8:"Du bringst Intensität. Du bist ganz da, oder du bist weg. Dazwischen gibt es wenig.",9:"Du gehst in jede Beziehung mit vollem Herzen. Und du verschwindest langsam darin.",11:"Du spürst was dein Partner fühlt — manchmal bevor er es selbst weiß.",22:"Du siehst was möglich ist — in Menschen, in Situationen, in Beziehungen.",33:"Du siehst was der andere braucht — oft bevor er es selbst sieht."};
-
-var AZ={1:"Du nimmst Raum ein — nicht weil du es versuchst, sondern weil du so wirkst. Direkt. Sicher. Klar.",2:"Du machst andere comfortable. Du liest Räume, passt dich an, weichst unnötiger Reibung aus.",3:"Du machst Dinge leicht. Probleme werden kleiner wenn du redest. Räume wärmer wenn du da bist.",4:"Du wirkst geerdet. Stabil. Verlässlich. Menschen wissen: wenn du da bist, hält etwas.",5:"Du wirkst lebendig. Ungebunden. Als hättest du eine Welt gewählt die größer ist.",6:"Du wirkst wie jemand, bei dem man ankommen kann. Du gibst ohne Kalkulation.",7:"Du wirkst nachdenklich. Wie jemand, der mehr sieht als er sagt.",8:"Du strahlst aus: ich habe das im Griff. Und jeder glaubt dir.",9:"Du wirkst offen. Zugänglich. Als würde man mit allem kommen können.",11:"Du wirkst als würdest du Menschen verstehen bevor sie sich selbst verstehen.",22:"Du wirkst orientiert. Als würdest du wissen wohin es geht.",33:"Du wirkst wie jemand, bei dem man ankommen kann."};
-
-var GM={1:"Du triffst finanzielle Entscheidungen alleine. Auch wenn jemand neben dir sitzt, der helfen könnte.",2:"Du verhandelst nicht. Nicht deinen Lohn. Nicht deinen Preis. Nicht was du für deine Zeit bekommst.",3:"Du kaufst, wenn du inspiriert bist — und schaust drei Wochen später nicht auf den Kontostand.",4:"Du planst so lange, bis die Gelegenheit vorbei ist.",5:"Wenn Geld fließt, fließt es. Wenn Flaute ist, greifst du auf Reserven zurück.",6:"Du finanzierst andere — direkt oder indirekt. Manchmal wissen sie es. Manchmal nicht.",7:"Du ignorierst finanzielle Details so lange, bis sie ein Problem werden.",8:"Du wechselst zwischen zwei Modi: du machst alles — oder du machst gar nichts.",9:"Du unterbietest deinen Wert — konsequent, oft unbewusst.",11:"Du schwankst zwischen Phasen wo Geld sich leicht anfühlt und Phasen wo du es komplett vermeidest.",22:"Du investierst in Visionen bevor du die eigene Grundlage gesichert hast.",33:"Du verlangst weniger als du solltest — weil deine Arbeit Berufung ist, kein Geschäft."};
-
+var HW={1:"Du willst nicht gebraucht werden. Du willst gebraucht werden dürfen — ohne dafür stark sein zu müssen.",2:"Du willst jemanden, der ohne Aufforderung fragt wie es dir wirklich geht — und dann wartet.",3:"Du willst ernst genommen werden — nicht bewundert. Für das was du bist, wenn du aufhörst zu produzieren.",4:"Du willst einmal sagen dürfen: Ich weiß nicht ob ich das schaffe — ohne sofort die Lösung parat haben zu müssen.",5:"Du willst tief gekannt sein — und trotzdem frei.",6:"Du willst geliebt werden ohne etwas dafür tun zu müssen. Sondern einfach weil du da bist.",7:"Du willst verstanden werden ohne erklären zu müssen.",8:"Du willst Erlaubnis. Die Erlaubnis vollständig zu sein.",9:"Du willst versorgt werden. So wie du es für andere tust: bevor sie fragen.",11:"Du willst auf einem Niveau kommunizieren, auf dem du nicht ständig übersetzen musst.",22:"Etwas bauen, das nach dir bleibt. Als Beweis, dass die Vision real war.",33:"Einmal nicht die Starke sein müssen."};
+var BM={1:"Du übernimmst. Nicht weil niemand anderes es tut — sondern weil es sich falsch anfühlt zu warten.",2:"Du passt dich an. Du weißt was dein Partner braucht, noch bevor er es ausspricht.",3:"Du machst alles leicht. Konflikte werden gelöst mit Humor.",4:"Du bist der verlässlichste Mensch in jeder Beziehung die du führst.",5:"Du fällst schnell. Du gehst schneller. Nicht weil du nicht fühlst — sondern weil Nähe sich wie eine Tür anfühlen kann.",6:"Du gibst — bevor jemand fragt. Du spürst was dein Partner braucht.",7:"Du bietest Tiefe — und schützt sie mit Abstand.",8:"Du bringst Intensität. Du bist ganz da, oder du bist weg.",9:"Du gehst in jede Beziehung mit vollem Herzen. Und du verschwindest langsam darin.",11:"Du spürst was dein Partner fühlt — manchmal bevor er es selbst weiß.",22:"Du siehst was möglich ist — in Menschen, in Situationen, in Beziehungen.",33:"Du siehst was der andere braucht — oft bevor er es selbst sieht."};
+var AZ={1:"Du nimmst Raum ein — nicht weil du es versuchst, sondern weil du so wirkst. Direkt. Sicher. Klar.",2:"Du machst andere comfortable. Du liest Räume, passt dich an.",3:"Du machst Dinge leicht. Probleme kleiner. Räume wärmer.",4:"Du wirkst geerdet. Stabil. Verlässlich.",5:"Du wirkst lebendig. Ungebunden. Als hättest du eine Welt gewählt die größer ist.",6:"Du wirkst wie jemand, bei dem man ankommen kann.",7:"Du wirkst nachdenklich. Wie jemand, der mehr sieht als er sagt.",8:"Du strahlst aus: ich habe das im Griff. Und jeder glaubt dir.",9:"Du wirkst offen. Zugänglich. Als würde man mit allem kommen können.",11:"Du wirkst als würdest du Menschen verstehen bevor sie sich selbst verstehen.",22:"Du wirkst orientiert. Als würdest du wissen wohin es geht.",33:"Du wirkst wie jemand, bei dem man ankommen kann."};
+var GM={1:"Du triffst finanzielle Entscheidungen alleine. Auch wenn jemand neben dir sitzt, der helfen könnte.",2:"Du verhandelst nicht. Nicht deinen Lohn. Nicht deinen Preis.",3:"Du kaufst, wenn du inspiriert bist — und schaust drei Wochen später nicht auf den Kontostand.",4:"Du planst so lange, bis die Gelegenheit vorbei ist.",5:"Wenn Geld fließt, fließt es. Wenn Flaute ist, greifst du auf Reserven zurück.",6:"Du finanzierst andere — direkt oder indirekt.",7:"Du ignorierst finanzielle Details so lange, bis sie ein Problem werden.",8:"Du wechselst zwischen Vollgas und Stillstand. Dazwischen gibt es wenig.",9:"Du unterbietest deinen Wert — konsequent, oft unbewusst.",11:"Du schwankst zwischen Phasen wo Geld sich leicht anfühlt und Phasen wo du es komplett vermeidest.",22:"Du investierst in Visionen bevor du die eigene Grundlage gesichert hast.",33:"Du verlangst weniger als du solltest."};
 var ZYK={1:"Phase des Erwachens",2:"Phase der Identität",3:"Phase des Aufbaus",4:"Phase der Transformation",5:"Phase der Weisheit",6:"Phase der Vollendung"};
 var NZYK={1:"Identität & Aufbruch",2:"Aufbau & Kraft",3:"Transformation & Tiefe",4:"Weisheit & Ernte",5:"Vollendung & Weitergabe",6:"Vollendung"};
+var PJT={1:"Neuanfänge, Loslassen, Eigeninitiative",2:"Geduld, Verbindung, inneres Lauschen",3:"Ausdruck, Freude, Kreativität",4:"Struktur, Arbeit, Fundament legen",5:"Veränderung, neue Türen, Freiheit",6:"Beziehungen, Verantwortung, Heimat",7:"Rückzug, Tiefe, Selbsterkenntnis",8:"Ernte, Macht, finanzielle Fragen",9:"Abschlüsse, Loslassen, innere Reinigung"};
 
-function red(n,km){var ms=[11,22,33];while(n>9){if(km&&ms.indexOf(n)>-1)break;var s=0;String(n).split('').forEach(function(d){s+=parseInt(d)});n=s}return n}
-function cv(c){var t={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};return t[c.toUpperCase()]||0}
-
-function calc(fn,ln,bd){
-  var p=bd.split('-'),yr=parseInt(p[0]),mo=parseInt(p[1]),dy=parseInt(p[2]);
-  var ds=String(dy).padStart(2,'0')+String(mo).padStart(2,'0')+String(yr);
-  var lz=red(ds.split('').reduce(function(a,b){return a+parseInt(b)},0),true);
-  var full=(fn+ln).replace(/[^a-zA-Z]/g,'');
-  var vow=['A','E','I','O','U'],av=[],vv=[],cv2=[];
-  full.split('').forEach(function(c){var v=cv(c);if(v>0){av.push(v);if(vow.indexOf(c.toUpperCase())>-1)vv.push(v);else cv2.push(v)}});
-  var az=red(av.reduce(function(a,b){return a+b},0)||1,true);
-  var cy=new Date().getFullYear(),age=cy-yr;
-  var cn=Math.min(Math.floor(age/13)+1,6);
-  var cs=yr+((cn-1)*13),ce=cs+12,yl=ce-cy+1,yc=age-((cn-1)*13)+1;
-  var pct=Math.min(Math.round((yc/13)*100),100);
-  var pj=red(dy+mo+cy,false);
-  return{lz:lz,az:az,yr:yr,mo:mo,dy:dy,cn:cn,cs:cs,ce:ce,yl:Math.max(0,yl),yc:yc,pct:pct,pj:pj};
+// ── MATH ─────────────────────────────────────────────────────────
+function red(n, km) {
+  var ms = [11, 22, 33];
+  while (n > 9) {
+    if (km && ms.indexOf(n) > -1) break;
+    var s = 0;
+    String(n).split('').forEach(function(d) { s += parseInt(d); });
+    n = s;
+  }
+  return n;
+}
+function charVal(c) {
+  var t = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+  return t[c.toUpperCase()] || 0;
+}
+function calc(fn, ln, bd) {
+  var p = bd.split('-'), yr = parseInt(p[0]), mo = parseInt(p[1]), dy = parseInt(p[2]);
+  var ds = String(dy).padStart(2,'0') + String(mo).padStart(2,'0') + String(yr);
+  var lz = red(ds.split('').reduce(function(a,b){return a+parseInt(b);}, 0), true);
+  var full = (fn + ln).replace(/[^a-zA-Z]/g, '');
+  var av = [], vow = ['A','E','I','O','U'];
+  full.split('').forEach(function(ch) {
+    var v = charVal(ch);
+    if (v > 0) av.push(v);
+  });
+  var az = red(av.reduce(function(a,b){return a+b;}, 0) || 1, true);
+  var cy = new Date().getFullYear(), age = cy - yr;
+  var cn = Math.min(Math.floor(age / 13) + 1, 6);
+  var cs = yr + (cn - 1) * 13, ce = cs + 12;
+  var yl = Math.max(0, ce - cy + 1), yc = age - (cn - 1) * 13 + 1;
+  var pct = Math.min(Math.round(yc / 13 * 100), 100);
+  var pj = red(dy + mo + cy, false);
+  return {lz:lz, az:az, yr:yr, mo:mo, dy:dy, cn:cn, cs:cs, ce:ce, yl:yl, yc:yc, pct:pct, pj:pj};
 }
 
-var SVG_SYM='<svg width="72" height="72" viewBox="0 0 80 80" fill="none" style="filter:drop-shadow(0 0 20px rgba(196,149,106,.35))"><path d="M40 40C40 40 24 24 16 24C8 24 8 32 8 40C8 48 8 56 16 56C24 56 40 40 40 40Z" stroke="#C4956A" stroke-width="1.8" fill="none"/><path d="M40 40C40 40 56 56 64 56C72 56 72 48 72 40C72 32 72 24 64 24C56 24 40 40 40 40Z" stroke="#C4956A" stroke-width="1.8" fill="none"/><path d="M40 40C40 40 24 56 24 64C24 72 32 72 40 72C48 72 56 72 56 64C56 56 40 40 40 40Z" stroke="#E8C4A0" stroke-width="1.2" fill="none" opacity=".7"/><path d="M40 40C40 40 56 24 56 16C56 8 48 8 40 8C32 8 24 8 24 16C24 24 40 40 40 40Z" stroke="#E8C4A0" stroke-width="1.2" fill="none" opacity=".7"/></svg>';
-
-document.getElementById('soulForm').addEventListener('submit',function(e){
+// ── FORM SUBMIT ──────────────────────────────────────────────────
+document.getElementById('soulForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  var btn=document.getElementById('submitBtn');
-  btn.disabled=true;btn.textContent='✦ Analysiere...';
 
-  localStorage.setItem('aevima_first_name', document.getElementById('fname').value.trim());
-  setTimeout(function(){
-    var fn=document.getElementById('fname').value.trim();
-    var ln=document.getElementById('lname').value.trim();
-    var bd=document.getElementById('bdate').value;
-    var bp=document.getElementById('birthplace').value.trim();
-    var d=calc(fn,ln,bd);
-    var ld=LZ_DATA[d.lz]||LZ_DATA[1];
-    var bf=String(d.dy).padStart(2,'0')+'.'+String(d.mo).padStart(2,'0')+'.'+d.yr;
-    var mb=ld.master?'<span class="master-tag">MEISTERZAHL</span>':'';
+  var fn = document.getElementById('fname').value.trim();
+  var ln = document.getElementById('lname').value.trim();
+  var bd = document.getElementById('bdate').value;
+  var bp = document.getElementById('birthplace').value.trim();
+  var ds = document.getElementById('ds').checked;
 
-    var hw=HW[d.lz]||HW[1], bm=BM[d.lz]||BM[1], az=AZ[d.az]||AZ[1], gm=GM[d.lz]||GM[1];
+  if (!fn || !ln || !bd || !bp) { alert('Bitte alle Pflichtfelder ausfüllen.'); return; }
+  if (!ds) { alert('Bitte Datenschutzerklärung akzeptieren.'); return; }
 
-    var pw='<div class="pw-wrap"><div class="pw-box">'
-      +'<div class="pw-sym"><div style="width:64px;height:64px;border-radius:50%;border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;margin:0 auto 4px;background:rgba(196,149,106,.08)"><span style="font-size:1.5rem">◈</span></div></div>'
-      +'<div class="pw-label">Vollständige Analyse</div>'
-      +'<div style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;color:var(--teal);margin-bottom:2px">PILOTPREIS</div><div class="pw-price">49 €</div>'
-      +'<div class="pw-note">Einmalig · Kein Abo · Sofortzugang</div>'
-      +'<div class="pw-items">'
-      +'<div class="pw-item">Herzwunsch</div>'
-      +'<div class="pw-item">Beziehungsmuster</div>'
-      +'<div class="pw-item">Ausdruckszahl</div>'
-      +'<div class="pw-item">Geldmuster</div>'
-      +'</div>'
-      +'<a href="checkout.html" class="btn-pw">✦ Mein Profil freischalten</a>'
-      +'<div class="pw-trust">Einmalige Zahlung · SSL-verschlüsselt</div>'
-      +'</div></div>';
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '✦ Analysiere...';
 
-    var h='<div class="r-hero">'
-      +'<div style="margin-bottom:24px">'+SVG_SYM+'</div>'
-      +'<div class="r-name">'+fn+' '+ln+'</div>'
-      +'<div class="r-date">'+bf+' · '+bp+'</div>'
-      +'<span class="lz-num">'+d.lz+mb+'</span>'
-      +'<span class="lz-name">'+ld.name+'</span>'
-      +'</div>';
+  // Save name for confirmation page
+  localStorage.setItem('aevima_first_name', fn);
 
-    var divr='<div class="divider"></div>';
-
-    // LZ Teaser (frei)
-    h+=divr+'<div class="pillar"><div class="pt">✦ Lebenszahl '+d.lz+'</div><p>'+ld.teaser+'</p></div>';
-
-    h+='<div class="orn"></div>';
-
-    // Herzwunsch
-    h+='<div class="pillar p-teal"><div class="pt">♡ Dein Herzwunsch</div><p>'+hw+'</p>'
-      +(isTest?'<p style="margin-top:12px;color:var(--rose-l);font-style:italic">Innerer Konflikt · Blinder Fleck · Entwicklungsaufgabe · Was möglich wird — vollständig sichtbar.</p>'
-               :'<p class="fade">Innerer Konflikt · Blinder Fleck · Was möglich wird...</p>')
-      +'</div>';
-
-    // Beziehungsmuster (prominent)
-    h+='<div class="pillar p-teal"><div class="pt">◐ Dein Beziehungsmuster<span class="badge-hot teal">Kaufmoment</span></div><p>'+bm+'</p>'
-      +(isTest?'<p style="margin-top:12px;color:var(--rose-l);font-style:italic">Die Anziehung · Der Bruchpunkt · Die Einladung · Was möglich wird — vollständig sichtbar.</p>'
-               :'<p class="fade">Die Anziehung · Der Bruchpunkt · Was möglich wird...</p>')
-      +'</div>';
-
-    if(!isTest) h+=pw;
-
-    // Ausdruckszahl
-    if(isTest){
-      h+='<div class="pillar p-teal"><div class="pt">◎ Dein Ausdruck (AZ '+d.az+')</div><p>'+az+'</p></div>';
-    } else {
-      h+='<div class="locked-wrap"><div class="locked-content"><div class="pt" style="opacity:.4">◎ Dein Ausdruck</div><p style="filter:blur(4px)">'+az+'</p></div><div class="locked-overlay"><span class="lock-icon">◈</span></div></div>';
-    }
-
-    // Geldmuster (kleiner gewichtet)
-    if(isTest){
-      h+='<div class="pillar p-dim p-em"><div class="pt">⊕ Geld &amp; Muster</div><p>'+gm+'</p></div>';
-    } else {
-      h+='<div class="locked-wrap"><div class="locked-content p-dim"><div class="pt" style="opacity:.4">⊕ Geld &amp; Muster</div><p style="filter:blur(4px)">'+gm+'</p></div><div class="locked-overlay"><span class="lock-icon">◈</span></div></div>';
-    }
-
-    h+='<div class="orn-teal"></div>';
-
-    // Persönliches Jahr (frei)
-    var pjt={1:'Neuanfänge, Loslassen, Eigeninitiative',2:'Geduld, Verbindung, inneres Lauschen',3:'Ausdruck, Freude, Kreativität',4:'Struktur, Arbeit, Fundament legen',5:'Veränderung, neue Türen, Freiheit',6:'Beziehungen, Verantwortung, Heimat',7:'Rückzug, Tiefe, Selbsterkenntnis',8:'Ernte, Macht, finanzielle Fragen',9:'Abschlüsse, Loslassen, innere Reinigung'};
-    h+='<div class="pillar"><div class="pt">◉ Persönliches Jahr '+d.pj+'</div><p>Dieser Zyklus lädt ein zu: <strong>'+( pjt[d.pj]||'erhöhter Intuition und ungewöhnlichen Chancen')+'</strong>.</p></div>';
-
-    // Lebensabschnitt (frei)
-    h+='<div class="pillar"><div class="pt">◈ Lebensabschnitt — '+d.cn+'. Phase</div>'
-      +'<p>Seit <strong>'+d.cs+'</strong> in der <strong>'+(ZYK[d.cn]||'Phase der Meisterschaft')+'</strong>.<br><br>'
-      +'Jahr <strong>'+d.yc+' von 13</strong>.'
-      +'<div class="cycle-bar"><div class="cycle-fill" style="width:'+d.pct+'%"></div></div>'
-      +'Noch <strong>'+d.yl+' Jahr'+(d.yl===1?'':'e')+'</strong> · Ab <strong>'+(d.ce+1)+'</strong>: '+(NZYK[d.cn]||'nächste Phase')+'.'
-      +'</p></div>';
-
-    h+='<div class="orn"></div>';
-
-    // Closing
-    h+='<div class="closing">'
-      +'<div style="margin-bottom:16px">'+SVG_SYM+'</div>'
-      +'<div class="cl-label">Was bleibt</div>'
-      +'<div class="cl-quote">Du hast nichts Neues bekommen.<br>Du hast etwas wiedergefunden.</div>'
-      +'</div>';
-
-    document.getElementById('soulForm').style.display='none';
-    document.getElementById('result').style.display='block';
-    document.getElementById('result').innerHTML=h;
-    window.scrollTo({top:0,behavior:'smooth'});
-  },700);
+  setTimeout(function() {
+    buildResult(fn, ln, bd, bp);
+    btn.disabled = false;
+    btn.innerHTML = '✦ Analyse starten';
+  }, 800);
 });
+
+// ── BUILD RESULT ─────────────────────────────────────────────────
+function buildResult(fn, ln, bd, bp) {
+  var d = calc(fn, ln, bd);
+  var ld = LZ[d.lz] || LZ[1];
+  var bf = String(d.dy).padStart(2,'0') + '.' + String(d.mo).padStart(2,'0') + '.' + d.yr;
+  var mb = ld.m ? '<span class="master-tag">MEISTERZAHL</span>' : '';
+
+  var hw = HW[d.lz] || HW[1];
+  var bm = BM[d.lz] || BM[1];
+  var az = AZ[d.az] || AZ[1];
+  var gm = GM[d.lz] || GM[1];
+
+  // ── HTML Sections ──
+  var logoHtml = '<div class="r-logo"><img src="logo.png" alt="AEVIMA"/></div>';
+
+  var heroHtml = '<div class="r-hero">'
+    + '<div class="r-name">' + fn + ' ' + ln + '</div>'
+    + '<div class="r-date">' + bf + ' &middot; ' + bp + '</div>'
+    + '<span class="lz-num">' + d.lz + mb + '</span>'
+    + '<span class="lz-name">' + ld.n + '</span>'
+    + '</div>';
+
+  var lzHtml = '<div class="pillar"><div class="pt">&#x2756; Lebenszahl ' + d.lz + '</div><p>' + ld.t + '</p></div>';
+
+  var hwHtml = '<div class="pillar p-teal"><div class="pt">&#9825; Dein Herzwunsch</div><p>' + hw + '</p>'
+    + (isTest
+        ? '<p style="margin-top:12px;color:var(--rose-l);font-style:italic">Vollständig sichtbar nach Freischaltung.</p>'
+        : '<p class="fade-p">Innerer Konflikt &middot; Blinder Fleck &middot; Entwicklungsaufgabe &middot; Was möglich wird...</p>')
+    + '</div>';
+
+  var bmHtml = '<div class="pillar p-teal"><div class="pt">&#9680; Beziehungsmuster<span class="hot-badge">Kaufmoment</span></div><p>' + bm + '</p>'
+    + (isTest
+        ? '<p style="margin-top:12px;color:var(--rose-l);font-style:italic">Anziehung &middot; Bruchpunkt &middot; Was möglich wird — vollständig sichtbar.</p>'
+        : '<p class="fade-p">Die Anziehung &middot; Der Bruchpunkt &middot; Was möglich wird...</p>')
+    + '</div>';
+
+  var pwHtml = '';
+  if (!isTest) {
+    pwHtml = '<div class="pw-box">'
+      + '<div class="pw-lock">&#9670;</div>'
+      + '<div class="pw-pilot">PILOTPREIS</div>'
+      + '<div class="pw-price">49 &euro;</div>'
+      + '<div class="pw-note">Einmalig &middot; Kein Abo &middot; Sofortzugang</div>'
+      + '<div class="pw-items">'
+      + '<div class="pw-item">Herzwunsch</div>'
+      + '<div class="pw-item">Beziehungsmuster</div>'
+      + '<div class="pw-item">Ausdruckszahl</div>'
+      + '<div class="pw-item">Geldmuster</div>'
+      + '</div>'
+      + '<a href="checkout.html" class="btn-pw">&#10022; Vollständiges Profil freischalten</a>'
+      + '<div class="pw-trust">Einmalige Zahlung &middot; SSL-verschlüsselt</div>'
+      + '</div>';
+  }
+
+  var azHtml, gmHtml;
+  if (isTest) {
+    azHtml = '<div class="pillar p-teal"><div class="pt">&#9675; Dein Ausdruck (AZ ' + d.az + ')</div><p>' + az + '</p></div>';
+    gmHtml = '<div class="pillar p-dim p-em"><div class="pt">&#8853; Geld &amp; Muster</div><p>' + gm + '</p></div>';
+  } else {
+    azHtml = '<div class="locked-wrap"><div class="locked-inner p-teal"><div class="pt" style="opacity:.4">&#9675; Dein Ausdruck</div><p>' + az + '</p></div><div class="locked-over">&#9670;</div></div>';
+    gmHtml = '<div class="locked-wrap"><div class="locked-inner p-dim"><div class="pt" style="opacity:.4">&#8853; Geld &amp; Muster</div><p>' + gm + '</p></div><div class="locked-over">&#9670;</div></div>';
+  }
+
+  var pjHtml = '<div class="pillar"><div class="pt">&#9689; Persönliches Jahr ' + d.pj + '</div>'
+    + '<p>Dieser Zyklus lädt ein zu: <strong>' + (PJT[d.pj] || 'erhöhter Intuition') + '</strong>.</p></div>';
+
+  var cycHtml = '<div class="pillar"><div class="pt">&#9670; Lebensabschnitt &mdash; ' + d.cn + '. Phase</div>'
+    + '<p>Seit <strong>' + d.cs + '</strong> in der <strong>' + (ZYK[d.cn] || 'Phase der Meisterschaft') + '</strong>.<br><br>'
+    + 'Jahr <strong>' + d.yc + ' von 13</strong>.'
+    + '<div class="cyc-bar"><div class="cyc-fill" style="width:' + d.pct + '%"></div></div>'
+    + 'Noch <strong>' + d.yl + ' Jahr' + (d.yl === 1 ? '' : 'e') + '</strong> &middot; Ab <strong>' + (d.ce + 1) + '</strong>: ' + (NZYK[d.cn] || 'nächste Phase') + '.'
+    + '</p></div>';
+
+  var closingHtml = '<div class="closing">'
+    + '<img src="logo.png" alt="AEVIMA"/>'
+    + '<div class="cl-label">Was bleibt</div>'
+    + '<div class="cl-quote">Du hast nichts Neues bekommen.<br>Du hast etwas wiedergefunden.</div>'
+    + '</div>';
+
+  var full = logoHtml + heroHtml
+    + '<div class="divider" style="margin:0 auto 32px"></div>'
+    + lzHtml
+    + '<div class="orn"></div>'
+    + hwHtml + bmHtml
+    + pwHtml
+    + '<div class="orn-t"></div>'
+    + azHtml + gmHtml
+    + '<div class="orn"></div>'
+    + pjHtml + cycHtml
+    + '<div class="orn"></div>'
+    + closingHtml;
+
+  document.getElementById('soulForm').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').innerHTML = full;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
 </script>
 </body>
 </html>
