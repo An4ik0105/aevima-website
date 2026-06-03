@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dein Seelenprofil — AEVIMA</title>
+  <link rel="preconnect" href="https://fonts.bunny.net"/>
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --black:#0F0E14;
+      --night:#18161F;
+      --off-white:#EDE9E2;
+      --muted:#8B7FA0;
+      --emerald:#1E7A52;
+      --emerald-h:#2AA06D;
+      --teal:#2AAFA0;
+      --teal-d:#1D7A70;
+      --rose:#C4956A;
+      --rose-l:#E8C4A0;
+      --rose-d:#9B6F4A;
+      --border-rose:rgba(196,149,106,.18);
+      --border-teal:rgba(42,175,160,.3);
+      --border-emerald:rgba(30,122,82,.3);
+    }
+    body{background:var(--black);color:var(--off-white);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.8;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(30,122,82,.05) 0,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(42,175,160,.04) 0,transparent 60%);pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:60px 20px 80px}
+
+    /* HEADER */
+    .logo{display:block;text-align:center;margin-bottom:40px}
+    .logo svg{width:40px;height:40px}
+    .back{display:inline-block;color:var(--rose);text-decoration:none;font-size:.78rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
+    .back:hover{opacity:1}
+
+    /* FORM */
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,5vw,2.2rem);font-weight:700;color:var(--rose-l);letter-spacing:.1em;margin-bottom:8px;text-align:center}
+    .subtitle{color:var(--muted);font-size:.85rem;margin-bottom:40px;letter-spacing:.05em;text-align:center}
+    .divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 40px}
+    .form-group{margin-bottom:20px}
+    label{display:block;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.15em;color:var(--rose);text-transform:uppercase;margin-bottom:8px}
+    input[type=text],input[type=email],input[type=date],input[type=time]{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border-rose);border-radius:2px;color:var(--off-white);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s}
+    input:focus{border-color:rgba(42,175,160,.5)}
+    input::placeholder{color:var(--muted);opacity:.6}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .checkbox-group{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}
+    .checkbox-group input{width:18px;height:18px;min-width:18px;margin-top:3px;accent-color:var(--teal)}
+    .checkbox-group span{font-size:.8rem;color:var(--muted);line-height:1.6}
+    .checkbox-group a{color:var(--rose)}
+    .btn-submit{width:100%;padding:17px;background:linear-gradient(135deg,var(--emerald),#167044);color:var(--off-white);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .3s;margin-top:8px;min-height:52px}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(30,122,82,.35)}
+    .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+    /* RESULT */
+    #result{display:none;margin-top:56px}
+    .result-header{text-align:center;margin-bottom:40px}
+    .result-name{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--rose-l);letter-spacing:.15em}
+    .result-date{color:var(--muted);font-size:.78rem;margin-top:4px}
+    .lz-badge{display:inline-block;font-family:'Cinzel',serif;font-size:3.5rem;font-weight:700;color:var(--rose);margin:20px 0 4px;line-height:1}
+    .lz-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--rose-l);letter-spacing:.1em}
+    .master-badge{display:inline-block;font-size:.62rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.2rem .6rem;border-radius:20px;margin-left:8px;vertical-align:middle}
+
+    /* SECTIONS */
+    .pillar{background:rgba(255,255,255,.02);border:1px solid var(--border-rose);border-radius:3px;padding:28px;margin-bottom:20px}
+    .pillar.teal{border-color:var(--border-teal)}
+    .pillar.emerald{border-color:var(--border-emerald)}
+    .pillar-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--rose);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .pillar.teal .pillar-title{color:var(--teal)}
+    .pillar.emerald .pillar-title{color:var(--emerald-h)}
+    .pillar p{color:var(--muted);font-size:.88rem;line-height:1.9}
+    .pillar p strong{color:var(--off-white)}
+    .pillar p em{color:var(--rose-l);font-style:italic}
+
+    /* PAYWALL */
+    .paywall-wrap{position:relative;overflow:hidden;border-radius:3px;margin-bottom:20px}
+    .paywall-preview{background:rgba(255,255,255,.02);border:1px solid var(--border-teal);border-radius:3px;padding:28px;padding-bottom:80px}
+    .paywall-preview p{color:var(--muted);font-size:.88rem;line-height:1.9}
+    .paywall-preview .pillar-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:14px}
+    .paywall-blur{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(transparent,var(--black) 80%);pointer-events:none}
+    .paywall-block{background:rgba(24,22,31,.95);border:1px solid var(--border-teal);border-radius:3px;padding:28px;text-align:center;margin-bottom:20px}
+    .paywall-block .pw-symbol{font-size:2rem;margin-bottom:12px;opacity:.7}
+    .paywall-block .pw-title{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
+    .paywall-block .pw-price{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--rose);margin:8px 0 4px}
+    .paywall-block .pw-sub{color:var(--muted);font-size:.8rem;margin-bottom:20px}
+    .btn-pay{display:block;width:100%;padding:17px;background:linear-gradient(135deg,var(--emerald),#167044);color:var(--off-white);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .3s;text-decoration:none;text-align:center;min-height:52px;line-height:1.2;display:flex;align-items:center;justify-content:center}
+    .btn-pay:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(30,122,82,.35)}
+    .btn-pay-sub{font-size:.75rem;color:var(--teal);margin-top:10px;text-align:center}
+
+    /* CYCLE */
+    .cycle-bar{background:rgba(255,255,255,.06);border-radius:20px;height:8px;margin:12px 0;overflow:hidden}
+    .cycle-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px;transition:width 1s ease}
+
+    /* ORNAMENT */
+    .ornament{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:40px auto}
+
+    /* ABSCHLUSS */
+    .abschluss{text-align:center;padding:40px 0 60px}
+    .abschluss-symbol{font-size:1.8rem;margin-bottom:16px;opacity:.6}
+    .abschluss-text{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:20px}
+    .abschluss-quote{font-family:'Raleway',sans-serif;font-size:1rem;color:var(--off-white);line-height:1.8;font-style:italic;max-width:480px;margin:0 auto}
+
+    @media(max-width:500px){.form-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← AEVIMA</a>
+
+  <div class="logo">
+    <!-- AEVIMA Symbol Placeholder: 4-Schleifen-Lemniskat -->
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 20C20 20 12 12 8 12C4 12 4 16 4 20C4 24 4 28 8 28C12 28 20 20 20 20Z" stroke="#C4956A" stroke-width="1.5" fill="none"/>
+      <path d="M20 20C20 20 28 28 32 28C36 28 36 24 36 20C36 16 36 12 32 12C28 12 20 20 20 20Z" stroke="#C4956A" stroke-width="1.5" fill="none"/>
+      <path d="M20 20C20 20 12 28 12 32C12 36 16 36 20 36C24 36 28 36 28 32C28 28 20 20 20 20Z" stroke="#E8C4A0" stroke-width="1" fill="none" opacity=".6"/>
+      <path d="M20 20C20 20 28 12 28 8C28 4 24 4 20 4C16 4 12 4 12 8C12 12 20 20 20 20Z" stroke="#E8C4A0" stroke-width="1" fill="none" opacity=".6"/>
+    </svg>
+  </div>
+
+  <div style="text-align:center">
+    <h1>DEIN SEELENPROFIL</h1>
+    <p class="subtitle">Persönlichkeit · Beziehungen · Ausdruck · Muster</p>
+  </div>
+  <div class="divider"></div>
+
+  <form id="soulForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Vorname</label>
+        <input type="text" id="fname" placeholder="z.B. Anna" required/>
+      </div>
+      <div class="form-group">
+        <label>Nachname</label>
+        <input type="text" id="lname" placeholder="z.B. Muster" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Geburtsdatum</label>
+      <input type="date" id="bdate" required/>
+    </div>
+    <div class="form-group">
+      <label>Geburtsort <span style="color:var(--muted);font-size:.75rem;text-transform:none;letter-spacing:0;font-family:'Raleway',sans-serif">(Stadt, Land)</span></label>
+      <input type="text" id="birthplace" placeholder="z.B. Berlin, Deutschland" required/>
+    </div>
+    <div class="form-group">
+      <label>E-Mail-Adresse</label>
+      <input type="email" id="email" placeholder="deine@email.de" required/>
+    </div>
+    <div class="form-group">
+      <label>Geburtszeit <span style="color:var(--muted);font-size:.75rem;text-transform:none;letter-spacing:0;font-family:'Raleway',sans-serif">(optional)</span></label>
+      <input type="time" id="btime"/>
+    </div>
+    <div style="margin:24px 0">
+      <div class="checkbox-group">
+        <input type="checkbox" id="datenschutz" required/>
+        <span>Ich stimme der Verarbeitung meiner Daten gemäß der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu. *</span>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="marketing"/>
+        <span>Ich möchte Einblicke und AEVIMA-Updates per E-Mail erhalten.</span>
+      </div>
+    </div>
+    <button type="submit" class="btn-submit" id="submitBtn">✦ Meine Analyse starten</button>
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<script>
+var isTest = location.search.indexOf('test=1')>-1 || localStorage.getItem('aevima-test')==='1';
+
+// LZ Teaser Data (frei sichtbarer Bereich)
+var LZ_DATA = {
+  1:{name:"Die Pionierin",teaser:"Du bist hier um voranzugehen — nicht um zu folgen. Menschen mit der Lebenszahl 1 sind Anführer. Nicht weil sie es wollen, sondern weil sie es nicht anders können. Wenn du in einem Raum bist, spüren andere deine Energie — auch wenn du nichts sagst.<br><br><strong>Deine größte Stärke</strong> ist dein unerschütterlicher Wille. Du stehst auf — immer wieder.<br><br><em>Aber da ist auch ein Schatten:</em> Du kämpfst mit dem Erlauben, jemanden wirklich brauchen zu dürfen."},
+  2:{name:"Die Brückenbauerin",teaser:"Du spürst was andere fühlen — noch bevor sie es selbst wissen. Die 2 ist die sensibelste aller Lebenszahlen. Du bist hier um zu verbinden, zu heilen, Frieden zu stiften.<br><br><strong>Dein Geschenk:</strong> Du siehst das Gute in jedem Menschen.<br><br><em>Dein Kampf:</em> Du weißt nicht immer, wo du aufhörst und andere anfangen."},
+  3:{name:"Die Schöpferin",teaser:"Wenn du redest, hören Menschen zu — auch wenn du denkst, du sagst nichts Besonderes. Die 3 ist die Lebenszahl der Kreativität, der Freude, des Ausdrucks.<br><br><strong>Deine Stärke:</strong> Ideen fließen dir zu wie Wasser.<br><br><em>Dein Schatten:</em> Du verlierst dich leicht. Fängst viel an — beendest wenig."},
+  4:{name:"Die Baumeisterin",teaser:"Du bist diejenige auf die sich alle verlassen — ob sie es zugeben oder nicht. Die 4 ist die Lebenszahl der Struktur, der Verlässlichkeit, des Fundaments.<br><br><strong>Deine Stärke:</strong> Wenn du dir etwas vornimmst, ziehst du es durch.<br><br><em>Dein Kampf:</em> Du arbeitest härter als fast alle — und fragst dich selten, ob das Fundament selbst getragen wird."},
+  5:{name:"Der freie Geist",teaser:"Du wirst in keine Schublade passen — und das ist gut so. Die 5 ist die Lebenszahl der Freiheit, des Wandels, des Abenteuers.<br><br><strong>Deine Gabe:</strong> Du siehst Möglichkeiten die andere übersehen.<br><br><em>Dein Muster:</em> Tiefe Bindungen kosten dich — weil Nähe sich manchmal wie ein Käfig anfühlt."},
+  6:{name:"Die Liebende",teaser:"Du liebst tiefer als die meisten — und das macht dich verletzlicher als du zeigst. Die 6 ist die Lebenszahl der Liebe, der Familie, der Verantwortung.<br><br><strong>Deine Stärke:</strong> Du erschaffst Geborgenheit überall wo du bist.<br><br><em>Dein Schatten:</em> Du gibst so viel — und fragst dich manchmal ob irgendjemand das wirklich sieht."},
+  7:{name:"Die Suchende",teaser:"Du bist hier um Wahrheiten zu finden die andere nicht einmal suchen. Die 7 ist die spirituellste aller Lebenszahlen. Du denkst tiefer, fühlst feiner, siehst weiter.<br><br><strong>Deine Gabe:</strong> Du erkennst Muster die anderen verborgen bleiben.<br><br><em>Dein Kampf:</em> Du vertraust schwer."},
+  8:{name:"Die Mächtige",teaser:"Du bist für mehr gemacht als du dir erlaubst zu zeigen. Die 8 ist die Lebenszahl der Macht, des Wohlstands, der Leistung.<br><br><strong>Deine Gabe:</strong> Du kannst Großes aufbauen — wenn du dich wirklich erlaubst, zu wollen was du willst.<br><br><em>Dein Muster:</em> Du schwankst zwischen Vollgas und Zweifel."},
+  9:{name:"Die Vollenderin",teaser:"Du trägst ein Wissen in dir das du dir selbst noch nicht vollständig erklären kannst. Die 9 ist die höchste der einstelligen Lebenszahlen.<br><br><strong>Deine Gabe:</strong> Mitgefühl, Weitsicht, ein tiefes Verständnis für das Leben.<br><br><em>Dein Kampf:</em> Du gibst viel für andere — aber lässt dich selbst oft zurück."},
+  11:{name:"Die Erleuchtete",teaser:"Du bist mit einer Antenne auf die Welt gekommen die andere nicht haben. Die 11 ist eine Meisterzahl — sie trägt die Energie der Intuition.<br><br><strong>Deine Gabe:</strong> Du spürst Dinge bevor sie passieren.<br><br><em>Dein Kampf:</em> Deine Empfindsamkeit ist gleichzeitig deine Stärke und dein Schmerz.",master:true},
+  22:{name:"Der Meisterbaumeister",teaser:"Du bist hier um etwas zu erschaffen das Generationen überdauert. Die 22 ist die mächtigste Meisterzahl.<br><br><strong>Deine Gabe:</strong> Du siehst das große Bild — und du kannst es aufbauen.<br><br><em>Dein Muster:</em> Das Gewicht deiner eigenen Vision erschreckt dich manchmal.",master:true},
+  33:{name:"Der Meisterlehrer",teaser:"Du bist nicht hier um ein normales Leben zu führen. Die 33 ist die seltenste Meisterzahl.<br><br><strong>Deine Gabe:</strong> Du kannst Menschen berühren — tief, echt, nachhaltig.<br><br><em>Dein Schatten:</em> Du gibst bis zur Erschöpfung.",master:true}
+};
+
+// Herzwunsch freier Teaser (Sehnsucht, erste 2-3 Sätze)
+var HW_TEASER = {
+  1:"Du willst nicht gebraucht werden. Du willst gebraucht werden dürfen — ohne dafür stark sein zu müssen. Nicht die Person sein, die hält. Die Person sein, bei der man bleibt, auch wenn sie loslässt.",
+  2:"Du willst jemanden, der ohne Aufforderung fragt wie es dir wirklich geht — und dann wartet, bis du antwortest. Nicht um dir zu helfen. Nur um da zu sein.",
+  3:"Du willst ernst genommen werden — nicht bewundert. Nicht für das was du produzierst, für das was du bist wenn du aufhörst zu produzieren.",
+  4:"Du willst einmal jemandem sagen dürfen: Ich weiß nicht, ob ich das schaffe — und dabei nicht sofort die Lösung parat haben müssen. Nur für einen Moment derjenige sein, der gehalten wird.",
+  5:"Du willst tief gekannt sein — und trotzdem frei. Du weißt, dass das wie ein Widerspruch klingt. Irgendwo glaubst du, es ist keiner.",
+  6:"Du willst geliebt werden ohne etwas dafür tun zu müssen. Nicht weil du kochst, organisierst, da bist, auffängst. Sondern weil du da bist.",
+  7:"Du willst verstanden werden ohne erklären zu müssen. Jemand der kommt, ohne dass du fünf Schichten abtragen musst damit er sieht was darunter ist.",
+  8:"Du willst keine Bewunderung. Du willst Erlaubnis. Die Erlaubnis, vollständig zu sein — ohne deine Größe sofort kleiner zu reden.",
+  9:"Du willst versorgt werden. Nicht unterstützt — versorgt. So wie du es für andere tust: bevor sie fragen.",
+  11:"Du willst auf einem Niveau kommunizieren, auf dem du nicht ständig übersetzen musst. Das innere Erleben zeigen, ohne es zuerst in etwas Verdauliches umzuformen.",
+  22:"Etwas bauen, das nach dir bleibt. Nicht aus Eitelkeit — als Beweis, dass die Vision real war und keine Einbildung.",
+  33:"Einmal nicht die Starke sein müssen. Nicht die, bei der andere Halt suchen. Einfach jemand mit unordentlichen Bedürfnissen, der dazu berechtigt ist."
+};
+
+// Beziehungsmuster freier Teaser (Das Muster, erste 3 Sätze)
+var BM_TEASER = {
+  1:"Du übernimmst. Nicht weil niemand anderes es tut — sondern weil es sich falsch anfühlt zu warten. Du planst, du trägst, du hältst die Dinge in Gang.",
+  2:"Du passt dich an. Du weißt was dein Partner braucht, noch bevor er es ausspricht. Du bist einfach. Unkompliziert. Flexibel.",
+  3:"Du machst alles leicht. Konflikte werden gelöst mit Humor. Schwere Gespräche werden aufgehellt bevor sie wirklich schwer werden.",
+  4:"Du bist der verlässlichste Mensch in jeder Beziehung die du führst. Du vergisst nichts. Du hältst Wort.",
+  5:"Du fällst schnell. Du gehst schneller. Nicht weil du nicht fühlst — sondern weil du spürst, wenn sich Nähe wie eine Tür anfühlt, die sich schließt.",
+  6:"Du gibst — bevor jemand fragt. Du spürst was dein Partner braucht und stellst es bereit. Ohne Aufhebens, ohne Erwartung.",
+  7:"Du bietest Tiefe — und schützt sie mit Abstand. Du bist faszinierend in kleinen Dosen. In anhaltender Nähe wirst du stiller.",
+  8:"Du bringst Intensität in Beziehungen — du bist ganz da, oder du bist weg. Dazwischen gibt es wenig.",
+  9:"Du gehst in jede Beziehung mit vollem Herzen. Und du verschwindest langsam darin.",
+  11:"Du spürst was dein Partner fühlt — manchmal bevor er es selbst weiß. Du bist auf eine Weise da, die selten ist.",
+  22:"Du siehst was möglich ist — in Menschen, in Situationen, in Beziehungen. Du investierst in dieses Mögliche.",
+  33:"Du siehst was der andere braucht — oft bevor er es selbst sieht. Du bietest es an. Bevor er fragt."
+};
+
+// Ausdruckszahl freier Teaser
+var AZ_TEASER = {
+  1:"Du nimmst Raum ein — nicht weil du es versuchst, sondern weil du so wirkst. Direkt. Sicher. Klar.",
+  2:"Du machst andere comfortable. Du liest Räume, passt dich an, weichst unnötiger Reibung aus. Du bist leicht. Angenehm. Da.",
+  3:"Du machst Dinge leicht. Probleme werden kleiner wenn du redest. Räume werden wärmer wenn du da bist.",
+  4:"Du wirkst geerdet. Stabil. Verlässlich. Menschen wissen: wenn du da bist, hält etwas.",
+  5:"Du wirkst lebendig. Ungebunden. Als hättest du eine Welt gewählt, die größer ist als die der meisten.",
+  6:"Du wirkst wie jemand, bei dem man ankommen kann. Du gibst ohne Kalkulation.",
+  7:"Du wirkst nachdenklich. Wie jemand, der mehr sieht als er sagt.",
+  8:"Du strahlst aus: ich habe das im Griff. Und jeder glaubt dir.",
+  9:"Du wirkst offen. Zugänglich. Als würde man mit allem kommen können.",
+  11:"Du wirkst, als würdest du Menschen verstehen bevor sie sich selbst verstehen.",
+  22:"Du wirkst orientiert. Als würdest du wissen wohin es geht.",
+  33:"Du wirkst wie jemand, bei dem man ankommen kann. Du gibst ohne Kalkulation."
+};
+
+// Geldmuster freier Teaser
+var GM_TEASER = {
+  1:"Du triffst finanzielle Entscheidungen alleine. Auch wenn jemand neben dir sitzt, der helfen könnte.",
+  2:"Du verhandelst nicht. Nicht deinen Lohn. Nicht deinen Preis. Nicht was du für deine Zeit bekommst.",
+  3:"Du kaufst, wenn du inspiriert bist — und schaust drei Wochen später nicht auf den Kontostand.",
+  4:"Du planst so lange, bis die Gelegenheit vorbei ist. Nicht aus Feigheit. Aus dem echten Bedürfnis, nichts dem Zufall zu überlassen.",
+  5:"Wenn Geld fließt, fließt es. Wenn Flaute ist, greifst du auf Reserven zurück — und baust sie in Bewegungsphasen nicht konsequent wieder auf.",
+  6:"Du finanzierst andere — direkt oder indirekt. Manchmal wissen sie es. Manchmal nicht.",
+  7:"Du ignorierst finanzielle Details so lange, bis sie ein Problem werden.",
+  8:"Du wechselst zwischen zwei Modi: du machst alles — oder du machst gar nichts.",
+  9:"Du unterbietest deinen Wert — konsequent, in verschiedenen Kontexten und oft unbewusst.",
+  11:"Du schwankst zwischen Phasen wo Geld sich wie Energie anfühlt — fließend, leicht, fast selbstverständlich — und Phasen wo du so überwältigt bist, dass du finanzielle Entscheidungen komplett vermeidest.",
+  22:"Du investierst in Visionen bevor du die eigene Grundlage gesichert hast.",
+  33:"Du verlangst weniger als du solltest — und rechtfertigst es mit dem Argument, dass deine Arbeit Berufung ist, kein Geschäft."
+};
+
+function reduce(n, keepMaster) {
+  var masters = [11,22,33,44];
+  while (n > 9) {
+    if (keepMaster && masters.indexOf(n) > -1) break;
+    var s = 0;
+    String(n).split('').forEach(function(d){ s += parseInt(d); });
+    n = s;
+  }
+  return n;
+}
+
+function charVal(c) {
+  var t={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+  return t[c.toUpperCase()]||0;
+}
+
+function calcAll(fname, lname, bdate) {
+  var parts = bdate.split('-');
+  var year = parseInt(parts[0]), month = parseInt(parts[1]), day = parseInt(parts[2]);
+  var dateStr = String(day).padStart(2,'0') + String(month).padStart(2,'0') + String(year);
+  var lz = reduce(dateStr.split('').reduce(function(a,b){return a+parseInt(b);},0), true);
+
+  var full = (fname+lname).replace(/[^a-zA-ZäöüÄÖÜß]/g,'');
+  var vowels = ['A','E','I','O','U'];
+  var allVals=[], vowelVals=[], consVals=[];
+  full.split('').forEach(function(c){
+    var cc = c.toUpperCase();
+    var v = charVal(cc);
+    if(v>0){
+      allVals.push(v);
+      if(vowels.indexOf(cc)>-1) vowelVals.push(v);
+      else consVals.push(v);
+    }
+  });
+
+  var ausdr = reduce(allVals.reduce(function(a,b){return a+b;},0)||1, true);
+  var seele = reduce(vowelVals.reduce(function(a,b){return a+b;},0)||1, true);
+
+  var curYear = new Date().getFullYear();
+  var age = curYear - year;
+  var cycleNum = Math.min(Math.floor(age/13)+1, 6);
+  var cycleStart = year+((cycleNum-1)*13);
+  var cycleEnd = cycleStart+12;
+  var yearsLeft = cycleEnd-curYear+1;
+  var yearInCycle = age-((cycleNum-1)*13)+1;
+  var pct = Math.min(Math.round((yearInCycle/13)*100), 100);
+  var pj = reduce(day+month+curYear, false);
+
+  return {lz:lz,ausdr:ausdr,seele:seele,cycleNum:cycleNum,cycleStart:cycleStart,cycleEnd:cycleEnd,yearsLeft:yearsLeft,yearInCycle:yearInCycle,pct:pct,pj:pj,year:year,month:month,day:day};
+}
+
+var ZYKLEN = {1:"Phase des Erwachens",2:"Phase der Identität",3:"Phase des Aufbaus",4:"Phase der Transformation",5:"Phase der Weisheit",6:"Phase der Vollendung"};
+var NEXT_Z = {1:"Identität & Aufbruch",2:"Aufbau & Kraft",3:"Transformation & Tiefe",4:"Weisheit & Ernte",5:"Vollendung & Weitergabe",6:"Vollendung"};
+
+document.getElementById('soulForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = '✦ Analysiere...';
+
+  setTimeout(function() {
+    var fname = document.getElementById('fname').value.trim();
+    var lname = document.getElementById('lname').value.trim();
+    var bdate = document.getElementById('bdate').value;
+    var birthplace = document.getElementById('birthplace').value.trim();
+
+    var d = calcAll(fname, lname, bdate);
+    var lzData = LZ_DATA[d.lz] || LZ_DATA[1];
+    var bFormatted = String(d.day).padStart(2,'0')+'.'+String(d.month).padStart(2,'0')+'.'+d.year;
+    var masterBadge = lzData.master ? '<span class="master-badge">MEISTERZAHL</span>' : '';
+
+    var hw = HW_TEASER[d.lz] || HW_TEASER[1];
+    var bm = BM_TEASER[d.lz] || BM_TEASER[1];
+    var az = AZ_TEASER[d.ausdr] || AZ_TEASER[1];
+    var gm = GM_TEASER[d.lz] || GM_TEASER[1];
+
+    var paywallBlock = isTest ? '' : '<div class="paywall-block"><div class="pw-symbol">◈</div><div class="pw-title">Vollständige Analyse</div><div class="pw-price">59 €</div><div class="pw-sub">Einmalig · Kein Abo · Sofortzugang</div><a href="checkout.html" class="btn-pay">✦ Analyse freischalten</a><div class="btn-pay-sub">Herzwunsch · Beziehungsmuster · Ausdruckszahl · Geldmuster</div></div>';
+
+    var html = '<div class="result-header">'
+      + '<p class="result-name">✦ '+fname+' '+lname+' ✦</p>'
+      + '<p class="result-date">'+bFormatted+' · '+birthplace+'</p>'
+      + '<div class="lz-badge">'+d.lz+masterBadge+'</div>'
+      + '<p class="lz-name">'+lzData.name+'</p>'
+      + '</div>'
+      + '<div class="divider" style="margin-bottom:32px"></div>';
+
+    // LZ Teaser (immer frei)
+    html += '<div class="pillar"><div class="pillar-title">✦ DEINE LEBENSZAHL '+d.lz+'</div><p>'+lzData.teaser+'</p></div>';
+
+    html += '<div class="ornament"></div>';
+
+    // Herzwunsch (erste Sätze frei, dann Paywall)
+    html += '<div class="pillar teal">'
+      + '<div class="pillar-title">♡ DEIN HERZWUNSCH</div>'
+      + '<p>'+hw+'</p>'
+      + (isTest ? '<p style="margin-top:16px;color:var(--rose-l);font-style:italic">Was genau dich antreibt — und warum du es dir so selten erlaubst — ist jetzt vollständig sichtbar.</p>' : '<p style="margin-top:16px;color:var(--muted);font-style:italic">Innerer Konflikt · Blinder Fleck · Entwicklungsaufgabe · Was möglich wird...</p>')
+      + '</div>';
+
+    if (!isTest) html += paywallBlock;
+    html += '<div class="ornament"></div>';
+
+    // Beziehungsmuster (frei + paywall)
+    html += '<div class="pillar teal">'
+      + '<div class="pillar-title">◐ DEIN BEZIEHUNGSMUSTER</div>'
+      + '<p>'+bm+'</p>'
+      + (isTest ? '<p style="margin-top:16px;color:var(--rose-l);font-style:italic">Die Anziehung, der Bruchpunkt und was möglich wird — jetzt vollständig sichtbar.</p>' : '<p style="margin-top:16px;color:var(--muted);font-style:italic">Die Anziehung · Der Bruchpunkt · Die Einladung · Was möglich wird...</p>')
+      + '</div>';
+
+    if (!isTest) {
+      html += '<div class="pillar teal" style="opacity:.4;pointer-events:none">'
+        + '<div class="pillar-title">◎ DEIN AUSDRUCK</div>'
+        + '<p style="filter:blur(4px)">'+az+'</p></div>';
+      html += '<div class="pillar emerald" style="opacity:.4;pointer-events:none">'
+        + '<div class="pillar-title">⊕ GELD & MUSTER</div>'
+        + '<p style="filter:blur(4px)">'+gm+'</p></div>';
+      html += paywallBlock;
+    } else {
+      html += '<div class="pillar teal"><div class="pillar-title">◎ DEIN AUSDRUCK (AZ '+d.ausdr+')</div><p>'+az+'</p></div>';
+      html += '<div class="pillar emerald"><div class="pillar-title">⊕ GELD & MUSTER</div><p>'+gm+'</p></div>';
+    }
+
+    html += '<div class="ornament"></div>';
+
+    // Persönliches Jahr (immer frei)
+    html += '<div class="pillar"><div class="pillar-title">◉ PERSÖNLICHES JAHR '+d.pj+' ('+d.year+d.year.toString().replace(/\d/g,'')+new Date().getFullYear()+')</div>'
+      + '<p>Dein Persönliches Jahr ist <strong>'+d.pj+'</strong>. Dieser Zyklus lädt ein zu: '
+      + (d.pj===1?'Neuanfängen, Eigeninitiative, Loslassen von Altem':d.pj===2?'Geduld, Verbindung, innerem Lauschen':d.pj===3?'Ausdruck, Freude, Kreativität':d.pj===4?'Struktur, Arbeit, Fundament legen':d.pj===5?'Veränderung, Freiheit, neue Türen':d.pj===6?'Beziehungen, Verantwortung, Heimat':d.pj===7?'Rückzug, Tiefe, Selbsterkenntnis':d.pj===8?'Ernte, Macht, finanzielle Fragen':d.pj===9?'Abschlüssen, Loslassen, innerer Reinigung':'erhöhter Intuition und ungewöhnlichen Chancen')+'.</p></div>';
+
+    // Lebensabschnitt
+    html += '<div class="pillar"><div class="pillar-title">◈ LEBENSABSCHNITT — '+d.cycleNum+'. PHASE</div>'
+      + '<p>Du bist seit <strong>'+d.cycleStart+'</strong> in der <strong>'+(ZYKLEN[d.cycleNum]||'Phase der Meisterschaft')+'</strong>.<br><br>'
+      + 'Jahr <strong>'+d.yearInCycle+' von 13</strong> in diesem Abschnitt.'
+      + '<div class="cycle-bar"><div class="cycle-fill" style="width:'+d.pct+'%"></div></div>'
+      + 'Noch <strong>'+Math.max(0,d.yearsLeft)+' Jahr'+(d.yearsLeft===1?'':'e')+'</strong> in dieser Phase.<br><br>'
+      + 'Ab <strong>'+(d.cycleEnd+1)+'</strong> beginnt die <strong>'+(NEXT_Z[d.cycleNum]||'nächste Phase')+'</strong>.'
+      + '</p></div>';
+
+    // Abschluss
+    html += '<div class="ornament"></div>'
+      + '<div class="abschluss">'
+      + '<div class="abschluss-symbol">◈</div>'
+      + '<div class="abschluss-text">Was bleibt</div>'
+      + '<div class="abschluss-quote">Du hast nichts Neues bekommen.<br>Du hast etwas wiedergefunden.</div>'
+      + '</div>';
+
+    document.getElementById('soulForm').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('result').innerHTML = html;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    btn.disabled = false;
+  }, 800);
+});
+</script>
+</body>
+</html>
