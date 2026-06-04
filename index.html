@@ -45,8 +45,8 @@
       font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.28em;color:var(--rose-l)
     }
     .header-logo img{
-      width:34px;height:auto;
-      filter:drop-shadow(0 0 10px rgba(196,149,106,.6))
+      width:42px;height:auto;
+      filter:drop-shadow(0 0 12px rgba(196,149,106,.65))
     }
     .header-lang{
       font-size:1.1rem;color:var(--muted);opacity:.45;
@@ -70,32 +70,61 @@
     /* Großes Referenzlogo — Herzstück der Marke */
     .hero-visual{
       width:100%;display:flex;justify-content:center;
-      position:relative;margin-bottom:-50px
+      position:relative;margin-bottom:-50px;
+      flex-direction:column;align-items:center
     }
-    /* Unterer Fade — der Lichtstrahl läuft in die Seite */
+    /* Atmosphärische Aura hinter dem Logo */
+    .hero-aura{
+      position:absolute;
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      width:580px;height:580px;
+      background:radial-gradient(circle,
+        rgba(210,158,55,.18) 0%,
+        rgba(196,149,106,.09) 25%,
+        rgba(42,175,160,.04) 50%,
+        transparent 68%
+      );
+      border-radius:50%;pointer-events:none;z-index:0
+    }
+    /* Lichtstrahl — vom Logo nach unten zum Horizont */
+    .hero-beam{
+      position:absolute;
+      bottom:0;left:50%;transform:translateX(-50%);
+      width:2px;height:55%;
+      background:linear-gradient(to bottom,
+        rgba(210,158,55,.65) 0%,
+        rgba(196,149,106,.35) 30%,
+        rgba(42,175,160,.12) 65%,
+        transparent 100%
+      );
+      filter:blur(2.5px);border-radius:1px;z-index:0
+    }
+    /* Boden-Glow */
     .hero-visual::after{
       content:'';position:absolute;
-      bottom:0;left:0;right:0;height:130px;
-      background:linear-gradient(to bottom,transparent 0%,var(--black) 100%);
-      pointer-events:none;z-index:2
+      bottom:-20px;left:50%;transform:translateX(-50%);
+      width:300px;height:100px;
+      background:radial-gradient(ellipse at 50% 100%,
+        rgba(196,149,106,.14) 0%,rgba(42,175,160,.05) 40%,transparent 70%
+      );
+      pointer-events:none;z-index:0
     }
-    /* Floating animation — sehr subtil, 4px, 7s Zyklus */
+    /* Floating animation — subtil, 4px, 7s */
     @keyframes float{
       0%,100%{transform:translateY(0)}
       50%{transform:translateY(-4px)}
     }
     .hero-visual-img{
-      width:clamp(280px,72vw,520px);
+      width:clamp(220px,52vw,340px);
       height:auto;
       display:block;
-      /* Transparenter Alpha-Kanal im WebP — kein blend-mode nötig */
       position:relative;z-index:1;
+      mix-blend-mode:screen;
       animation:float 7s ease-in-out infinite;
-      /* Dezenter Glow — verstärkt den Lichteindruck ohne Box-Effekt */
       filter:
-        drop-shadow(0 0 20px rgba(210,158,55,.35))
-        drop-shadow(0 0 50px rgba(196,149,106,.18))
-        brightness(1.06)
+        drop-shadow(0 0 32px rgba(210,158,55,.7))
+        drop-shadow(0 0 70px rgba(196,149,106,.4))
+        drop-shadow(0 0 110px rgba(196,149,106,.18))
     }
 
     /* Headline + Subline */
@@ -348,12 +377,14 @@
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
 
-  <!-- Referenzlogo — erscheint aus der Dunkelheit -->
   <div class="hero-visual">
-    <img src="logo-hero.webp" alt="AEVIMA" class="hero-visual-img" loading="eager" onerror="this.src='logo-hero.png'"/>
+    <!-- Atmosphärische Elemente — reines CSS -->
+    <div class="hero-aura"></div>
+    <div class="hero-beam"></div>
+    <!-- Original AEVIMA-Logo -->
+    <img src="logo.png" alt="AEVIMA" class="hero-visual-img" loading="eager"/>
   </div>
 
-  <!-- Headline direkt darunter -->
   <div class="hero-text">
     <h1 class="hero-headline">Kein Zufall.<br><span>Dein Weg.</span></h1>
     <p class="hero-sub">AEVIMA macht sichtbar,<br>was unter deinen Mustern liegt.</p>
