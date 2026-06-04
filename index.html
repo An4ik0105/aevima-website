@@ -70,49 +70,32 @@
     /* Großes Referenzlogo — Herzstück der Marke */
     .hero-visual{
       width:100%;display:flex;justify-content:center;
-      position:relative;margin-bottom:-50px;
-      /* Kein border, kein shadow — saubere Schnittstelle */
-      background:none;border:none;box-shadow:none
+      position:relative;margin-bottom:-50px
     }
-    /* Boden-Fade — nahtlose Verschmelzung */
+    /* Unterer Fade — der Lichtstrahl läuft in die Seite */
     .hero-visual::after{
       content:'';position:absolute;
-      bottom:0;left:0;right:0;height:180px;
-      background:linear-gradient(to bottom,transparent 0%,rgba(6,5,7,.8) 60%,var(--black) 100%);
+      bottom:0;left:0;right:0;height:130px;
+      background:linear-gradient(to bottom,transparent 0%,var(--black) 100%);
       pointer-events:none;z-index:2
     }
-    /* Obere Abdunklung */
-    .hero-visual::before{
-      content:'';position:absolute;
-      top:0;left:0;right:0;height:80px;
-      background:linear-gradient(to bottom,var(--black) 0%,transparent 100%);
-      pointer-events:none;z-index:2
+    /* Floating animation — sehr subtil, 4px, 7s Zyklus */
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-4px)}
     }
     .hero-visual-img{
-      width:clamp(300px,78vw,540px);
+      width:clamp(280px,72vw,520px);
       height:auto;
       display:block;
-      mix-blend-mode:screen;
+      /* Transparenter Alpha-Kanal im WebP — kein blend-mode nötig */
       position:relative;z-index:1;
-      /* KEIN drop-shadow — erzeugt goldenen Kasten ums Rechteck */
-      /* Stattdessen: Elliptische Vignette via mask-image */
-      -webkit-mask-image:radial-gradient(
-        ellipse 72% 90% at 50% 44%,
-        black 18%,
-        rgba(0,0,0,.85) 40%,
-        rgba(0,0,0,.45) 62%,
-        rgba(0,0,0,.1) 78%,
-        transparent 90%
-      );
-      mask-image:radial-gradient(
-        ellipse 72% 90% at 50% 44%,
-        black 18%,
-        rgba(0,0,0,.85) 40%,
-        rgba(0,0,0,.45) 62%,
-        rgba(0,0,0,.1) 78%,
-        transparent 90%
-      );
-      filter:brightness(1.08) contrast(1.05)
+      animation:float 7s ease-in-out infinite;
+      /* Dezenter Glow — verstärkt den Lichteindruck ohne Box-Effekt */
+      filter:
+        drop-shadow(0 0 20px rgba(210,158,55,.35))
+        drop-shadow(0 0 50px rgba(196,149,106,.18))
+        brightness(1.06)
     }
 
     /* Headline + Subline */
@@ -367,7 +350,7 @@
 
   <!-- Referenzlogo — erscheint aus der Dunkelheit -->
   <div class="hero-visual">
-    <img src="logo-hero.jpg" alt="AEVIMA" class="hero-visual-img" loading="eager"/>
+    <img src="logo-hero.webp" alt="AEVIMA" class="hero-visual-img" loading="eager" onerror="this.src='logo-hero.png'"/>
   </div>
 
   <!-- Headline direkt darunter -->
