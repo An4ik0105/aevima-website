@@ -106,6 +106,57 @@
     .closing img{max-width:80px;margin-bottom:16px;opacity:.85;filter:drop-shadow(0 0 10px rgba(196,149,106,.2))}
     .cl-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
     .cl-quote{font-size:1rem;color:var(--off-white);line-height:1.9;font-style:italic}
+
+    /* ── SPIRITUAL INTRO ── */
+    .soul-intro{
+      background:linear-gradient(160deg,rgba(24,22,31,.9),rgba(18,16,24,.95));
+      border:1px solid rgba(196,149,106,.18);border-radius:4px;
+      padding:28px 28px;margin-bottom:28px;
+      box-shadow:0 4px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(196,149,106,.07)
+    }
+    .soul-intro p{font-size:.95rem;color:var(--muted);line-height:1.9}
+    .soul-intro p+p{margin-top:10px}
+    .soul-intro-lbl{
+      font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;
+      color:var(--rose);text-transform:uppercase;margin-bottom:12px
+    }
+    /* ── ARCHETYPE ── */
+    .arch-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+    .arch-tag{
+      font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.16em;
+      color:var(--rose-l);border:1px solid var(--br);border-radius:2px;
+      padding:.35rem .8rem;background:rgba(196,149,106,.07);white-space:nowrap
+    }
+    .lz-intro{
+      font-size:.92rem;color:var(--muted);line-height:1.85;
+      margin-bottom:18px;padding-bottom:18px;
+      border-bottom:1px solid rgba(196,149,106,.1)
+    }
+    /* ── MASTER BOX ── */
+    .master-box{
+      background:linear-gradient(135deg,rgba(42,175,160,.06),rgba(42,175,160,.02));
+      border:1px solid rgba(42,175,160,.35);border-radius:4px;
+      padding:22px 24px;margin-bottom:18px;
+      box-shadow:0 0 40px rgba(42,175,160,.06),inset 0 1px 0 rgba(42,175,160,.1)
+    }
+    .master-box-lbl{
+      font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;
+      color:var(--teal);text-transform:uppercase;margin-bottom:10px;
+      display:flex;align-items:center;gap:8px
+    }
+    .master-box p{font-size:.9rem;color:var(--text);line-height:1.85}
+    /* ── SECTION INTRO ── */
+    .sec-intro{
+      background:rgba(255,255,255,.02);border-radius:3px;
+      border-left:2px solid rgba(196,149,106,.25);
+      padding:16px 20px;margin-bottom:20px
+    }
+    .sec-intro.teal{border-left-color:rgba(42,175,160,.35)}
+    .sec-intro-lbl{
+      font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;
+      color:var(--muted);text-transform:uppercase;margin-bottom:8px
+    }
+    .sec-intro p{font-size:.88rem;color:var(--muted);line-height:1.8}
     @media(max-width:500px){.row2{grid-template-columns:1fr}.pillar,.pillar.p-strong{padding:24px 18px}.pillar.p-quiet{padding:20px 18px}.pw-box{padding:32px 18px}.locked-card{padding:24px 18px}}
   </style>
 </head>
@@ -230,6 +281,35 @@ var ZYK={1:"Phase des Erwachens",2:"Phase der Identität",3:"Phase des Aufbaus",
 var NZYK={1:"Identität & Aufbruch",2:"Aufbau & Kraft",3:"Transformation & Tiefe",4:"Weisheit & Ernte",5:"Vollendung & Weitergabe",6:"Vollendung"};
 var PJT={1:"Neuanfänge, Loslassen, Eigeninitiative",2:"Geduld, Verbindung, inneres Lauschen",3:"Ausdruck, Freude, Kreativität",4:"Struktur, Arbeit, Fundament legen",5:"Veränderung, neue Türen, Freiheit",6:"Beziehungen, Verantwortung, Heimat",7:"Rückzug, Tiefe, Selbsterkenntnis",8:"Ernte, Macht, finanzielle Fragen",9:"Abschlüsse, Loslassen, innere Reinigung"};
 
+
+// ── SPIRITUAL DATA ────────────────────────────────────────────────
+var ARCH={1:"Der Pionier",2:"Der Vermittler",3:"Der Schöpfer",4:"Der Baumeister",5:"Der Entdecker",6:"Der Hüter",7:"Der Suchende",8:"Der Gestalter",9:"Der Weise",11:"Der Visionär",22:"Der Meister-Baumeister",33:"Der Lehrer des Herzens"};
+
+var LZ_INTRO={
+  1:"Die 1 ist die Lebenszahl des Aufbruchs. Menschen mit der 1 bringen die Seelenenergie des Pioniers auf die Erde — den Antrieb, Neues zu erschaffen, Wege zu gehen bevor andere sie kennen.<br>Die Seele mit der 1 lernt in diesem Leben Selbstführung: das eigene Innere als Kompass zu nutzen, ohne ständige Bestätigung von außen zu brauchen. Bestimmte Erfahrungen wiederholen sich — bis dieser Weg von innen heraus gegangen werden kann.",
+  2:"Die 2 ist die Lebenszahl der Verbindung. Menschen mit der 2 bringen die Seelenenergie des Vermittlers — ein tiefes Gespür für andere, für Stimmungen, für das Unausgesprochene.<br>Die Seele mit der 2 lernt in diesem Leben Balance: die Fähigkeit zur Verbindung und die eigene Mitte gleichzeitig zu halten. Bestimmte Beziehungsmuster kehren zurück — bis diese Balance gefunden ist.",
+  3:"Die 3 ist die Lebenszahl des Ausdrucks. Menschen mit der 3 bringen die Seelenenergie des Schöpfers — Kreativität, Kommunikation, die Fähigkeit Dinge entstehen zu lassen und Räume zu beleben.<br>Die Seele mit der 3 lernt in diesem Leben Ausdauer: die eigene schöpferische Energie zu bündeln und Tiefe zuzulassen, auch wenn die Leichtigkeit lockt weiterzugehen.",
+  4:"Die 4 ist die Lebenszahl des Fundaments. Menschen mit der 4 bringen die Seelenenergie des Baumeisters — den Impuls, Bleibendes zu erschaffen und Strukturen aufzubauen auf die andere sich verlassen können.<br>Die Seele mit der 4 lernt in diesem Leben eine zentrale Frage: auch sich selbst ein Fundament zu sein. Nicht nur für andere.",
+  5:"Die 5 ist die Lebenszahl der Freiheit. Menschen mit der 5 bringen die Seelenenergie des Entdeckers — den unstillbaren Hunger nach Erfahrung, Bewegung und neuen Horizonten.<br>Die Seele mit der 5 lernt in diesem Leben: Freiheit nicht nur im Gehen zu finden, sondern auch im Bleiben. Tiefe und Freiheit schließen sich nicht aus — diese Erkenntnis ist das Ziel.",
+  6:"Die 6 ist die Lebenszahl der Liebe. Menschen mit der 6 bringen die Seelenenergie des Hüters — tiefe Fürsorge, das natürliche Bedürfnis anderen zu dienen und Geborgenheit zu schenken.<br>Die Seele mit der 6 lernt in diesem Leben: Liebe auch für sich selbst zuzulassen. Geliebt zu werden ohne dafür leisten zu müssen.",
+  7:"Die 7 ist die Lebenszahl der Wahrheit. Menschen mit der 7 bringen die Seelenenergie des Suchenden — den Antrieb unter die Oberfläche zu schauen und Fragen zu stellen die andere nicht stellen.<br>Die Seele mit der 7 lernt in diesem Leben Vertrauen: in andere, in das Leben und in sich selbst. Das Wissen allein reicht nicht — irgendwann muss es sich zeigen dürfen.",
+  8:"Die 8 ist die Lebenszahl der Wirkung. Menschen mit der 8 bringen die Seelenenergie des Gestalters — die Fähigkeit Großes aufzubauen, Ressourcen zu bewegen und sichtbare Wirkung zu erzeugen.<br>Die Seele mit der 8 lernt in diesem Leben: sich die eigene Größe zu erlauben. Nicht als Ego — sondern als Ausdruck dessen, wofür sie wirklich hier ist.",
+  9:"Die 9 ist die höchste einstellige Lebenszahl. Menschen mit der 9 bringen die Seelenenergie der Weisen — umfassendes Verständnis, tiefes Mitgefühl, die Fähigkeit das große Bild zu sehen.<br>Die Seele mit der 9 lernt in diesem Leben: auch empfangen zu dürfen, was sie so bereitwillig gibt. Und zu erkennen, dass Geben und Nehmen kein Widerspruch sind.",
+  11:"Die 11 ist eine Meisterzahl — und gleichzeitig eine Vertiefung der 2. Menschen mit der 11 bringen erhöhte Intuition, ein tiefes inneres Wissen und die Fähigkeit auf Ebenen wahrzunehmen, die anderen verborgen bleiben.<br>Die Seele mit der 11 lernt in diesem Leben: diese Empfindsamkeit als Stärke zu tragen — statt als Last.",
+  22:"Die 22 ist eine Meisterzahl — und gleichzeitig eine Vertiefung der 4. Menschen mit der 22 bringen die Fähigkeit, Großes in die Realität zu bringen: Ideen die Bestand haben und Strukturen die über Generationen wirken.<br>Die Seele mit der 22 lernt in diesem Leben: die eigene Vision als real zu akzeptieren — und anzufangen.",
+  33:"Die 33 ist die seltenste Meisterzahl. Sie vereint die Energie des Ausdrucks und der Liebe auf einer erhöhten Ebene. Menschen mit der 33 bringen mitfühlende Führung — die Fähigkeit andere auf tiefe Weise zu transformieren.<br>Die Seele mit der 33 lernt in diesem Leben: diese Gabe auch sich selbst gegenüber einzusetzen."
+};
+
+var MASTER_BOX={
+  11:"Die 11 ist keine Variante der 2. Sie ist eine eigene Seelenenergie — mit erhöhtem Potenzial und erhöhter Empfindsamkeit. Menschen mit der 11 stehen oft zwischen zwei Welten: der inneren Welt der Intuition und Tiefe, und der äußeren Welt die oft langsamer und rauer ist.<br><br>Die Herausforderung ist nicht die Energie — sie ist, sie zu tragen ohne daran zu zerbrechen. Und in ihr zu lernen: das eigene Wissen ist real, auch wenn die Welt es noch nicht sieht.",
+  22:"Die 22 ist nicht einfach eine starke 4. Sie ist die Energie des Meister-Baumeisters — jemand, der nicht nur baut, sondern etwas erschaffen kann, das nach ihm bleibt und wirkt.<br><br>Die Herausforderung der 22 ist die Lücke zwischen Vision und Start. Was noch nicht begonnen wurde, kann nicht scheitern. Diese stille Sicherheit kostet die Vision ihre Wirklichkeit.",
+  33:"Die 33 vereint die Energie der 3 (Ausdruck) und der 6 (Liebe) auf der intensivsten Schwingungsebene. Menschen mit der 33 sind hier um zu dienen — nicht aus Pflicht, sondern aus einer tiefen Ausrichtung auf das Wohlergehen anderer.<br><br>Die Herausforderung der 33 ist, diese Gabe nicht bis zur Erschöpfung zu geben. Mitgefühl mit anderen ist vollständiger, wenn es auch Mitgefühl mit sich selbst einschließt."
+};
+
+var SOUL_INTRO="Die Seele kommt nicht zufällig auf die Erde. Sie bringt Potenziale, Erfahrungen und Lernaufgaben mit — und formt im Laufe des Lebens Muster durch Erziehung, Erwartungen, Schutzmechanismen und Erfahrungen. Diese Muster können das wahre Selbst überlagern.<br><br>Dieses Profil lehrt nichts Neues. Es macht sichtbar, was bereits vorhanden ist. Die Zahlen beschreiben nicht, wer du sein solltest. Sie geben Hinweise darauf, wer du im Kern bereits bist.<br><br><em>Die Muster sind nicht deine Identität. Sie sind das, was sich über die Identität gelegt hat.</em>";
+var AZ_INTRO="Die Lebenszahl beschreibt den Weg der Seele. Die Ausdruckszahl beschreibt, wie sich diese Energie nach außen zeigt — in der Persönlichkeit, in der Wirkung, in der Art wie andere dich erleben.<br>Beide Zahlen können unterschiedlich sein. Das ist keine Spannung — es ist eine Erweiterung. Deine Lebenszahl zeigt, wohin du gehst. Deine Ausdruckszahl zeigt, wie du dabei wirkst.";
+var PJ_INTRO="Nicht jede Lebensphase dient derselben Aufgabe. Das persönliche Jahr beschreibt den energetischen Schwerpunkt des aktuellen Zyklus — das Thema, das dein Leben gerade einlädt zu vertiefen. Es ist kein Befehl. Es ist ein Hinweis auf das, womit du gerade in Berührung bist.";
+var CYC_INTRO="Die Lebenszahl beschreibt den gesamten Weg. Aber der Weg besteht aus Etappen — Lebensabschnitte von je 13 Jahren, in denen unterschiedliche Seelenaufgaben im Vordergrund stehen. Jede Phase aktiviert andere Potenziale. Was im letzten Abschnitt Lernaufgabe war, kann im nächsten Ressource werden. AEVIMA zeigt nicht nur wer du bist — sondern auch wo auf dem Weg du dich gerade befindest.";
 // ── HELPER: render full section ───────────────────────────────────
 function fsec(lbl,txt,cls){cls=cls||'';return'<div class="full-sec"><div class="full-sec-lbl '+cls+'">'+lbl+'</div><p>'+txt+'</p></div>';}
 
@@ -303,7 +383,20 @@ function buildResult(fn,ln,bd,bp){
 
   var logoHtml='<div class="r-logo"><img src="logo.png" alt="AEVIMA"/></div>';
   var heroHtml='<div class="r-hero"><div class="r-name">'+fn+' '+ln+'</div><div class="r-date">'+bf+' &middot; '+bp+'</div><span class="lz-num">'+d.lz+mb+'</span><span class="lz-name">'+ld.n+'</span></div>';
-  var lzHtml='<div class="pillar"><div class="pt">&#x2756; Lebenszahl '+d.lz+'</div><div class="p-sublabel">Dein Lebensweg &middot; Deine Energie &middot; Dein Kern</div><p>'+ld.t+'</p></div>';
+  var arch=ARCH[d.lz]||'';
+  var lzIntro=LZ_INTRO[d.lz]||'';
+  var masterBox=MASTER_BOX[d.lz]?'<div class="master-box"><div class="master-box-lbl">&#9670; Meisterzahl '+d.lz+'</div><p>'+MASTER_BOX[d.lz]+'</p></div>':'';
+
+  var soulIntroHtml='<div class="soul-intro"><div class="soul-intro-lbl">&#9651; &#220;ber dieses Profil</div><p>'+SOUL_INTRO+'</p></div>';
+
+  var lzHtml='<div class="pillar">'
+    +'<div class="pt">&#x2756; Lebenszahl '+d.lz+'</div>'
+    +'<div class="arch-row"><span class="arch-tag">'+arch+'</span></div>'
+    +'<div class="lz-intro">'+lzIntro+'</div>'
+    +masterBox
+    +'<div class="p-sublabel">Dein Pers&#246;nlichkeitsprofil &middot; Deine Energie &middot; Dein Schatten</div>'
+    +'<p>'+ld.t+'</p>'
+    +'</div>';
 
   // ── HERZWUNSCH ────────────────────────────────────────────────
   var hwHtml;
@@ -380,6 +473,7 @@ function buildResult(fn,ln,bd,bp){
   }
 
   // ── AUSDRUCKSZAHL ─────────────────────────────────────────────
+  var azSecIntro='<div class="sec-intro teal"><div class="sec-intro-lbl">Ausdruckszahl &mdash; Warum das wichtig ist</div><p>'+AZ_INTRO+'</p></div>';
   var azHtml;
   if(isTest){
     azHtml='<div class="pillar p-teal p-strong">'
@@ -426,14 +520,19 @@ function buildResult(fn,ln,bd,bp){
   var cycHtml='<div class="pillar"><div class="pt">&#9670; Lebensabschnitt &mdash; '+d.cn+'. Phase</div><div class="p-sublabel">Wo du bist &middot; Wie lange noch &middot; Was kommt</div><p>Seit <strong>'+d.cs+'</strong> in der <strong>'+(ZYK[d.cn]||'Phase der Meisterschaft')+'</strong>.<br><br>Jahr <strong>'+d.yc+' von 13</strong>.<div class="cyc-bar"><div class="cyc-fill" style="width:'+d.pct+'%"></div></div>Noch <strong>'+d.yl+' Jahr'+(d.yl===1?'':'e')+'</strong> &middot; Ab <strong>'+(d.ce+1)+'</strong>: '+(NZYK[d.cn]||'nächste Phase')+'.</p></div>';
   var closingHtml='<div class="closing"><img src="logo.png" alt="AEVIMA"/><div class="cl-label">Was bleibt</div><div class="cl-quote">Du hast nichts Neues bekommen.<br>Du hast etwas wiedergefunden.</div></div>';
 
+  var pjSI='<div class="sec-intro"><div class="sec-intro-lbl">Pers&#246;nliches Jahr &mdash; Aktuelle Phase</div><p>'+PJ_INTRO+'</p></div>';
+  var cycSI='<div class="sec-intro teal"><div class="sec-intro-lbl">Lebensabschnitte &mdash; Der Weg in Etappen</div><p>'+CYC_INTRO+'</p></div>';
+
   var full=logoHtml+heroHtml
     +'<div class="divider" style="margin:0 auto 32px"></div>'
+    +soulIntroHtml
     +lzHtml+'<div class="orn"></div>'
     +hwHtml+bmHtml+pwHtml
     +'<div class="orn-t"></div>'
-    +azHtml+gmHtml
+    +azSecIntro+azHtml+gmHtml
     +'<div class="orn"></div>'
-    +pjHtml+cycHtml
+    +pjSI+pjHtml
+    +cycSI+cycHtml
     +'<div class="orn"></div>'
     +closingHtml;
 
