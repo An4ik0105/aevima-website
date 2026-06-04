@@ -121,6 +121,10 @@
       position:relative;z-index:1;
       mix-blend-mode:screen;
       animation:float 7s ease-in-out infinite;
+      /* Wordmark (untere ~36%) ausblenden — zeigt nur das Symbol */
+      clip-path:inset(0 0 36% 0);
+      /* Negativer unterer Abstand kompensiert geklippten Bereich */
+      margin-bottom:calc(clamp(220px,52vw,340px) * -0.36 * 1.45);
       filter:
         drop-shadow(0 0 32px rgba(210,158,55,.7))
         drop-shadow(0 0 70px rgba(196,149,106,.4))
