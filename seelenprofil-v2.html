@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dein Seelenprofil — AEVIMA</title>
+  <!-- v=design-2.0-header -->
   <link rel="preconnect" href="https://fonts.bunny.net"/>
   <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|raleway:300,400,500,600&display=swap" rel="stylesheet"/>
   <style>
@@ -194,10 +195,45 @@
       color:var(--muted);text-transform:uppercase;margin-bottom:8px
     }
     .sec-intro p{font-size:.88rem;color:var(--muted);line-height:1.8}
+
+    /* ── SITE HEADER ── */
+    .site-header{
+      position:sticky;top:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 24px;
+      background:rgba(6,5,7,.85);
+      backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(196,149,106,.08)
+    }
+    .site-header-logo{
+      font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.28em;
+      color:var(--rose-l);text-decoration:none;
+      display:flex;align-items:center;gap:10px
+    }
+    .site-header-logo img{width:28px;height:auto;filter:drop-shadow(0 0 8px rgba(196,149,106,.4))}
+    .site-header-menu{
+      display:flex;flex-direction:column;gap:4px;cursor:pointer;padding:4px;opacity:.7
+    }
+    .site-header-menu span{
+      display:block;width:20px;height:1.5px;
+      background:var(--rose-l);border-radius:1px;transition:opacity .2s
+    }
+    .site-header-menu:hover span{opacity:.6}
     @media(max-width:500px){.row2{grid-template-columns:1fr}.pillar,.pillar.p-strong{padding:24px 18px}.pillar.p-quiet{padding:20px 18px}.pw-box{padding:32px 18px}.locked-card{padding:24px 18px}}
   </style>
 </head>
 <body>
+<header class="site-header">
+  <a class="site-header-logo" href="seelenprofil-v2.html">
+    <img src="logo.png" alt="AEVIMA Symbol"/>
+    AEVIMA
+  </a>
+  <div class="site-header-menu" aria-label="Menü">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
 <div class="page">
   <div class="logo-wrap"><img src="logo.png" alt="AEVIMA" loading="eager"/></div>
   <div class="intro">
