@@ -10,48 +10,23 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --black:#0F0E14;--night:#18161F;--off-white:#EDE9E2;--text:#D8D4CC;--muted:#9B8FA8;
-      --emerald:#1E7A52;--teal:#2AAFA0;
-      --rose:#C4956A;--rose-l:#E8C4A0;
+      --emerald:#1E7A52;--teal:#2AAFA0;--rose:#C4956A;--rose-l:#E8C4A0;
       --br:rgba(196,149,106,.22);--bt:rgba(42,175,160,.28);--be:rgba(30,122,82,.3);
     }
     html{scroll-behavior:smooth}
-    body{
-      background:var(--black);color:var(--text);
-      font-family:'Raleway',sans-serif;font-weight:300;line-height:1.85;
-      min-height:100vh;font-size:18px
-    }
-    body::before{
-      content:'';position:fixed;inset:0;
-      background:
-        radial-gradient(ellipse at 30% 10%,rgba(30,122,82,.05) 0,transparent 55%),
-        radial-gradient(ellipse at 70% 90%,rgba(42,175,160,.04) 0,transparent 55%);
-      pointer-events:none;z-index:0
-    }
+    body{background:var(--black);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.85;min-height:100vh;font-size:18px}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 10%,rgba(30,122,82,.05) 0,transparent 55%),radial-gradient(ellipse at 70% 90%,rgba(42,175,160,.04) 0,transparent 55%);pointer-events:none;z-index:0}
     .page{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 20px 100px}
-
-    /* ── LOGO ── */
     .logo-wrap{display:flex;justify-content:center;padding:48px 0 32px}
     .logo-wrap img{max-width:210px;height:auto;filter:drop-shadow(0 0 20px rgba(196,149,106,.25))}
-
-    /* ── INTRO ── */
     .intro{text-align:center;padding:0 0 40px}
-    .headline{
-      font-family:'Cinzel',serif;font-size:clamp(1.4rem,5vw,1.9rem);
-      font-weight:600;color:var(--rose-l);letter-spacing:.06em;line-height:1.35;margin-bottom:10px
-    }
+    .headline{font-family:'Cinzel',serif;font-size:clamp(1.4rem,5vw,1.9rem);font-weight:600;color:var(--rose-l);letter-spacing:.06em;line-height:1.35;margin-bottom:10px}
     .subline{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:28px}
     .divider{width:56px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:0 auto 28px}
     .intro-body{color:var(--muted);font-size:1rem;line-height:1.7}
-
-    /* ── FORM ── */
     .form-group{margin-bottom:18px}
     label{display:block;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;color:var(--rose);text-transform:uppercase;margin-bottom:7px}
-    .field{
-      width:100%;padding:14px 16px;background:rgba(255,255,255,.04);
-      border:1px solid var(--br);border-radius:2px;color:var(--off-white);
-      font-family:'Raleway',sans-serif;font-size:1rem;outline:none;
-      transition:border-color .25s,background .25s
-    }
+    .field{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid var(--br);border-radius:2px;color:var(--off-white);font-family:'Raleway',sans-serif;font-size:1rem;outline:none;transition:border-color .25s,background .25s}
     .field:focus{border-color:rgba(42,175,160,.6);background:rgba(42,175,160,.03)}
     .field::placeholder{color:var(--muted);opacity:.55}
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -59,19 +34,10 @@
     .check-row input{width:17px;height:17px;min-width:17px;margin-top:4px;accent-color:var(--teal)}
     .check-row span{font-size:.875rem;color:var(--muted);line-height:1.6}
     .check-row a{color:var(--rose);text-decoration:none}
-    .btn-start{
-      width:100%;padding:18px 24px;
-      background:linear-gradient(135deg,var(--emerald),#16704A);
-      color:var(--off-white);border:none;border-radius:2px;
-      font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;
-      cursor:pointer;transition:all .25s;margin-top:10px;min-height:56px;
-      display:flex;align-items:center;justify-content:center;gap:8px
-    }
+    .btn-start{width:100%;padding:18px 24px;background:linear-gradient(135deg,var(--emerald),#16704A);color:var(--off-white);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .25s;margin-top:10px;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px}
     .btn-start:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(30,122,82,.4)}
     .btn-start:disabled{opacity:.45;cursor:not-allowed}
     .btn-note{color:var(--muted);font-size:.82rem;text-align:center;margin-top:10px}
-
-    /* ── RESULT ── */
     #result{display:none;margin-top:8px}
     .r-logo{display:flex;justify-content:center;padding:40px 0 28px}
     .r-logo img{max-width:150px;height:auto;filter:drop-shadow(0 0 16px rgba(196,149,106,.2))}
@@ -81,216 +47,99 @@
     .lz-num{font-family:'Cinzel',serif;font-size:4.2rem;font-weight:700;color:var(--rose);line-height:1;display:block}
     .lz-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--rose-l);letter-spacing:.12em;margin-top:8px;display:block}
     .master-tag{display:inline-block;font-size:.6rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.2rem .6rem;border-radius:20px;margin-left:8px;vertical-align:middle}
-
-    /* ── PILLARS ── */
-    .pillar{
-      border-radius:4px;padding:32px;margin-bottom:20px;
-      border:1px solid var(--br);
-      box-shadow:0 6px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.04)
-    }
+    .pillar{border-radius:4px;padding:32px;margin-bottom:20px;border:1px solid var(--br);box-shadow:0 6px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.04)}
     .pillar.p-strong{padding:36px 32px;margin-bottom:24px}
     .pillar.p-quiet{padding:24px 28px;margin-bottom:14px}
-    .pt{
-      font-family:'Cinzel',serif;font-size:.67rem;letter-spacing:.22em;
-      color:var(--rose);text-transform:uppercase;margin-bottom:6px;
-      display:flex;align-items:center;gap:8px
-    }
-    .p-sublabel{
-      font-size:.7rem;letter-spacing:.12em;color:var(--muted);
-      text-transform:uppercase;font-family:'Raleway',sans-serif;font-weight:400;
-      margin-bottom:18px;padding-bottom:14px;
-      border-bottom:1px solid rgba(196,149,106,.12)
-    }
-    .p-teal{
-      border-color:var(--bt);background:rgba(42,175,160,.03);
-      box-shadow:0 6px 40px rgba(0,0,0,.35),0 0 50px rgba(42,175,160,.05),inset 0 1px 0 rgba(42,175,160,.07)
-    }
+    .pt{font-family:'Cinzel',serif;font-size:.67rem;letter-spacing:.22em;color:var(--rose);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+    .p-sublabel{font-size:.7rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;font-family:'Raleway',sans-serif;font-weight:400;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(196,149,106,.12)}
+    .p-teal{border-color:var(--bt);background:rgba(42,175,160,.03);box-shadow:0 6px 40px rgba(0,0,0,.35),0 0 50px rgba(42,175,160,.05),inset 0 1px 0 rgba(42,175,160,.07)}
     .p-teal .pt{color:var(--teal)}
     .p-em{border-color:var(--be);background:rgba(30,122,82,.025)}
     .p-em .pt{color:#3DB87A}
     .pillar p{font-size:1rem;color:var(--text);line-height:1.85}
     .pillar p strong{color:var(--off-white)}
     .pillar p em{color:var(--rose-l);font-style:italic}
-    .fade-line{
-      color:var(--muted);font-style:italic;font-size:.9rem;
-      margin-top:16px;padding-top:14px;
-      border-top:1px solid rgba(196,149,106,.12);
-      letter-spacing:.03em;line-height:1.7
-    }
-
-    /* ── BADGE ── */
-    .hot-badge{
-      display:inline-flex;align-items:center;font-family:'Cinzel',serif;
-      font-size:.52rem;letter-spacing:.12em;padding:.2rem .55rem;border-radius:20px;
-      margin-left:8px;background:rgba(42,175,160,.12);color:var(--teal);
-      border:1px solid rgba(42,175,160,.25)
-    }
-
-    /* ── PAYWALL ── */
-    .pw-box{
-      background:linear-gradient(160deg,rgba(22,20,30,1) 0%,rgba(18,16,24,1) 100%);
-      border:1px solid rgba(42,175,160,.4);border-radius:6px;
-      padding:44px 32px;text-align:center;margin:36px 0 28px;
-      box-shadow:0 12px 60px rgba(0,0,0,.6),0 0 80px rgba(42,175,160,.08),inset 0 1px 0 rgba(42,175,160,.12)
-    }
+    .fade-line{color:var(--muted);font-style:italic;font-size:.9rem;margin-top:16px;padding-top:14px;border-top:1px solid rgba(196,149,106,.12);letter-spacing:.03em;line-height:1.7}
+    /* Full-content sections */
+    .full-sec{margin-top:22px;padding-top:18px;border-top:1px solid rgba(196,149,106,.1)}
+    .full-sec-lbl{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;color:var(--rose);text-transform:uppercase;margin-bottom:10px}
+    .full-sec-lbl.tl{color:var(--teal)}
+    .full-sec-lbl.gn{color:#3DB87A}
+    .full-sec p{font-size:1rem;color:var(--text);line-height:1.85;margin-bottom:0}
+    .full-sec p+p{margin-top:10px}
+    /* Paywall */
+    .pw-box{background:linear-gradient(160deg,rgba(22,20,30,1) 0%,rgba(18,16,24,1) 100%);border:1px solid rgba(42,175,160,.4);border-radius:6px;padding:44px 32px;text-align:center;margin:36px 0 28px;box-shadow:0 12px 60px rgba(0,0,0,.6),0 0 80px rgba(42,175,160,.08),inset 0 1px 0 rgba(42,175,160,.12)}
     .pw-logo{display:flex;justify-content:center;margin-bottom:28px}
     .pw-logo img{max-width:90px;height:auto;opacity:.95;filter:drop-shadow(0 0 12px rgba(196,149,106,.3))}
-    .pw-headline{
-      font-family:'Cinzel',serif;font-size:1.15rem;color:var(--rose-l);
-      line-height:1.55;letter-spacing:.04em;margin-bottom:16px;font-weight:600
-    }
-    .pw-sub{color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:28px;font-style:italic}
-    .pw-divider{width:48px;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);margin:0 auto 28px}
-    .pw-pilot-label{
-      font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;
-      color:var(--teal);text-transform:uppercase;margin-bottom:6px
-    }
+    .pw-headline{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--rose-l);line-height:1.55;letter-spacing:.04em;margin-bottom:16px;font-weight:600}
+    .pw-questions{margin-bottom:24px;text-align:left}
+    .pw-q{font-family:'Cinzel',serif;font-size:.82rem;color:var(--off-white);line-height:1.55;padding:9px 0;border-bottom:1px solid rgba(196,149,106,.08);letter-spacing:.02em}
+    .pw-q:last-child{border-bottom:none}
+    .pw-divider{width:48px;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);margin:0 auto 24px}
+    .pw-section-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+    .pw-pilot-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
     .pw-price{font-family:'Cinzel',serif;font-size:2.8rem;color:var(--rose);line-height:1;margin-bottom:6px;font-weight:700}
     .pw-price-note{color:var(--muted);font-size:.82rem;margin-bottom:28px}
     .pw-items{margin-bottom:32px;text-align:left}
     .pw-item{display:flex;align-items:flex-start;gap:12px;color:var(--text);font-size:.95rem;padding:7px 0;line-height:1.55}
     .pw-check{color:var(--teal);font-size:.8rem;margin-top:3px;flex-shrink:0}
-    .btn-pw{
-      display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
-      padding:19px;background:linear-gradient(135deg,var(--emerald),#16704A);
-      color:var(--off-white);border:none;border-radius:3px;
-      font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;
-      cursor:pointer;transition:all .25s;min-height:58px;text-decoration:none;
-      box-shadow:0 4px 28px rgba(30,122,82,.4)
-    }
-    .btn-pw:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(30,122,82,.55)}
-    .pw-questions{margin-bottom:24px;text-align:left}
-    .pw-q{
-      font-family:'Cinzel',serif;font-size:.82rem;color:var(--off-white);
-      line-height:1.55;padding:9px 0;
-      border-bottom:1px solid rgba(196,149,106,.08);
-      letter-spacing:.02em
-    }
-    .pw-q:last-child{border-bottom:none}
-    .pw-section-label{
-      font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;
-      color:var(--muted);text-transform:uppercase;margin-bottom:14px
-    }
-    .pw-closing{
-      font-size:.95rem;color:var(--muted);line-height:1.9;
-      font-style:normal;margin-bottom:4px
-    }
+    .pw-closing{font-size:.95rem;color:var(--muted);line-height:1.9;margin-bottom:4px}
     .pw-closing em{color:var(--rose-l);font-style:italic;font-size:1rem}
+    .btn-pw{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:19px;background:linear-gradient(135deg,var(--emerald),#16704A);color:var(--off-white);border:none;border-radius:3px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .25s;min-height:58px;text-decoration:none;box-shadow:0 4px 28px rgba(30,122,82,.4)}
+    .btn-pw:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(30,122,82,.55)}
     .pw-trust{color:var(--muted);font-size:.78rem;margin-top:14px}
-
-    /* ── LOCKED CARDS ── */
+    /* Locked */
     .locked-wrap{position:relative;overflow:hidden;border-radius:4px;margin-bottom:20px}
-    .locked-card{
-      border:1px solid rgba(196,149,106,.14);border-radius:4px;
-      padding:32px;background:rgba(15,14,20,.55)
-    }
+    .locked-card{border:1px solid rgba(196,149,106,.14);border-radius:4px;padding:32px;background:rgba(15,14,20,.55)}
     .locked-card.p-quiet-card{opacity:.75;padding:24px 28px}
     .locked-teaser{position:relative;margin-top:14px;min-height:90px}
-    .locked-teaser-text{
-      color:var(--text);font-size:1rem;line-height:1.85;
-      filter:blur(5px);user-select:none;pointer-events:none;
-      -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.4) 60%,transparent 100%);
-      mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.4) 60%,transparent 100%)
-    }
-    .locked-over{
-      position:absolute;bottom:0;left:0;right:0;
-      display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-      padding:16px;
-      background:linear-gradient(to top,rgba(15,14,20,.98) 35%,transparent 100%)
-    }
+    .locked-teaser-text{color:var(--text);font-size:1rem;line-height:1.85;filter:blur(5px);user-select:none;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.4) 60%,transparent 100%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.4) 60%,transparent 100%)}
+    .locked-over{position:absolute;bottom:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:16px;background:linear-gradient(to top,rgba(15,14,20,.98) 35%,transparent 100%)}
     .locked-icon{font-size:1.2rem;color:var(--rose);margin-bottom:8px;opacity:.75}
-    .locked-hint{
-      font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.1em;
-      color:var(--muted);text-align:center;font-style:italic
-    }
-
-    /* ── CYCLE ── */
+    .locked-hint{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.1em;color:var(--muted);text-align:center;font-style:italic}
+    .hot-badge{display:inline-flex;align-items:center;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;padding:.2rem .55rem;border-radius:20px;margin-left:8px;background:rgba(42,175,160,.12);color:var(--teal);border:1px solid rgba(42,175,160,.25)}
     .cyc-bar{background:rgba(255,255,255,.07);border-radius:20px;height:7px;margin:10px 0;overflow:hidden}
     .cyc-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px}
-
-    /* ── ORNAMENTS ── */
     .orn{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:40px auto}
     .orn-t{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);margin:40px auto}
-
-    /* ── CLOSING ── */
     .closing{text-align:center;padding:48px 0 60px}
     .closing img{max-width:80px;margin-bottom:16px;opacity:.85;filter:drop-shadow(0 0 10px rgba(196,149,106,.2))}
     .cl-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
     .cl-quote{font-size:1rem;color:var(--off-white);line-height:1.9;font-style:italic}
-
-    @media(max-width:500px){
-      .row2{grid-template-columns:1fr}
-      .pillar,.pillar.p-strong{padding:24px 18px}
-      .pillar.p-quiet{padding:20px 18px}
-      .pw-box{padding:32px 18px}
-      .locked-card{padding:24px 18px}
-    }
+    @media(max-width:500px){.row2{grid-template-columns:1fr}.pillar,.pillar.p-strong{padding:24px 18px}.pillar.p-quiet{padding:20px 18px}.pw-box{padding:32px 18px}.locked-card{padding:24px 18px}}
   </style>
 </head>
 <body>
 <div class="page">
-
-  <!-- LOGO -->
-  <div class="logo-wrap">
-    <img src="logo.png" alt="AEVIMA" loading="eager"/>
-  </div>
-
-  <!-- INTRO -->
+  <div class="logo-wrap"><img src="logo.png" alt="AEVIMA" loading="eager"/></div>
   <div class="intro">
     <h1 class="headline">Manche Dinge<br>wiederholen sich.<br><span style="color:var(--teal)">Nicht zufällig.</span></h1>
     <div class="divider"></div>
     <p class="subline">Kein Zufall. Dein Weg.</p>
     <p class="intro-body">Name · Geburtsdatum · Geburtsort — das ist alles was du brauchst.</p>
   </div>
-
-  <!-- FORM -->
   <form id="soulForm" novalidate>
     <div class="row2">
-      <div class="form-group">
-        <label for="fname">Vorname</label>
-        <input type="text" id="fname" class="field" placeholder="Anna" required/>
-      </div>
-      <div class="form-group">
-        <label for="lname">Nachname</label>
-        <input type="text" id="lname" class="field" placeholder="Muster" required/>
-      </div>
+      <div class="form-group"><label for="fname">Vorname</label><input type="text" id="fname" class="field" placeholder="Anna" required/></div>
+      <div class="form-group"><label for="lname">Nachname</label><input type="text" id="lname" class="field" placeholder="Muster" required/></div>
     </div>
-    <div class="form-group">
-      <label for="bdate">Geburtsdatum</label>
-      <input type="date" id="bdate" class="field" required/>
-    </div>
-    <div class="form-group">
-      <label for="birthplace">Geburtsort</label>
-      <input type="text" id="birthplace" class="field" placeholder="Stadt, Land" required/>
-    </div>
-    <div class="form-group">
-      <label for="email">E-Mail</label>
-      <input type="email" id="email" class="field" placeholder="deine@email.de" required/>
-    </div>
+    <div class="form-group"><label for="bdate">Geburtsdatum</label><input type="date" id="bdate" class="field" required/></div>
+    <div class="form-group"><label for="birthplace">Geburtsort</label><input type="text" id="birthplace" class="field" placeholder="Stadt, Land" required/></div>
+    <div class="form-group"><label for="email">E-Mail</label><input type="email" id="email" class="field" placeholder="deine@email.de" required/></div>
     <div style="margin:20px 0 4px">
-      <div class="check-row">
-        <input type="checkbox" id="ds" required/>
-        <span>Ich stimme der Verarbeitung meiner Daten gemäß <a href="datenschutz.html">Datenschutzerklärung</a> zu. *</span>
-      </div>
-      <div class="check-row">
-        <input type="checkbox" id="nl"/>
-        <span>Ich möchte Einblicke per E-Mail erhalten.</span>
-      </div>
+      <div class="check-row"><input type="checkbox" id="ds" required/><span>Ich stimme der Verarbeitung meiner Daten gemäß <a href="datenschutz.html">Datenschutzerklärung</a> zu. *</span></div>
+      <div class="check-row"><input type="checkbox" id="nl"/><span>Ich möchte Einblicke per E-Mail erhalten.</span></div>
     </div>
     <button type="submit" class="btn-start" id="submitBtn">✦ Analyse starten</button>
     <p class="btn-note">Kostenlose Vorschau · Kein Konto nötig</p>
   </form>
-
-  <!-- RESULT -->
   <div id="result"></div>
-
 </div>
 <script>
-// ── CONFIG ───────────────────────────────────────────────────────
-var isTest = location.search.indexOf('test=1') > -1 || localStorage.getItem('aevima-test') === '1';
+var isTest=location.search.indexOf('test=1')>-1||localStorage.getItem('aevima-test')==='1';
 
-// ── GENDER-NEUTRAL LIFE NUMBER DATA ─────────────────────────────
-var LZ = {
+// ── TEASER TEXTS (Free preview) ───────────────────────────────────
+var LZ={
   1:{n:"Die 1 — Wille &amp; Aufbruch",t:"Andere hören auf. Du machst weiter. Nicht weil du stärker bist — sondern weil aufhören sich falsch anfühlt.<br><br>Du hast schon oft auf dich selbst gehört, wenn alle anderen gesagt haben: Lass es. Und meistens hattest du recht.<br><br><em>Was du selten sagst:</em> dass es auch dich kostet."},
   2:{n:"Die 2 — Verbindung &amp; Tiefe",t:"Du weißt bereits wie sich das Gespräch entwickeln wird — noch bevor die andere Person angefangen hat zu reden. Du liest Räume. Du liest Menschen. Fast immer richtig.<br><br>Das Problem: Du bist so beschäftigt damit, andere zu verstehen, dass kaum jemand merkt, dass du selbst auch verstanden werden willst."},
   3:{n:"Die 3 — Ausdruck &amp; Kreativität",t:"Du machst schwere Dinge leicht. In Gesprächen, in Räumen, in Beziehungen. Menschen fühlen sich in deiner Nähe wohler als sie sich erklären können.<br><br>Das Problem: Die schweren Dinge, die du selbst trägst, werden dadurch selten besprochen. Weil du sie ebenfalls leicht klingen lässt."},
@@ -306,17 +155,83 @@ var LZ = {
 };
 
 var HW={1:"Du willst jemanden, der bleibt — auch wenn du nichts leistest. Nicht wegen dem was du kannst. Sondern einfach weil du da bist.",2:"Du willst jemanden, der ohne Aufforderung fragt wie es dir wirklich geht. Und der dann aufhört zu reden — und wartet.",3:"Du willst gesehen werden — nicht für das was du produzierst oder wie du die Stimmung hebst. Für das was du bist wenn du aufhörst, es für andere leichter zu machen.",4:"Du willst einmal sagen dürfen: Ich weiß nicht ob ich das schaffe — ohne dass sofort eine Lösung auf dem Tisch liegt. Nur damit jemand es weiß.",5:"Du willst tief gekannt sein. Und gleichzeitig nicht festgehalten werden. Dass beides geht — das glaubst du noch nicht wirklich.",6:"Du willst geliebt werden ohne etwas dafür tun zu müssen. Keine Leistung. Keine Fürsorge. Kein Verdienen. Einfach so.",7:"Du willst ein Gespräch in dem du nicht erklärt wirst. Sondern verstanden. Ohne Worte, wenn es geht.",8:"Du willst Erlaubnis. Die Erlaubnis vollständig zu sein — laut, groß, kompromisslos — ohne dass es jemanden abschreckt.",9:"Du willst so versorgt werden wie du andere versorgst. Bevor sie fragen. Ohne dass du drum bitten musst.",11:"Du willst auf einem Niveau kommunizieren, auf dem du nicht übersetzen musst. Jemanden, der das direkte Signal empfängt.",22:"Du willst etwas bauen das nach dir bleibt. Nicht als Beweis — sondern weil die Vision so groß ist, dass eine Lebenszeit dafür zu kurz erscheint.",33:"Du willst einmal nicht die Stärkste sein müssen. Nur für einen Moment. Ohne dass dabei alles zusammenbricht."};
+
 var BM={1:"Du kämpfst für Beziehungen länger als die andere Person. Du weißt das. Und du machst es trotzdem — weil aufgeben sich wie Versagen anfühlt.",2:"Du weißt immer was dein Partner gerade braucht. Das Problem: du weißt es manchmal so gut, dass du anfängst dich selbst wegzulassen. Ohne es zu merken.",3:"Du löst Konflikte bevor sie eskalieren. Mit Humor, mit Leichtigkeit, mit einem Satz der alles wieder okifiziert. Was du dabei nicht sagst: was dich wirklich beschäftigt.",4:"Du bist der verlässlichste Mensch in fast jeder Beziehung die du führst. Und du fragst dich selten wann du zuletzt der warst, der einfach dran sein durfte.",5:"Du fällst schnell. Und du gehst genauso schnell — nicht weil du nicht fühlst, sondern weil du Enge vor Kälte fürchtest. Und manchmal wechselst du beides durcheinander.",6:"Du gibst bevor jemand fragt. Und manchmal verhindert genau das, dass jemand das Geben für dich lernt.",7:"Du öffnest dich — aber nicht sofort. Nicht allen. Du testest. Still. Lange. Und die meisten bestehen den Test nicht, weil sie nicht wissen, dass er stattfindet.",8:"Du bist ganz da — oder nicht da. Nichts dazwischen. Das erzeugt Intensität. Und es verwirrt Menschen, die nicht wissen was sie erwartet.",9:"Du gehst mit vollem Herzen rein. Du gibst alles. Und irgendwann merkst du, dass du angefangen hast dich selbst dabei zu verlieren. Leise. Fast unmerklich.",11:"Du spürst was dein Partner fühlt — manchmal bevor er es selbst weiß. Und du trägst es. Auch wenn es nicht deins ist.",22:"Du siehst das Potenzial in Menschen klarer als sie selbst. Und du liebst oft nicht die Person wie sie ist — sondern die Version, die sie werden könnte.",33:"Du siehst was der andere braucht. Immer. Und du gibst es. Auch wenn du selbst leer bist."};
+
 var AZ={1:"Du nimmst Raum ein — nicht weil du es versuchst, sondern weil du so wirkst. Direkt. Sicher. Klar.",2:"Du machst andere comfortable. Du liest Räume, passt dich an.",3:"Du machst Dinge leicht. Probleme kleiner. Räume wärmer.",4:"Du wirkst geerdet. Stabil. Verlässlich.",5:"Du wirkst lebendig. Ungebunden. Als hättest du eine Welt gewählt die größer ist.",6:"Du wirkst wie jemand, bei dem man ankommen kann.",7:"Du wirkst nachdenklich. Wie jemand, der mehr sieht als er sagt.",8:"Du strahlst aus: ich habe das im Griff. Und jeder glaubt dir.",9:"Du wirkst offen. Zugänglich. Als würde man mit allem kommen können.",11:"Du wirkst als würdest du Menschen verstehen bevor sie sich selbst verstehen.",22:"Du wirkst orientiert. Als würdest du wissen wohin es geht.",33:"Du wirkst wie jemand, bei dem man ankommen kann."};
+
 var GM={1:"Du triffst finanzielle Entscheidungen alleine. Auch wenn jemand neben dir sitzt, der helfen könnte.",2:"Du verhandelst nicht. Nicht deinen Lohn. Nicht deinen Preis.",3:"Du kaufst, wenn du inspiriert bist — und schaust drei Wochen später nicht auf den Kontostand.",4:"Du planst so lange, bis die Gelegenheit vorbei ist.",5:"Wenn Geld fließt, fließt es. Wenn Flaute ist, greifst du auf Reserven zurück.",6:"Du finanzierst andere — direkt oder indirekt.",7:"Du ignorierst finanzielle Details so lange, bis sie ein Problem werden.",8:"Du wechselst zwischen Vollgas und Stillstand. Dazwischen gibt es wenig.",9:"Du unterbietest deinen Wert — konsequent, oft unbewusst.",11:"Du schwankst zwischen Phasen wo Geld sich leicht anfühlt und Phasen wo du es komplett vermeidest.",22:"Du investierst in Visionen bevor du die eigene Grundlage gesichert hast.",33:"Du verlangst weniger als du solltest."};
 
-// Teaser texts for locked sections
 var AZ_TEASER={1:"Du wirkst stärker als du dich fühlst. Das Missverständnis entsteht immer an derselben Stelle — wenn andere annehmen, du brauchst nichts. Der blinde Fleck liegt nicht in deiner Stärke ...",2:"Du wirst gelesen — aber nicht immer richtig verstanden. Das Missverständnis beginnt da, wo andere deine Anpassung für Zustimmung halten. Was dahinter liegt ...",3:"Du wirkst leichter als du bist. Das Missverständnis: Menschen halten deine Offenheit für Oberflächlichkeit. Was sie nicht sehen ...",4:"Du wirkst verlässlicher als du dich manchmal fühlst. Das Missverständnis entsteht wenn andere deine Struktur für Gefühllosigkeit halten ...",5:"Du wirkst frei — und das ist sowohl deine Stärke als auch das Missverständnis. Was Menschen nicht sehen wenn sie dich anschauen ...",6:"Du wirkst warm. Du wirkst verfügbar. Das Missverständnis ist, dass andere annehmen, du hast immer Kapazität ...",7:"Du wirkst distanziert — aber du bist es nicht. Das ist das Missverständnis, das sich in fast jeder Beziehung wiederholt ...",8:"Du wirkst unerschütterlich. Das erzeugt Ehrfurcht und gleichzeitig Abstand. Der blinde Fleck dahinter ...",9:"Du wirkst als hättest du alles im Griff. Das Missverständnis: niemand fragt, ob du Hilfe brauchst ...",11:"Du wirkst intuitiv — und das irritiert manche. Das Missverständnis liegt genau dort, wo du denkst du wärst klar ...",22:"Du wirkst als hättest du einen Plan. Das Missverständnis entsteht wenn andere deine Vision für Arroganz halten ...",33:"Du wirkst stabil. Das Missverständnis: man hält dich für unverwundbar ..."};
 var GM_TEASER={1:"Finanzielle Kontrolle ist für dich wichtiger als du zugibst. Der blinde Fleck liegt in dem Moment, wo Kontrolle zur Bremse wird ...",2:"Du verhandelst nicht — und das kostet dich mehr als Geld. Der Bruchpunkt liegt in einem Glaubenssatz, den du noch nicht benannt hast ...",3:"Dein Geldfluss folgt deiner Energie — nicht deiner Strategie. Der blinde Fleck liegt genau dort, wo Inspiration endet ...",4:"Du planst — aber du startest selten. Der Bruchpunkt zwischen Analyse und Aktion wiederholt sich in einem bestimmten Moment ...",5:"Dein Verhältnis zu Geld ist wie dein Verhältnis zur Freiheit — intensiv, unberechenbar, und tief verbunden mit deiner Identität ...",6:"Du gibst finanziell — bevor du dich selbst absicherst. Das Muster dahinter ist älter als du denkst ...",7:"Finanzielle Details vermeidest du — nicht aus Faulheit, sondern aus einem tieferen Grund. Was dahinter liegt ...",8:"Dein Geldmuster trägt eine innere Spannung. Vollgas oder Stillstand. Der Bruchpunkt liegt genau in der Mitte ...",9:"Du unterbietest deinen Wert — und weißt meistens warum. Aber der echte Grund liegt tiefer ...",11:"Dein Verhältnis zu Geld ist zyklisch — und das ist kein Zufall. Der blinde Fleck liegt in dem, was du mit Geld verbindest ...",22:"Du investierst in große Visionen — und vergisst dabei manchmal das Fundament. Der Bruchpunkt ist vorhersehbar ...",33:"Du verlangst weniger als du solltest — und das hat einen Namen, den du vielleicht noch nicht gehört hast ..."};
+
+// ── FULL CONTENT (Vollversion) ────────────────────────────────────
+var HW_FULL={
+  1:{s:"Du willst nicht gebraucht werden. Du willst gebraucht werden dürfen — ohne dafür stark sein zu müssen.<br>Nicht die Person sein, die hält. Die Person sein, bei der man bleibt, auch wenn sie loslässt.<br>Das ist kein kleiner Wunsch. Und du gibst ihn selten zu.",k:"Brauchen und Stärke widersprechen sich in dir.<br>Du hast dein Leben so eingerichtet, dass du niemanden brauchst — und nennst das Unabhängigkeit.<br>Aber da ist ein Unterschied zwischen 'ich brauche niemanden' und 'ich erlaube mir nicht zu brauchen.' Du kennst ihn. Du schaust ihm selten ins Gesicht.",b:"Du glaubst, du bist allein weil andere nicht bereit sind, für jemanden wie dich da zu sein.<br>Manchmal stimmt das. Öfter ist es so: du hast gar nicht gezeigt, dass du etwas brauchst.<br>Menschen geben dir keine Chance dich zu stützen — weil du immer schon weitergehst, bevor sie fragen könnten.",a:"Die Einladung lautet: einmal zu bleiben, wenn es wehtut — anstatt weiterzugehen.<br>Nicht als Experiment. Als Entscheidung."},
+  2:{s:"Du willst jemanden, der ohne Aufforderung fragt wie es dir wirklich geht — und dann wartet, bis du antwortest.<br>Nicht um dir zu helfen. Nur um da zu sein.<br>Du hast das für andere so oft getan. Du weißt genau, wie es sich anfühlen würde.",k:"Du bist so gut darin, anderen Raum zu geben, dass niemand merkt wann du keinen mehr hast.<br>Und du sagst es nicht — weil du nicht zur Last fallen willst. Weil du glaubst, deine Bedürfnisse seien kleiner als die der anderen.<br>Sie sind es nicht. Du hast dich nur daran gewöhnt, so zu tun als ob.",b:"Du hältst deine Zurückhaltung für Rücksichtnahme.<br>Aber sie schützt dich auch vor etwas: vor dem Moment, wo jemand 'nein' sagt — und du weißt, was du wirklich gebraucht hättest.<br>Solange du nicht fragst, musst du diese Antwort nie hören. Das ist keine Großzügigkeit. Das ist Schutz.",a:"Die Einladung lautet: einmal zu sagen was du brauchst — vollständig, ohne es danach kleiner zu reden.<br>Nur einmal. Und abwarten, was passiert."},
+  3:{s:"Du willst ernst genommen werden — nicht bewundert.<br>Nicht für das was du produzierst, für das was du bist wenn du aufhörst zu produzieren.<br>Du machst Dinge leicht wirken. Das ist eine Fähigkeit. Es hat einen Preis.",k:"Du bist so gut darin, Leichtigkeit zu zeigen, dass niemand sieht wenn du kämpfst.<br>Und du zeigst den Kampf nicht — weil eine alte Überzeugung sagt: wenn du aufhörst zu glänzen, hört die Zuwendung auf.<br>Du weißt nicht ob das stimmt. Du hast es nie riskiert.",b:"Du denkst, dein Problem ist mangelnde Disziplin — zu viele Ideen, zu wenig Durchzug.<br>Das ist nicht das Problem. Das Problem ist: du hast deine Identität an 'die mit den Ideen' gebunden.<br>Solange eine Sache nicht fertig ist, kann sie noch alles werden. Das ist kein Zufall. Das ist ein Sicherheitsnetz.",a:"Die Einladung lautet: bei einer Sache zu bleiben, auch wenn der Impuls weg ist.<br>Nicht weil Beharren tugendhaft ist — sondern um herauszufinden, was darunter liegt."},
+  4:{s:"Du willst einmal jemandem sagen dürfen: Ich weiß nicht, ob ich das schaffe — und dabei nicht sofort die Lösung parat haben müssen.<br>Nicht stark sein müssen. Nicht das Fundament sein müssen, auf dem alle anderen stehen.<br>Nur für einen Moment derjenige sein, der gehalten wird. Nicht der, der hält.",k:"Du kannst dich nicht entspannen, bevor alles gesichert ist.<br>Aber 'gesichert' hat keine feste Definition — sie verschiebt sich, sobald du nah dran bist.<br>Das ist kein Versagen in der Planung. Es ist eine Funktion von etwas, das tiefer liegt als der nächste Plan.",b:"Du glaubst, Verlässlichkeit ist deine Identität — und du schützt sie, weil ohne sie nichts von dir übrig bleibt.<br>Also planst du weiter. Sicherst weiter ab. Nicht weil es noch nötig ist, sondern weil Aufhören bedeuten würde, niemand mehr zu sein.<br>Das Fundament zu sein ist auch ein Weg, nie fragen zu müssen: Wer bin ich, wenn gerade nichts gebaut wird?",a:"Die Einladung lautet: aufzuhören, bevor die Arbeit fertig ist.<br>Und zu bemerken, was aufsteigt — bevor du weitermachst."},
+  5:{s:"Du willst tief gekannt sein — und trotzdem frei.<br>Du weißt, dass das wie ein Widerspruch klingt. Irgendwo glaubst du, es ist keiner.<br>Du hast es nur noch nicht lange genug getestet.",k:"Du gehst, bevor es wehtut.<br>Manchmal als neue Stadt, neues Projekt, neue Person. Manchmal nur innerlich — du bist noch da, aber schon weg.<br>Du nennst es Freiheit. Manchmal ist es das. Manchmal ist es eine sehr früh erlernte Sicherheitsstrategie.",b:"Du glaubst, Tiefe und Freiheit schließen sich aus.<br>Was du nie getestet hast: ob tiefe Nähe und Freiheit nebeneinander existieren können.<br>Du bist immer gegangen, bevor du es hättest herausfinden können.",a:"Die Einladung lautet: zu bleiben — über den Punkt hinaus, an dem du normalerweise gehst.<br>Einmal. Und zu schauen, was passiert."},
+  6:{s:"Du willst geliebt werden ohne etwas dafür tun zu müssen.<br>Nicht weil du kochst, organisierst, da bist, auffängst. Sondern weil du da bist.<br>Du weißt rational, dass das möglich ist. Du glaubst es selten.",k:"Du machst dich unentbehrlich — nicht aus Kalkül, sondern weil Zugehörigkeit sich so für dich anfühlt.<br>Wenn du gibst, bist du sicher. Wenn du aufhörst zu geben, kommt eine Frage die du nicht stellen willst: Bleiben sie dann noch?<br>Du hast die Antwort nie wirklich getestet. Du riskierst es nicht.",b:"Die Liebe, die du empfängst, ist oft echter als du denkst.<br>Aber du kannst sie nicht fühlen — weil du im Geben-Modus bist, bevor du im Empfangen-Modus sein könntest.<br>Du bist zu beschäftigt damit sicherzustellen, dass alle gut versorgt sind, um zu bemerken, dass jemand gerade versucht, dich zu versorgen.",a:"Die Einladung lautet: etwas anzunehmen, ohne es sofort zu erwidern.<br>Nicht als Geschenk. Als Übung."},
+  7:{s:"Du willst verstanden werden ohne erklären zu müssen.<br>Jemand der kommt, ohne dass du fünf Schichten abtragen musst damit er sieht was darunter ist.<br>Du hast dieses Treffen selten erlebt. Du zweifelst manchmal daran, ob es möglich ist.",k:"Du hältst Abstand — und sagst dir, du brauchst Raum.<br>Das stimmt. Aber Abstand schützt dich auch vor etwas Spezifischem: dem Moment, wo jemand dich fast versteht.<br>Fast ist schlimmer als gar nicht. Du weißt das. Deshalb ist gar nicht manchmal sicherer.",b:"Du machst dich komplizierter als nötig — unbewusst, als Test.<br>Ob jemand trotzdem bleibt. Die meisten gehen.<br>Das bestätigt, was du schon geglaubt hast.",a:"Die Einladung lautet: jemanden falsch liegen zu lassen, ohne es zu korrigieren.<br>Und zu bemerken, was das auslöst."},
+  8:{s:"Du willst keine Bewunderung. Du willst Erlaubnis.<br>Die Erlaubnis, vollständig zu sein — ohne deine Größe sofort kleiner zu reden, damit andere sich wohlfühlen.<br>Du weißt was in dir steckt. Die Frage ist nicht ob. Die Frage ist: darf es das sein?",k:"Du willst gesehen werden — und fürchtest genau das.<br>Vollständig sichtbar zu sein bedeutet: kein Rückzug mehr hinter 'ich könnte, wenn ich wollte.'<br>Solange du unter deinen Möglichkeiten bleibst, ist das Potenzial noch unberührt. Sobald du es zeigst, muss es sich beweisen. Dauerhaft.",b:"Du glaubst, du hältst dich zurück weil du Misserfolg fürchtest.<br>Meistens ist es umgekehrt: du fürchtest den Erfolg — weil er dich sichtbar macht und dort hält.<br>Diese Unterscheidung verändert alles. Sie ist auch der Grund, warum Willenskraft alleine nie gereicht hat.",a:"Die Einladung lautet: eine Entscheidung zu treffen, die dich sichtbar macht — ohne sie danach zu erklären.<br>Sichtbar sein. Schweigen. Bleiben."},
+  9:{s:"Du willst versorgt werden. Nicht unterstützt — versorgt.<br>So wie du es für andere tust: bevor sie fragen. Weil jemand einfach sieht, dass es gebraucht wird.<br>Du weißt wie das geht. Du hast es anderen so oft gegeben. Du lässt es für dich selten zu.",k:"Du hast deine Identität daran gebaut, derjenige zu sein, der gibt.<br>Gebraucht zu werden und geliebt zu werden fühlen sich für dich gleich an.<br>Sie sind es nicht. Aber die Unterscheidung macht dir Angst — weil sie die Frage aufwirft, was bleibt, wenn du aufhörst zu geben.",b:"Das Geben ist nicht nur Großzügigkeit.<br>Wenn du gibst, steuerst du die Beziehung. Wenn du empfängst, verlierst du die Kontrolle.<br>Das ist der eigentliche Grund.",a:"Die Einladung lautet: heute etwas zu erbitten — nicht weil du dringend brauchst, sondern weil du dazu berechtigt bist."},
+  11:{s:"Du willst auf einem Niveau kommunizieren, auf dem du nicht ständig übersetzen musst.<br>Nicht intellektuell — tiefer. Das innere Erleben zeigen, ohne es zuerst in etwas Verdauliches umzuformen.<br>Du weißt nicht mehr genau, wie sich das anfühlt. Du hast zu lange übersetzt.",k:"Du fühlst zu viel und hast gelernt, es zu dämpfen damit du funktionierst.<br>Die Dämpfung kostet dich. Und du ressentierst leise die Welt dafür, dass sie sie notwendig macht.<br>Du hast irgendwann aufgehört zu prüfen, ob die Welt wirklich nicht bereit ist.",b:"Du wartest darauf, dass andere tief genug werden, um dich zu halten.<br>Aber manchmal ist das, was wie 'die anderen sind nicht bereit' aussieht, in Wirklichkeit: du bist nicht bereit, in deiner vollen Tiefe gesehen zu werden.<br>Die Fürsorge für andere ist auch Schutz vor dir selbst.",a:"Die Einladung lautet: einer Person heute zu sagen, wie es dir wirklich geht — in einem Satz, ohne Erklärung davor und ohne Relativierung danach."},
+  22:{s:"Etwas bauen, das nach dir bleibt.<br>Nicht aus Eitelkeit — als Beweis, dass die Vision real war und keine Einbildung.<br>Dieser Zweifel ist da. Auch wenn du ihn selten zeigst.",k:"Die Vision ist so groß, dass kein Anfang groß genug wirkt.<br>Also planst du — und die Vision bleibt im Raum des Möglichen, unberührt und intakt.<br>Das ist kein Mangel an Entschlossenheit. Es ist Schutz: was nie anfängt, kann nie scheitern.",b:"Du denkst, was dich aufhält sind Ressourcen, Timing, Umstände.<br>Das eigentliche Hindernis: wenn du anfängst, wird die Vision getestet. Und du weißt nicht, ob sie standhält.<br>So bleibt die Vision sicher. Ungetestet. Intakt.",a:"Die Einladung lautet: heute etwas zu beginnen, das zu klein ist.<br>Und trotzdem zu beginnen."},
+  33:{s:"Einmal nicht die Starke sein müssen.<br>Nicht die, bei der andere Halt suchen. Einfach jemand mit unordentlichen Bedürfnissen, der dazu berechtigt ist.<br>Du weißt nicht genau, wie das geht. Die Rolle sitzt zu tief.",k:"Du bist so lange 'die Starke' gewesen, dass du nicht mehr weißt wer du bist, wenn du es nicht bist.<br>Das ist keine Frage die du dir gerne stellst. Sie ist trotzdem da.<br>Und manchmal schützt das Geben auch vor ihr.",b:"Du glaubst, du opferst dich weil du so tief fühlst und so viel gibst.<br>Manchmal stimmt das. Manchmal ist das Opfer auch eine Möglichkeit, gebraucht zu bleiben — und nicht herausfinden zu müssen, wer du bist ohne diese Funktion.<br>Es ist eine Beobachtung, die verändert, sobald sie gesehen ist.",a:"Die Einladung lautet: heute etwas nur für dich zu tun — ohne Nutzen für irgendjemanden sonst.<br>Und den Widerstand daran zu bemerken, ohne ihn sofort aufzulösen."}
+};
+
+var BM_FULL={
+  1:{an:"Du ziehst Menschen an die Führung bewundern oder suchen. Menschen die zurücktreten, wo du vorangehst. Anfangs fühlt sich das vertraut an — du hast das Steuer, du kennst die Richtung.",br:"Irgendwann merkst du, dass du allein entscheidest. Du wolltest einen Partner — du hast einen Mitreisenden. Der Groll kommt leise. Zuerst als Müdigkeit, dann als Distanz.",mo:"Wenn du dir erlaubst, gelegentlich nicht die Führende zu sein — findest du jemanden, der wirklich neben dir steht. Nicht hinter dir. Daneben."},
+  2:{an:"Du ziehst Menschen an, die unbewusst jemanden suchen der sie versteht ohne Erklärung. Oft sind das Menschen mit ungelösten emotionalen Themen — weil du der erste bist, der sie wirklich sieht.",br:"Du verlierst dich. Irgendwann weißt du nicht mehr, was deine Gefühle sind und was du von der anderen Person mitträgst. Die Erschöpfung kommt ohne sichtbaren Auslöser.",mo:"Wenn du lernst, dich zurückzuziehen ohne die Verbindung zu zerstören — und Menschen zu wählen, die auch für dich da sein können, nicht nur die, denen du helfen kannst."},
+  3:{an:"Du ziehst Menschen an die deine Energie genießen — deine Leichtigkeit, dein Humor, deine Art Dinge leichter zu machen. Das sind schöne erste Monate. Und dann kommt der Tag, wo du schwer bist.",br:"Du hast dich so lange leicht gezeigt, dass niemand weiß wie er mit dir umgehen soll, wenn du es nicht bist. Der Bruchpunkt ist der Tag, wo du aufhörst zu performen — und die andere Person überfragt ist.",mo:"Wenn du jemandem zeigst, dass du auch schwer sein kannst — bevor es ein Notfall ist. Und wählst, wer das halten kann."},
+  4:{an:"Du ziehst Menschen an die Stabilität suchen — bewusst oder nicht. Menschen die Chaos mitbringen, weil dein Fundament sie trägt. Das fühlt sich bedeutsam an. Du bist gebraucht.",br:"Irgendwann bist du das Fundament für jemanden, der nie zurückbaut. Du hast jahrelang getragen — und eines Morgens fragst du dich, wann du zuletzt getragen wurdest. Ohne Antwort.",mo:"Wenn du aufhörst, Verlässlichkeit als Eintrittsgeld für Zugehörigkeit zu zahlen. Und jemanden wählst, der auch für dich stabil ist — nicht nur weil du es für ihn bist."},
+  5:{an:"Du ziehst Menschen an, die von deiner Freiheit fasziniert sind — oder die glauben, sie können dich festhalten. Beide aus dem gleichen Grund: du wirkst wie etwas, das man nicht ganz greifen kann.",br:"Der Bruchpunkt ist der Moment, wo die andere Person anfängt dich zu besitzen. Oder umgekehrt: wo du merkst, dass du schon weg bist — obwohl du noch da bist. Innerlich längst gegangen.",mo:"Wenn du jemandem begegnest, der deine Freiheit nicht als Problem sieht — sondern als Teil von dir. Und du lernst, dass Bleiben kein Verlust ist."},
+  6:{an:"Du ziehst Menschen an die versorgt werden wollen — und Menschen die sich um dich sorgen, weil sie spüren dass du gibst. Beides zieht dich an: gebraucht zu werden und gesehen zu werden.",br:"Der Bruchpunkt ist der Moment, wo du merkst, dass die Beziehung aus deinem Geben lebt — und wenn du aufhörst, nichts mehr da ist. Keine Wärme. Keine Initiative. Nur das Echo deiner Fürsorge.",mo:"Wenn du lernst, weniger zu geben — und zu sehen wer trotzdem bleibt. Die sind dein Material."},
+  7:{an:"Du ziehst Menschen an, die deine Tiefe spüren und sie herausfordern wollen. Manchmal Menschen die glauben, sie können dich 'öffnen'. Das kann sich gut anfühlen. Bis es übergriffig wird.",br:"Der Bruchpunkt ist der Moment, wo du merkst, dass die andere Person nicht wirklich versteht — sie sucht. Und du bist ihr Projekt. Der Rückzug beginnt. Leise. Vollständig.",mo:"Wenn du jemandem begegnest, der nicht sucht — sondern der einfach da ist. Der keine Schlüssel braucht, weil er nicht einbrechen will."},
+  8:{an:"Du ziehst Menschen an, die Intensität wollen — oder Menschen die von deiner Kompetenz profitieren. Beides hat eine Funktion für dich: beim ersten fühlst du dich gesehen, beim zweiten gebraucht.",br:"Der Bruchpunkt ist die Strecke zwischen deinen Vollgas-Phasen. Wenn du leer bist, bist du schwer erreichbar. Die andere Person versteht nicht was passiert. Und du erklärst es nicht — weil du nicht sicher bist, dass sie es verstehen kann.",mo:"Wenn du jemandem zeigst, was in deinen Tiefphasen passiert — bevor du wieder Vollgas gibst. Und wählst, wer das hält."},
+  9:{an:"Du ziehst Menschen an, die Tiefe und Wärme suchen — und Menschen, die jemanden brauchen der für sie da ist. Du bist beides. Das ist deine Stärke. Und das ist die Einladung für die, die nehmen ohne zurückzugeben.",br:"Irgendwann bist du leer. Nicht plötzlich — langsam. Du hast so viel gegeben, dass du dich selbst in der Beziehung verloren hast. Und wenn du dich umschaust, bist du der Einzige der sich noch erinnert, wie es am Anfang war.",mo:"Wenn du lernst, früher zu stoppen. Nicht weil du weniger gibst — sondern weil du weißt, wann genug ist."},
+  11:{an:"Du ziehst Menschen an, die das Besondere in dir spüren — und Menschen die nicht wissen was sie spüren, aber wissen dass es anders ist. Beides kann intensiv sein. Nicht beides hält.",br:"Der Bruchpunkt ist der Moment, wo du merkst, dass die andere Person dich nicht wirklich versteht — sie bewundert. Bewunderung ist kein Zuhause. Du beginnst dich zu isolieren, weil Nähe mit Missverständnis koinzidiert.",mo:"Wenn du dir erlaubst, auch ohne vollständiges Verstehen verbunden zu bleiben. Und Menschen wählst die nicht alles verstehen — aber alles halten."},
+  22:{an:"Du ziehst Menschen an, die von deiner Richtung fasziniert sind — oder die sich an deiner Orientierung festhalten. Du gibst Rahmen. Du gibst Sinn. Das ist anziehend. Und es schafft eine Asymmetrie.",br:"Der Bruchpunkt ist der Moment, wo du siehst, dass die andere Person nicht an der Beziehung gebaut hat — sie hat an dir gebaut. Als wärst du ein Projekt, kein Mensch. Du kannst das lange übersehen. Bis du es nicht mehr kannst.",mo:"Wenn du jemandem begegnest, der eine eigene Vision hat. Der nicht deine braucht — sondern die eigene neben deine stellt."},
+  33:{an:"Du ziehst Menschen an, die Fürsorge brauchen — und Menschen die selbst tiefes Mitgefühl haben. Das Erste erschöpft dich manchmal. Das Zweite ist das, wonach du wirklich suchst.",br:"Der Bruchpunkt ist der Moment, wo du merkst, dass du wieder jemanden hilfst, der sich nicht entwickelt. Deine Fürsorge ist Netz geworden — kein Sprungbrett. Und du bist müde. Still. Tief müde.",mo:"Wenn du lernst, Fürsorge an Wachstum zu koppeln. Und die Menschen zu wählen, die deine Fürsorge als Einladung sehen — nicht als Versorgungsvertrag."}
+};
+
+var AZ_FULL={
+  1:{au:"Du nimmst Raum ein — nicht weil du es versuchst, sondern weil du so wirkst. Direkt. Sicher. Klar.<br>Menschen orientieren sich an dir, ohne dass du darum gebeten hast.<br>Wer so wirkt, wird selten gefragt ob er gerade okay ist. Du wirst nicht in die Lage gebracht, zu antworten.",ms:"Du sendest das Signal: Ich habe das.<br>Was ankommt: Dieser Mensch braucht nichts.<br>Was du willst: Dass jemand trotzdem fragt.<br>Du willst verstanden werden — und kommunizierst dabei Unnahbarkeit.",bl:"Du glaubst, du bist klar. Du bist es auch.<br>Was du nicht siehst: Klarheit ohne Riss wird gelesen als 'komm nicht näher.'<br>Der Eingang existiert. Du hast ihn so selten geöffnet, dass Menschen aufgehört haben zu suchen.",ei:"Die Einladung lautet: einmal Unsicherheit zu zeigen — bevor du sie in Entschlossenheit aufgelöst hast.",mo:"Was hört auf: alle zu halten — und dabei selbst kein Halt zu haben.<br>Was wird möglich: einmal derjenige zu sein, der gehalten wird. Ohne dafür Stärke als Eintrittsgeld zu zahlen."},
+  2:{au:"Du machst andere comfortable. Du liest Räume, passt dich an, weichst unnötiger Reibung aus.<br>Menschen fühlen sich bei dir gut — ohne zu wissen warum.",ms:"Angenehm zu sein wird gelesen als: ohne starke eigene Positionen.<br>Du hast eine klare innere Welt. Du zeigst sie selten.<br>Irgendwann entstand der Eindruck: da ist nicht viel dahinter. Du hast nie widersprochen.",bl:"Du bist unsichtbar geworden — nicht weil du nichts zu sagen hast, sondern weil du gelernt hast, dass das Sagen die Verbindung kostet.<br>Niemand fragt, weil du den Eindruck erweckst: hier gibt es nichts zu fragen.",ei:"Die Einladung lautet: einer Person heute zu sagen, was du wirklich denkst — nicht was die Stimmung braucht.",mo:"Was hört auf: die Erschöpfung des Angepasst-Seins als Dauerzustand.<br>Was wird möglich: gesehen zu werden für das was du bist — nicht für das womit du andere komfortabel machst."},
+  3:{au:"Du machst Dinge leicht. Probleme werden kleiner wenn du redest. Räume werden wärmer wenn du da bist.<br>Das ist kein Trick. Das ist wie du funktionierst.",ms:"Menschen fühlen sich gut in deiner Nähe. Du schaffst die Energie für andere — und bist danach allein damit, dass niemand die Energie für dich schafft.<br>Du bist geworden, wohin andere kommen wenn sie gehoben werden wollen.",bl:"Du hebst andere auf. Niemand hebt dich, weil du nie so wirkst, als bräuchtest du das.<br>Deine Leichtigkeit schützt dich vor einer Frage: Was passiert, wenn die Leichtigkeit nicht da ist — und ich sie trotzdem zeige?",ei:"Die Einladung lautet: heute einmal etwas schwer zu lassen — ohne es im selben Atemzug leichter zu machen.",mo:"Was hört auf: die Erschöpfung des Lichts das du brennst, auch wenn du selbst dunkel bist.<br>Was wird möglich: dass jemand kommt um dich zu heben — weil du gezeigt hast, dass das möglich ist."},
+  4:{au:"Du wirkst geerdet. Stabil. Verlässlich.<br>Menschen wissen: wenn du da bist, hält etwas.<br>Wer so wirkt, wird selten gefragt, ob gerade etwas wackelt.",ms:"Die Stabilität die du zeigst, wird gelesen als: diese Person hat es raus.<br>Du weißt, was es kostet, so zu wirken. Niemand fragt — weil du nie signalisiert hast, dass es etwas kostet.",bl:"Du wirkst als hättest du alles unter Kontrolle. Du weißt, dass das nicht stimmt. Aber niemand zweifelt daran — also zweifelst du auch seltener laut.<br>Die Stabilität die du zeigst, zwingt dich, sie auch zu fühlen. Selbst wenn du sie gerade nicht hast.",ei:"Die Einladung lautet: einer Person heute zu sagen, was gerade wackelt — bevor du es stabilisiert hast.",mo:"Was hört auf: die Einsamkeit des Soliden — das immer gefragt wird, aber nie gefragt wird.<br>Was wird möglich: sagen 'ich weiß das gerade nicht' — ohne das als strukturelles Versagen zu erleben."},
+  5:{au:"Du wirkst lebendig. Ungebunden. Als hättest du eine Welt gewählt, die größer ist als die der meisten.<br>Das ist nicht gespielt.",ms:"Menschen bewundern das, was sie als Freiheit lesen.<br>Du sendest: ich brauche keinen Anker. Was du manchmal willst: jemand, der trotzdem bleibt.",bl:"Deine Freiheit hält die Verbindung fern, die du eigentlich willst.<br>Du hast noch nie wirklich getestet, ob Bleiben deine Freiheit kostet — weil du gegangen bist, bevor du es hättest wissen können.",ei:"Die Einladung lautet: zu bleiben — über den Punkt hinaus, an dem du normalerweise gehst.",mo:"Was hört auf: das Suchen als Dauerzustand — die Freiheit die sich nie wie Ankunft anfühlt.<br>Was wird möglich: verbunden zu sein, ohne dabei aufhören zu müssen, du zu sein."},
+  6:{au:"Du wirkst wie jemand, bei dem man ankommen kann.<br>Du gibst ohne Kalkulation. Menschen fühlen sich bei dir gesehen — besonders wenn es ihnen nicht gut geht.",ms:"Du bist als jemand bekannt, der gegeben hat. Was in diesem Bild fehlt: die Momente, in denen du selbst gehalten werden wolltest — und niemand wusste, dass das erlaubt ist.",bl:"Du hilfst anderen mit Dingen, an denen du selbst manchmal noch arbeitest.<br>Die spezifischste Einsamkeit: Den Schmerz anderer zu halten — und den eigenen allein zu tragen, weil die Wirkung das so eingerichtet hat.",ei:"Die Einladung lautet: jemandem heute zu zeigen, dass etwas schwer ist — ohne gleichzeitig eine Lösung dafür anzubieten.",mo:"Was hört auf: empfangen zu werden als die Helfende — aber nicht als die Person.<br>Was wird möglich: geliebt zu werden von jemandem, der dich nicht braucht."},
+  7:{au:"Du wirkst nachdenklich. Wie jemand, der mehr sieht als er sagt.<br>Menschen begegnen dir mit einer gewissen Vorsicht — als wärst du jemand, den man nicht zu schnell einschätzen sollte.",ms:"Tiefe wird mit dem Wunsch nach Tiefe gleichgesetzt. Also bieten viele weniger an.<br>Was du manchmal wirklich willst: dass jemand einfach da ist. Ohne Bedeutung. Ohne Anspruch.",bl:"Deine Tiefe signalisiert: komm nicht mit Nichtigkeiten. Also kommen die wenigsten überhaupt.<br>Deine Tiefe schützt dich vor Oberflächlichkeit — und schafft gleichzeitig eine Einsamkeit, die keiner gesehen hat.",ei:"Die Einladung lautet: jemanden etwas Kleines fragen — nichts Bedeutsames, nichts Tiefes.",mo:"Was hört auf: die Einsamkeit des Immer-Ernst-Genommen-Werdens.<br>Was wird möglich: Verbindung die nicht durch Tiefe verdient werden muss."},
+  8:{au:"Du strahlst aus: ich habe das im Griff. Und jeder glaubt dir.<br>Wer Kompetenz ausstrahlt, muss nie Fehler erklären — und muss nie zeigen, was ihn kostet.",ms:"Menschen begegnen dir mit Respekt. Was du manchmal brauchst: Wärme.<br>Wer Kompetenz ausstrahlt, bekommt selten jemanden, der fragt 'wie geht es dir wirklich?' — weil die Frage sich anmaßend anfühlen würde.",bl:"Du hast eine Wirkung aufgebaut, die dich vor Nähe schützt — ohne das je so entschieden zu haben.<br>Die Kompetenz ist echt. Aber sie ist auch eine Tür, die immer geschlossen aussieht.",ei:"Die Einladung lautet: einmal jemandem zu zeigen, dass du gerade nicht weißt wie es weitergeht — bevor du es weißt.",mo:"Was hört auf: respektiert zu werden aus der Distanz — und dabei nie wirklich erreicht zu werden.<br>Was wird möglich: Wärme, die nicht für deine Kompetenz kommt — sondern für dich."},
+  9:{au:"Du wirkst offen. Zugänglich. Als würde man mit allem kommen können.<br>Menschen spüren das — und sie kommen.",ms:"Du bist offen für alle. Also kommt niemand mit etwas wirklich Besonderem zu dir.<br>Wer für alle da ist, ist für niemanden der Einzige.",bl:"Deine Offenheit schützt dich vor dem spezifischsten aller Schmerzen.<br>Wenn du für alle da bist, kann niemand nur zu dir kommen — und niemand kann nur dich verlassen.",ei:"Die Einladung lautet: für eine Person heute die Tür zu schließen — und nur für sie aufzumachen.",mo:"Was hört auf: für alle da zu sein — und dabei für niemanden spezifisch zu existieren.<br>Was wird möglich: jemandes Einzige zu sein. Nicht die Offene. Die Gewählte."},
+  11:{au:"Du wirkst, als würdest du Menschen verstehen bevor sie sich selbst verstehen.<br>Du liest was zwischen den Worten ist. Du merkst was unausgesprochen bleibt.",ms:"Du verstehst Menschen. Also denken die meisten, du brauchst nicht verstanden zu werden.<br>Du bist der Container für das innere Erleben anderer geworden.",bl:"Das Verstehen schützt dich auch.<br>Wer beschäftigt ist mit dem inneren Erleben anderer, muss das eigene nicht so genau anschauen.",ei:"Die Einladung lautet: jemandem heute zu sagen, dass du etwas nicht verstehst — über dich selbst, über eine Situation.",mo:"Was hört auf: immer derjenige zu sein, der versteht — ohne je der zu sein, der verstanden wird.<br>Was wird möglich: jemanden lesen lassen — dich."},
+  22:{au:"Du wirkst orientiert. Als würdest du wissen wohin es geht.<br>Menschen richten sich an dir aus, ohne dass du darum gebeten hast.",ms:"Du gibst Richtung. Also scheint es, als würdest du selbst nie suchen.<br>Was du behältst: die Nächte, in denen du selbst nicht weißt wo das hinführt.",bl:"Du hast dich zu einem Kompass gemacht.<br>Und ein Kompass ist nicht dafür gedacht, selbst verloren zu sein.",ei:"Die Einladung lautet: jemandem heute zu sagen, dass du selbst gerade suchst — ohne danach einen Plan zu liefern.",mo:"Was hört auf: immer wissen zu müssen, auch wenn du es nicht tust.<br>Was wird möglich: gesucht zu werden — nicht weil du die Richtung kennst, sondern weil du da bist."},
+  33:{au:"Du wirkst wie jemand, bei dem man ankommen kann.<br>Du gibst ohne Kalkulation. Menschen fühlen sich bei dir gesehen — besonders wenn es ihnen nicht gut geht.<br>Wer immer gibt, muss nie bitten. Und wer nie bittet, kann nie abgewiesen werden.",ms:"Du gibst anderen was sie brauchen. Wer gibt dir, was du brauchst?<br>Niemand fragt — weil du nie so gewirkt hast, als ob du das bräuchtest.",bl:"Du hilfst anderen mit Dingen, an denen du selbst manchmal noch arbeitest.<br>Die spezifischste Einsamkeit von 33: Den Schmerz anderer zu halten — und den eigenen allein zu tragen.",ei:"Die Einladung lautet: jemandem heute zu zeigen, womit du selbst gerade ringst — ohne dabei gleichzeitig eine Lösung anzubieten.",mo:"Was hört auf: der eigene Schmerz als stiller Untermieter.<br>Was wird möglich: empfangen zu werden — nicht als die Heilende, sondern als die, die selbst manchmal geheilt werden möchte."}
+};
+
+var GM_FULL={
+  1:{mu:"Du triffst finanzielle Entscheidungen alleine. Auch wenn jemand neben dir sitzt, der helfen könnte.<br>Du recherchierst, kalkulierst, entscheidest. Andere einzubeziehen kommt dir erst nachher in den Sinn, wenn überhaupt.",ko:"Unabhängigkeit und Hilfe annehmen widersprechen sich in dir.<br>Wenn jemand dir finanziell helfen will — auch ohne Gegenleistung — entsteht ein Unbehagen, das sich nicht mit Logik erklären lässt.<br>Du nimmst lieber weniger an, als jemandem etwas zu schulden.",bl:"Du hältst Alleingänge für Stärke — und übersiehst, dass sie manchmal schlicht teurer sind.<br>Es gibt Bereiche, wo Kooperation dir mehr einbringen würde als Kontrolle. Du siehst sie nicht, weil du nicht hinschaust.",a:"Die Einladung lautet: zu prüfen, was Unabhängigkeit wirklich kostet.<br>Nicht symbolisch. In Zahlen."},
+  2:{mu:"Du verhandelst nicht. Nicht deinen Lohn. Nicht deinen Preis. Nicht was du für deine Zeit bekommst.<br>Du akzeptierst was angeboten wird — und ärgerst dich still, wenn es weniger ist als du wert bist.",ko:"Du hörst 'nein' bevor du gefragt hast.<br>Du unterscheidest nicht zwischen 'das steht mir zu' und 'ich will mehr als andere'.<br>Dieser Unterschied ist entscheidend — und du übergehst ihn regelmäßig.",bl:"Du bildest dir ein, andere würden deinen Wert von alleine erkennen und entsprechend zahlen.<br>Das passiert selten. Menschen zahlen, was sie müssen — nicht was sie sollten.<br>Du weißt das rational. Du verhältst dich trotzdem so, als wäre es anders.",a:"Die Einladung lautet: einmal zu fordern ohne zu erklären, warum du es verdient hast.<br>Nur fordern. Schweigen. Abwarten."},
+  3:{mu:"Du kaufst, wenn du inspiriert bist — und schaust drei Wochen später nicht auf den Kontostand.<br>Beides passiert schnell. Beides hat Konsequenzen, die du erst später siehst.",ko:"Du weißt, dass du Struktur bräuchtest — und du widersetzt dich ihr.<br>Nicht weil du faul bist. Sondern weil Struktur sich für dich anfühlt wie ein Geständnis: dass die Leichtigkeit nicht reicht.",bl:"Du denkst, du kannst Geld jederzeit wieder verdienen — weil du es schon getan hast.<br>Es führt aber dazu, dass du Polster abbaust, bevor du sie gebraucht hättest.<br>Du merkst es erst, wenn der Puffer fehlt und du Energie brauchst, die du gerade nicht hast.",a:"Die Einladung lautet: Sicherheit nicht als Kreativitätsbremse zu sehen, sondern als Bedingung dafür, dass die Leichtigkeit anhält."},
+  4:{mu:"Du planst so lange, bis die Gelegenheit vorbei ist.<br>Nicht aus Feigheit. Aus dem echten Bedürfnis, nichts dem Zufall zu überlassen.",ko:"Du weißt genau, was ein vernünftiger Schritt wäre — aber du tust ihn nicht, weil ein Detail noch nicht stimmt.<br>Das Detail ist manchmal real. Oft ist es eine Verzögerungstaktik, die du nicht als solche erkennst.",bl:"Du glaubst, du bist der Vorsichtigste im Raum — und übersiehst, dass du manchmal das teuerste Risiko eingehst: das der verpassten Zeit.<br>Kein Plan deckt die Kosten ab, die entstehen, wenn du zu lange wartest.",a:"Die Einladung lautet: eine Entscheidung zu treffen, bei der du dir sagst 'gut genug' — und es dabei zu lassen."},
+  5:{mu:"Wenn Geld fließt, fließt es. Wenn Flaute ist, greifst du auf Reserven zurück — und baust sie in Bewegungsphasen nicht konsequent wieder auf.<br>Der Zyklus wiederholt sich. Du weißt das.",ko:"Finanzielle Struktur fühlt sich für dich wie eine Einschränkung an — nicht wie ein Werkzeug.<br>Du hast das Erlebnis: wenn du anfängst zu planen, verlierst du den Impuls.<br>Ob das wahr ist oder eine Überzeugung die du nie wirklich getestet hast, lässt sich schwer sagen.",bl:"Du nennst es Risikobereitschaft. Manchmal ist es das. Und manchmal ist es das kurzfristige Gefühl, das über die mittelfristige Stabilität gestellt wird.<br>Risikobereitschaft und Impulsivität sehen von innen gleich aus.",a:"Die Einladung lautet: eine finanzielle Struktur zu entwerfen, die klein genug ist, um dich nicht einzuengen — und groß genug, um zu wirken."},
+  6:{mu:"Wenn du nachrechnest, wer in deinen engsten Beziehungen mehr gibt — weißt du die Antwort bereits.<br>Manchmal wissen sie es. Manchmal nicht. Du sagst es selten laut.",ko:"Für dich selbst Geld zu fordern fühlt sich anders an als für andere zu fordern.<br>Wenn ein Freund unterbezahlt ist, wirst du laut. Wenn du es bist, redest du dir ein, dass es okay ist.<br>Dieser Unterschied hat einen Namen: er heißt Selbstwert.",bl:"Du glaubst, andere wissen was du gibst — und schätzen es.<br>Oft wird es als Selbstverständlichkeit behandelt, weil du es nie thematisierst.<br>Großzügigkeit die unsichtbar bleibt, verändert nichts — außer deiner eigenen Bilanz.",a:"Die Einladung lautet: das, was du für andere selbstverständlich forderst, einmal für dich selbst durchzusetzen.<br>Kein Erklären. Kein Abschwächen. Nur die Zahl nennen."},
+  7:{mu:"Du ignorierst finanzielle Details so lange, bis sie ein Problem werden.<br>Nicht weil du sie nicht verstehst — sondern weil sie sich unwichtig anfühlen gegenüber dem, womit du eigentlich beschäftigt bist.",ko:"Du hast eine klare Haltung zu Geld: es ist ein Mittel, kein Ziel.<br>Diese Haltung führt aber dazu, dass du dich mit dem Mittel zu wenig beschäftigst — und dich dann wunderst, warum es nicht da ist, wenn du es brauchst.",bl:"Du hast gelernt, finanziellen Druck umzudeuten — in Bedeutungslosigkeit des Themas. Das kostet trotzdem.<br>Du hältst dich für wenig materiell — und merkst nicht, wie viel Raum finanzielle Unsicherheit in deinem Inneren einnimmt.",a:"Die Einladung lautet: Geld als Thema mit derselben Tiefe zu behandeln, die du anderen Themen gibst.<br>Nicht obsessiv. Bewusst."},
+  8:{mu:"Du wechselst zwischen zwei Modi: du machst alles — oder du machst gar nichts.<br>Wenn du Gas gibst, baust du in Wochen was andere in Jahren nicht erreichen. In Tiefphasen zweifelst du an allem davon.",ko:"Du willst mehr — mehr Handlungsfähigkeit, mehr Wirkung, mehr Spielraum.<br>Gleichzeitig hast du eine tiefe, kaum formulierte Überzeugung, dass zu viel wollen etwas Falsches ist.<br>Diese Überzeugung sitzt vor jeder Entscheidung. Du nennst sie Vorsicht. Sie ist Angst.",bl:"Du glaubst, dein Problem ist mangelnde Strategie. Es ist mangelnde Erlaubnis.<br>Die Strategie ist oft da. Der Schritt fehlt — weil ein Teil von dir immer noch prüft, ob du das Recht hast, ihn zu machen.",a:"Die Einladung lautet: nicht die Strategie zu verfeinern — sondern einen Schritt zu machen, obwohl die innere Erlaubnis noch nicht vollständig ist.<br>Sie wird nicht vollständiger durch Warten."},
+  9:{mu:"Du unterbietest deinen Wert — konsequent, in verschiedenen Kontexten und oft unbewusst.<br>Du setzt Preise, die zu niedrig sind. Du arbeitest länger als bezahlt. Du gibst mehr als vereinbart.",ko:"Du trägst eine alte Überzeugung: wer wirklich gibt, braucht keine Gegenleistung.<br>Diese Überzeugung klingt edel — sie ist aber nicht nachhaltig.<br>Und irgendwo weißt du das. Du änderst es trotzdem nicht.",bl:"Du glaubst, deine Großzügigkeit wird gesehen und irgendwann zurückgegeben.<br>Was tatsächlich passiert: andere gewöhnen sich daran, dass du mehr gibst. Und du gewöhnst dich daran, zu wenig zu bekommen.",a:"Die Einladung lautet: den Preis zu nennen, der sich unangenehm hoch anfühlt — und ihn nicht sofort zu reduzieren.<br>Das Unbehagen dabei ist ein Zeichen, dass du in der Nähe deines tatsächlichen Werts bist."},
+  11:{mu:"Du schwankst zwischen Phasen wo Geld sich wie Energie anfühlt — fließend, leicht — und Phasen wo du finanzielle Entscheidungen komplett vermeidest.<br>In Flussphasen übersiehst du Risiken. In Stockungsphasen siehst du sie überall.",ko:"Du spürst genau, wann eine finanzielle Entscheidung sich falsch anfühlt.<br>Aber du weißt nie sicher, ob dieses Gefühl Intuition ist oder Angst die sich als Intuition verkleidet.<br>Beide fühlen sich gleich an. Das ist das eigentliche Problem.",bl:"Du hältst dich für ungewöhnlich sensibel gegenüber Geld — und das bist du.<br>Was du dabei übersiehst: diese Sensibilität macht dich auch anfällig für das Finanzgebaren anderer.<br>Du regulierst dich nach Außen. Das ist riskant, wenn du nicht weißt, dass du es tust.",a:"Die Einladung lautet: eine finanzielle Entscheidung vollständig aus dir selbst heraus zu treffen — ohne das Energiefeld der Person zu lesen, die davon betroffen ist."},
+  22:{mu:"Du investierst in Visionen bevor du die eigene Grundlage gesichert hast.<br>Nicht weil du die Risiken nicht siehst — sondern weil die Vision für dich realer ist als die gegenwärtige Situation.",ko:"Du hältst persönliche finanzielle Bedürfnisse für eine Ablenkung vom Wesentlichen.<br>Das Große ist das Ziel — und das Kleine dafür zu vernachlässigen erscheint dir fast folgerichtig.",bl:"Du glaubst, dass die persönliche Grundlage warten kann, bis das Große steht.<br>Sie kann nicht. Sie ist die Bedingung dafür, dass das Große überhaupt stehen kann.<br>Was erodiert wenn du sie ignorierst, ist nicht nur Geld — es ist die Kapazität weiterzumachen.",a:"Die Einladung lautet: die eigene finanzielle Sicherheit als Teil der Konstruktion zu behandeln — nicht als Luxus danach."},
+  33:{mu:"Du verlangst weniger als du solltest — und rechtfertigst es mit dem Argument, dass deine Arbeit Berufung ist, kein Geschäft.<br>Das klingt stimmig. Es führt aber dazu, dass du dich regelmäßig erschöpfst und nicht weißt warum.",ko:"Geld zu fordern fühlt sich für dich an wie eine Entwertung dessen, was du tust.<br>Als würde die Transaktion die Bedeutung reduzieren.<br>Diese Überzeugung wirkt. Unabhängig davon, ob sie stimmt.",bl:"Du trägst stillen Groll — und bemerkst ihn oft erst, wenn er sich entlädt.<br>Dieser Groll zeigt dir, wo deine Grenzen liegen. Du überschreitest sie trotzdem.",a:"Die Einladung lautet: zu erkennen, dass angemessene Entlohnung keine Kapitulation vor dem Materiellen ist.<br>Sie ist die Bedingung dafür, dass du langfristig das tun kannst, wozu du hier bist."}
+};
 
 var ZYK={1:"Phase des Erwachens",2:"Phase der Identität",3:"Phase des Aufbaus",4:"Phase der Transformation",5:"Phase der Weisheit",6:"Phase der Vollendung"};
 var NZYK={1:"Identität & Aufbruch",2:"Aufbau & Kraft",3:"Transformation & Tiefe",4:"Weisheit & Ernte",5:"Vollendung & Weitergabe",6:"Vollendung"};
 var PJT={1:"Neuanfänge, Loslassen, Eigeninitiative",2:"Geduld, Verbindung, inneres Lauschen",3:"Ausdruck, Freude, Kreativität",4:"Struktur, Arbeit, Fundament legen",5:"Veränderung, neue Türen, Freiheit",6:"Beziehungen, Verantwortung, Heimat",7:"Rückzug, Tiefe, Selbsterkenntnis",8:"Ernte, Macht, finanzielle Fragen",9:"Abschlüsse, Loslassen, innere Reinigung"};
+
+// ── HELPER: render full section ───────────────────────────────────
+function fsec(lbl,txt,cls){cls=cls||'';return'<div class="full-sec"><div class="full-sec-lbl '+cls+'">'+lbl+'</div><p>'+txt+'</p></div>';}
 
 // ── MATH ─────────────────────────────────────────────────────────
 function red(n,km){var ms=[11,22,33];while(n>9){if(km&&ms.indexOf(n)>-1)break;var s=0;String(n).split('').forEach(function(d){s+=parseInt(d);});n=s;}return n;}
@@ -326,8 +241,7 @@ function calc(fn,ln,bd){
   var ds=String(dy).padStart(2,'0')+String(mo).padStart(2,'0')+String(yr);
   var lz=red(ds.split('').reduce(function(a,b){return a+parseInt(b);},0),true);
   var full=(fn+ln).replace(/[^a-zA-Z]/g,'');
-  var av=[];
-  full.split('').forEach(function(ch){var v=charVal(ch);if(v>0)av.push(v);});
+  var av=[];full.split('').forEach(function(ch){var v=charVal(ch);if(v>0)av.push(v);});
   var az=red(av.reduce(function(a,b){return a+b;},0)||1,true);
   var cy=new Date().getFullYear(),age=cy-yr;
   var cn=Math.min(Math.floor(age/13)+1,6);
@@ -350,7 +264,6 @@ document.getElementById('soulForm').addEventListener('submit',function(e){
   if(!ds){alert('Bitte Datenschutzerklärung akzeptieren.');return;}
   var btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.innerHTML='✦ Analysiere...';
-  // Save all profile data — needed to restore after checkout
   localStorage.setItem('aevima_first_name',fn);
   localStorage.setItem('aevima_profile_fname',fn);
   localStorage.setItem('aevima_profile_lname',ln);
@@ -359,19 +272,14 @@ document.getElementById('soulForm').addEventListener('submit',function(e){
   setTimeout(function(){buildResult(fn,ln,bd,bp);btn.disabled=false;btn.innerHTML='✦ Analyse starten';},800);
 });
 
-// ── AUTO-LOAD when coming back after payment ─────────────────────
+// ── AUTO-LOAD after payment ───────────────────────────────────────
 (function(){
   if(isTest){
     var fn=localStorage.getItem('aevima_profile_fname');
     var ln=localStorage.getItem('aevima_profile_lname');
     var bd=localStorage.getItem('aevima_profile_bdate');
     var bp=localStorage.getItem('aevima_profile_bplace');
-    if(fn&&ln&&bd&&bp){
-      document.getElementById('soulForm').style.display='none';
-      buildResult(fn,ln,bd,bp);
-      return;
-    }
-    // Fallback: prefill form if partial data exists
+    if(fn&&ln&&bd&&bp){document.getElementById('soulForm').style.display='none';buildResult(fn,ln,bd,bp);return;}
     if(fn)document.getElementById('fname').value=fn;
     if(ln)document.getElementById('lname').value=ln;
     if(bd)document.getElementById('bdate').value=bd;
@@ -385,47 +293,60 @@ function buildResult(fn,ln,bd,bp){
   var ld=LZ[d.lz]||LZ[1];
   var bf=String(d.dy).padStart(2,'0')+'.'+String(d.mo).padStart(2,'0')+'.'+d.yr;
   var mb=ld.m?'<span class="master-tag">MEISTERZAHL</span>':'';
-  var hw=HW[d.lz]||HW[1];
-  var bm=BM[d.lz]||BM[1];
-  var az=AZ[d.az]||AZ[1];
-  var azT=AZ_TEASER[d.az]||AZ_TEASER[1];
-  var gm=GM[d.lz]||GM[1];
-  var gmT=GM_TEASER[d.lz]||GM_TEASER[1];
+  var hw=HW[d.lz]||HW[1]; var bm=BM[d.lz]||BM[1];
+  var az=AZ[d.az]||AZ[1]; var azT=AZ_TEASER[d.az]||AZ_TEASER[1];
+  var gm=GM[d.lz]||GM[1]; var gmT=GM_TEASER[d.lz]||GM_TEASER[1];
+  var hwF=HW_FULL[d.lz]||HW_FULL[1];
+  var bmF=BM_FULL[d.lz]||BM_FULL[1];
+  var azF=AZ_FULL[d.az]||AZ_FULL[1];
+  var gmF=GM_FULL[d.lz]||GM_FULL[1];
 
   var logoHtml='<div class="r-logo"><img src="logo.png" alt="AEVIMA"/></div>';
+  var heroHtml='<div class="r-hero"><div class="r-name">'+fn+' '+ln+'</div><div class="r-date">'+bf+' &middot; '+bp+'</div><span class="lz-num">'+d.lz+mb+'</span><span class="lz-name">'+ld.n+'</span></div>';
+  var lzHtml='<div class="pillar"><div class="pt">&#x2756; Lebenszahl '+d.lz+'</div><div class="p-sublabel">Dein Lebensweg &middot; Deine Energie &middot; Dein Kern</div><p>'+ld.t+'</p></div>';
 
-  var heroHtml='<div class="r-hero">'
-    +'<div class="r-name">'+fn+' '+ln+'</div>'
-    +'<div class="r-date">'+bf+' &middot; '+bp+'</div>'
-    +'<span class="lz-num">'+d.lz+mb+'</span>'
-    +'<span class="lz-name">'+ld.n+'</span>'
-    +'</div>';
+  // ── HERZWUNSCH ────────────────────────────────────────────────
+  var hwHtml;
+  if(isTest){
+    hwHtml='<div class="pillar p-teal p-strong">'
+      +'<div class="pt">&#9825; Herzwunsch</div>'
+      +'<div class="p-sublabel">Sehnsucht &middot; Innerer Konflikt &middot; Blinder Fleck &middot; Einladung</div>'
+      +'<p>'+hw+'</p>'
+      +fsec('Sehnsucht',hwF.s,'tl')
+      +fsec('Innerer Konflikt',hwF.k)
+      +fsec('Blinder Fleck',hwF.b)
+      +fsec('Die Einladung',hwF.a,'tl')
+      +'</div>';
+  } else {
+    hwHtml='<div class="pillar p-teal p-strong">'
+      +'<div class="pt">&#9825; Dein Herzwunsch</div>'
+      +'<div class="p-sublabel">Sehnsucht &middot; Innerer Konflikt &middot; Tiefe</div>'
+      +'<p>'+hw+'</p>'
+      +'<div class="fade-line">Vollversion: Wovor schützt dieser Wunsch dich? &middot; Wer bist du, wenn er erfüllt ist? &middot; Was steht dem im Weg?</div>'
+      +'</div>';
+  }
 
-  var lzHtml='<div class="pillar">'
-    +'<div class="pt">&#x2756; Lebenszahl '+d.lz+'</div>'
-    +'<div class="p-sublabel">Dein Lebensweg &middot; Deine Energie &middot; Dein Kern</div>'
-    +'<p>'+ld.t+'</p>'
-    +'</div>';
+  // ── BEZIEHUNGSMUSTER ──────────────────────────────────────────
+  var bmHtml;
+  if(isTest){
+    bmHtml='<div class="pillar p-teal p-strong">'
+      +'<div class="pt">&#9680; Beziehungsmuster</div>'
+      +'<div class="p-sublabel">Anziehung &middot; Bruchpunkt &middot; Was möglich wird</div>'
+      +'<p>'+bm+'</p>'
+      +fsec('Anziehungsmuster',bmF.an,'tl')
+      +fsec('Der Bruchpunkt',bmF.br)
+      +fsec('Was möglich wird',bmF.mo,'gn')
+      +'</div>';
+  } else {
+    bmHtml='<div class="pillar p-teal p-strong">'
+      +'<div class="pt">&#9680; Beziehungsmuster<span class="hot-badge">Tiefste Ebene</span></div>'
+      +'<div class="p-sublabel">Das Muster &middot; Die Anziehung &middot; Der Bruchpunkt</div>'
+      +'<p>'+bm+'</p>'
+      +'<div class="fade-line">Vollversion: Warum zieht dich an, was dich kostet &middot; Der exakte Bruchpunkt &middot; Wer wärst du in einer Beziehung ohne dieses Muster?</div>'
+      +'</div>';
+  }
 
-  var hwHtml='<div class="pillar p-teal p-strong">'
-    +'<div class="pt">&#9825; Dein Herzwunsch</div>'
-    +'<div class="p-sublabel">Sehnsucht &middot; Innerer Konflikt &middot; Tiefe</div>'
-    +'<p>'+hw+'</p>'
-    +(isTest
-      ?'<p style="margin-top:14px;color:var(--rose-l);font-style:italic;font-size:.95rem">Vollständig sichtbar — inkl. Wovor du dich schützt &amp; wer sichtbar wird, wenn der Wunsch leiser wird.</p>'
-      :'<div class="fade-line">Vollversion: Wovor schützt dieser Wunsch dich? &middot; Wer bist du, wenn er erfüllt ist? &middot; Was steht dem im Weg?</div>')
-    +'</div>';
-
-  var bmHtml='<div class="pillar p-teal p-strong">'
-    +'<div class="pt">&#9680; Beziehungsmuster<span class="hot-badge">Tiefste Ebene</span></div>'
-    +'<div class="p-sublabel">Das Muster &middot; Die Anziehung &middot; Der Bruchpunkt</div>'
-    +'<p>'+bm+'</p>'
-    +(isTest
-      ?'<p style="margin-top:14px;color:var(--rose-l);font-style:italic;font-size:.95rem">Vollständig sichtbar — Bruchpunkt, Anziehungsmuster &amp; was möglich wird, wenn das Muster leiser wird.</p>'
-      :'<div class="fade-line">Vollversion: Warum zieht dich an, was dich kostet &middot; Der exakte Bruchpunkt &middot; Wer wärst du in einer Beziehung ohne dieses Muster?</div>')
-    +'</div>';
-
-  // ── PAYWALL ──────────────────────────────────────────────────
+  // ── PAYWALL ───────────────────────────────────────────────────
   var pwHtml='';
   if(!isTest){
     pwHtml='<div class="pw-box">'
@@ -462,24 +383,22 @@ function buildResult(fn,ln,bd,bp){
   if(isTest){
     azHtml='<div class="pillar p-teal p-strong">'
       +'<div class="pt">&#9675; Ausdruckszahl '+d.az+'</div>'
-      +'<div class="p-sublabel">Wie du wirkst &middot; Das Missverständnis &middot; Dein blinder Fleck</div>'
+      +'<div class="p-sublabel">Wie du wirkst &middot; Das Missverständnis &middot; Blinder Fleck &middot; Was möglich wird</div>'
       +'<p>'+az+'</p>'
-      +'<p style="margin-top:14px;color:var(--rose-l);font-style:italic;font-size:.95rem">'+azT+'</p>'
+      +fsec('Der Ausdruck',azF.au,'tl')
+      +fsec('Das Missverständnis',azF.ms)
+      +fsec('Blinder Fleck',azF.bl)
+      +fsec('Die Einladung',azF.ei,'tl')
+      +fsec('Was möglich wird',azF.mo,'gn')
       +'</div>';
   } else {
     azHtml='<div class="locked-wrap">'
       +'<div class="locked-card">'
       +'<div class="pt" style="color:var(--teal)">&#9675; Ausdruckszahl '+d.az+'</div>'
       +'<div class="p-sublabel">Wie du wirkst &middot; Das Missverständnis &middot; Dein blinder Fleck</div>'
-      +'<div class="locked-teaser">'
-      +'<div class="locked-teaser-text">'+azT+'</div>'
-      +'<div class="locked-over">'
-      +'<div class="locked-icon">&#9670;</div>'
-      +'<div class="locked-hint">Das Missverständnis, das sich immer wiederholt</div>'
-      +'</div>'
-      +'</div>'
-      +'</div>'
-      +'</div>';
+      +'<div class="locked-teaser"><div class="locked-teaser-text">'+azT+'</div>'
+      +'<div class="locked-over"><div class="locked-icon">&#9670;</div><div class="locked-hint">Das Missverständnis, das sich immer wiederholt</div></div></div>'
+      +'</div></div>';
   }
 
   // ── GELDMUSTER ────────────────────────────────────────────────
@@ -487,53 +406,31 @@ function buildResult(fn,ln,bd,bp){
   if(isTest){
     gmHtml='<div class="pillar p-quiet p-em">'
       +'<div class="pt">&#8853; Geldmuster</div>'
-      +'<div class="p-sublabel">Muster &middot; Blinder Fleck &middot; Bruchpunkt</div>'
+      +'<div class="p-sublabel">Verhaltensmuster &middot; Innerer Konflikt &middot; Blinder Fleck</div>'
       +'<p>'+gm+'</p>'
-      +'<p style="margin-top:12px;color:var(--rose-l);font-style:italic;font-size:.9rem">'+gmT+'</p>'
+      +fsec('Das Muster',gmF.mu,'gn')
+      +fsec('Innerer Konflikt',gmF.ko)
+      +fsec('Blinder Fleck',gmF.bl)
+      +fsec('Die Einladung',gmF.a,'tl')
       +'</div>';
   } else {
     gmHtml='<div class="locked-wrap">'
       +'<div class="locked-card p-quiet-card">'
       +'<div class="pt" style="color:#3DB87A">&#8853; Geldmuster</div>'
       +'<div class="p-sublabel">Muster &middot; Blinder Fleck &middot; Bruchpunkt</div>'
-      +'<div class="locked-teaser">'
-      +'<div class="locked-teaser-text">'+gmT+'</div>'
-      +'<div class="locked-over">'
-      +'<div class="locked-icon">&#9670;</div>'
-      +'<div class="locked-hint">Der blinde Fleck hinter deinem Muster</div>'
-      +'</div>'
-      +'</div>'
-      +'</div>'
-      +'</div>';
+      +'<div class="locked-teaser"><div class="locked-teaser-text">'+gmT+'</div>'
+      +'<div class="locked-over"><div class="locked-icon">&#9670;</div><div class="locked-hint">Der blinde Fleck hinter deinem Muster</div></div></div>'
+      +'</div></div>';
   }
 
-  var pjHtml='<div class="pillar">'
-    +'<div class="pt">&#9689; Persönliches Jahr '+d.pj+'</div>'
-    +'<div class="p-sublabel">Deine aktuelle Phase &middot; Energie &middot; Themen</div>'
-    +'<p>Dieser Zyklus lädt ein zu: <strong>'+(PJT[d.pj]||'erhöhter Intuition')+'</strong>.</p>'
-    +'</div>';
-
-  var cycHtml='<div class="pillar">'
-    +'<div class="pt">&#9670; Lebensabschnitt &mdash; '+d.cn+'. Phase</div>'
-    +'<div class="p-sublabel">Wo du bist &middot; Wie lange noch &middot; Was kommt</div>'
-    +'<p>Seit <strong>'+d.cs+'</strong> in der <strong>'+(ZYK[d.cn]||'Phase der Meisterschaft')+'</strong>.<br><br>'
-    +'Jahr <strong>'+d.yc+' von 13</strong>.'
-    +'<div class="cyc-bar"><div class="cyc-fill" style="width:'+d.pct+'%"></div></div>'
-    +'Noch <strong>'+d.yl+' Jahr'+(d.yl===1?'':'e')+'</strong> &middot; Ab <strong>'+(d.ce+1)+'</strong>: '+(NZYK[d.cn]||'nächste Phase')+'.'
-    +'</p></div>';
-
-  var closingHtml='<div class="closing">'
-    +'<img src="logo.png" alt="AEVIMA"/>'
-    +'<div class="cl-label">Was bleibt</div>'
-    +'<div class="cl-quote">Du hast nichts Neues bekommen.<br>Du hast etwas wiedergefunden.</div>'
-    +'</div>';
+  var pjHtml='<div class="pillar"><div class="pt">&#9689; Persönliches Jahr '+d.pj+'</div><div class="p-sublabel">Deine aktuelle Phase &middot; Energie &middot; Themen</div><p>Dieser Zyklus lädt ein zu: <strong>'+(PJT[d.pj]||'erhöhter Intuition')+'</strong>.</p></div>';
+  var cycHtml='<div class="pillar"><div class="pt">&#9670; Lebensabschnitt &mdash; '+d.cn+'. Phase</div><div class="p-sublabel">Wo du bist &middot; Wie lange noch &middot; Was kommt</div><p>Seit <strong>'+d.cs+'</strong> in der <strong>'+(ZYK[d.cn]||'Phase der Meisterschaft')+'</strong>.<br><br>Jahr <strong>'+d.yc+' von 13</strong>.<div class="cyc-bar"><div class="cyc-fill" style="width:'+d.pct+'%"></div></div>Noch <strong>'+d.yl+' Jahr'+(d.yl===1?'':'e')+'</strong> &middot; Ab <strong>'+(d.ce+1)+'</strong>: '+(NZYK[d.cn]||'nächste Phase')+'.</p></div>';
+  var closingHtml='<div class="closing"><img src="logo.png" alt="AEVIMA"/><div class="cl-label">Was bleibt</div><div class="cl-quote">Du hast nichts Neues bekommen.<br>Du hast etwas wiedergefunden.</div></div>';
 
   var full=logoHtml+heroHtml
     +'<div class="divider" style="margin:0 auto 32px"></div>'
-    +lzHtml
-    +'<div class="orn"></div>'
-    +hwHtml+bmHtml
-    +pwHtml
+    +lzHtml+'<div class="orn"></div>'
+    +hwHtml+bmHtml+pwHtml
     +'<div class="orn-t"></div>'
     +azHtml+gmHtml
     +'<div class="orn"></div>'
