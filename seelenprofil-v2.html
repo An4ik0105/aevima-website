@@ -219,6 +219,43 @@
       background:var(--rose-l);border-radius:1px;transition:opacity .2s
     }
     .site-header-menu:hover span{opacity:.6}
+
+    /* ── ACCORDION ── */
+    .acc-item{border-top:1px solid rgba(196,149,106,.1);margin-top:0}
+    .acc-item:first-of-type{border-top:none}
+    .acc-header{
+      display:flex;align-items:flex-start;justify-content:space-between;
+      padding:16px 0 12px;cursor:pointer;user-select:none;
+      transition:opacity .2s
+    }
+    .acc-header:hover .acc-lbl{opacity:.8}
+    .acc-header:hover .acc-chevron{color:var(--rose-l)}
+    .acc-left{flex:1;min-width:0}
+    .acc-lbl{
+      font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;
+      color:var(--rose);text-transform:uppercase;
+      display:flex;align-items:center;gap:7px;margin-bottom:5px;transition:opacity .2s
+    }
+    .acc-lbl.tl{color:var(--teal)}
+    .acc-lbl.gn{color:#3DB87A}
+    .acc-desc{font-size:.85rem;color:var(--muted);line-height:1.65;padding-right:12px}
+    .acc-chevron{
+      flex-shrink:0;margin-left:10px;margin-top:2px;
+      color:var(--muted);opacity:.7;
+      transition:transform .35s cubic-bezier(.2,.8,.2,1),color .2s;font-size:.7rem
+    }
+    .acc-chevron.acc-open{transform:rotate(180deg);color:var(--rose-l);opacity:1}
+    .acc-body{
+      max-height:0;overflow:hidden;
+      transition:max-height .45s cubic-bezier(.2,.8,.2,1),opacity .35s ease;
+      opacity:0
+    }
+    .acc-body.acc-open{max-height:1200px;opacity:1}
+    .acc-body p{font-size:1rem;color:var(--text);line-height:1.9;padding-bottom:18px}
+    .acc-body p+p{margin-top:10px}
+    /* first section open by default (Sehnsucht / Das Muster) */
+    .acc-item:first-of-type .acc-body{max-height:1200px;opacity:1}
+    .acc-item:first-of-type .acc-chevron{transform:rotate(180deg);color:var(--rose-l);opacity:1}
     @media(max-width:500px){.row2{grid-template-columns:1fr}.pillar,.pillar.p-strong{padding:24px 18px}.pillar.p-quiet{padding:20px 18px}.pw-box{padding:32px 18px}.locked-card{padding:24px 18px}}
   </style>
 </head>
@@ -383,8 +420,45 @@ var SOUL_INTRO="Die Seele kommt nicht zufällig auf die Erde. Sie bringt Potenzi
 var AZ_INTRO="Die Lebenszahl beschreibt den Weg der Seele. Die Ausdruckszahl beschreibt, wie sich diese Energie nach außen zeigt — in der Persönlichkeit, in der Wirkung, in der Art wie andere dich erleben.<br>Beide Zahlen können unterschiedlich sein. Das ist keine Spannung — es ist eine Erweiterung. Deine Lebenszahl zeigt, wohin du gehst. Deine Ausdruckszahl zeigt, wie du dabei wirkst.";
 var PJ_INTRO="Nicht jede Lebensphase dient derselben Aufgabe. Das persönliche Jahr beschreibt den energetischen Schwerpunkt des aktuellen Zyklus — das Thema, das dein Leben gerade einlädt zu vertiefen. Es ist kein Befehl. Es ist ein Hinweis auf das, womit du gerade in Berührung bist.";
 var CYC_INTRO="Die Lebenszahl beschreibt den gesamten Weg. Aber der Weg besteht aus Etappen — Lebensabschnitte von je 13 Jahren, in denen unterschiedliche Seelenaufgaben im Vordergrund stehen. Jede Phase aktiviert andere Potenziale. Was im letzten Abschnitt Lernaufgabe war, kann im nächsten Ressource werden. AEVIMA zeigt nicht nur wer du bist — sondern auch wo auf dem Weg du dich gerade befindest.";
-// ── HELPER: render full section ───────────────────────────────────
-function fsec(lbl,txt,cls){cls=cls||'';return'<div class="full-sec"><div class="full-sec-lbl '+cls+'">'+lbl+'</div><p>'+txt+'</p></div>';}
+// ── FSEC ICONS ────────────────────────────────────────────────────
+var FSEC_ICONS={
+  'Sehnsucht':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>',
+  'Innerer Konflikt':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  'Was du vielleicht noch nicht siehst':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  'Die Einladung':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
+  'Was möglich wird':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V12m0 0C12 6 7 3 3 5m9 7c0-6 5-9 9-7"/></svg>',
+  'Das Muster':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>',
+  'Anziehungsmuster':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>',
+  'Der Bruchpunkt':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  'Der Ausdruck':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  'Das Missverständnis':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'
+};
+var CHEVRON_SVG='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"/></svg>';
+
+// ── ACCORDION TOGGLE ──────────────────────────────────────────────
+function accToggle(el){
+  var body=el.nextElementSibling;
+  var chev=el.querySelector('.acc-chevron');
+  var open=body.classList.contains('acc-open');
+  body.classList.toggle('acc-open',!open);
+  chev.classList.toggle('acc-open',!open);
+}
+
+// ── HELPER: render accordion section ─────────────────────────────
+function fsec(lbl,desc,txt,cls){
+  cls=cls||'';
+  var icon=FSEC_ICONS[lbl]||'';
+  return'<div class="acc-item">'
+    +'<div class="acc-header" onclick="accToggle(this)">'
+    +'<div class="acc-left">'
+    +'<div class="acc-lbl '+cls+'">'+icon+' '+lbl+'</div>'
+    +'<div class="acc-desc">'+desc+'</div>'
+    +'</div>'
+    +'<div class="acc-chevron">'+CHEVRON_SVG+'</div>'
+    +'</div>'
+    +'<div class="acc-body"><p>'+txt+'</p></div>'
+    +'</div>';
+}
 
 // ── MATH ─────────────────────────────────────────────────────────
 function red(n,km){var ms=[11,22,33];while(n>9){if(km&&ms.indexOf(n)>-1)break;var s=0;String(n).split('').forEach(function(d){s+=parseInt(d);});n=s;}return n;}
@@ -476,12 +550,12 @@ function buildResult(fn,ln,bd,bp){
   if(isTest){
     hwHtml='<div class="pillar p-teal p-strong">'
       +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Herzwunsch</div>'
-      +'<div class="p-sublabel">Sehnsucht &middot; Innerer Konflikt &middot; Blinder Fleck &middot; Einladung &middot; Was m&#246;glich wird</div>'
-      +fsec('Sehnsucht',hwF.s,'tl')
-      +fsec('Innerer Konflikt',hwF.k)
-      +fsec('Blinder Fleck',hwF.b)
-      +fsec('Die Einladung',hwF.a,'tl')
-      +fsec('Was m&#246;glich wird',hwF.w,'gn')
+      +'<div class="p-sublabel">Sehnsucht &middot; Innerer Konflikt &middot; Was du vielleicht noch nicht siehst &middot; Einladung &middot; Was m&#246;glich wird</div>'
+      +fsec('Sehnsucht','Was du dir tief im Inneren wünschst.',hwF.s,'tl')
+      +fsec('Innerer Konflikt','Warum sich Sehnsucht und Wirklichkeit widersprechen.',hwF.k)
+      +fsec('Was du vielleicht noch nicht siehst','Der verborgene Grund hinter dem Muster.',hwF.b)
+      +fsec('Die Einladung','Ein konkreter Schritt in Richtung Veränderung.',hwF.a,'tl')
+      +fsec('Was möglich wird','Was aufhört — und was sichtbar wird.',hwF.w,'gn')
       +'</div>';
   } else {
     hwHtml='<div class="pillar p-teal p-strong">'
@@ -498,11 +572,11 @@ function buildResult(fn,ln,bd,bp){
     bmHtml='<div class="pillar p-teal p-strong">'
       +'<div class="pt"><svg width="16" height="14" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><circle cx="9" cy="12" r="7"/><circle cx="19" cy="12" r="7"/></svg> Beziehungsmuster</div>'
       +'<div class="p-sublabel">Das Muster &middot; Anziehung &middot; Bruchpunkt &middot; Einladung &middot; Was m&#246;glich wird</div>'
-      +fsec('Das Muster',bmF.mu)
-      +fsec('Anziehungsmuster',bmF.an,'tl')
-      +fsec('Der Bruchpunkt',bmF.br)
-      +fsec('Die Einladung',bmF.ei,'tl')
-      +fsec('Was m&#246;glich wird',bmF.mo,'gn')
+      +fsec('Das Muster','Wie es sich im Alltag und in Beziehungen zeigt.',bmF.mu)
+      +fsec('Anziehungsmuster','Welche Menschen du anziehst — und warum.',bmF.an,'tl')
+      +fsec('Der Bruchpunkt','Der Moment, an dem das Muster sichtbar bricht.',bmF.br)
+      +fsec('Die Einladung','Ein konkreter Schritt in Beziehungen.',bmF.ei,'tl')
+      +fsec('Was möglich wird','Wie Beziehungen ohne dieses Muster aussehen können.',bmF.mo,'gn')
       +'</div>';
   } else {
     bmHtml='<div class="pillar p-teal p-strong">'
@@ -551,12 +625,12 @@ function buildResult(fn,ln,bd,bp){
   if(isTest){
     azHtml='<div class="pillar p-teal p-strong">'
       +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg> Ausdruckszahl '+d.az+'</div>'
-      +'<div class="p-sublabel">Der Ausdruck &middot; Das Missverst&#228;ndnis &middot; Blinder Fleck &middot; Einladung &middot; Was m&#246;glich wird</div>'
-      +fsec('Der Ausdruck',azF.au,'tl')
-      +fsec('Das Missverständnis',azF.ms)
-      +fsec('Blinder Fleck',azF.bl)
-      +fsec('Die Einladung',azF.ei,'tl')
-      +fsec('Was möglich wird',azF.mo,'gn')
+      +'<div class="p-sublabel">Der Ausdruck &middot; Das Missverst&#228;ndnis &middot; Was du vielleicht noch nicht siehst &middot; Einladung &middot; Was m&#246;glich wird</div>'
+      +fsec('Der Ausdruck','Wie deine Energie auf andere wirkt.',azF.au,'tl')
+      +fsec('Das Missverständnis','Was andere wahrnehmen — und was wirklich dahintersteckt.',azF.ms)
+      +fsec('Was du vielleicht noch nicht siehst','Was andere sehen — und du vielleicht noch nicht.',azF.bl)
+      +fsec('Die Einladung','Was sich verändert, wenn du den blinden Fleck erkennst.',azF.ei,'tl')
+      +fsec('Was möglich wird','Wie deine Wirkung sich verändert.',azF.mo,'gn')
       +'</div>';
   } else {
     azHtml='<div class="locked-wrap">'
@@ -573,17 +647,17 @@ function buildResult(fn,ln,bd,bp){
   if(isTest){
     gmHtml='<div class="pillar p-quiet p-em">'
       +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Geldmuster</div>'
-      +'<div class="p-sublabel">Das Muster &middot; Innerer Konflikt &middot; Blinder Fleck &middot; Die Einladung</div>'
-      +fsec('Das Muster',gmF.mu,'gn')
-      +fsec('Innerer Konflikt',gmF.ko)
-      +fsec('Blinder Fleck',gmF.bl)
-      +fsec('Die Einladung',gmF.a,'tl')
+      +'<div class="p-sublabel">Das Muster &middot; Innerer Konflikt &middot; Was du vielleicht noch nicht siehst &middot; Die Einladung</div>'
+      +fsec('Das Muster','Wie es sich im Umgang mit Geld zeigt.',gmF.mu,'gn')
+      +fsec('Innerer Konflikt','Warum der nächste Schritt nicht folgt.',gmF.ko)
+      +fsec('Was du vielleicht noch nicht siehst','Was das Geldmuster am Leben hält.',gmF.bl)
+      +fsec('Die Einladung','Ein konkreter Schritt in Richtung finanzieller Klarheit.',gmF.a,'tl')
       +'</div>';
   } else {
     gmHtml='<div class="locked-wrap">'
       +'<div class="locked-card p-quiet-card">'
       +'<div class="pt" style="color:#3DB87A"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Geldmuster</div>'
-      +'<div class="p-sublabel">Muster &middot; Blinder Fleck &middot; Bruchpunkt</div>'
+      +'<div class="p-sublabel">Muster &middot; Was du vielleicht noch nicht siehst &middot; Bruchpunkt</div>'
       +'<div class="locked-teaser"><div class="locked-teaser-text">'+gmT+'</div>'
       +'<div class="locked-over"><div class="locked-icon">&#9670;</div><div class="locked-hint">Der blinde Fleck hinter deinem Muster</div></div></div>'
       +'</div></div>';
