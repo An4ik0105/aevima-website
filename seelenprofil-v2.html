@@ -159,6 +159,23 @@
       box-shadow:0 4px 28px rgba(30,122,82,.4)
     }
     .btn-pw:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(30,122,82,.55)}
+    .pw-questions{margin-bottom:24px;text-align:left}
+    .pw-q{
+      font-family:'Cinzel',serif;font-size:.82rem;color:var(--off-white);
+      line-height:1.55;padding:9px 0;
+      border-bottom:1px solid rgba(196,149,106,.08);
+      letter-spacing:.02em
+    }
+    .pw-q:last-child{border-bottom:none}
+    .pw-section-label{
+      font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;
+      color:var(--muted);text-transform:uppercase;margin-bottom:14px
+    }
+    .pw-closing{
+      font-size:.95rem;color:var(--muted);line-height:1.9;
+      font-style:normal;margin-bottom:4px
+    }
+    .pw-closing em{color:var(--rose-l);font-style:italic;font-size:1rem}
     .pw-trust{color:var(--muted);font-size:.78rem;margin-top:14px}
 
     /* ── LOCKED CARDS ── */
@@ -413,20 +430,29 @@ function buildResult(fn,ln,bd,bp){
   if(!isTest){
     pwHtml='<div class="pw-box">'
       +'<div class="pw-logo"><img src="logo.png" alt="AEVIMA"/></div>'
-      +'<div class="pw-headline">Du hast den Anfang gesehen.<br>Die Muster dahinter noch nicht.</div>'
-      +'<div class="pw-sub">Der blinde Fleck. Der Bruchpunkt. Das Missverständnis.<br>Und was möglich wird, wenn die Muster leiser werden.</div>'
+      +'<div class="pw-headline">Du hast gesehen, welches Muster sich wiederholt.<br><span style="color:var(--muted);font-size:.9em;font-weight:400">Die wichtigeren Fragen beginnen erst danach.</span></div>'
+      +'<div class="pw-questions">'
+      +'<div class="pw-q">Warum ist das so?</div>'
+      +'<div class="pw-q">Wovor schützt dich dieses Muster?</div>'
+      +'<div class="pw-q">Warum taucht es immer wieder auf?</div>'
+      +'<div class="pw-q">Und wer bleibt übrig, wenn du es nicht mehr brauchst?</div>'
+      +'</div>'
+      +'<div class="pw-divider"></div>'
+      +'<div class="pw-section-label">Die Vollversion enthält:</div>'
+      +'<div class="pw-items">'
+      +'<div class="pw-item"><span class="pw-check">&#10022;</span><span>Den blinden Fleck hinter deinem Muster</span></div>'
+      +'<div class="pw-item"><span class="pw-check">&#10022;</span><span>Den Bruchpunkt, an dem es sichtbar wird</span></div>'
+      +'<div class="pw-item"><span class="pw-check">&#10022;</span><span>Die Schutzfunktion, die es am Leben hält</span></div>'
+      +'<div class="pw-item"><span class="pw-check">&#10022;</span><span>Was möglich wird, wenn das Muster leiser wird</span></div>'
+      +'<div class="pw-item"><span class="pw-check">&#10022;</span><span>Die Erinnerung an das, was darunter schon immer da war</span></div>'
+      +'</div>'
+      +'<div class="pw-divider"></div>'
+      +'<div class="pw-closing">Du kaufst keine Analyse.<br>Du kaufst die Antwort auf die Frage:<br><em>Wer bist du, wenn du nicht nur dein Muster bist?</em></div>'
       +'<div class="pw-divider"></div>'
       +'<div class="pw-pilot-label">Pilotpreis</div>'
       +'<div class="pw-price">49 &euro;</div>'
       +'<div class="pw-price-note">Einmalig &middot; Kein Abo &middot; Sofortzugang</div>'
-      +'<div class="pw-items">'
-      +'<div class="pw-item"><span class="pw-check">&#10003;</span><span>Vollständiger Herzwunsch — mit blindem Fleck</span></div>'
-      +'<div class="pw-item"><span class="pw-check">&#10003;</span><span>Beziehungsmuster — mit Bruchpunkt &amp; Auflösung</span></div>'
-      +'<div class="pw-item"><span class="pw-check">&#10003;</span><span>Ausdruckszahl — mit Missverständnis</span></div>'
-      +'<div class="pw-item"><span class="pw-check">&#10003;</span><span>Geldmuster — vollständig</span></div>'
-      +'<div class="pw-item"><span class="pw-check">&#10003;</span><span>Sofort sichtbar — kein Warten</span></div>'
-      +'</div>'
-      +'<a href="checkout.html" class="btn-pw">&#10022; Vollständiges Profil freischalten</a>'
+      +'<a href="checkout.html" class="btn-pw" style="margin-top:10px">&#10022; Vollständiges Profil freischalten</a>'
       +'<div class="pw-trust">Einmalige Zahlung &middot; SSL-verschlüsselt &middot; DSGVO-konform</div>'
       +'</div>';
   }
