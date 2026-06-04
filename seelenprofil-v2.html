@@ -9,16 +9,31 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --black:#0F0E14;--night:#18161F;--off-white:#EDE9E2;--text:#D8D4CC;--muted:#9B8FA8;
-      --emerald:#1E7A52;--teal:#2AAFA0;--rose:#C4956A;--rose-l:#E8C4A0;
-      --br:rgba(196,149,106,.22);--bt:rgba(42,175,160,.28);--be:rgba(30,122,82,.3);
+      --black:#060507;--night:#0D0B13;--off-white:#EDE9E2;--text:#D4CFCA;--muted:#897FA0;
+      --emerald:#1E9060;--teal:#2AAFA0;--rose:#C4956A;--rose-l:#E8C4A0;
+      --br:rgba(60,55,72,.7);--bt:rgba(42,175,160,.3);--be:rgba(30,122,82,.3);
     }
     html{scroll-behavior:smooth}
     body{background:var(--black);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.85;min-height:100vh;font-size:18px}
-    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 10%,rgba(30,122,82,.07) 0,transparent 55%),radial-gradient(ellipse at 70% 90%,rgba(42,175,160,.06) 0,transparent 55%),radial-gradient(ellipse at 50% 50%,rgba(196,149,106,.02) 0,transparent 70%);pointer-events:none;z-index:0}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 10%,rgba(30,122,82,.09) 0,transparent 50%),radial-gradient(ellipse at 70% 90%,rgba(42,175,160,.07) 0,transparent 50%),radial-gradient(ellipse at 50% 30%,rgba(196,149,106,.04) 0,transparent 60%);pointer-events:none;z-index:0}
     .page{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 20px 100px}
-    .logo-wrap{display:flex;justify-content:center;padding:48px 0 32px}
-    .logo-wrap img{max-width:210px;height:auto;filter:drop-shadow(0 0 30px rgba(196,149,106,.5)) drop-shadow(0 0 10px rgba(196,149,106,.25))}
+    .logo-wrap{display:flex;justify-content:center;padding:60px 0 48px;position:relative}
+    .logo-wrap::before{
+      content:'';position:absolute;
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      width:320px;height:320px;
+      background:radial-gradient(circle,rgba(196,149,106,.1) 0%,rgba(196,149,106,.04) 40%,transparent 70%);
+      border-radius:50%;pointer-events:none;z-index:0
+    }
+    .logo-wrap::after{
+      content:'';position:absolute;
+      bottom:0;left:50%;transform:translateX(-50%);
+      width:2px;height:72px;
+      background:linear-gradient(to bottom,rgba(196,149,106,.65),rgba(42,175,160,.25),transparent);
+      filter:blur(2px);border-radius:1px;z-index:0
+    }
+    .logo-wrap img{max-width:200px;height:auto;position:relative;z-index:1;
+      filter:drop-shadow(0 0 32px rgba(196,149,106,.55)) drop-shadow(0 0 12px rgba(196,149,106,.3)) drop-shadow(0 0 60px rgba(196,149,106,.15))}
     .intro{text-align:center;padding:0 0 40px}
     .headline{font-family:'Cinzel',serif;font-size:clamp(1.4rem,5vw,1.9rem);font-weight:600;color:var(--rose-l);letter-spacing:.06em;line-height:1.35;margin-bottom:10px}
     .subline{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:28px}
@@ -34,12 +49,19 @@
     .check-row input{width:17px;height:17px;min-width:17px;margin-top:4px;accent-color:var(--teal)}
     .check-row span{font-size:.875rem;color:var(--muted);line-height:1.6}
     .check-row a{color:var(--rose);text-decoration:none}
-    .btn-start{width:100%;padding:18px 24px;background:linear-gradient(135deg,var(--emerald),#16704A);color:var(--off-white);border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .3s cubic-bezier(.2,.8,.2,1);margin-top:10px;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(30,122,82,.3)}
+    .btn-start{width:100%;padding:18px 24px;background:linear-gradient(135deg,var(--emerald),#157A48);color:var(--off-white);border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .3s cubic-bezier(.2,.8,.2,1);margin-top:10px;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(30,122,82,.3)}
     .btn-start:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 40px rgba(30,122,82,.55),0 0 60px rgba(30,122,82,.12)}
     .btn-start:disabled{opacity:.45;cursor:not-allowed}
     .btn-note{color:var(--muted);font-size:.82rem;text-align:center;margin-top:10px}
     #result{display:none;margin-top:8px}
-    .r-logo{display:flex;justify-content:center;padding:40px 0 28px}
+    .r-logo{display:flex;justify-content:center;padding:40px 0 28px;position:relative}
+    .r-logo::before{
+      content:'';position:absolute;
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      width:200px;height:200px;
+      background:radial-gradient(circle,rgba(196,149,106,.07) 0%,transparent 70%);
+      border-radius:50%;pointer-events:none
+    }
     .r-logo img{max-width:150px;height:auto;filter:drop-shadow(0 0 24px rgba(196,149,106,.45)) drop-shadow(0 0 8px rgba(196,149,106,.2))}
     .r-hero{text-align:center;margin-bottom:36px}
     .r-name{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--rose-l);letter-spacing:.15em;margin-bottom:4px}
@@ -85,7 +107,7 @@
     .pw-check{color:var(--teal);font-size:.8rem;margin-top:3px;flex-shrink:0}
     .pw-closing{font-size:.95rem;color:var(--muted);line-height:1.9;margin-bottom:4px}
     .pw-closing em{color:var(--rose-l);font-style:italic;font-size:1rem}
-    .btn-pw{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:19px;background:linear-gradient(135deg,var(--emerald),#16704A);color:var(--off-white);border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .25s;min-height:58px;text-decoration:none;box-shadow:0 4px 28px rgba(30,122,82,.4)}
+    .btn-pw{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:19px;background:linear-gradient(135deg,var(--emerald),#157A48);color:var(--off-white);border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.22em;cursor:pointer;transition:all .25s;min-height:58px;text-decoration:none;box-shadow:0 4px 28px rgba(30,122,82,.4)}
     .btn-pw:hover{transform:translateY(-3px);box-shadow:0 14px 50px rgba(30,122,82,.65),0 0 80px rgba(30,122,82,.18)}
     .pw-trust{color:var(--muted);font-size:.78rem;margin-top:14px}
     /* Locked */
@@ -103,6 +125,21 @@
     .orn{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:40px auto}
     .orn-t{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent);margin:40px auto}
     .closing{text-align:center;padding:48px 0 60px}
+    .closing-beam{position:relative;display:inline-block;margin-bottom:0}
+    .closing-beam::before{
+      content:'';position:absolute;
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      width:200px;height:200px;
+      background:radial-gradient(circle,rgba(196,149,106,.08) 0%,transparent 70%);
+      border-radius:50%;pointer-events:none
+    }
+    .closing-beam::after{
+      content:'';position:absolute;
+      bottom:-20px;left:50%;transform:translateX(-50%);
+      width:1px;height:48px;
+      background:linear-gradient(to bottom,rgba(196,149,106,.5),transparent);
+      filter:blur(1px)
+    }
     .closing img{max-width:80px;margin-bottom:16px;opacity:.85;filter:drop-shadow(0 0 10px rgba(196,149,106,.2))}
     .cl-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin-bottom:18px}
     .cl-quote{font-size:1rem;color:var(--off-white);line-height:1.9;font-style:italic}
@@ -390,7 +427,7 @@ function buildResult(fn,ln,bd,bp){
   var soulIntroHtml='<div class="soul-intro"><div class="soul-intro-lbl">&#9651; &#220;ber dieses Profil</div><p>'+SOUL_INTRO+'</p></div>';
 
   var lzHtml='<div class="pillar">'
-    +'<div class="pt">&#x2756; Lebenszahl '+d.lz+'</div>'
+    +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg> Lebenszahl '+d.lz+'</div>'
     +'<div class="arch-row"><span class="arch-tag">'+arch+'</span></div>'
     +'<div class="lz-intro">'+lzIntro+'</div>'
     +masterBox
@@ -402,7 +439,7 @@ function buildResult(fn,ln,bd,bp){
   var hwHtml;
   if(isTest){
     hwHtml='<div class="pillar p-teal p-strong">'
-      +'<div class="pt">&#9825; Herzwunsch</div>'
+      +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Herzwunsch</div>'
       +'<div class="p-sublabel">Sehnsucht &middot; Innerer Konflikt &middot; Blinder Fleck &middot; Einladung &middot; Was m&#246;glich wird</div>'
       +fsec('Sehnsucht',hwF.s,'tl')
       +fsec('Innerer Konflikt',hwF.k)
@@ -423,7 +460,7 @@ function buildResult(fn,ln,bd,bp){
   var bmHtml;
   if(isTest){
     bmHtml='<div class="pillar p-teal p-strong">'
-      +'<div class="pt">&#9680; Beziehungsmuster</div>'
+      +'<div class="pt"><svg width="16" height="14" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><circle cx="9" cy="12" r="7"/><circle cx="19" cy="12" r="7"/></svg> Beziehungsmuster</div>'
       +'<div class="p-sublabel">Das Muster &middot; Anziehung &middot; Bruchpunkt &middot; Einladung &middot; Was m&#246;glich wird</div>'
       +fsec('Das Muster',bmF.mu)
       +fsec('Anziehungsmuster',bmF.an,'tl')
@@ -433,7 +470,7 @@ function buildResult(fn,ln,bd,bp){
       +'</div>';
   } else {
     bmHtml='<div class="pillar p-teal p-strong">'
-      +'<div class="pt">&#9680; Beziehungsmuster<span class="hot-badge">Tiefste Ebene</span></div>'
+      +'<div class="pt"><svg width="16" height="14" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><circle cx="9" cy="12" r="7"/><circle cx="19" cy="12" r="7"/></svg> Beziehungsmuster<span class="hot-badge">Tiefste Ebene</span></div>'
       +'<div class="p-sublabel">Das Muster &middot; Die Anziehung &middot; Der Bruchpunkt</div>'
       +'<p>'+bm+'</p>'
       +'<div class="fade-line">Vollversion: Warum zieht dich an, was dich kostet &middot; Der exakte Bruchpunkt &middot; Wer wärst du in einer Beziehung ohne dieses Muster?</div>'
@@ -477,7 +514,7 @@ function buildResult(fn,ln,bd,bp){
   var azHtml;
   if(isTest){
     azHtml='<div class="pillar p-teal p-strong">'
-      +'<div class="pt">&#9675; Ausdruckszahl '+d.az+'</div>'
+      +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg> Ausdruckszahl '+d.az+'</div>'
       +'<div class="p-sublabel">Der Ausdruck &middot; Das Missverst&#228;ndnis &middot; Blinder Fleck &middot; Einladung &middot; Was m&#246;glich wird</div>'
       +fsec('Der Ausdruck',azF.au,'tl')
       +fsec('Das Missverständnis',azF.ms)
@@ -488,7 +525,7 @@ function buildResult(fn,ln,bd,bp){
   } else {
     azHtml='<div class="locked-wrap">'
       +'<div class="locked-card">'
-      +'<div class="pt" style="color:var(--teal)">&#9675; Ausdruckszahl '+d.az+'</div>'
+      +'<div class="pt" style="color:var(--teal)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg> Ausdruckszahl '+d.az+'</div>'
       +'<div class="p-sublabel">Wie du wirkst &middot; Das Missverständnis &middot; Dein blinder Fleck</div>'
       +'<div class="locked-teaser"><div class="locked-teaser-text">'+azT+'</div>'
       +'<div class="locked-over"><div class="locked-icon">&#9670;</div><div class="locked-hint">Das Missverständnis, das sich immer wiederholt</div></div></div>'
@@ -499,7 +536,7 @@ function buildResult(fn,ln,bd,bp){
   var gmHtml;
   if(isTest){
     gmHtml='<div class="pillar p-quiet p-em">'
-      +'<div class="pt">&#8853; Geldmuster</div>'
+      +'<div class="pt"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Geldmuster</div>'
       +'<div class="p-sublabel">Das Muster &middot; Innerer Konflikt &middot; Blinder Fleck &middot; Die Einladung</div>'
       +fsec('Das Muster',gmF.mu,'gn')
       +fsec('Innerer Konflikt',gmF.ko)
@@ -509,7 +546,7 @@ function buildResult(fn,ln,bd,bp){
   } else {
     gmHtml='<div class="locked-wrap">'
       +'<div class="locked-card p-quiet-card">'
-      +'<div class="pt" style="color:#3DB87A">&#8853; Geldmuster</div>'
+      +'<div class="pt" style="color:#3DB87A"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:middle"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Geldmuster</div>'
       +'<div class="p-sublabel">Muster &middot; Blinder Fleck &middot; Bruchpunkt</div>'
       +'<div class="locked-teaser"><div class="locked-teaser-text">'+gmT+'</div>'
       +'<div class="locked-over"><div class="locked-icon">&#9670;</div><div class="locked-hint">Der blinde Fleck hinter deinem Muster</div></div></div>'
