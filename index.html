@@ -70,7 +70,7 @@
     /* Großes Referenzlogo — Herzstück der Marke */
     .hero-visual{
       width:100%;display:flex;justify-content:center;
-      position:relative;margin-bottom:-50px;
+      position:relative;margin-bottom:0;
       flex-direction:column;align-items:center
     }
     /* Atmosphärische Aura hinter dem Logo */
@@ -123,8 +123,8 @@
       animation:float 7s ease-in-out infinite;
       /* Wordmark (untere ~36%) ausblenden — zeigt nur das Symbol */
       clip-path:inset(0 0 36% 0);
-      /* Negativer unterer Abstand kompensiert geklippten Bereich */
-      margin-bottom:calc(clamp(220px,52vw,340px) * -0.36 * 1.45);
+      /* Kompensiert geklippten Bereich, lässt 60px Mindestabstand zur Headline */
+      margin-bottom:calc((clamp(220px,52vw,340px) * -0.36) + 60px);
       filter:
         drop-shadow(0 0 32px rgba(210,158,55,.7))
         drop-shadow(0 0 70px rgba(196,149,106,.4))
@@ -362,6 +362,48 @@
       .pillar-body{padding:0 18px 12px}
       .pillar-foot{padding:12px 18px 20px}
       .early-form{flex-direction:column}
+    }
+
+    /* ── TABLET (601–900px) ── */
+    @media(min-width:601px) and (max-width:900px){
+      .pillar-q{
+        font-size:.9rem;letter-spacing:.06em
+      }
+      .pillar-prod{
+        font-size:.87rem;line-height:1.7
+      }
+      .pillar-body{
+        font-size:1rem;line-height:1.9
+      }
+      .pillar-hdr{padding:24px 28px 18px;gap:16px}
+      .pillar-body{padding:0 28px 16px}
+      .pillar-foot{padding:16px 28px 26px}
+      .phil-block{padding:30px 30px}
+      .phil-block p{font-size:1.02rem}
+    }
+
+    /* ── DESKTOP (> 900px) ── */
+    @media(min-width:901px){
+      .pillar-q{
+        font-size:.95rem;letter-spacing:.06em;line-height:1.55
+      }
+      .pillar-prod{
+        font-size:.9rem;line-height:1.75
+      }
+      .pillar-body{
+        font-size:1.05rem;line-height:1.95
+      }
+      .pillar-hdr{padding:28px 32px 20px;gap:18px}
+      .pillar-body{padding:0 32px 18px}
+      .pillar-foot{padding:18px 32px 30px}
+      .pillar-icon{width:48px;height:48px;font-size:1.3rem}
+      .pillar-badge{font-size:.58rem;padding:.25rem .6rem}
+      .phil-block{padding:36px 44px}
+      .phil-block p{font-size:1.05rem;line-height:2.05}
+      .sec-title{
+        font-size:clamp(1.3rem,2.8vw,1.7rem)
+      }
+      .sec-eyebrow{font-size:.62rem;letter-spacing:.34em;margin-bottom:16px}
     }
   </style>
 </head>
