@@ -22,91 +22,235 @@
     .section-text{color:rgba(240,237,232,.82);font-size:.9rem;line-height:1.95}
     .field-label{font-size:.72rem;letter-spacing:.12em;color:var(--teal);text-transform:uppercase;margin-bottom:6px;margin-top:18px}
     .field-label:first-of-type{margin-top:0}
+    /* Accordion */
+    .accordion-btn{width:100%;background:rgba(196,149,106,.06);border:1px solid var(--border);border-radius:3px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:var(--text);font-family:'Raleway',sans-serif;font-size:.88rem;letter-spacing:.04em;margin-bottom:8px;transition:background .2s}
+    .accordion-btn:hover{background:rgba(196,149,106,.1)}
+    .accordion-icon{color:var(--rose);font-size:.8rem;transition:transform .3s}
+    .accordion-content{display:none;margin-bottom:20px}
+    .accordion-content.open{display:block}
+    /* Basis-Zahlen */
+    .base-num{text-align:center;padding:20px 0 12px}
+    .base-num .lz-label{font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+    .base-num .lz-number{font-family:'Cinzel',serif;font-size:3rem;color:var(--rose);line-height:1}
+    .base-num .lz-sub{font-size:.72rem;letter-spacing:.12em;color:var(--muted);margin-top:4px}
+    .base-num .einordnung{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:10px;line-height:1.75}
+    /* Progress */
+    .progress-bar-wrap{background:rgba(255,255,255,.06);border-radius:20px;height:6px;margin:14px 0;overflow:hidden}
+    .progress-bar-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px;transition:width .8s ease}
+    /* CTA */
+    .cta-block{border:1px solid rgba(42,175,160,.2);border-radius:3px;padding:28px 30px;margin-bottom:20px;background:rgba(42,175,160,.04)}
+    .cta-text{color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:20px}
+    .cta-btn{display:inline-block;padding:13px 32px;border:1px solid var(--teal);color:var(--teal);border-radius:2px;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.15em;text-decoration:none;transition:all .3s}
+    .cta-btn:hover{background:rgba(42,175,160,.12)}
+    /* Kompass */
     .kompass-item{padding:14px 0;border-bottom:1px solid rgba(196,149,106,.1)}
     .kompass-item:last-child{border-bottom:none}
-    .kompass-num{font-family:'Cinzel',serif;font-size:.65rem;color:var(--rose);letter-spacing:.15em;margin-bottom:6px}
+    .kompass-num{font-family:'Cinzel',serif;font-size:.62rem;color:var(--rose);letter-spacing:.15em;margin-bottom:6px}
+    /* KI-Note */
+    .ki-note{color:rgba(155,143,168,.6);font-size:.8rem;font-style:italic;padding:18px;border:1px dashed rgba(155,143,168,.2);border-radius:3px;margin-bottom:20px}
+    .missing{color:var(--teal);font-size:.75rem;opacity:.7}
+    @media(max-width:500px){.wrap{padding:40px 16px 60px}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <a href="seelenprofil.html" class="back">← Kostenlose Analyse</a>
+  <h1 id="pg-title">VOLLSTÄNDIGE ANALYSE</h1>
+  <p class="subtitle" id="pg-sub">Persönliche Tiefenanalyse</p>
 
-  <h1>VOLLSTÄNDIGE ANALYSE</h1>
-  <p class="subtitle">Persönliche Tiefenanalyse · Lebenszahl 33</p>
-
-  <!-- GELDMUSTER -->
-  <div class="section">
-    <div class="section-label">✦ Geldmuster</div>
-
-    <p class="field-label">Verhaltensmuster</p>
-    <p class="section-text">Du verlangst weniger als du solltest — und rechtfertigst es mit dem Argument, dass deine Arbeit Berufung ist, kein Geschäft. Das klingt stimmig. Es führt aber dazu, dass du dich regelmäßig erschöpfst und nicht weißt warum. Du weißt warum. Du sagst es dir nur nicht.</p>
-
-    <p class="field-label">Innerer Konflikt</p>
-    <p class="section-text">Geld zu fordern fühlt sich für dich an wie eine Entwertung dessen, was du tust. Als würde die Transaktion die Bedeutung reduzieren. Diese Überzeugung wirkt. Unabhängig davon, ob sie stimmt.</p>
-
-    <p class="field-label">Blinder Fleck</p>
-    <p class="section-text">Du trägst stillen Groll — und bemerkst ihn oft erst, wenn er sich entlädt. Nicht immer gegen andere. Manchmal gegen dich selbst: für das Nachgeben, das du für Großzügigkeit gehalten hast. Dieser Groll zeigt dir, wo deine Grenzen liegen. Du überschreitest sie trotzdem.</p>
-
-    <p class="field-label">Entwicklungsaufgabe</p>
-    <p class="section-text">Die Einladung lautet: zu erkennen, dass angemessene Entlohnung keine Kapitulation vor dem Materiellen ist. Sie ist die Bedingung dafür, dass du langfristig das tun kannst, wozu du hier bist.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- BEZIEHUNGSMUSTER -->
-  <div class="section">
-    <div class="section-label">✦ Beziehungsmuster</div>
-
-    <p class="field-label">Muster</p>
-    <p class="section-text">Du siehst was der andere braucht. Immer. Und du gibst es. Auch wenn du selbst leer bist.</p>
-
-    <p class="field-label">Anziehung</p>
-    <p class="section-text">Du ziehst Menschen an, die Fürsorge brauchen — und Menschen die selbst tiefes Mitgefühl haben. Das Erste erschöpft dich manchmal. Das Zweite ist das, wonach du wirklich suchst.</p>
-
-    <p class="field-label">Bruchpunkt</p>
-    <p class="section-text">Der Bruchpunkt ist der Moment, wo du merkst, dass du wieder jemanden hilfst, der sich nicht entwickelt. Deine Fürsorge ist Netz geworden — kein Sprungbrett. Und du bist müde. Still. Tief müde.</p>
-
-    <p class="field-label">Einladung</p>
-    <p class="section-text">Die Einladung lautet: heute etwas nur für dich zu brauchen — in einer Beziehung, ohne es gleichzeitig für die andere Person nutzbar zu machen.</p>
-
-    <p class="field-label">Was möglich wird</p>
-    <p class="section-text">Wenn du lernst, Fürsorge an Wachstum zu koppeln. Und die Menschen zu wählen, die deine Fürsorge als Einladung sehen — nicht als Versorgungsvertrag.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- INNERE SPANNUNGSFELDER -->
-  <div class="section">
-    <div class="section-label">✦ Innere Spannungsfelder</div>
-    <p class="section-text">Deine Lebenszahl 33 trägt den Impuls zu geben — deine Herzwunschzahl sucht Verbindung, die empfängt. Das erzeugt eine stille Spannung: du gibst nach außen, was du dir nach innen wünschst. Deine Ausdruckszahl verstärkt das: nach außen wirkst du stark und selbstgenügsam. Niemand fragt, wie es dir geht — weil du nie so wirkst, als bräuchtest du etwas. Die Spannung: die Wirkung nach außen schützt dich — und hält gleichzeitig das fern, was du brauchst.</p>
-  </div>
-
-  <!-- PERSÖNLICHE SYNTHESE -->
-  <div class="section">
-    <div class="section-label">✦ Persönliche Synthese</div>
-    <p class="section-text">Die tiefste Stärke dieser Kombination: du kannst Menschen begleiten in Momenten, die andere überfordern. Du hältst, ohne zu werten. Du siehst, ohne zu urteilen. Das ist selten.<br><br>Die häufigste innere Falle: du machst dich unentbehrlich — und verlierst dabei den Zugang zu dem, was du selbst brauchst. Nicht aus Schwäche. Aus Gewohnheit.<br><br>Der Satz, der dich in dieser Phase beschreibt: <em>Du gibst so viel, dass du vergisst zu fragen — was ich eigentlich möchte.</em></p>
-  </div>
-
-  <!-- LEBENSKOMPASS -->
-  <div class="section">
-    <div class="section-label">✦ Persönlicher Lebenskompass</div>
-
-    <div class="kompass-item">
-      <p class="kompass-num">IMPULS 01</p>
-      <p class="section-text">Benenne einmal pro Woche konkret, was du brauchst — nicht was du geben möchtest. Schreib es auf. Sag es jemandem. Nicht weil es sofort etwas ändert, sondern weil das Aussprechen der erste Schritt ist, den du systematisch übersprungen hast.</p>
-    </div>
-
-    <div class="kompass-item">
-      <p class="kompass-num">IMPULS 02</p>
-      <p class="section-text">Setze einen Preis — für deine Zeit, deine Energie, deine Arbeit — der sich unangemessen hoch anfühlt. Dann lass ihn stehen. Das Unbehagen dabei ist kein Signal, dass du zu viel verlangst. Es ist das Signal, dass du in der Nähe deines tatsächlichen Werts bist.</p>
-    </div>
-
-    <div class="kompass-item">
-      <p class="kompass-num">IMPULS 03</p>
-      <p class="section-text">Wähle eine Beziehung in deinem Leben und beobachte: Wer beginnt das Gespräch, wenn du aufhörst zu initiieren? Wer fragt, wie es dir geht, ohne Anlass? Das Ergebnis dieser Beobachtung zeigt dir, wo du wirklich gehalten wirst — und wo du das Fundament alleine trägst.</p>
-    </div>
-  </div>
-
+  <div id="premium-content"></div>
 </div>
+
+<script>
+var GM = {"1": {"v": "Du triffst finanzielle Entscheidungen alleine. Auch wenn jemand neben dir sitzt, der helfen könnte. Du recherchierst, kalkulierst, entscheidest. Andere einzubeziehen kommt dir erst nachher in den Sinn, wenn überhaupt.", "i": "Unabhängigkeit und Hilfe annehmen widersprechen sich in dir. Wenn jemand dir finanziell helfen will — auch ohne Gegenleistung — entsteht ein Unbehagen, das sich nicht mit Logik erklären lässt. Du nimmst lieber weniger an, als jemandem etwas zu schulden.", "b": "Du hältst Alleingänge für Stärke — und übersiehst, dass sie manchmal schlicht teurer sind. Es gibt Bereiche, wo Kooperation dir mehr einbringen würde als Kontrolle. Du siehst sie nicht, weil du nicht hinschaust.", "e": "Die Einladung lautet: zu prüfen, was Unabhängigkeit wirklich kostet. Nicht symbolisch. In Zahlen."}, "2": {"v": "Du verhandelst nicht. Nicht deinen Lohn. Nicht deinen Preis. Nicht was du für deine Zeit bekommst. Du akzeptierst was angeboten wird — und ärgerst dich still, wenn es weniger ist als du wert bist.", "i": "Du hörst 'nein' bevor du gefragt hast. Du unterscheidest nicht zwischen \"das steht mir zu\" und \"ich will mehr als andere\". Dieser Unterschied ist entscheidend — und du übergehst ihn regelmäßig.", "b": "Du bildest dir ein, andere würden deinen Wert von alleine erkennen und entsprechend zahlen. Das passiert selten. Menschen zahlen, was sie müssen — nicht was sie sollten. Du weißt das rational. Du verhältst dich trotzdem so, als wäre es anders.", "e": "Die Einladung lautet: einmal zu fordern ohne zu erklären, warum du es verdient hast. Nur fordern. Schweigen. Abwarten."}, "3": {"v": "Du kaufst, wenn du inspiriert bist — und schaust drei Wochen später nicht auf den Kontostand. Beides passiert schnell. Beides hat Konsequenzen, die du erst später siehst.", "i": "Du weißt, dass du Struktur bräuchtest — und du widersetzt dich ihr. Nicht weil du faul bist. Sondern weil Struktur sich für dich anfühlt wie ein Geständnis: dass die Leichtigkeit nicht reicht. Das stimmt manchmal. Aber es fühlt sich an wie immer.", "b": "Du denkst, du kannst Geld jederzeit wieder verdienen — weil du es schon getan hast. Das stimmt. Es führt aber dazu, dass du Polster abbaust, bevor du sie gebraucht hättest. Du merkst es erst, wenn der Puffer fehlt und du Energie brauchst, die du gerade nicht hast.", "e": "Die Einladung lautet: Sicherheit nicht als Kreativitätsbremse zu sehen, sondern als Bedingung dafür, dass die Leichtigkeit anhält."}, "4": {"v": "Du planst so lange, bis die Gelegenheit vorbei ist. Nicht aus Feigheit. Aus dem echten Bedürfnis, nichts dem Zufall zu überlassen. Es hält dich aus Räumen heraus, die nur durch Entscheidung ohne Sicherheitsgarantie zugänglich sind.", "i": "Du weißt genau, was ein vernünftiger Schritt wäre — aber du tust ihn nicht, weil ein Detail noch nicht stimmt. Das Detail ist manchmal real. Oft ist es eine Verzögerungstaktik, die du nicht als solche erkennst. Du bist ehrlicher mit Zahlen als mit deinen eigenen Widerständen.", "b": "Du glaubst, du bist der Vorsichtigste im Raum — und übersiehst, dass du manchmal das teuerste Risiko eingehst: das der verpassten Zeit. Kein Plan deckt die Kosten ab, die entstehen, wenn du zu lange wartest.", "e": "Die Einladung lautet: eine Entscheidung zu treffen, bei der du dir sagst \"gut genug\" — und es dabei zu lassen."}, "5": {"v": "Wenn Geld fließt, fließt es. Wenn Flaute ist, greifst du auf Reserven zurück — und baust sie in Bewegungsphasen nicht konsequent wieder auf. Der Zyklus wiederholt sich. Du weißt das. Du unterbrichst ihn trotzdem nicht.", "i": "Finanzielle Struktur fühlt sich für dich wie eine Einschränkung an — nicht wie ein Werkzeug. Du hast das Erlebnis: wenn du anfängst zu planen, verlierst du den Impuls. Ob das wahr ist oder eine Überzeugung die du nie wirklich getestet hast, lässt sich schwer sagen.", "b": "Du nennst es Risikobereitschaft. Manchmal ist es das. Und manchmal ist es das kurzfristige Gefühl, das über die mittelfristige Stabilität gestellt wird. Risikobereitschaft und Impulsivität sehen von innen gleich aus.", "e": "Die Einladung lautet: eine finanzielle Struktur zu entwerfen, die klein genug ist, um dich nicht einzuengen — und groß genug, um zu wirken. Nicht perfekt. Funktionstüchtig."}, "6": {"v": "Wenn du nachrechnest, wer in deinen engsten Beziehungen mehr gibt — weißt du die Antwort bereits. Manchmal wissen sie es. Manchmal nicht. Du sagst es selten laut. Das macht es schwer, zu erkennen, wie viel du trägst.", "i": "Für dich selbst Geld zu fordern fühlt sich anders an als für andere zu fordern. Wenn ein Freund unterbezahlt ist, wirst du laut. Wenn du es bist, redest du dir ein, dass es okay ist. Dieser Unterschied hat einen Namen: er heißt Selbstwert.", "b": "Du glaubst, andere wissen was du gibst — und schätzen es. Manchmal ist das wahr. Oft wird es als Selbstverständlichkeit behandelt, weil du es nie thematisierst. Großzügigkeit die unsichtbar bleibt, verändert nichts — außer deiner eigenen Bilanz.", "e": "Die Einladung lautet: das, was du für andere selbstverständlich forderst, einmal für dich selbst durchzusetzen. Kein Erklären. Kein Abschwächen. Nur die Zahl nennen."}, "7": {"v": "Du ignorierst finanzielle Details so lange, bis sie ein Problem werden. Nicht weil du sie nicht verstehst — sondern weil sie sich unwichtig anfühlen gegenüber dem, womit du eigentlich beschäftigt bist. Das ist eine Entscheidung. Du triffst sie täglich, ohne sie so zu nennen.", "i": "Du hast eine klare Haltung zu Geld: es ist ein Mittel, kein Ziel. Diese Haltung ist ehrlich. Sie führt aber dazu, dass du dich mit dem Mittel zu wenig beschäftigst — und dich dann wunderst, warum es nicht da ist, wenn du es brauchst.", "b": "Du hast gelernt, finanziellen Druck umzudeuten — in Bedeutungslosigkeit des Themas. Das kostet trotzdem. Du hältst dich für wenig materiell — und merkst nicht, wie viel Raum finanzielle Unsicherheit in deinem Inneren einnimmt, auch wenn du nach außen so tust, als wäre es kein Thema.", "e": "Die Einladung lautet: Geld als Thema mit derselben Tiefe zu behandeln, die du anderen Themen gibst. Nicht obsessiv. Bewusst."}, "8": {"v": "Du wechselst zwischen zwei Modi: du machst alles — oder du machst gar nichts. Wenn du Gas gibst, baust du in Wochen was andere in Jahren nicht erreichen. In Tiefphasen zweifelst du an allem davon. Der Wechsel kommt schneller als du ihn siehst — und andere sehen ihn noch schneller als du.", "i": "Du willst mehr — mehr Handlungsfähigkeit, mehr Wirkung, mehr Spielraum. Gleichzeitig hast du eine tiefe, kaum formulierte Überzeugung, dass zu viel wollen etwas Falsches ist. Diese Überzeugung sitzt vor jeder Entscheidung. Du nennst sie Vorsicht. Sie ist Angst.", "b": "Du glaubst, dein Problem ist mangelnde Strategie. Es ist mangelnde Erlaubnis. Die Strategie ist oft da. Der Schritt fehlt — weil ein Teil von dir immer noch prüft, ob du das Recht hast, ihn zu machen.", "e": "Die Einladung lautet: nicht die Strategie zu verfeinern — sondern einen Schritt zu machen, obwohl die innere Erlaubnis noch nicht vollständig ist. Sie wird nicht vollständiger durch Warten."}, "9": {"v": "Du unterbietest deinen Wert — konsequent, in verschiedenen Kontexten und oft unbewusst. Du setzt Preise, die zu niedrig sind. Du arbeitest länger als bezahlt. Du gibst mehr als vereinbart. Danach bist du still erschöpft — und verstehst selbst nicht ganz warum.", "i": "Du trägst eine alte Überzeugung: wer wirklich gibt, braucht keine Gegenleistung. Diese Überzeugung klingt edel — sie ist aber nicht nachhaltig. Und irgendwo weißt du das. Du änderst es trotzdem nicht.", "b": "Du glaubst, deine Großzügigkeit wird gesehen und irgendwann zurückgegeben. Das passiert seltener als du hoffst. Was tatsächlich passiert: andere gewöhnen sich daran, dass du mehr gibst. Und du gewöhnst dich daran, zu wenig zu bekommen — ohne dass irgendjemand das explizit entschieden hätte.", "e": "Die Einladung lautet: den Preis zu nennen, der sich unangenehm hoch anfühlt — und ihn nicht sofort zu reduzieren. Das Unbehagen dabei ist ein Zeichen, dass du in der Nähe deines tatsächlichen Werts bist."}, "11": {"v": "Du schwankst zwischen Phasen wo Geld sich wie Energie anfühlt — fließend, leicht, fast selbstverständlich — und Phasen wo du so überwältigt bist, dass du finanzielle Entscheidungen komplett vermeidest. In Phasen wo Geld gut fließt, übersiehst du Risiken — weil das Gefühl so positiv ist. In Phasen wo es stockt, siehst du Risiken überall.", "i": "Du spürst genau, wann eine finanzielle Entscheidung sich falsch anfühlt. Aber du weißt nie sicher, ob dieses Gefühl Intuition ist oder Angst die sich als Intuition verkleidet. Beide fühlen sich gleich an. Das ist das eigentliche Problem.", "b": "Du hältst dich für ungewöhnlich sensibel gegenüber Geld — und das bist du. Was du dabei übersiehst: diese Sensibilität macht dich auch ungewöhnlich anfällig für das Finanzgebaren anderer. Du regulierst dich nach Außen. Das ist riskant, wenn du nicht weißt, dass du es tust.", "e": "Die Einladung lautet: eine finanzielle Entscheidung vollständig aus dir selbst heraus zu treffen — ohne das Energiefeld der Person zu lesen, die davon betroffen ist."}, "22": {"v": "Du investierst in Visionen bevor du die eigene Grundlage gesichert hast. Nicht weil du die Risiken nicht siehst — sondern weil die Vision für dich realer ist als die gegenwärtige Situation. Das hat dich manchmal sehr weit gebracht. Es hat dich auch in Lagen gebracht, aus denen du dich mühsam herausarbeiten musstest.", "i": "Du hältst persönliche finanzielle Bedürfnisse für eine Ablenkung vom Wesentlichen. Wenn du für dich selbst sorgst, gibt es eine Stimme in dir, die sagt: das ist zu wenig. Das Große ist das Ziel — und das Kleine dafür zu vernachlässigen erscheint dir fast folgerichtig.", "b": "Du glaubst, dass die persönliche Grundlage warten kann, bis das Große steht. Sie kann nicht. Sie ist die Bedingung dafür, dass das Große überhaupt stehen kann. Was erodiert wenn du sie ignorierst, ist nicht nur Geld — es ist die Kapazität weiterzumachen.", "e": "Die Einladung lautet: die eigene finanzielle Sicherheit als Teil der Konstruktion zu behandeln — nicht als Luxus danach."}, "33": {"v": "Du verlangst weniger als du solltest — und rechtfertigst es mit dem Argument, dass deine Arbeit Berufung ist, kein Geschäft. Das klingt stimmig. Es führt aber dazu, dass du dich regelmäßig erschöpfst und nicht weißt warum. Du weißt warum. Du sagst es dir nur nicht.", "i": "Geld zu fordern fühlt sich für dich an wie eine Entwertung dessen, was du tust. Als würde die Transaktion die Bedeutung reduzieren. Diese Überzeugung wirkt. Unabhängig davon, ob sie stimmt.", "b": "Du trägst stillen Groll — und bemerkst ihn oft erst, wenn er sich entlädt. Nicht immer gegen andere. Manchmal gegen dich selbst: für das Nachgeben, das du für Großzügigkeit gehalten hast. Gegenüber Systemen die Wert nicht erkennen. Gegenüber denen, die nehmen ohne zu fragen. Dieser Groll zeigt dir, wo deine Grenzen liegen. Du überschreitest sie trotzdem.", "e": "Die Einladung lautet: zu erkennen, dass angemessene Entlohnung keine Kapitulation vor dem Materiellen ist. Sie ist die Bedingung dafür, dass du langfristig das tun kannst, wozu du hier bist."}};
+var BZ = {"1": {"mu": "Du kämpfst für Beziehungen länger als die andere Person. Du weißt das. Und du machst es trotzdem — weil aufgeben sich wie Versagen anfühlt.", "an": "Du ziehst Menschen an die Führung bewundern oder suchen. Menschen die zurücktreten, wo du vorangehst. Das fühlt sich anfangs vertraut an — du hast das Steuer, du kennst die Richtung.", "br": "Irgendwann merkst du, dass du allein entscheidest. Du wolltest einen Partner — du hast einen Mitreisenden. Der Groll kommt leise. Zuerst als Müdigkeit, dann als Distanz.", "ei": "Die Einladung lautet: einmal zu warten — und zu sehen, wer anfängt zu kämpfen, bevor du es tust.", "mo": "Wenn du dir erlaubst, gelegentlich nicht die Führende zu sein — findest du jemanden, der wirklich neben dir steht. Nicht hinter dir. Daneben."}, "2": {"mu": "Du weißt immer was dein Partner gerade braucht. Das Problem: du weißt es manchmal so gut, dass du anfängst dich selbst wegzulassen. Ohne es zu merken.", "an": "Du ziehst Menschen an, die unbewusst jemanden suchen der sie versteht ohne Erklärung. Oft sind das Menschen mit ungelösten emotionalen Themen — weil du der erste bist, der sie wirklich sieht.", "br": "Du verlierst dich. Irgendwann weißt du nicht mehr, was deine Gefühle sind und was du von der anderen Person mitträgst. Die Erschöpfung kommt ohne sichtbaren Auslöser.", "ei": "Die Einladung lautet: einmal zu sagen was du brauchst — bevor du weißt ob die andere Person bereit ist, es zu geben.", "mo": "Wenn du lernst, dich zurückzuziehen ohne die Verbindung zu zerstören — und Menschen zu wählen, die auch für dich da sein können."}, "3": {"mu": "Du löst Konflikte bevor sie eskalieren. Mit Humor, mit Leichtigkeit. Was du dabei nicht sagst: was dich wirklich beschäftigt.", "an": "Du ziehst Menschen an die deine Energie genießen — deine Leichtigkeit, deinen Humor. Das sind schöne erste Monate. Und dann kommt der Tag, wo du schwer bist.", "br": "Du hast dich so lange leicht gezeigt, dass niemand weiß wie er mit dir umgehen soll, wenn du es nicht bist. Der Bruchpunkt ist der Tag, wo du aufhörst zu performen — und die andere Person überfragt ist.", "ei": "Die Einladung lautet: einer Person zu zeigen was dich wirklich bewegt — ohne es dabei leichter klingen zu lassen.", "mo": "Wenn du jemandem zeigst, dass du auch schwer sein kannst — bevor es ein Notfall ist. Und wählst, wer das halten kann."}, "4": {"mu": "Du bist der verlässlichste Mensch in fast jeder Beziehung die du führst. Und du fragst dich selten wann du zuletzt der warst, der einfach dran sein durfte.", "an": "Du ziehst Menschen an die Stabilität suchen — bewusst oder nicht. Menschen die Chaos mitbringen, weil dein Fundament sie trägt. Das fühlt sich bedeutsam an. Du bist gebraucht.", "br": "Irgendwann bist du das Fundament für jemanden, der nie zurückbaut. Du hast jahrelang getragen — und eines Morgens fragst du dich, wann du zuletzt getragen wurdest. Ohne Antwort.", "ei": "Die Einladung lautet: einmal die Person sein, die Hilfe bekommt — und warten, ohne die andere Person dabei zu unterstützen.", "mo": "Wenn du aufhörst, Verlässlichkeit als Eintrittsgeld für Zugehörigkeit zu zahlen. Und jemanden wählst, der auch für dich stabil ist."}, "5": {"mu": "Du fällst schnell. Und du gehst genauso schnell — nicht weil du nicht fühlst, sondern weil du Enge vor Kälte fürchtest.", "an": "Du ziehst Menschen an, die von deiner Freiheit fasziniert sind — oder die glauben, sie können dich festhalten. Beide aus dem gleichen Grund: du wirkst wie etwas, das man nicht ganz greifen kann.", "br": "Der Bruchpunkt ist der Moment, wo die andere Person anfängt dich zu besitzen. Oder: wo du merkst, dass du schon weg bist — obwohl du noch da bist. Innerlich längst gegangen.", "ei": "Die Einladung lautet: in einem Gespräch zu bleiben, nachdem der Impuls zu gehen entstanden ist. Nur diesmal.", "mo": "Wenn du jemandem begegnest, der deine Freiheit nicht als Problem sieht — sondern als Teil von dir. Und du lernst, dass Bleiben kein Verlust ist."}, "6": {"mu": "Du gibst bevor jemand fragt. Und manchmal verhindert genau das, dass jemand das Geben für dich lernt.", "an": "Du ziehst Menschen an die versorgt werden wollen — und Menschen die sich um dich sorgen. Beides zieht dich an: gebraucht zu werden und gesehen zu werden.", "br": "Der Bruchpunkt ist der Moment, wo du merkst, dass die Beziehung aus deinem Geben lebt — und wenn du aufhörst, nichts mehr da ist. Keine Wärme. Keine Initiative.", "ei": "Die Einladung lautet: heute weniger zu geben — und zu beobachten ob die Beziehung auch ohne dein Geben existiert.", "mo": "Wenn du lernst, weniger zu geben — und zu sehen wer trotzdem bleibt. Die sind dein Material."}, "7": {"mu": "Du öffnest dich — aber nicht sofort. Nicht allen. Du testest. Still. Lange. Und die meisten bestehen den Test nicht, weil sie nicht wissen, dass er stattfindet.", "an": "Du ziehst Menschen an, die deine Tiefe spüren und herausfordern wollen. Manchmal Menschen die glauben, sie können dich 'öffnen'. Das kann sich gut anfühlen. Bis es übergriffig wird.", "br": "Der Bruchpunkt ist der Moment, wo du merkst, dass die andere Person nicht wirklich versteht — sie sucht. Und du bist ihr Projekt. Der Rückzug beginnt. Leise. Vollständig.", "ei": "Die Einladung lautet: jemandem zu zeigen wo der Eingang zu dir ist — einmal, ohne einen Test zu stellen.", "mo": "Wenn du jemandem begegnest, der nicht sucht — sondern der einfach da ist. Der keine Schlüssel braucht, weil er nicht einbrechen will."}, "8": {"mu": "Du bist ganz da — oder nicht da. Nichts dazwischen. Das erzeugt Intensität. Und es verwirrt Menschen, die nicht wissen was sie erwartet.", "an": "Du ziehst Menschen an, die Intensität wollen — oder Menschen die von deiner Kompetenz profitieren. Beim ersten fühlst du dich gesehen, beim zweiten gebraucht.", "br": "Der Bruchpunkt ist die Strecke zwischen deinen Vollgas-Phasen. Wenn du leer bist, bist du schwer erreichbar. Die andere Person versteht nicht was passiert.", "ei": "Die Einladung lautet: jemandem in einer Leere-Phase zu sagen, was gerade passiert — bevor du wieder funktionierst.", "mo": "Wenn du jemandem zeigst, was in deinen Tiefphasen passiert — bevor du wieder Vollgas gibst. Und wählst, wer das hält."}, "9": {"mu": "Du gehst mit vollem Herzen rein. Du gibst alles. Und irgendwann merkst du, dass du angefangen hast dich selbst dabei zu verlieren. Leise. Fast unmerklich.", "an": "Du ziehst Menschen an, die Tiefe und Wärme suchen — und Menschen, die jemanden brauchen der für sie da ist. Das ist deine Stärke. Und die Einladung für die, die nehmen ohne zurückzugeben.", "br": "Irgendwann bist du leer. Nicht plötzlich — langsam. Du hast so viel gegeben, dass du dich selbst in der Beziehung verloren hast.", "ei": "Die Einladung lautet: früher aufzuhören als du normalerweise würdest — und zu beobachten, was zurückkommt.", "mo": "Wenn du lernst, früher zu stoppen. Nicht weil du weniger gibst — sondern weil du weißt, wann genug ist."}, "11": {"mu": "Du spürst was dein Partner fühlt — manchmal bevor er es selbst weiß. Und du trägst es. Auch wenn es nicht deins ist.", "an": "Du ziehst Menschen an, die das Besondere in dir spüren — und Menschen die nicht wissen was sie spüren, aber wissen dass es anders ist. Beides kann intensiv sein. Nicht beides hält.", "br": "Der Bruchpunkt ist der Moment, wo du merkst, dass die andere Person dich nicht wirklich versteht — sie bewundert. Bewunderung ist kein Zuhause.", "ei": "Die Einladung lautet: jemandem zu erlauben, dich nicht vollständig zu verstehen — und trotzdem zu bleiben.", "mo": "Wenn du dir erlaubst, auch ohne vollständiges Verstehen verbunden zu bleiben. Und Menschen wählst die nicht alles verstehen — aber alles halten."}, "22": {"mu": "Du siehst das Potenzial in Menschen klarer als sie selbst. Und du liebst oft nicht die Person wie sie ist — sondern die Version, die sie werden könnte.", "an": "Du ziehst Menschen an, die von deiner Richtung fasziniert sind — oder die sich an deiner Orientierung festhalten. Du gibst Rahmen. Das ist anziehend. Und es schafft eine Asymmetrie.", "br": "Der Bruchpunkt ist der Moment, wo du siehst, dass die andere Person nicht an der Beziehung gebaut hat — sie hat an dir gebaut. Als wärst du ein Projekt, kein Mensch.", "ei": "Die Einladung lautet: einer Person ohne Rahmen zu begegnen — ohne Richtung, ohne Vision. Einfach als Mensch.", "mo": "Wenn du jemandem begegnest, der eine eigene Vision hat. Der nicht deine braucht — sondern die eigene neben deine stellt."}, "33": {"mu": "Du siehst was der andere braucht. Immer. Und du gibst es. Auch wenn du selbst leer bist.", "an": "Du ziehst Menschen an, die Fürsorge brauchen — und Menschen die selbst tiefes Mitgefühl haben. Das Erste erschöpft dich manchmal. Das Zweite ist das, wonach du wirklich suchst.", "br": "Der Bruchpunkt ist der Moment, wo du merkst, dass du wieder jemanden hilfst, der sich nicht entwickelt. Deine Fürsorge ist Netz geworden — kein Sprungbrett. Und du bist müde. Still. Tief müde.", "ei": "Die Einladung lautet: heute etwas nur für dich zu brauchen — in einer Beziehung, ohne es gleichzeitig für die andere Person nutzbar zu machen.", "mo": "Wenn du lernst, Fürsorge an Wachstum zu koppeln. Und die Menschen zu wählen, die deine Fürsorge als Einladung sehen — nicht als Versorgungsvertrag."}};
+
+var MASTER = [11,22,33];
+var PHASEN = {1:'Phase des Neubeginns',2:'Phase der Verbindung',3:'Phase des Wachstums',4:'Phase des Aufbaus',5:'Phase der Veränderung',6:'Phase der Verantwortung',7:'Phase der Besinnung',8:'Phase der Manifestation',9:'Phase des Abschlusses'};
+var PHASEN_BEDEUTUNG = {
+  1:'Eine neue neunjährige Reise beginnt. Impulse der Selbstbestimmung und des Aufbruchs treten stärker in den Vordergrund. Was jetzt gesät wird, trägt das Potenzial der gesamten Periode.',
+  2:'Eine Phase der Sensibilität und des Ausgleichs. Was sich jetzt verbindet, kann Tiefe gewinnen. Geduld und Feinfühligkeit zeigen mehr Wirkung als Durchsetzung.',
+  3:'Eine Phase des Ausdrucks und der kreativen Entfaltung. Was bewegt, drängt nach außen. Kreative und kommunikative Themen können besonders fruchtbar sein.',
+  4:'Eine Phase der Struktur und der Fundamente. Was jetzt gebaut wird, hat Bestand. Ausdauer und Konsequenz zeigen sich als verlässliche Begleiter.',
+  5:'Eine Phase des Wandels und der Erneuerung. Was nicht mehr passt, macht sich deutlich bemerkbar. Flexibilität kann mehr öffnen als Beharren.',
+  6:'Eine Phase der Fürsorge und der Harmonie. Beziehungen und Gemeinschaft stehen häufig im Mittelpunkt. Was gegeben wird, weist auf tiefere Bedürfnisse hin.',
+  7:'Eine Phase der Tiefe und der inneren Einkehr. Was jetzt entsteht, wächst im Verborgenen. Innere Prozesse können mehr bewegen als äußere Aktivität.',
+  8:'Eine Phase der Umsetzung und der sichtbaren Wirkung. Was lange vorbereitet wurde, kann jetzt Form annehmen. Fokus und Ausdauer machen Unterschiede.',
+  9:'Eine Phase des Loslassens und der Vollendung. Was gelebt wurde, kann integriert werden. Abschlüsse machen Raum für das, was folgt.'
+};
+
+function reduceNum(n) {
+  if (MASTER.indexOf(n) > -1) return n;
+  while (n > 9) {
+    if (MASTER.indexOf(n) > -1) return n;
+    var s=0; String(n).split('').forEach(function(d){s+=parseInt(d)||0;}); n=s;
+  }
+  return n;
+}
+function parseDate(raw) {
+  raw=(raw||'').trim();
+  if(raw.indexOf('.')>-1){var p=raw.split('.');return(p.length===3&&p[2].length===4)?{day:p[0],month:p[1],year:p[2]}:null;}
+  if(raw.indexOf('-')>-1){var q=raw.split('-');return(q.length===3)?{day:q[2],month:q[1],year:q[0]}:null;}
+  return null;
+}
+function calcLZ(raw){var d=parseDate(raw);if(!d)return null;return reduceNum((d.day+d.month+d.year).split('').reduce(function(a,b){return a+(parseInt(b)||0);},0));}
+var CV={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8,\u00c4:1,\u00d6:6,\u00dc:3};
+var VW={A:1,E:1,I:1,O:1,U:1,\u00c4:1,\u00d6:1,\u00dc:1};
+function calcHWZ(fn,ln){var s=0,f=(fn+ln).toUpperCase().replace(/[^A-Z\u00c4\u00d6\u00dc]/g,'');for(var i=0;i<f.length;i++){var c=f[i];if(VW[c]&&CV[c])s+=CV[c];}return reduceNum(s);}
+function calcAZ(fn,ln){var s=0,f=(fn+ln).toUpperCase().replace(/[^A-Z\u00c4\u00d6\u00dc]/g,'');for(var i=0;i<f.length;i++){if(CV[f[i]])s+=CV[f[i]];}return reduceNum(s);}
+function calcPhase(raw) {
+  var d=parseDate(raw); if(!d)return null;
+  var cy=new Date().getFullYear();
+  var ds=reduceNum(parseInt(d.day)); var ms=reduceNum(parseInt(d.month));
+  var ys=reduceNum(String(cy).split('').reduce(function(a,b){return a+(parseInt(b)||0);},0));
+  var py=reduceNum(ds+ms+ys); if(py>9)py=py%9||9;
+  return {phase:PHASEN[py],meaning:PHASEN_BEDEUTUNG[py],since:cy-py+1,py:py,total:9,nextYear:cy-py+1+9,nextPhase:PHASEN[py%9+1]||PHASEN[1],progress:Math.round((py/9)*100)};
+}
+
+function sec(label, content) {
+  return '<div class="section"><div class="section-label">\u2756 '+label+'</div>'+content+'</div>';
+}
+function fl(label,text) {
+  return '<p class="field-label">'+label+'</p><p class="section-text">'+text+'</p>';
+}
+
+function render(fname,lname,bdate,lzD,hwzD,azD) {
+  var lz=calcLZ(bdate), hwz=calcHWZ(fname,lname), az=calcAZ(fname,lname);
+  var ph=calcPhase(bdate);
+  var gm=GM[String(lz)]||{};
+  var bm=BZ[String(lz)]||{};
+  var isMasterLZ=MASTER.indexOf(lz)>-1;
+  var isMasterHWZ=MASTER.indexOf(hwz)>-1;
+  var isMasterAZ=MASTER.indexOf(az)>-1;
+
+  var h='';
+
+  // HEADER
+  document.getElementById('pg-sub').textContent='Vollständige Tiefenanalyse für '+fname+' '+lname.charAt(0)+'.';
+
+  // 1. ACCORDION: Basisanalyse
+  h+='<button class="accordion-btn" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.accordion-icon').style.transform=this.nextElementSibling.classList.contains('open')?'rotate(45deg)':''">';
+  h+='<span>Der Ausgangspunkt deiner Reise</span><span class="accordion-icon">✦</span></button>';
+  h+='<div class="accordion-content">';
+  h+='<p style="color:var(--muted);font-size:.82rem;margin-bottom:20px;line-height:1.75">Lebenszahl, Herzwunschzahl und Ausdruckszahl bilden das Fundament deiner Analyse. Falls du sie noch einmal in Ruhe lesen möchtest, kannst du sie hier aufklappen.</p>';
+
+  // LZ
+  h+='<div class="base-num"><p class="lz-label">So wirke ich — Lebenszahl</p><div class="lz-number">'+lz+'</div>';
+  if(isMasterLZ) h+='<div style="font-size:.6rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.2rem .6rem;border-radius:20px;display:inline-block;margin-top:4px">\u2756 MEISTERZAHL \u2756</div>';
+  if(lzD&&lzD.einordnung) h+='<p class="einordnung">'+lzD.einordnung+'</p>';
+  h+='</div>';
+  if(lzD){h+='<div class="section" style="margin-bottom:12px">';h+=fl('Kernthema',lzD.kernthema||'');h+=fl('Stärke',lzD.staerke||'');h+=fl('Herausforderung',lzD.herausforderung||'');h+='</div>';}
+
+  // HWZ
+  h+='<div class="base-num" style="margin-top:12px"><p class="lz-label">Was ich wirklich will — Herzwunschzahl</p><div class="lz-number">'+hwz+'</div>';
+  if(isMasterHWZ) h+='<div style="font-size:.6rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.2rem .6rem;border-radius:20px;display:inline-block;margin-top:4px">\u2756 MEISTERZAHL \u2756</div>';
+  h+='</div>';
+  if(hwzD){h+='<div class="section" style="margin-bottom:12px">';h+=fl('Kernthema',hwzD.kernthema||'');h+=fl('Herausforderung',hwzD.herausforderung||'');h+='</div>';}
+
+  // AZ
+  h+='<div class="base-num" style="margin-top:12px"><p class="lz-label">Wie andere mich erleben — Ausdruckszahl</p><div class="lz-number">'+az+'</div>';
+  if(isMasterAZ) h+='<div style="font-size:.6rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.2rem .6rem;border-radius:20px;display:inline-block;margin-top:4px">\u2756 MEISTERZAHL \u2756</div>';
+  h+='</div>';
+  if(azD){h+='<div class="section" style="margin-bottom:12px">';h+=fl('Kernthema',azD.kernthema||'');h+=fl('Herausforderung',azD.herausforderung||'');h+='</div>';}
+
+  h+='</div>'; // end accordion
+
+  h+='<div class="divider"></div>';
+
+  // 2. GELDMUSTER
+  if(gm.v){
+    h+=sec('Geldmuster',fl('Verhaltensmuster',gm.v)+fl('Innerer Konflikt',gm.i)+fl('Blinder Fleck',gm.b)+fl('Entwicklungsaufgabe',gm.e));
+  } else {
+    h+='<div class="ki-note"><span class="missing">Datenquelle: CONTENT_GELD_LZ.md — LZ '+lz+' nicht gefunden.</span></div>';
+  }
+
+  h+='<div class="divider"></div>';
+
+  // 3. BEZIEHUNGSMUSTER
+  var bmContent='';
+  if(bm.mu){
+    bmContent=fl('Muster',bm.mu)+fl('Anziehung',bm.an)+fl('Bruchpunkt',bm.br)+fl('Einladung',bm.ei)+fl('Was möglich wird',bm.mo);
+  } else {
+    bmContent='<div class="ki-note"><span class="missing">Datenquelle: Beziehungsmuster — LZ '+lz+' nicht gefunden.</span></div>';
+  }
+  bmContent+='<div class="divider" style="margin:28px 0 20px"></div>';
+  bmContent+='<p class="section-text" style="margin-bottom:16px">Nicht jede Begegnung kommt, um zu bleiben. Manche kommen, um etwas zu zeigen. Die Beziehungsanalyse beleuchtet die Dynamiken, Erfahrungen und möglichen Lernimpulse eurer Verbindung.</p>';
+  bmContent+='<a href="#" class="cta-btn">Warum wir uns begegnet sind</a><!-- TODO: beziehungsanalyse.html -->';
+  h+=sec('Beziehungsmuster', bmContent);
+
+  h+='<div class="divider"></div>';
+
+  // 4. INNERE SPANNUNGSFELDER — KI-generiert
+  h+=sec('Innere Spannungsfelder','<div class="ki-note">Diese Analyse verbindet Lebenszahl '+lz+', Herzwunschzahl '+hwz+' und Ausdruckszahl '+az+' zu einem personalisierten Spannungsbild.<br><span class="missing">Datenquelle: KI-Synthese (Anthropic) — Backend-Integration ausstehend.</span></div>');
+
+  // 5. PERSÖNLICHE SYNTHESE — KI-generiert
+  h+=sec('Persönliche Synthese','<div class="ki-note">Die Synthese verbindet alle Zahlen und Muster zu einem Gesamtbild — die tiefste Stärke und häufigste innere Falle dieser Zahlenkombination.<br><span class="missing">Datenquelle: KI-Synthese (Anthropic) — Backend-Integration ausstehend.</span></div>');
+
+  h+='<div class="divider"></div>';
+
+  // 6. LEBENSKOMPASS
+  var kompContent='';
+  if(ph){
+    kompContent+='<div style="background:rgba(42,175,160,.06);border:1px solid rgba(42,175,160,.2);border-radius:3px;padding:22px;margin-bottom:20px">';
+    kompContent+='<p class="field-label">Aktuelle Phase</p>';
+    kompContent+='<p style="font-family:'Cinzel',serif;font-size:1.05rem;color:var(--rose-l);margin-bottom:4px">'+ph.phase+'</p>';
+    kompContent+='<p style="color:var(--muted);font-size:.82rem;margin-bottom:14px">seit '+ph.since+'</p>';
+    kompContent+='<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+ph.progress+'%"></div></div>';
+    kompContent+='<p style="color:var(--muted);font-size:.78rem;margin-top:8px">Du befindest dich im Jahr <strong style="color:var(--text)">'+ph.py+' von '+ph.total+'</strong> deiner aktuellen Phase.</p>';
+    kompContent+='</div>';
+
+    kompContent+='<p class="field-label">Bedeutung dieser Phase</p>';
+    kompContent+='<p class="section-text" style="margin-bottom:20px">'+ph.meaning+'</p>';
+
+    kompContent+='<div style="border-top:1px solid var(--border);padding-top:18px;margin-top:4px">';
+    kompContent+='<p class="field-label">Nächster Übergang</p>';
+    kompContent+='<p style="color:var(--text);font-size:.88rem;margin-bottom:6px"><strong>'+ph.nextYear+'</strong> — Übergang in: <span style="color:var(--rose-l)">'+ph.nextPhase+'</span></p>';
+    kompContent+='<p class="section-text">'+PHASEN_BEDEUTUNG[(parseInt(ph.py)%9)+1]+'</p>';
+    kompContent+='</div>';
+  } else {
+    kompContent='<div class="ki-note"><span class="missing">Lebensabschnitt: Geburtsdatum nicht verfügbar.</span></div>';
+  }
+  h+=sec('Persönlicher Lebenskompass', kompContent);
+
+  // 7. KOSMISCHER KALENDER CTA
+  h+='<div class="cta-block">';
+  h+='<div class="section-label" style="margin-bottom:12px">\u2756 Kosmischer Kalender</div>';
+  h+='<p class="cta-text">Erkenntnis entsteht nicht nur durch das Wer, sondern auch durch das Wann. Der Kosmische Kalender zeigt, welche Themen deine aktuelle Lebensphase begleiten und welche Entwicklungen in den kommenden Jahren stärker in den Vordergrund treten können.</p>';
+  h+='<a href="#" class="cta-btn">Meinen Kosmischen Kalender ansehen</a><!-- TODO: kosmischer-kalender.html -->';
+  h+='</div>';
+
+  // 8. ASTROCARTOGRAPHY CTA
+  h+='<div class="cta-block">';
+  h+='<div class="section-label" style="margin-bottom:12px">\u2756 Astrocartography</div>';
+  h+='<p class="cta-text">Manchmal suchen wir einen Ort und meinen eigentlich ein Gefühl. Die Astrocartography zeigt, wo die Energien liegen, nach denen sich ein Teil von dir schon lange sehnt.</p>';
+  h+='<a href="astrocartography.html" class="cta-btn">Meine Seelenorte entdecken</a>';
+  h+='</div>';
+
+  document.getElementById('premium-content').innerHTML=h;
+}
+
+// MAIN: Daten aus localStorage laden
+(function(){
+  var fn=localStorage.getItem('aevima_fname')||'';
+  var ln=localStorage.getItem('aevima_lname')||'';
+  var bd=localStorage.getItem('aevima_bdate')||'';
+
+  if(!fn||!ln||!bd){
+    document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Keine Profildaten gefunden. Bitte zuerst <a href="seelenprofil.html" style="color:var(--rose)">die kostenlose Analyse</a> durchführen.</div>';
+    return;
+  }
+
+  Promise.all([
+    fetch('public/data/preview_lebenszahl.json').then(function(r){return r.json();}),
+    fetch('public/data/preview_herzwunsch.json').then(function(r){return r.json();}),
+    fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();})
+  ]).then(function(res){
+    var lz=calcLZ(bd), hwz=calcHWZ(fn,ln), az=calcAZ(fn,ln);
+    render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)]);
+  }).catch(function(){
+    document.getElementById('premium-content').innerHTML='<div class="ki-note">Fehler beim Laden der Daten. Bitte Seite neu laden.</div>';
+  });
+})();
+</script>
 </body>
 </html>
