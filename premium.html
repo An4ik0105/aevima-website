@@ -50,10 +50,29 @@
     .ki-note{color:rgba(155,143,168,.6);font-size:.8rem;font-style:italic;padding:18px;border:1px dashed rgba(155,143,168,.2);border-radius:3px;margin-bottom:20px}
     .missing{color:var(--teal);font-size:.75rem;opacity:.7}
     @media(max-width:500px){.wrap{padding:40px 16px 60px}}
+    /* ADMIN PREVIEW */
+    .admin-bar{background:rgba(42,175,160,.08);border:1px solid rgba(42,175,160,.3);border-radius:3px;padding:20px 24px;margin-bottom:32px}
+    .admin-bar h3{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.2em;color:var(--teal);margin-bottom:14px}
+    .admin-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end}
+    .admin-fg label{font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:5px}
+    .admin-fg input{width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(42,175,160,.25);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.85rem;outline:none}
+    .admin-btn{padding:10px 20px;background:var(--teal);color:var(--dark);border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;white-space:nowrap}
+    @media(max-width:600px){.admin-row{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
 <div class="wrap">
+  <div id="admin-bar" style="display:none">
+    <div class="admin-bar">
+      <h3>✦ ADMIN PREVIEW — Entwicklungsmodus</h3>
+      <div class="admin-row">
+        <div class="admin-fg"><label>Vorname</label><input type="text" id="ap-fname" placeholder="Anna"/></div>
+        <div class="admin-fg"><label>Nachname</label><input type="text" id="ap-lname" placeholder="Muster"/></div>
+        <div class="admin-fg"><label>Geburtsdatum</label><input type="text" id="ap-bdate" placeholder="TT.MM.JJJJ"/></div>
+        <button class="admin-btn" onclick="runAdminPreview()">Vorschau erzeugen</button>
+      </div>
+    </div>
+  </div>
   <a href="seelenprofil.html" class="back">← Kostenlose Analyse</a>
   <h1 id="pg-title">VOLLSTÄNDIGE ANALYSE</h1>
   <p class="subtitle" id="pg-sub">Persönliche Tiefenanalyse</p>
@@ -187,11 +206,11 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   h+='<div class="divider"></div>';
 
   // 4. INNERE SPANNUNGSFELDER — KI-generiert
-  var spContent = synth ? '<p class="section-text">'+synth.spannungsfelder+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Die persönliche KI-Synthese wird nach der Zahlung individuell für dein Profil erstellt.</div>';
+  var spContent = synth ? '<p class="section-text">'+synth.spannungsfelder+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>';
   h+=sec('Innere Spannungsfelder', spContent);
 
   // 5. PERSÖNLICHE SYNTHESE — KI-generiert
-  var synContent = synth ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Die persönliche KI-Synthese wird nach der Zahlung individuell für dein Profil erstellt.</div>';
+  var synContent = synth ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>';
   h+=sec('Persönliche Synthese', synContent);
 
   h+='<div class="divider"></div>';
@@ -245,10 +264,19 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   document.getElementById('premium-content').innerHTML=h;
 }
 
-// MAIN: Daten aus localStorage laden
+// MAIN: Daten laden
+var urlParams = new URLSearchParams(window.location.search);
+
+function runAdminPreview() {
+  var fn = document.getElementById('ap-fname').value.trim();
+  var ln = document.getElementById('ap-lname').value.trim();
+  var bd = document.getElementById('ap-bdate').value.trim();
+  if (!fn || !ln || !bd) { alert('Bitte alle Felder ausfüllen.'); return; }
+  loadAndRender(fn, ln, bd);
+}
+
 (function(){
   // Test-Modus: ?test=anna füllt Anna Muster Daten vor
-  var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('test') === 'anna') {
     localStorage.setItem('aevima_fname','Anna');
     localStorage.setItem('aevima_lname','Muster');
@@ -256,19 +284,30 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
     localStorage.setItem('aevima_first_name','Anna');
   }
 
+  // Admin Preview Modus
+  if (urlParams.get('adminPreview') === '1') {
+    document.getElementById('admin-bar').style.display = 'block';
+    document.getElementById('premium-content').innerHTML = '<div class="ki-note" style="text-align:center;padding:32px">Daten oben eingeben und auf <strong>Vorschau erzeugen</strong> klicken.</div>';
+    return;
+  }
+
   var fn=localStorage.getItem('aevima_fname')||'';
   var ln=localStorage.getItem('aevima_lname')||'';
   var bd=localStorage.getItem('aevima_bdate')||'';
 
   if(!fn||!ln||!bd){
-    document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Keine Profildaten gefunden.<br><a href="seelenprofil.html" style="color:var(--rose)">Zur Analyse</a> &nbsp;|&nbsp; <a href="premium.html?test=anna" style="color:var(--teal)">Test mit Anna Muster</a></div>';
+    document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Keine Profildaten gefunden.<br><a href="seelenprofil.html" style="color:var(--rose)">Zur Analyse</a> &nbsp;|&nbsp; <a href="premium.html?adminPreview=1" style="color:var(--teal)">Admin Preview</a></div>';
     return;
   }
 
+  loadAndRender(fn, ln, bd);
+})();
+
+function loadAndRender(fn, ln, bd) {
   var lz=calcLZ(bd), hwz=calcHWZ(fn,ln), az=calcAZ(fn,ln);
-  // Berechne Synthese-Hash
   var synthHash = (function(s){var h=0;for(var i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;}return Math.abs(h).toString(16).substring(0,8);})(lz+'-'+hwz+'-'+az);
-  var synthFile = 'public/data/synthesis_'+synthHash+'.json';
+  
+  document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Lade Analyse…</div>';
   
   Promise.all([
     fetch('public/data/preview_lebenszahl.json').then(function(r){return r.json();}),
@@ -280,7 +319,7 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   }).catch(function(){
     document.getElementById('premium-content').innerHTML='<div class="ki-note">Fehler beim Laden der Daten. Bitte Seite neu laden.</div>';
   });
-})();
+}
 </script>
 </body>
 </html>
