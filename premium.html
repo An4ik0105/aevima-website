@@ -187,11 +187,11 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   h+='<div class="divider"></div>';
 
   // 4. INNERE SPANNUNGSFELDER — KI-generiert
-  var spContent = synth ? '<p class="section-text">'+synth.spannungsfelder+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Die persönliche KI-Synthese wird nach der Zahlung individuell erstellt.</div>';
+  var spContent = synth ? '<p class="section-text">'+synth.spannungsfelder+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Die persönliche KI-Synthese wird nach der Zahlung individuell für dein Profil erstellt.</div>';
   h+=sec('Innere Spannungsfelder', spContent);
 
   // 5. PERSÖNLICHE SYNTHESE — KI-generiert
-  var synContent = synth ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Die persönliche KI-Synthese wird nach der Zahlung individuell erstellt.</div>';
+  var synContent = synth ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Die persönliche KI-Synthese wird nach der Zahlung individuell für dein Profil erstellt.</div>';
   h+=sec('Persönliche Synthese', synContent);
 
   h+='<div class="divider"></div>';
@@ -265,10 +265,7 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
     fetch('public/data/preview_lebenszahl.json').then(function(r){return r.json();}),
     fetch('public/data/preview_herzwunsch.json').then(function(r){return r.json();}),
     fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();}),
-    fetch('public/data/synthesis_'+synthHash+'.json')
-      .then(function(r){return r.ok?r.json():null;})
-      .catch(function(){return null;})
-      .then(function(s){return s||fetch('public/data/synthesis_test.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});})
+    fetch('public/data/synthesis_'+synthHash+'.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
   ]).then(function(res){
     render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)],res[3]);
   }).catch(function(){
