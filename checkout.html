@@ -77,6 +77,17 @@
     .legal a{color:var(--muted);text-decoration:underline}
     .instant{color:var(--teal);font-size:.76rem;text-align:center;margin-top:8px;letter-spacing:.04em}
     .trust{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;color:var(--muted);font-size:.72rem}
+    .email-group{margin-bottom:20px}
+    .email-group label{display:block;font-size:.72rem;letter-spacing:.12em;color:var(--rose-l);text-transform:uppercase;margin-bottom:8px}
+    .email-group input{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(196,149,106,.2);border-radius:2px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s}
+    .email-group input:focus{border-color:rgba(196,149,106,.5)}
+    .email-group input::placeholder{color:var(--muted);opacity:.6}
+    .consent-block{margin-bottom:20px;margin-top:4px}
+    .consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+    .consent-row input[type=checkbox]{width:18px;height:18px;min-width:18px;margin-top:3px;accent-color:var(--teal);cursor:pointer}
+    .consent-row span{font-size:.78rem;color:var(--muted);line-height:1.65}
+    .consent-row a{color:var(--rose-l);text-decoration:underline}
+    .btn-pay:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
   </style>
 </head>
 <body>
@@ -92,14 +103,16 @@
   <div class="product">
     <div class="prod-title">AEVIMA Seelenprofil</div>
     <ul class="prod-list">
-      <li>Herzwunsch — vollständig</li>
-      <li>Beziehungsmuster — vollständig</li>
-      <li>Ausdruckszahl — vollständig</li>
-      <li>Geldmuster — vollständig</li>
+      <li>Geldmuster &amp; finanzielle Überzeugungen</li>
+      <li>Beziehungsmuster &amp; wiederkehrende Dynamiken</li>
+      <li>Wiederkehrende Lebensthemen</li>
+      <li>Innere Spannungsfelder</li>
+      <li>Persönliche Synthese aller Zahlen</li>
+      <li>Persönlicher Lebenskompass</li>
     </ul>
     <div class="price-row">
       <div style="font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.18em;color:var(--teal);margin-bottom:3px">PILOTPREIS</div>
-      <div style="display:flex;align-items:baseline;gap:10px"><span class="price">49 €</span><span class="price-note">Einmalig · Kein Abo</span></div>
+      <div style="display:flex;align-items:baseline;gap:10px"><span class="price">39 €</span><span class="price-note">Einmalig · Kein Abo</span></div>
     </div>
   </div>
 
@@ -134,15 +147,43 @@
     </div>
   </div>
 
-  <button class="btn-pay" onclick="location.href='confirmation.html'">
-    49 € · Profil freischalten
+  <div class="email-group">
+    <label for="buyer_email">E-Mail-Adresse für Analyse &amp; Kaufbestätigung</label>
+    <input type="email" id="buyer_email" placeholder="deine@email.de" required oninput="checkConsent()"/>
+  </div>
+
+  <div class="consent-block">
+    <div class="consent-row">
+      <input type="checkbox" id="cb_agb" onchange="checkConsent()"/>
+      <span>Ich habe die <a href="agb.html" target="_blank">AGB</a> und die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und stimme ihnen zu.</span>
+    </div>
+    <div class="consent-row">
+      <input type="checkbox" id="cb_widerruf" onchange="checkConsent()"/>
+      <span>Ich stimme ausdrücklich zu, dass mit der Ausführung sofort begonnen wird, und bestätige, dass ich damit mein Widerrufsrecht verliere.</span>
+    </div>
+    <div class="consent-row">
+      <input type="checkbox" id="cb_marketing"/>
+      <span>Ich möchte per E-Mail über AEVIMA-Neuigkeiten, Angebote und zukünftige Veranstaltungen informiert werden. Ich kann mich jederzeit abmelden.</span>
+    </div>
+  </div>
+
+  <button class="btn-pay" id="buyBtn" disabled onclick="location.href='confirmation.html'">
+    Jetzt kaufen — 39 €
   </button>
-  <div class="legal">Mit dem Klick akzeptierst du <a href="agb.html">AGB</a> und <a href="datenschutz.html">Datenschutz</a>.</div>
   <div class="instant">Sofortiger Zugang · Einmalige Zahlung · Kein Abo</div>
 
   <div class="trust">
     <span>🔒</span><span>SSL-verschlüsselt · DSGVO-konform</span>
   </div>
 </div>
+<script>
+function checkConsent() {
+  var email = document.getElementById('buyer_email').value;
+  var emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  var agb = document.getElementById('cb_agb').checked;
+  var wid = document.getElementById('cb_widerruf').checked;
+  document.getElementById('buyBtn').disabled = !(emailValid && agb && wid);
+}
+</script>
 </body>
 </html>
