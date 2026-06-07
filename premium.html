@@ -38,10 +38,10 @@
     .progress-bar-wrap{background:rgba(255,255,255,.06);border-radius:20px;height:6px;margin:14px 0;overflow:hidden}
     .progress-bar-fill{height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px;transition:width .8s ease}
     /* CTA */
-    .cta-block{border:1px solid rgba(42,175,160,.2);border-radius:3px;padding:28px 30px;margin-bottom:20px;background:rgba(42,175,160,.04)}
+    .cta-block{border:1px solid rgba(42,175,160,.2);border-radius:3px;padding:28px 30px;margin-bottom:20px;background:rgba(42,175,160,.04);text-align:center}
     .cta-text{color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:20px}
-    .cta-btn{display:inline-block;padding:13px 32px;border:1px solid var(--teal);color:var(--teal);border-radius:2px;font-family:\'Cinzel\',serif;font-size:.72rem;letter-spacing:.15em;text-decoration:none;transition:all .3s}
-    .cta-btn:hover{background:rgba(42,175,160,.12)}
+    .cta-btn{display:block;padding:15px 32px;background:linear-gradient(135deg,#1E7A52,#167044);color:#EDE9E2;border:none;border-radius:2px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-decoration:none;text-align:center;width:100%;max-width:360px;margin:0 auto;transition:all .3s;cursor:pointer}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(30,122,82,.35)}
     /* Kompass */
     .kompass-item{padding:14px 0;border-bottom:1px solid rgba(196,149,106,.1)}
     .kompass-item:last-child{border-bottom:none}
@@ -265,7 +265,10 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
     fetch('public/data/preview_lebenszahl.json').then(function(r){return r.json();}),
     fetch('public/data/preview_herzwunsch.json').then(function(r){return r.json();}),
     fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();}),
-    fetch('public/data/synthesis_'+synthHash+'.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+    fetch('public/data/synthesis_'+synthHash+'.json')
+      .then(function(r){return r.ok?r.json():null;})
+      .catch(function(){return null;})
+      .then(function(s){return s||fetch('public/data/synthesis_test.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});})
   ]).then(function(res){
     render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)],res[3]);
   }).catch(function(){
