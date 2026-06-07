@@ -174,7 +174,8 @@ function calcLebensabschnitt(bdate) {
   var py = reduceNum(daySum + monSum + yrSum);
   if (py > 9) py = py % 9 || 9;
   var startYear = cy - py + 1;
-  return { phase: PHASEN[py] || 'Phase der Besinnung', since: startYear };
+  var progress = Math.round((py / 9) * 100);
+  return { phase: PHASEN[py] || 'Phase der Besinnung', since: startYear, progress: progress };
 }
 
 // ─────────────────────────────────────────
@@ -245,9 +246,11 @@ function renderResult(fname, lname, lz, hwz, az, lzData, hwzData, azData, bdate)
   // Lebensabschnitt
   var la = calcLebensabschnitt(bdate || '');
   if (la) {
+    var laProgress = la.progress || 50;
     h += '<div style="text-align:center;padding:28px 0 8px">';
     h += '<p style="font-family:\'Cinzel\',serif;font-size:.65rem;letter-spacing:.2em;color:var(--muted);margin-bottom:10px">LEBENSABSCHNITT</p>';
     h += '<p style="color:var(--text);font-size:.92rem;line-height:1.8">Du befindest dich seit <strong>' + la.since + '</strong> in der <strong>' + la.phase + '</strong>.</p>';
+    h += '<div style="background:rgba(255,255,255,.06);border-radius:20px;height:6px;margin:14px auto;max-width:280px;overflow:hidden"><div style="height:100%;background:linear-gradient(to right,var(--teal),var(--rose));border-radius:20px;width:' + laProgress + '%"></div></div>';
     h += '</div>';
     h += divider();
   }
@@ -297,6 +300,11 @@ function renderResult(fname, lname, lz, hwz, az, lzData, hwzData, azData, bdate)
             document.getElementById('result').innerHTML = renderResult(fn, ln, lz, hwz, az, lzD, hwzD, azD, bd);
             document.getElementById('soulForm').style.display = 'none';
             document.getElementById('result').style.display = 'block';
+            // localStorage nach Restore leeren damit kein alter Name bleibt
+            localStorage.removeItem('aevima_fname');
+            localStorage.removeItem('aevima_lname');
+            localStorage.removeItem('aevima_bdate');
+            localStorage.removeItem('aevima_first_name');
           }
         }).catch(function(){});
       }
@@ -349,6 +357,7 @@ document.getElementById('soulForm').addEventListener('submit', function(e) {
     localStorage.setItem('aevima_fname', fname);
     localStorage.setItem('aevima_lname', lname);
     localStorage.setItem('aevima_bdate', bdateRaw);
+    localStorage.setItem('aevima_first_name', fname);
   })
   .catch(function(err) {
     console.error(err);

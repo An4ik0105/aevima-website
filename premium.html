@@ -14,62 +14,99 @@
     .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:60px 24px 80px}
     .back{display:inline-block;color:var(--rose);text-decoration:none;font-size:.8rem;letter-spacing:.1em;margin-bottom:40px;opacity:.8}
     h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;color:var(--rose-l);letter-spacing:.1em;margin-bottom:8px;text-align:center}
-    .subtitle{color:var(--muted);font-size:.85rem;text-align:center;margin-bottom:12px;letter-spacing:.05em}
-    .demo-badge{display:inline-block;font-size:.62rem;letter-spacing:.18em;color:var(--teal);border:1px solid rgba(42,175,160,.4);padding:.25rem .8rem;border-radius:20px;margin:0 auto 40px;display:block;width:fit-content}
-    .divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:32px auto}
+    .subtitle{color:var(--muted);font-size:.85rem;text-align:center;margin-bottom:48px;letter-spacing:.05em}
+    .divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--rose),transparent);margin:36px auto}
     .section{border:1px solid var(--border);border-radius:3px;padding:28px 30px;margin-bottom:20px;background:rgba(196,149,106,.03)}
-    .section-label{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--rose);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .section-label{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--rose);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
     .section-label::after{content:'';flex:1;height:1px;background:rgba(196,149,106,.15)}
-    .placeholder{color:rgba(155,143,168,.45);font-size:.88rem;font-style:italic;line-height:1.9;user-select:none;pointer-events:none}
-    .locked-note{color:var(--teal);font-size:.75rem;letter-spacing:.08em;margin-top:12px;opacity:.7}
-    .coming{text-align:center;padding:48px 24px;background:linear-gradient(135deg,rgba(196,149,106,.07),rgba(42,175,160,.05));border:1px solid var(--border);border-radius:3px;margin-top:16px}
-    .coming p{color:var(--muted);font-size:.88rem;max-width:400px;margin:0 auto}
+    .section-text{color:rgba(240,237,232,.82);font-size:.9rem;line-height:1.95}
+    .field-label{font-size:.72rem;letter-spacing:.12em;color:var(--teal);text-transform:uppercase;margin-bottom:6px;margin-top:18px}
+    .field-label:first-of-type{margin-top:0}
+    .kompass-item{padding:14px 0;border-bottom:1px solid rgba(196,149,106,.1)}
+    .kompass-item:last-child{border-bottom:none}
+    .kompass-num{font-family:'Cinzel',serif;font-size:.65rem;color:var(--rose);letter-spacing:.15em;margin-bottom:6px}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <a href="seelenprofil.html" class="back">← Zur Übersicht</a>
+  <a href="seelenprofil.html" class="back">← Kostenlose Analyse</a>
 
   <h1>VOLLSTÄNDIGE ANALYSE</h1>
-  <p class="subtitle">Persönliche Tiefenanalyse · KI-generiert</p>
-  <span class="demo-badge">✦ DEMO-VORSCHAU ✦</span>
-  <p style="color:var(--teal);font-size:.8rem;text-align:center;margin-bottom:32px;padding:10px 16px;border:1px solid rgba(42,175,160,.3);border-radius:3px;">Demo-Vorschau — keine echte Zahlung, keine echte KI-Generierung.</p>
+  <p class="subtitle">Persönliche Tiefenanalyse · Lebenszahl 33</p>
 
+  <!-- GELDMUSTER -->
   <div class="section">
     <div class="section-label">✦ Geldmuster</div>
-    <p class="placeholder">Hier erscheint deine persönliche Analyse zu finanziellen Überzeugungen, inneren Konflikten und blinden Flecken im Umgang mit Geld — spezifisch für deine Lebenszahl.</p>
-    
-  </div>
 
-  <div class="section">
-    <div class="section-label">✦ Beziehungsmuster</div>
-    <p class="placeholder">Hier erscheint eine Analyse wiederkehrender Dynamiken in deinen Beziehungen — Anziehung, Bruchpunkte und der Weg zu echten Verbindungen.</p>
-    
+    <p class="field-label">Verhaltensmuster</p>
+    <p class="section-text">Du verlangst weniger als du solltest — und rechtfertigst es mit dem Argument, dass deine Arbeit Berufung ist, kein Geschäft. Das klingt stimmig. Es führt aber dazu, dass du dich regelmäßig erschöpfst und nicht weißt warum. Du weißt warum. Du sagst es dir nur nicht.</p>
+
+    <p class="field-label">Innerer Konflikt</p>
+    <p class="section-text">Geld zu fordern fühlt sich für dich an wie eine Entwertung dessen, was du tust. Als würde die Transaktion die Bedeutung reduzieren. Diese Überzeugung wirkt. Unabhängig davon, ob sie stimmt.</p>
+
+    <p class="field-label">Blinder Fleck</p>
+    <p class="section-text">Du trägst stillen Groll — und bemerkst ihn oft erst, wenn er sich entlädt. Nicht immer gegen andere. Manchmal gegen dich selbst: für das Nachgeben, das du für Großzügigkeit gehalten hast. Dieser Groll zeigt dir, wo deine Grenzen liegen. Du überschreitest sie trotzdem.</p>
+
+    <p class="field-label">Entwicklungsaufgabe</p>
+    <p class="section-text">Die Einladung lautet: zu erkennen, dass angemessene Entlohnung keine Kapitulation vor dem Materiellen ist. Sie ist die Bedingung dafür, dass du langfristig das tun kannst, wozu du hier bist.</p>
   </div>
 
   <div class="divider"></div>
 
+  <!-- BEZIEHUNGSMUSTER -->
+  <div class="section">
+    <div class="section-label">✦ Beziehungsmuster</div>
+
+    <p class="field-label">Muster</p>
+    <p class="section-text">Du siehst was der andere braucht. Immer. Und du gibst es. Auch wenn du selbst leer bist.</p>
+
+    <p class="field-label">Anziehung</p>
+    <p class="section-text">Du ziehst Menschen an, die Fürsorge brauchen — und Menschen die selbst tiefes Mitgefühl haben. Das Erste erschöpft dich manchmal. Das Zweite ist das, wonach du wirklich suchst.</p>
+
+    <p class="field-label">Bruchpunkt</p>
+    <p class="section-text">Der Bruchpunkt ist der Moment, wo du merkst, dass du wieder jemanden hilfst, der sich nicht entwickelt. Deine Fürsorge ist Netz geworden — kein Sprungbrett. Und du bist müde. Still. Tief müde.</p>
+
+    <p class="field-label">Einladung</p>
+    <p class="section-text">Die Einladung lautet: heute etwas nur für dich zu brauchen — in einer Beziehung, ohne es gleichzeitig für die andere Person nutzbar zu machen.</p>
+
+    <p class="field-label">Was möglich wird</p>
+    <p class="section-text">Wenn du lernst, Fürsorge an Wachstum zu koppeln. Und die Menschen zu wählen, die deine Fürsorge als Einladung sehen — nicht als Versorgungsvertrag.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- INNERE SPANNUNGSFELDER -->
   <div class="section">
     <div class="section-label">✦ Innere Spannungsfelder</div>
-    <p class="placeholder">KI-generierte Synthese: wo Lebenszahl, Herzwunschzahl und Ausdruckszahl in verschiedene Richtungen ziehen — und welche innere Reibung daraus entsteht.</p>
-    
+    <p class="section-text">Deine Lebenszahl 33 trägt den Impuls zu geben — deine Herzwunschzahl sucht Verbindung, die empfängt. Das erzeugt eine stille Spannung: du gibst nach außen, was du dir nach innen wünschst. Deine Ausdruckszahl verstärkt das: nach außen wirkst du stark und selbstgenügsam. Niemand fragt, wie es dir geht — weil du nie so wirkst, als bräuchtest du etwas. Die Spannung: die Wirkung nach außen schützt dich — und hält gleichzeitig das fern, was du brauchst.</p>
   </div>
 
+  <!-- PERSÖNLICHE SYNTHESE -->
   <div class="section">
     <div class="section-label">✦ Persönliche Synthese</div>
-    <p class="placeholder">Verbindung aller Zahlen und Muster zu einem Gesamtbild — die tiefste Stärke dieser Kombination und ihre häufigste innere Falle.</p>
-    
+    <p class="section-text">Die tiefste Stärke dieser Kombination: du kannst Menschen begleiten in Momenten, die andere überfordern. Du hältst, ohne zu werten. Du siehst, ohne zu urteilen. Das ist selten.<br><br>Die häufigste innere Falle: du machst dich unentbehrlich — und verlierst dabei den Zugang zu dem, was du selbst brauchst. Nicht aus Schwäche. Aus Gewohnheit.<br><br>Der Satz, der dich in dieser Phase beschreibt: <em>Du gibst so viel, dass du vergisst zu fragen — was ich eigentlich möchte.</em></p>
   </div>
 
+  <!-- LEBENSKOMPASS -->
   <div class="section">
     <div class="section-label">✦ Persönlicher Lebenskompass</div>
-    <p class="placeholder">Drei konkrete Entwicklungsimpulse — spezifisch für deine Zahlenkombination. Kein allgemeines Coaching. Keine Versprechen. Nur präzise Impulse.</p>
-    
+
+    <div class="kompass-item">
+      <p class="kompass-num">IMPULS 01</p>
+      <p class="section-text">Benenne einmal pro Woche konkret, was du brauchst — nicht was du geben möchtest. Schreib es auf. Sag es jemandem. Nicht weil es sofort etwas ändert, sondern weil das Aussprechen der erste Schritt ist, den du systematisch übersprungen hast.</p>
+    </div>
+
+    <div class="kompass-item">
+      <p class="kompass-num">IMPULS 02</p>
+      <p class="section-text">Setze einen Preis — für deine Zeit, deine Energie, deine Arbeit — der sich unangemessen hoch anfühlt. Dann lass ihn stehen. Das Unbehagen dabei ist kein Signal, dass du zu viel verlangst. Es ist das Signal, dass du in der Nähe deines tatsächlichen Werts bist.</p>
+    </div>
+
+    <div class="kompass-item">
+      <p class="kompass-num">IMPULS 03</p>
+      <p class="section-text">Wähle eine Beziehung in deinem Leben und beobachte: Wer beginnt das Gespräch, wenn du aufhörst zu initiieren? Wer fragt, wie es dir geht, ohne Anlass? Das Ergebnis dieser Beobachtung zeigt dir, wo du wirklich gehalten wirst — und wo du das Fundament alleine trägst.</p>
+    </div>
   </div>
 
-  <div class="coming">
-    <p>Die vollständige Analyse wird nach Zahlungseingang per E-Mail zugestellt.<br>Backend-Integration folgt in Kürze.</p>
-  </div>
 </div>
 </body>
 </html>
