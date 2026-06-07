@@ -120,7 +120,7 @@ function fl(label,text) {
   return '<p class="field-label">'+label+'</p><p class="section-text">'+text+'</p>';
 }
 
-function render(fname,lname,bdate,lzD,hwzD,azD) {
+function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   var lz=calcLZ(bdate), hwz=calcHWZ(fname,lname), az=calcAZ(fname,lname);
   var ph=calcPhase(bdate);
   var gm=GM[String(lz)]||{};
@@ -187,15 +187,26 @@ function render(fname,lname,bdate,lzD,hwzD,azD) {
   h+='<div class="divider"></div>';
 
   // 4. INNERE SPANNUNGSFELDER — KI-generiert
-  h+=sec('Innere Spannungsfelder','<div class="ki-note">Diese Analyse verbindet Lebenszahl '+lz+', Herzwunschzahl '+hwz+' und Ausdruckszahl '+az+' zu einem personalisierten Spannungsbild.<br><span class="missing">Datenquelle: KI-Synthese (Anthropic) — Backend-Integration ausstehend.</span></div>');
+  var spContent = synth ? '<p class="section-text">'+synth.spannungsfelder+'</p>' : '<div class="ki-note"><span class="missing">KI-Synthese ausstehend</span></div>';
+  h+=sec('Innere Spannungsfelder', spContent);
 
   // 5. PERSÖNLICHE SYNTHESE — KI-generiert
-  h+=sec('Persönliche Synthese','<div class="ki-note">Die Synthese verbindet alle Zahlen und Muster zu einem Gesamtbild — die tiefste Stärke und häufigste innere Falle dieser Zahlenkombination.<br><span class="missing">Datenquelle: KI-Synthese (Anthropic) — Backend-Integration ausstehend.</span></div>');
+  var synContent = synth ? '<p class="section-text">'+synth.synthese.replace(/
+/g,'<br><br>')+'</p>' : '<div class="ki-note"><span class="missing">KI-Synthese ausstehend</span></div>';
+  h+=sec('Persönliche Synthese', synContent);
 
   h+='<div class="divider"></div>';
 
   // 6. LEBENSKOMPASS
+  // Lebenskompass-Impulse aus KI-Synthese wenn vorhanden
   var kompContent='';
+  if(synth && synth.kompass && synth.kompass.length) {
+    var impulse='';
+    synth.kompass.forEach(function(imp,i){
+      impulse+='<div class="kompass-item"><p class="kompass-num">IMPULS 0'+(i+1)+'</p><p class="section-text">'+imp+'</p></div>';
+    });
+    kompContent='<div style="margin-bottom:24px">'+impulse+'</div>';
+  }
   if(ph){
     kompContent+='<div style="background:rgba(42,175,160,.06);border:1px solid rgba(42,175,160,.2);border-radius:3px;padding:22px;margin-bottom:20px">';
     kompContent+='<p class="field-label">Aktuelle Phase</p>';
@@ -246,13 +257,18 @@ function render(fname,lname,bdate,lzD,hwzD,azD) {
     return;
   }
 
+  var lz=calcLZ(bd), hwz=calcHWZ(fn,ln), az=calcAZ(fn,ln);
+  // Berechne Synthese-Hash
+  var synthHash = (function(s){var h=0;for(var i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;}return Math.abs(h).toString(16).substring(0,8);})(lz+'-'+hwz+'-'+az);
+  var synthFile = 'public/data/synthesis_'+synthHash+'.json';
+  
   Promise.all([
     fetch('public/data/preview_lebenszahl.json').then(function(r){return r.json();}),
     fetch('public/data/preview_herzwunsch.json').then(function(r){return r.json();}),
-    fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();})
+    fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();}),
+    fetch('public/data/synthesis_test.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
   ]).then(function(res){
-    var lz=calcLZ(bd), hwz=calcHWZ(fn,ln), az=calcAZ(fn,ln);
-    render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)]);
+    render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)],res[3]);
   }).catch(function(){
     document.getElementById('premium-content').innerHTML='<div class="ki-note">Fehler beim Laden der Daten. Bitte Seite neu laden.</div>';
   });
