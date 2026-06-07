@@ -86,7 +86,7 @@
 
   <div class="msg" style="margin-top:8px;font-size:.82rem;color:var(--muted)">Kein Zufall. Dein Weg.</div>
 
-  <a href="seelenprofil.html?showResult=1" class="btn">✦ Mein Profil lesen</a>
+  <a href="premium.html" class="btn">✦ Mein Profil lesen</a>
 
   <div class="email-note">Eine Bestätigung wurde an deine E-Mail gesendet.</div>
   <div class="redirect">Weiterleitung in <span id="cd">5</span> Sekunden...</div>
@@ -103,7 +103,7 @@ var n=5;
 var t=setInterval(function(){
   n--;
   document.getElementById('cd').textContent=n;
-  if(n<=0){clearInterval(t);location.href='seelenprofil.html?showResult=1'}
+  if(n<=0){clearInterval(t);location.href='premium.html'}
 },1000);
 </script>
 </body>
