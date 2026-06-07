@@ -247,12 +247,21 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
 
 // MAIN: Daten aus localStorage laden
 (function(){
+  // Test-Modus: ?test=anna füllt Anna Muster Daten vor
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('test') === 'anna') {
+    localStorage.setItem('aevima_fname','Anna');
+    localStorage.setItem('aevima_lname','Muster');
+    localStorage.setItem('aevima_bdate','01.05.1989');
+    localStorage.setItem('aevima_first_name','Anna');
+  }
+
   var fn=localStorage.getItem('aevima_fname')||'';
   var ln=localStorage.getItem('aevima_lname')||'';
   var bd=localStorage.getItem('aevima_bdate')||'';
 
   if(!fn||!ln||!bd){
-    document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Keine Profildaten gefunden. Bitte zuerst <a href="seelenprofil.html" style="color:var(--rose)">die kostenlose Analyse</a> durchführen.</div>';
+    document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Keine Profildaten gefunden.<br><a href="seelenprofil.html" style="color:var(--rose)">Zur Analyse</a> &nbsp;|&nbsp; <a href="premium.html?test=anna" style="color:var(--teal)">Test mit Anna Muster</a></div>';
     return;
   }
 
