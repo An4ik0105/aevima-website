@@ -309,11 +309,22 @@ function loadAndRender(fn, ln, bd) {
   
   document.getElementById('premium-content').innerHTML='<div class="ki-note" style="text-align:center">Lade Analyse…</div>';
   
+  var isAdmin = urlParams.get('adminPreview') === '1';
+  var synthFetch = fetch('public/data/synthesis_'+synthHash+'.json')
+    .then(function(r){return r.ok?r.json():null;})
+    .catch(function(){return null;});
+  // Im Admin-Modus: synthesis_test.json als Fallback wenn keine eigene existiert
+  if(isAdmin) {
+    synthFetch = synthFetch.then(function(s){
+      return s || fetch('public/data/synthesis_test.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+    });
+  }
+
   Promise.all([
     fetch('public/data/preview_lebenszahl.json').then(function(r){return r.json();}),
     fetch('public/data/preview_herzwunsch.json').then(function(r){return r.json();}),
     fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();}),
-    fetch('public/data/synthesis_'+synthHash+'.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+    synthFetch
   ]).then(function(res){
     render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)],res[3]);
   }).catch(function(){
