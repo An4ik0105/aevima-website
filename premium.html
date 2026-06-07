@@ -191,8 +191,7 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   h+=sec('Innere Spannungsfelder', spContent);
 
   // 5. PERSÖNLICHE SYNTHESE — KI-generiert
-  var synContent = synth ? '<p class="section-text">'+synth.synthese.replace(/
-/g,'<br><br>')+'</p>' : '<div class="ki-note"><span class="missing">KI-Synthese ausstehend</span></div>';
+  var synContent = synth ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>' : '<div class="ki-note"><span class="missing">KI-Synthese ausstehend</span></div>';
   h+=sec('Persönliche Synthese', synContent);
 
   h+='<div class="divider"></div>';
