@@ -246,7 +246,7 @@ function renderResult(fname, lname, lz, hwz, az, lzData, hwzData, azData, bdate)
   var la = calcLebensabschnitt(bdate || '');
   if (la) {
     h += '<div style="text-align:center;padding:28px 0 8px">';
-    h += '<p style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;color:var(--muted);margin-bottom:10px">LEBENSABSCHNITT</p>';
+    h += '<p style="font-family:\'Cinzel\',serif;font-size:.65rem;letter-spacing:.2em;color:var(--muted);margin-bottom:10px">LEBENSABSCHNITT</p>';
     h += '<p style="color:var(--text);font-size:.92rem;line-height:1.8">Du befindest dich seit <strong>' + la.since + '</strong> in der <strong>' + la.phase + '</strong>.</p>';
     h += '</div>';
     h += divider();
