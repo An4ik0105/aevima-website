@@ -146,7 +146,7 @@ function fl(label,text) {
   return '<p class="field-label">'+label+'</p><p class="section-text">'+text+'</p>';
 }
 
-function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
+function render(fname,lname,bdate,lzD,hwzD,azD,synth,isAdmin) {
   var lz=calcLZ(bdate), hwz=calcHWZ(fname,lname), az=calcAZ(fname,lname);
   var ph=calcPhase(bdate);
   var gm=GM[String(lz)]||{};
@@ -213,11 +213,19 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth) {
   h+='<div class="divider"></div>';
 
   // 4. INNERE SPANNUNGSFELDER — KI-generiert
-  var spContent = synth ? '<p class="section-text">'+synth.spannungsfelder+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>';
+  var spContent = synth
+    ? '<p class="section-text">'+synth.spannungsfelder+'</p>'
+    : isAdmin
+      ? '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>'
+      : '';
   h+=sec('Innere Spannungsfelder', spContent);
 
   // 5. PERSÖNLICHE SYNTHESE — KI-generiert
-  var synContent = synth ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>' : '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>';
+  var synContent = synth
+    ? '<p class="section-text">'+synth.synthese.split('\n').join('<br><br>')+'</p>'
+    : isAdmin
+      ? '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>'
+      : '';
   h+=sec('Persönliche Synthese', synContent);
 
   h+='<div class="divider"></div>';
@@ -311,6 +319,7 @@ function runAdminPreview() {
 })();
 
 function loadAndRender(fn, ln, bd) {
+  var isAdmin = urlParams.get('adminPreview') === '1';
   var lz=calcLZ(bd), hwz=calcHWZ(fn,ln), az=calcAZ(fn,ln);
   var mapKey = lz+'-'+hwz+'-'+az;
   var synthFile = SYNTHESIS_MAP[mapKey] || null;
@@ -327,7 +336,7 @@ function loadAndRender(fn, ln, bd) {
     fetch('public/data/preview_ausdruckszahl.json').then(function(r){return r.json();}),
     synthFetch
   ]).then(function(res){
-    render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)],res[3]);
+    render(fn,ln,bd,res[0][String(lz)],res[1][String(hwz)],res[2][String(az)],res[3],isAdmin);
   }).catch(function(){
     document.getElementById('premium-content').innerHTML='<div class="ki-note">Fehler beim Laden der Daten. Bitte Seite neu laden.</div>';
   });
