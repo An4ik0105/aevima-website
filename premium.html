@@ -218,7 +218,7 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth,isAdmin) {
     : isAdmin
       ? '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>'
       : '';
-  h+=sec('Innere Spannungsfelder', spContent);
+  if (spContent) h+=sec('Innere Spannungsfelder', spContent);
 
   // 5. PERSÖNLICHE SYNTHESE — KI-generiert
   var synContent = synth
@@ -226,7 +226,7 @@ function render(fname,lname,bdate,lzD,hwzD,azD,synth,isAdmin) {
     : isAdmin
       ? '<div class="ki-note" style="text-align:center;padding:24px">Für diese Kombination existiert aktuell noch keine Test-Synthese. Nach der Live-Schaltung wird sie automatisch erzeugt.</div>'
       : '';
-  h+=sec('Persönliche Synthese', synContent);
+  if (synContent) h+=sec('Persönliche Synthese', synContent);
 
   h+='<div class="divider"></div>';
 

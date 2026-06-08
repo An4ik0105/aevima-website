@@ -118,10 +118,10 @@
 
   <div class="pay-label">Schnell bezahlen</div>
 
-  <button class="pay-apple" onclick="location.href='confirmation.html'">
+  <button class="pay-apple" onclick="quickPay()">
     <span style="font-size:1.1rem">&#63743;</span> Mit Apple Pay
   </button>
-  <button class="pay-google" onclick="location.href='confirmation.html'">
+  <button class="pay-google" onclick="quickPay()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" opacity=".8"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"/></svg>
     Mit Google Pay
   </button>
@@ -134,7 +134,7 @@
   </div>
   <div class="fg">
     <label class="fl">Kartennummer</label>
-    <input type="text" class="fi" placeholder="1234 5678 9012 3456" maxlength="19"/>
+    <input type="text" class="fi" id="card_number" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)" inputmode="numeric"/>
   </div>
   <div class="row2">
     <div class="fg">
@@ -177,12 +177,33 @@
   </div>
 </div>
 <script>
-function checkConsent() {
+function fmtCard(el) {
+  var v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(\d{4})(?=\d)/g,'$1 ');
+}
+function consentOk() {
   var email = document.getElementById('buyer_email').value;
   var emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-  var agb = document.getElementById('cb_agb').checked;
-  var wid = document.getElementById('cb_widerruf').checked;
-  document.getElementById('buyBtn').disabled = !(emailValid && agb && wid);
+  return emailValid && document.getElementById('cb_agb').checked && document.getElementById('cb_widerruf').checked;
+}
+function checkConsent() {
+  document.getElementById('buyBtn').disabled = !consentOk();
+}
+function quickPay() {
+  if (!consentOk()) {
+    var email = document.getElementById('buyer_email').value;
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      document.getElementById('buyer_email').focus();
+      return;
+    }
+    if (!document.getElementById('cb_agb').checked) {
+      document.getElementById('cb_agb').focus();
+      return;
+    }
+    document.getElementById('cb_widerruf').focus();
+    return;
+  }
+  location.href = 'confirmation.html';
 }
 </script>
 </body>
